@@ -17,4 +17,17 @@
     <ProjectReference Include="..\ChemSharp\ChemSharp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="files\epr.par">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="files\epr.spc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

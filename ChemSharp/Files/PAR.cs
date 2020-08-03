@@ -5,9 +5,16 @@ using System.Globalization;
 
 namespace ChemSharp.Files
 {
+    /// <summary>
+    /// PARameter file from Bruker EMX EPR Spectrometer
+    /// </summary>
     public class PAR : TextFile, IXSpectrumFile
     {
+        /// <summary>
+        /// Parameter Dictionary
+        /// </summary>
         public Dictionary<string, string> Parameters = new Dictionary<string, string>();
+        public float[] XData { get; set; }
 
         public PAR(string path) : base(path)
         {
@@ -25,7 +32,7 @@ namespace ChemSharp.Files
                 }
 
             }
-            //Generate X Axis Data
+            //Generate X Axis Data from Parameters
             var RES = int.Parse(Parameters["RES"], CultureInfo.InvariantCulture);
             var HCF = float.Parse(Parameters["HCF"], CultureInfo.InvariantCulture);
             var HSW = float.Parse(Parameters["HSW"], CultureInfo.InvariantCulture);
@@ -38,6 +45,5 @@ namespace ChemSharp.Files
             }
         }
 
-        public float[] XData { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ChemSharp.Spectrum
         public static AbstractSpectrum CreateFromFiles<T>(IXSpectrumFile xSrc, IYSpectrumFile ySrc)
             where T : AbstractSpectrum
         {
-            Vector2[] data = new Vector2[xSrc.XData.Length];
+            var data = new Vector2[xSrc.XData.Length];
             for (var i = 0; i < xSrc.XData.Length; i++)
             {
                 data[i] = new Vector2(xSrc.XData[i], ySrc.YData[i]);

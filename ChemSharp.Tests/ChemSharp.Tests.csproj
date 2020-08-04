@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -18,14 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="files\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="files\epr.par">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="files\epr.spc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="files\mescho.xyz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="files\uvvis.dsw">

@@ -25,9 +25,10 @@ namespace ChemSharp.Files.Molecule
                 if (atomMatch.Groups.Count == 5)
                     yield return new Atom()
                     {
+                        ElementSymbol = atomMatch.Groups[1].Value,
                         Location = new Vector3(
                             float.Parse(atomMatch.Groups[2].Value, CultureInfo.InvariantCulture),
-                            float.Parse(atomMatch.Groups[2].Value, CultureInfo.InvariantCulture),
+                            float.Parse(atomMatch.Groups[3].Value, CultureInfo.InvariantCulture),
                             float.Parse(atomMatch.Groups[4].Value, CultureInfo.InvariantCulture)
                         )
                     };

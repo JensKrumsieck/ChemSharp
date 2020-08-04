@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Numerics;
 
-namespace ChemSharp.Files
+namespace ChemSharp.Files.Spectroscopy
 {
     /// <summary>
     /// DSW Files from supported Devices:

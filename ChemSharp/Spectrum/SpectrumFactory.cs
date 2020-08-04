@@ -1,4 +1,4 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.Files.Spectroscopy;
 using System;
 using System.Numerics;
 

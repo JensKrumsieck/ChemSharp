@@ -1,4 +1,4 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Spectrum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

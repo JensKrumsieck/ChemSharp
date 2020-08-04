@@ -1,4 +1,4 @@
-﻿namespace ChemSharp.Files
+﻿namespace ChemSharp.Files.Spectroscopy
 {
     public interface IXSpectrumFile
     {

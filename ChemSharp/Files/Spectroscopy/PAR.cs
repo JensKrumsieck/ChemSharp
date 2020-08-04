@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace ChemSharp.Files
+namespace ChemSharp.Files.Spectroscopy
 {
     /// <summary>
     /// PARameter file from Bruker EMX EPR Spectrometer

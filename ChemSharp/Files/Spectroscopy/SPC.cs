@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChemSharp.Files
+namespace ChemSharp.Files.Spectroscopy
 {
     /// <summary>
     /// Bruker EMX EPR Spectrometer File Type

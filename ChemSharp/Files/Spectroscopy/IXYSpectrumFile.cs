@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace ChemSharp.Files
+namespace ChemSharp.Files.Spectroscopy
 {
     public interface IXYSpectrumFile
     {

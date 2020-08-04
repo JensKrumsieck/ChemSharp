@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp", "ChemSharp\ChemSharp.csproj", "{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Tests", "ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp", "DemoApp\DemoApp.csproj", "{EC9E7120-3FA3-4CF3-8B51-BEB0734EF951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Tests", "ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC9E7120-3FA3-4CF3-8B51-BEB0734EF951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC9E7120-3FA3-4CF3-8B51-BEB0734EF951}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC9E7120-3FA3-4CF3-8B51-BEB0734EF951}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC9E7120-3FA3-4CF3-8B51-BEB0734EF951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

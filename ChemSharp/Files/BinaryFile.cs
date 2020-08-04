@@ -6,7 +6,7 @@ namespace ChemSharp.Files
     {
         public byte[] Data { get; private set; }
 
-        protected BinaryFile(string path): base(path){}
+        protected BinaryFile(string path) : base(path) { }
 
         public override void ReadFile()
         {

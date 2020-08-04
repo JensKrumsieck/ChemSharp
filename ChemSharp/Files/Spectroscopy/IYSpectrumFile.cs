@@ -2,6 +2,6 @@
 {
     public interface IYSpectrumFile
     {
-       float[] YData { get; set; }
+        float[] YData { get; set; }
     }
 }

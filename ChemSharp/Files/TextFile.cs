@@ -7,8 +7,8 @@ namespace ChemSharp.Files
 
         public string[] Data { get; private set; }
 
-        protected TextFile(string path) : base (path){}
-            
+        protected TextFile(string path) : base(path) { }
+
         public override void ReadFile()
         {
             if (File.Exists(Path)) Data = File.ReadAllLines(Path);

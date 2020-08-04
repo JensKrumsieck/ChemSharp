@@ -1,4 +1,5 @@
-﻿using ChemSharp.Files.Spectroscopy;
+﻿using ChemSharp.Files;
+using ChemSharp.Files.Spectroscopy;
 using System;
 using System.Numerics;
 
@@ -14,6 +15,8 @@ namespace ChemSharp.Spectrum
         {
             var spc = (T)Activator.CreateInstance(typeof(T));
             spc.Data = src.XYData;
+            spc.Files.Add(((AbstractFile)src).Path);
+            //add files
             return spc;
         }
 
@@ -27,12 +30,15 @@ namespace ChemSharp.Spectrum
             }
             var spc = (T)Activator.CreateInstance(typeof(T));
             spc.Data = data;
+            //add files
+            spc.Files.Add(((AbstractFile)xSrc).Path);
+            spc.Files.Add(((AbstractFile)ySrc).Path);
             return spc;
         }
 
         public static TResult Create<TResult, TSource>(string path)
             where TResult : AbstractSpectrum
-            where TSource : IXYSpectrumFile
+            where TSource : AbstractFile, IXYSpectrumFile
         {
             var file = (TSource)Activator.CreateInstance(typeof(TSource), path);
             return (TResult)CreateFromFile<TResult>(file);
@@ -40,8 +46,8 @@ namespace ChemSharp.Spectrum
 
         public static TResult Create<TResult, TSourceX, TSourceY>(string xPath, string yPath)
             where TResult : AbstractSpectrum
-            where TSourceX : IXSpectrumFile
-            where TSourceY : IYSpectrumFile
+            where TSourceX : AbstractFile, IXSpectrumFile
+            where TSourceY : AbstractFile, IYSpectrumFile
         {
             var xFile = (TSourceX)Activator.CreateInstance(typeof(TSourceX), xPath);
             var yFile = (TSourceY)Activator.CreateInstance(typeof(TSourceY), yPath);

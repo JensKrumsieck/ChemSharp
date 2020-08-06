@@ -8,33 +8,20 @@ namespace ChemSharp.Tests
     public class SumFormulaTests
     {
         [TestMethod]
-        public void TestFerrozin()
-        {
-            var formula = "K4[Fe(CN)6]";
-            var elements = formula.ToElements();
-            Assert.AreEqual(17, elements.Count());
-            var parsed = elements.SumFormula();
-            Assert.AreEqual("C6FeK4N6", parsed);
-        }
+        public void TestFerrozin() => RunTest("K4[Fe(CN)6]", 17, "C6FeK4N6");
 
         [TestMethod]
-        public void TestPorphine()
-        {
-            var formula = "C20H14N4";
-            var elements = formula.ToElements();
-            Assert.AreEqual(38, elements.Count());
-            var parsed = elements.SumFormula();
-            Assert.AreEqual("C20H14N4", parsed);
-        }
+        public void TestPorphine() => RunTest("C20H14N4", 38, "C20H14N4");
 
         [TestMethod]
-        public void TestCarboraneAcid()
+        public void TestCarboraneAcid() => RunTest("H(CHB11F11)", 25, "B11CF11H2");
+
+        public void RunTest(string formula, int expectedNumberOfElements, string expectedFormula)
         {
-            var formula = "H(CHB11F11)";
             var elements = formula.ToElements();
-            Assert.AreEqual(25, elements.Count());
+            Assert.AreEqual(expectedNumberOfElements, elements.Count());
             var parsed = elements.SumFormula();
-            Assert.AreEqual("B11CF11H2", parsed);
+            Assert.AreEqual(expectedFormula, parsed);
         }
 
     }

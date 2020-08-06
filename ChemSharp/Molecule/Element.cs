@@ -2,8 +2,13 @@
 
 namespace ChemSharp.Molecule
 {
+    /// <summary>
+    /// Represents an Element in the periodic table
+    /// if your want to use an Element with 3D Properties use Atom class instead!
+    /// </summary>
     public class Element
     {
+        #region API Properties
         public string Name { get; set; }
         public string Symbol { get; set; }
         public string Appearance { get; set; }
@@ -19,12 +24,17 @@ namespace ChemSharp.Molecule
         public int? AtomicRadius { get; set; }
         public int? VdWRadius { get; set; }
         public string CAS { get; set; }
+        #endregion API Properties
 
         /// <summary>
         /// Constructor for Json Serialization
         /// </summary>
         private Element() { }
 
+        /// <summary>
+        /// Create Element by symbol
+        /// </summary>
+        /// <param name="symbol"></param>
         public Element(string symbol)
         {
             //get Data via SingletonAPI

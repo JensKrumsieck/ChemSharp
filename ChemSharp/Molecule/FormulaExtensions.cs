@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecule
 {
-    public static class Extensions
+    public static class FormulaExtensions
     {
         private static string Pattern = @"([A-Z][a-z]*)(\d*[,.]?\d*)|(\()|(\))(\d*[,.]?\d*)";
 
@@ -48,6 +48,7 @@ namespace ChemSharp.Molecule
         /// <returns></returns>
         public static IEnumerable<Element> ToElements(this string input)
         {
+            //replace complex brackets
             input = input.Replace("[", "(".Replace("]", ")"));
             List<List<Element>> result = new List<List<Element>>()
             {
@@ -57,28 +58,41 @@ namespace ChemSharp.Molecule
             foreach (Match m in Regex.Matches(input, Pattern))
             {
                 if (m.Groups[1].Success)
-                {
-                    var amount = m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToInt32(m.Groups[2].Value) : 1;
-                    for (var i = 0; i < amount; i++)result[index].Add(new Element(m.Groups[1].Value));
-                }
+                    for (var i = 0; i < Multiplicity(m.Groups[2]); i++)
+                        result[index].Add(new Element(m.Groups[1].Value));
                 if (m.Groups[3].Success)
                 {
                     index++;
                     result.Add(new List<Element>());
                 }
                 if (m.Groups[4].Success)
-                {
-                    var multiplicity = m.Groups[5].Success && m.Groups[5].Value != ""
-                        ? Convert.ToInt32(m.Groups[5].Value)
-                        : 1;
-                    for (var j = index; j < result.Count; j++) result[j].Factor(multiplicity);
-                }
+                    for (var j = index; j < result.Count; j++)
+                        result[j].Factor(Multiplicity(m.Groups[5]));
             }
-
-            var ret = new List<Element>();
-            foreach(var list in result) ret.AddRange(list);
-            return ret;
+            return result.Combine();
         }
+
+        /// <summary>
+        /// Combines a list of lists into single list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static List<T> Combine<T>(this List<List<T>> input)
+        {
+            var tmp = new List<T>();
+            foreach (var list in input) tmp.AddRange(list);
+            return tmp;
+        }
+
+        /// <summary>
+        /// calculates multiplicity
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        private static int Multiplicity(Group match) => match.Success && match.Value != ""
+            ? Convert.ToInt32(match.Value)
+            : 1;
 
         /// <summary>
         /// Multiplies a List of Element

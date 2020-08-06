@@ -41,6 +41,11 @@ namespace ChemSharp.Molecule
             return input.Sum(s => s.AtomicWeight);
         }
 
+        /// <summary>
+        /// Conversion from string to ElementCollection
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static IEnumerable<Element> ToElements(this string input)
         {
             input = input.Replace("[", "(".Replace("]", ")"));
@@ -75,6 +80,12 @@ namespace ChemSharp.Molecule
             return ret;
         }
 
+        /// <summary>
+        /// Multiplies a List of Element
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="multiplicity"></param>
+        /// <returns></returns>
         private static List<Element> Factor(this List<Element> input, int multiplicity)
         {
             var tmp = new List<Element>(input);

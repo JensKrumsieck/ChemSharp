@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace ChemSharp.Molecule
 {
+    /// <summary>
+    /// Singleton!
+    /// </summary>
     public sealed class ElementDataProvider
     {
         private static readonly ElementDataProvider _instance = new ElementDataProvider();

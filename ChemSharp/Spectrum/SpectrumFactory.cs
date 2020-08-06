@@ -10,6 +10,12 @@ namespace ChemSharp.Spectrum
     /// </summary>
     public static class SpectrumFactory
     {
+        /// <summary>
+        /// Create AbstractSpectrum from Single XY File
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="src"></param>
+        /// <returns></returns>
         public static AbstractSpectrum CreateFromFile<T>(IXYSpectrumFile src)
             where T : AbstractSpectrum
         {
@@ -20,6 +26,13 @@ namespace ChemSharp.Spectrum
             return spc;
         }
 
+        /// <summary>
+        /// Create AbstractSpectrum from two files (X,Y)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xSrc"></param>
+        /// <param name="ySrc"></param>
+        /// <returns></returns>
         public static AbstractSpectrum CreateFromFiles<T>(IXSpectrumFile xSrc, IYSpectrumFile ySrc)
             where T : AbstractSpectrum
         {
@@ -36,6 +49,14 @@ namespace ChemSharp.Spectrum
             return spc;
         }
 
+
+        /// <summary>
+        /// Creator Method for Spectra
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static TResult Create<TResult, TSource>(string path)
             where TResult : AbstractSpectrum
             where TSource : AbstractFile, IXYSpectrumFile
@@ -44,6 +65,15 @@ namespace ChemSharp.Spectrum
             return (TResult)CreateFromFile<TResult>(file);
         }
 
+        /// <summary>
+        /// Creator Method for Spectra
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TSourceX"></typeparam>
+        /// <typeparam name="TSourceY"></typeparam>
+        /// <param name="xPath"></param>
+        /// <param name="yPath"></param>
+        /// <returns></returns>
         public static TResult Create<TResult, TSourceX, TSourceY>(string xPath, string yPath)
             where TResult : AbstractSpectrum
             where TSourceX : AbstractFile, IXSpectrumFile

@@ -30,6 +30,11 @@ namespace ChemSharp.Molecule
             return formula;
         }
 
+        /// <summary>
+        /// Calculate Molecular Weight
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static double Weight(this IEnumerable<Element> input)
         {
             return input.Sum(s => s.AtomicWeight);

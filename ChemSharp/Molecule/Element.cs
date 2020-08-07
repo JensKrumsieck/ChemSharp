@@ -37,8 +37,8 @@ namespace ChemSharp.Molecule
         /// <param name="symbol"></param>
         public Element(string symbol)
         {
-            //get Data via SingletonAPI
-            var shadow = ElementDataProvider.Instance.Elements.Find(s => s.Symbol == symbol);
+            //get Data via API
+            var shadow = ElementDataProvider.Elements.Find(s => s.Symbol == symbol);
             var props = typeof(Element).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var p in props)
             {

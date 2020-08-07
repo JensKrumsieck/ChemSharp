@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -8,25 +9,21 @@ namespace ChemSharp.Molecule
     /// <summary>
     /// Singleton!
     /// </summary>
-    public sealed class ElementDataProvider
+    public class ElementDataProvider
     {
-        private static readonly ElementDataProvider _instance = new ElementDataProvider();
-        public List<Element> Elements;
-
-        public static ElementDataProvider Instance => _instance;
-
-        private ElementDataProvider()
+        public static List<Element> Elements { get; private set; }
+        static ElementDataProvider()
         {
-            Elements = Init().Result;
+            LoadElements().Wait();
         }
-
-        private static async Task<List<Element>> Init()
+        private static async Task LoadElements()
         {
             //Read Data from https://github.com/JensKrumsieck/periodic-table 
             //fetched from http://en.wikipedia.org
-            var assembly = typeof(ChemSharp.Molecule.Element).GetTypeInfo().Assembly;
-            await using var stream = assembly.GetManifestResourceStream("ChemSharp.Resources.elements.json");
-            return await JsonSerializer.DeserializeAsync<List<Element>>(stream);
+            var assembly = typeof(Element).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream("ChemSharp.Resources.elements.json");
+            var json = await JsonSerializer.DeserializeAsync<List<Element>>(stream);
+            Elements = json;
         }
     }
 }

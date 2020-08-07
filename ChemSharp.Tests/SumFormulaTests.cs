@@ -24,5 +24,12 @@ namespace ChemSharp.Tests
             Assert.AreEqual(expectedFormula, parsed);
         }
 
+        [TestMethod]
+        public void TestElementalAnalysis()
+        {
+            var ea = "H2O".ToElements().ElementalAnalysis();
+            Assert.AreEqual(0.1119, ea["H"], 0.001);
+        }
+
     }
 }

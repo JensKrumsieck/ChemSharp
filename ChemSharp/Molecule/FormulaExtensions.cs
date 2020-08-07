@@ -16,11 +16,7 @@ namespace ChemSharp.Molecule
         /// <returns></returns>
         public static string SumFormula(this IEnumerable<Element> input)
         {
-            var groups = from element in input
-                         group element by element.Symbol
-                into newGroup
-                         orderby newGroup.Key
-                         select newGroup;
+            var groups = input.Group();
             var formula = "";
             foreach (var group in groups)
             {
@@ -85,6 +81,13 @@ namespace ChemSharp.Molecule
             return tmp;
         }
 
+        public static Dictionary<string, double> ElementalAnalysis(this IEnumerable<Element> input)
+        {
+            var arr = input as Element[] ?? input.ToArray();
+            var weight = arr.Weight();
+            return arr.Group().ToDictionary(g => g.Key, g => g.Weight() / weight);
+        }
+
         /// <summary>
         /// calculates multiplicity
         /// </summary>
@@ -106,5 +109,17 @@ namespace ChemSharp.Molecule
             for (int i = 0; i < multiplicity - 1; i++) input.AddRange(tmp);
             return input;
         }
+
+        /// <summary>
+        /// Returns Elements grouped by Symbol
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private static IOrderedEnumerable<IGrouping<string, Element>> Group(this IEnumerable<Element> input)
+            => from element in input
+               group element by element.Symbol
+               into newGroup
+               orderby newGroup.Key
+               select newGroup;
     }
 }

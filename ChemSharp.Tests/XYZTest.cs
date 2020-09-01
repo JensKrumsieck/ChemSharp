@@ -21,5 +21,13 @@ namespace ChemSharp.Tests
             Assert.AreEqual("C10H12O", atoms.SumFormula());
             Assert.AreEqual(148.205, atoms.Weight(), 0.025);
         }
+
+        [TestMethod]
+        public void TestBondGeneration()
+        {
+            var file = new XYZ(path);
+            var mol = new Molecule.Molecule(file.Atoms);
+            Assert.AreEqual(23,mol.Bonds.Count());
+        }
     }
 }

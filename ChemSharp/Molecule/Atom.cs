@@ -37,7 +37,8 @@ namespace ChemSharp.Molecule
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public bool BondTo(Atom test) => DistanceTo(test) < (CovalentRadius +  test.CovalentRadius + Delta) / 100d;
+        // ReSharper disable possibleInvalidOperationException
+        public bool BondTo(Atom test) => DistanceTo(test) < ((float)CovalentRadius +  (float)test.CovalentRadius + Delta) / 100f;
 
         private string _title;
 

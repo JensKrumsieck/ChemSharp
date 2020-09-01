@@ -6,6 +6,7 @@
 ### Supported Filetypes
 * Molecule
 	* XYZ
+	* CIF (crystallographic information file)
 
 * Spectroscopy
 	* Varian/Agilient DSW

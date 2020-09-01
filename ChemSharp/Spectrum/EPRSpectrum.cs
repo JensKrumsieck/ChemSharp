@@ -90,6 +90,9 @@ namespace ChemSharp.Spectrum
             Operator = file.Parameters.TryAndGet("JON");
             Comment = file.Parameters.TryAndGet("JCO");
             Unit = file.Parameters.TryAndGet("JUN");
+
+            //set secondary X Axis to G Axis
+            SecondaryXAxis = GAxis.ToArray();
         }
 
         /// <summary>

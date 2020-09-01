@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ChemSharp.Files;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using ChemSharp.Files;
 
 namespace ChemSharp.Spectrum
 {
@@ -53,8 +53,8 @@ namespace ChemSharp.Spectrum
         private IEnumerable<Vector2> Integrate()
         {
             for (var i = 0; i < Data.Length; i++)
-                yield return i == 0 
-                    ? Data[i] 
+                yield return i == 0
+                    ? Data[i]
                     : new Vector2(Data[i].X, Data[i].Y + Data[i - 1].Y);
         }
 
@@ -65,5 +65,12 @@ namespace ChemSharp.Spectrum
         {
             //does nothing
         }
+
+        /// <summary>
+        /// Dummy Method to link secondary x axis for plotting
+        /// Dummy Method makes it exchangeable
+        /// </summary>
+        /// <returns></returns>
+        public float[] SecondaryXAxis { get; set; }
     }
 }

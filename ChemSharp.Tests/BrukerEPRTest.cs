@@ -40,6 +40,7 @@ namespace ChemSharp.Tests
             var epr = SpectrumFactory.Create<EPRSpectrum, PAR, SPC>($"{path}.par", $"{path}.spc");
             var g = epr.GAxis.ToArray();
             Assert.AreEqual(2048, g.Length);
+            CollectionAssert.AreEqual(g, epr.SecondaryXAxis);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ChemSharp.Tests
     [TestClass]
     public class VarianUVVisTest
     {
-        private string path = "files/uvvis.dsw";
+        private readonly string path = "files/uvvis.dsw";
 
         [TestMethod]
         public void TestDSW()

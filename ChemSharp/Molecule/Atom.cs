@@ -10,7 +10,7 @@ namespace ChemSharp.Molecule
         /// <summary>
         /// See BondTo Method
         /// </summary>
-        static readonly float Delta = 0.25f;
+        private const float Delta = 5f;
 
         /// <summary>
         /// Location in 3D Space
@@ -37,10 +37,7 @@ namespace ChemSharp.Molecule
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public bool BondTo(Atom test)
-        {
-            return DistanceTo(test) < ((CovalentRadius +  test.CovalentRadius + 5) / 100d);
-        }
+        public bool BondTo(Atom test) => DistanceTo(test) < (CovalentRadius +  test.CovalentRadius + Delta) / 100d;
 
         private string _title;
 

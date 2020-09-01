@@ -1,4 +1,5 @@
-﻿using ChemSharp.Files.Molecule;
+﻿using System.Collections.Generic;
+using ChemSharp.Files.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using ChemSharp.Molecule;
@@ -15,9 +16,10 @@ namespace ChemSharp.Tests
         public void XYZLoad()
         {
             var file = new XYZ(path);
-            Assert.AreEqual(23, file.Atoms.Count());
-            Assert.AreEqual("C10H12O", file.Atoms.SumFormula());
-            Assert.AreEqual(148.205, file.Atoms.Weight(), 0.025);
+            var atoms = new HashSet<Atom>(file.Atoms);
+            Assert.AreEqual(23, atoms.Count());
+            Assert.AreEqual("C10H12O", atoms.SumFormula());
+            Assert.AreEqual(148.205, atoms.Weight(), 0.025);
         }
     }
 }

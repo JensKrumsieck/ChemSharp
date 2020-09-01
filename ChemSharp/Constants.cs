@@ -73,5 +73,10 @@ namespace ChemSharp
         /// Hartree constant
         /// </summary>
         public const double Hartree = (ReducedPlanck * ReducedPlanck) / (ElectronMass * (BohrRadius * BohrRadius));
+
+        /// <summary>
+        /// Free g factor for electron
+        /// </summary>
+        public const double GFree = 2.00231930436256;
     }
 }

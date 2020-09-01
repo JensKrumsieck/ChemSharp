@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using ChemSharp.Files;
 
 namespace ChemSharp.Spectrum
 {
@@ -11,7 +12,7 @@ namespace ChemSharp.Spectrum
         /// <summary>
         /// associated files
         /// </summary>
-        public IList<string> Files { get; set; } = new List<string>();
+        public IList<IFile> Files { get; set; } = new List<IFile>();
 
         private Vector2[] _derivative;
 
@@ -20,11 +21,7 @@ namespace ChemSharp.Spectrum
         /// </summary>
         public Vector2[] Derivative
         {
-            get
-            {
-                if (_derivative.Equals(null)) _derivative = Derive().ToArray();
-                return _derivative;
-            }
+            get { return _derivative ??= Derive().ToArray(); }
         }
 
         private Vector2[] _integral;
@@ -34,11 +31,7 @@ namespace ChemSharp.Spectrum
         /// </summary>
         public Vector2[] Integral
         {
-            get
-            {
-                if (_integral.Equals(null)) _integral = Integrate().ToArray();
-                return _integral;
-            }
+            get { return _integral ??= Integrate().ToArray(); }
         }
 
         /// <summary>
@@ -47,9 +40,9 @@ namespace ChemSharp.Spectrum
         /// <returns></returns>
         private IEnumerable<Vector2> Derive()
         {
-            for (var i = 0; i <= Data.Length; i++)
+            for (var i = 0; i < Data.Length; i++)
                 yield return i == 0
-                    ? Vector2.Zero
+                    ? new Vector2(Data[i].X, 0)
                     : new Vector2(Data[i].X, (Data[i].Y - Data[i - 1].Y) / (Data[i].X - Data[i - 1].X));
         }
 
@@ -59,10 +52,18 @@ namespace ChemSharp.Spectrum
         /// <returns></returns>
         private IEnumerable<Vector2> Integrate()
         {
-            for (var i = 0; i <= Data.Length; i++)
+            for (var i = 0; i < Data.Length; i++)
                 yield return i == 0 
                     ? Data[i] 
                     : new Vector2(Data[i].X, Data[i].Y + Data[i - 1].Y);
+        }
+
+        /// <summary>
+        /// Can be called after initialization through factory;
+        /// </summary>
+        public virtual void OnInit()
+        {
+            //does nothing
         }
     }
 }

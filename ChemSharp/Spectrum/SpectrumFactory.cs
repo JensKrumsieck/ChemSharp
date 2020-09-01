@@ -21,7 +21,8 @@ namespace ChemSharp.Spectrum
         {
             var spc = (T)Activator.CreateInstance(typeof(T));
             spc.Data = src.XYData;
-            spc.Files.Add(((AbstractFile)src).Path);
+            spc.Files.Add((IFile)(src));
+            spc.OnInit();
             //add files
             return spc;
         }
@@ -44,8 +45,9 @@ namespace ChemSharp.Spectrum
             var spc = (T)Activator.CreateInstance(typeof(T));
             spc.Data = data;
             //add files
-            spc.Files.Add(((AbstractFile)xSrc).Path);
-            spc.Files.Add(((AbstractFile)ySrc).Path);
+            spc.Files.Add((IFile)(xSrc));
+            spc.Files.Add((IFile)(ySrc));
+            spc.OnInit();
             return spc;
         }
 

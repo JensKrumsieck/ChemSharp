@@ -22,7 +22,7 @@ namespace ChemSharp.Tests
             var uvvis = SpectrumFactory.Create<UVVisSpectrum, DSW>(path);
             Assert.AreEqual(901, uvvis.Data.Length);
             //check if file information is saved correctly
-            Assert.AreEqual(uvvis.Files[0], path);
+            Assert.AreEqual(uvvis.Files[0].Path, path);
         }
     }
 }

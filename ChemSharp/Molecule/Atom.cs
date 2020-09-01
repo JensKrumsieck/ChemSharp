@@ -29,14 +29,18 @@ namespace ChemSharp.Molecule
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public float DistanceTo(Atom test) => Vector3.Distance(this.Location, test.Location);
+        public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
 
         /// <summary>
         /// Tests if Atom is Bond to another based on distance!
+        /// allow uncertainity of 5 pm overall
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public bool BondTo(Atom test) => DistanceTo(test) < (this.VdWRadius);
+        public bool BondTo(Atom test)
+        {
+            return DistanceTo(test) < ((CovalentRadius +  test.CovalentRadius + 5) / 100d);
+        }
 
         private string _title;
 
@@ -49,5 +53,7 @@ namespace ChemSharp.Molecule
             set => _title = value;
         }
 
+
+        public override string ToString() => Title;
     }
 }

@@ -26,7 +26,7 @@ namespace ChemSharp.Files.Molecule
             var cellAngles = CellParameters("cell_angle").ToArray();
             var moleculeLoop = Loop("atom_site_label");
             var headers = moleculeLoop.LineSplit().Where(s => s.Trim().StartsWith("_")).ToArray();
-            int disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
+            var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
 
             var conversionMatrix = MathUtil.ConversionMatrix(cellLengths[0], cellLengths[1], cellLengths[2],
                 cellAngles[0], cellAngles[1], cellAngles[2]);

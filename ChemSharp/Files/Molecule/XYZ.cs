@@ -21,7 +21,7 @@ namespace ChemSharp.Files.Molecule
         /// Read Atom data from CIF File
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Atom> ReadAtoms()
+        private IEnumerable<Atom> ReadAtoms()
         {
             foreach (var line in Data)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Numerics;
 
 namespace ChemSharp.Extensions
 {
@@ -19,6 +20,12 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static int ToInt(this string? input) => input == null ? 0 : Convert.ToInt32(input, CultureInfo.InvariantCulture);
 
+        /// <summary>
+        /// converts float array [3] to vector3
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static Vector3 ToVector3(this float[] input) => new Vector3(input[0], input[1], input[2]);
 
         /// <summary>
         /// Converts three letter month to int

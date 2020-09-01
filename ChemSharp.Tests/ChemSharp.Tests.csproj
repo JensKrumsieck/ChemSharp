@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="files\cif.cif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\epr.par">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

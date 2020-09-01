@@ -1,7 +1,8 @@
-﻿using System;
-using System.Linq;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files.Spectroscopy;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChemSharp.Spectrum
 {
@@ -62,6 +63,9 @@ namespace ChemSharp.Spectrum
         /// </summary>
         public string Unit;
 
+        /// <summary>
+        /// Calls directly after initialization
+        /// </summary>
         public override void OnInit()
         {
             base.OnInit();
@@ -86,6 +90,35 @@ namespace ChemSharp.Spectrum
             Operator = file.Parameters.TryAndGet("JON");
             Comment = file.Parameters.TryAndGet("JCO");
             Unit = file.Parameters.TryAndGet("JUN");
+        }
+
+        /// <summary>
+        /// Calculate GValue for one given point.
+        /// </summary>
+        /// <param name="xInput"></param>
+        /// <param name="frequency"></param>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public static float GValue(float xInput, float frequency, string unit = "G")
+        {
+            //convert input to Tesla unit
+            var value = unit switch
+            {
+                "G" => xInput / 10000,
+                "mT" => xInput / 1000,
+                _ => xInput
+            };
+
+            return (float) (Constants.Planck * frequency * 1e9 / (Constants.BohrM * value));
+        }
+
+
+        public IEnumerable<float> GAxis
+        {
+            get
+            {
+                for (var i = 0; i < Data.Length; i++) yield return GValue(Data[i].X, Frequency, !string.IsNullOrEmpty(Unit) ? Unit : "G");
+            }
         }
     }
 }

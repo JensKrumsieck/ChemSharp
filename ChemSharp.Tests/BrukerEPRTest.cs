@@ -1,3 +1,4 @@
+using System.Linq;
 using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Spectrum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,6 +32,14 @@ namespace ChemSharp.Tests
             var epr = SpectrumFactory.Create<EPRSpectrum, PAR, SPC>($"{path}.par", $"{path}.spc");
             //check length of created vector property
             Assert.AreEqual(2048, epr.Data.Length);
+        }
+
+        [TestMethod]
+        public void TestGAxis()
+        {
+            var epr = SpectrumFactory.Create<EPRSpectrum, PAR, SPC>($"{path}.par", $"{path}.spc");
+            var g = epr.GAxis.ToArray();
+            Assert.AreEqual(2048, g.Length);
         }
     }
 }

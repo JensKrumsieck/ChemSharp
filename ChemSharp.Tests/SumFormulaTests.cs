@@ -18,8 +18,8 @@ namespace ChemSharp.Tests
 
         public void RunTest(string formula, int expectedNumberOfElements, string expectedFormula)
         {
-            var elements = formula.ToElements();
-            Assert.AreEqual(expectedNumberOfElements, elements.Count());
+            var elements = formula.ToElements().ToArray();
+            Assert.AreEqual(expectedNumberOfElements, elements.Length);
             var parsed = elements.SumFormula();
             Assert.AreEqual(expectedFormula, parsed);
         }

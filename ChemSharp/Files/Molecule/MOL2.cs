@@ -40,8 +40,7 @@ namespace ChemSharp.Files.Molecule
             foreach (var line in lines)
             {
                 if(string.IsNullOrEmpty(line) || line == "ATOM") continue;
-                var columns = line.Split(new[] { " ", "\t" }, StringSplitOptions.None).
-                    Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                var columns = line.WhiteSpaceSplit();
                 var identifier = columns[1];
                 var x = columns[2].ToFloat();
                 var y = columns[3].ToFloat();
@@ -66,8 +65,7 @@ namespace ChemSharp.Files.Molecule
             foreach (var line in lines)
             {
                 if (string.IsNullOrEmpty(line) || line == "BOND") continue;
-                var columns = line.Split(new[] { " ", "\t" }, StringSplitOptions.None).
-                    Where(s => !string.IsNullOrEmpty(s)).ToArray();
+                var columns = line.WhiteSpaceSplit();
                 //subtract 1 as mol2 starts counting at 1
                 var a1 = columns[1].ToInt() - 1;
                 var a2 = columns[2].ToInt() - 1;

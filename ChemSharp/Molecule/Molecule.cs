@@ -17,7 +17,6 @@ namespace ChemSharp.Molecule
 
         public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null)
         {
-            Debug.WriteLine(atoms.First().GetHashCode());
             Atoms = atoms;
             Bonds = bonds;
             if (bonds == null)

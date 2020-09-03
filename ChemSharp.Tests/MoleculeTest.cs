@@ -21,16 +21,13 @@ namespace ChemSharp.Tests
         public void SetUp()
         {
             var mol2 = new MOL2(path);
-            Debug.WriteLine(mol2.Atoms.First().GetHashCode());
             _molecule = new Molecule.Molecule(mol2.Atoms, mol2.Bonds);
-            Debug.WriteLine(_molecule.Atoms.First().GetHashCode());
         }
 
         [TestMethod]
         public void TestIsBond()
         {
             var c1 = _molecule.Atoms.ElementAt(0);
-            Debug.WriteLine(c1.GetHashCode());
             var c2 = _molecule.Atoms.ElementAt(1);
             Assert.IsTrue(_molecule.IsBond(c1,c2));
         }

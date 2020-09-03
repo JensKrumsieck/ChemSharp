@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace ChemSharp.Extensions
@@ -48,6 +50,31 @@ namespace ChemSharp.Extensions
                     MathF.Cos(alpha * MathF.PI / 180f) * MathF.Cos(beta * MathF.PI / 180f) *
                     MathF.Cos(gamma * MathF.PI / 180f))) / MathF.Sin(gamma * MathF.PI / 180f));
             return new[] {line1, line2, line3};
+        }
+
+        /// <summary>
+        /// Calculates the centroid of given vectors by 1/m sum_(i=0 to m) v_i
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static Vector3 Centroid(this IEnumerable<Vector3> input)
+        {
+            var array = input.ToArray();
+            return array.Sum() / array.Length;
+        }
+
+        /// <summary>
+        /// Calculates the Sum of given Vectors
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static Vector3 Sum(this IEnumerable<Vector3> input)
+        {
+            var array = input as Vector3[] ?? input.ToArray();
+            var sumX = array.Sum(s => s.X);
+            var sumY = array.Sum(s => s.Y);
+            var sumZ = array.Sum(s => s.Z);
+            return new Vector3(sumX, sumY, sumZ);
         }
     }
 }

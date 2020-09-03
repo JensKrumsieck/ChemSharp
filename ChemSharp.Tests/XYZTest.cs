@@ -13,7 +13,7 @@ namespace ChemSharp.Tests
         public string path = "files/mescho.xyz";
 
         [TestMethod]
-        public void XYZLoad()
+        public void TestXYZAtoms()
         {
             var file = new XYZ(path);
             var atoms = new HashSet<Atom>(file.Atoms);
@@ -23,7 +23,7 @@ namespace ChemSharp.Tests
         }
 
         [TestMethod]
-        public void TestBondGeneration()
+        public void TextXYZGeneratedBonds()
         {
             var file = new XYZ(path);
             var mol = new Molecule.Molecule(file.Atoms);

@@ -48,8 +48,6 @@ namespace ChemSharp.Files.Molecule
                     && disorderGroupIndex < raw.Length 
                     && raw[disorderGroupIndex] == "2" 
                     || (raw.Length != headers.Length)) continue;
-
-                var symbol = raw[1];
                 var rawCoordinates = new Vector3(
                     raw[2].StripUncertainity().ToFloat(),
                     raw[3].StripUncertainity().ToFloat(),

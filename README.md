@@ -7,6 +7,7 @@
 * Molecule
 	* XYZ
 	* CIF (crystallographic information file)
+	* MOL2 (TRIPOS Mol2)
 
 * Spectroscopy
 	* Varian/Agilient DSW

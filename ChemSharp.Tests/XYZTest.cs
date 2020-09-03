@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using ChemSharp.Files.Molecule;
+﻿using ChemSharp.Files.Molecule;
+using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using ChemSharp.Molecule;
 
 namespace ChemSharp.Tests
 {

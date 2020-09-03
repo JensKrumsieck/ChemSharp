@@ -72,15 +72,15 @@ namespace ChemSharp.Files.Molecule
         {
             var bondLoop = Loop("geom_bond");
             if (bondLoop == null) yield break;
+            var tmp = Atoms.ToDictionary(atom => atom.Title);
             foreach (var line in bondLoop.LineSplit().Where(s => !s.StartsWith("_")))
             {
-                if (string.IsNullOrEmpty(line)) continue; ;
+                if (string.IsNullOrEmpty(line)) continue; 
                 var raw = line.Split(" ");
                 if (raw.Length == 0) continue;
-                var atoms = new HashSet<Atom>(Atoms);
-                var a1 = atoms.FirstOrDefault(s => s.Title == raw[0]);
-                var a2 = atoms.FirstOrDefault(s => s.Title == raw[1]);
-                if(a1 == null || a2 == null) continue;;
+                var a1 = tmp.TryAndGet(raw[0]);
+                var a2 = tmp.TryAndGet(raw[1]);
+                if (a1 == null || a2 == null) continue;
                 yield return new Bond(a1,a2);
             }
         }

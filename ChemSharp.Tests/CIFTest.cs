@@ -23,15 +23,14 @@ namespace ChemSharp.Tests
             _cif = new CIF(path); 
             _atoms = _cif.Atoms.ToArray();
             _bonds = _cif.Bonds.ToArray();
-
         }
 
         [TestMethod]
         public void TestCIFAtoms()
         {
+            Assert.AreEqual(79, _atoms.Length);
             Assert.AreEqual(780.51, _atoms.Weight(), 0.05);
             Assert.AreEqual("C40Cl2H29MoN4O3", _atoms.SumFormula());
-            Assert.AreEqual(79,_atoms.Length);
         }
 
         [TestMethod]

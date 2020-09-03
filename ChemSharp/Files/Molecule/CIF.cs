@@ -35,7 +35,6 @@ namespace ChemSharp.Files.Molecule
             var moleculeLoop = Loop("atom_site_label");
             var headers = moleculeLoop.LineSplit().Where(s => s.Trim().StartsWith("_")).ToArray();
             var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
-
             var conversionMatrix = MathUtil.ConversionMatrix(cellLengths[0], cellLengths[1], cellLengths[2],
                 cellAngles[0], cellAngles[1], cellAngles[2]);
 
@@ -44,21 +43,16 @@ namespace ChemSharp.Files.Molecule
             {
                 var raw = line.Split(" ");
                 //ignore disorder group
-                if (disorderGroupIndex >= 0 
-                    && disorderGroupIndex < raw.Length 
-                    && raw[disorderGroupIndex] == "2" 
+                if (disorderGroupIndex >= 0
+                    && disorderGroupIndex < raw.Length
+                    && raw[disorderGroupIndex] == "2"
                     || (raw.Length != headers.Length)) continue;
                 var rawCoordinates = new Vector3(
                     raw[2].StripUncertainity().ToFloat(),
                     raw[3].StripUncertainity().ToFloat(),
                     raw[4].StripUncertainity().ToFloat());
-
                 var coordinates = MathUtil.FractionalToCartesian(rawCoordinates, conversionMatrix);
-                yield return new Atom(raw[1])
-                {
-                    Location = coordinates,
-                    Title = raw[0]
-                };
+                yield return new Atom(raw[1]) { Location = coordinates, Title = raw[0] };
             }
         }
 
@@ -73,13 +67,13 @@ namespace ChemSharp.Files.Molecule
             var tmp = Atoms.ToDictionary(atom => atom.Title);
             foreach (var line in bondLoop.LineSplit().Where(s => !s.StartsWith("_")))
             {
-                if (string.IsNullOrEmpty(line)) continue; 
+                if (string.IsNullOrEmpty(line)) continue;
                 var raw = line.Split(" ");
                 if (raw.Length == 0) continue;
                 var a1 = tmp.TryAndGet(raw[0]);
                 var a2 = tmp.TryAndGet(raw[1]);
                 if (a1 == null || a2 == null) continue;
-                yield return new Bond(a1,a2);
+                yield return new Bond(a1, a2);
             }
         }
 

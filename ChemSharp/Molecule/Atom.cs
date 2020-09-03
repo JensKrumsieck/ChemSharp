@@ -42,7 +42,6 @@ namespace ChemSharp.Molecule
         public bool BondTo(Atom test) => DistanceTo(test) < ((float)CovalentRadius + (float)test.CovalentRadius + Delta) / 100f;
 
         private string _title;
-
         /// <summary>
         /// Gets or Sets the Atom title
         /// </summary>

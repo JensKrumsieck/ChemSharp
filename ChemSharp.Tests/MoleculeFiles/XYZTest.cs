@@ -3,7 +3,7 @@ using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace ChemSharp.Tests
+namespace ChemSharp.Tests.MoleculeFiles
 {
     [TestClass]
     public class XYZTest

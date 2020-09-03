@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace ChemSharp.Molecule
 {
@@ -40,10 +43,37 @@ namespace ChemSharp.Molecule
             //get Data via API
             var shadow = ElementDataProvider.Elements.Find(s => s.Symbol == symbol);
             var props = typeof(Element).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var p in props)
+            foreach (var p in props.Where(s => !Attribute.IsDefined(s, typeof(JsonIgnoreAttribute))))
             {
                 p.SetValue(this as Element, p.GetValue(shadow), null);
             }
         }
+
+
+        /// <summary>
+        /// retuns true if atom is considered as metal
+        /// </summary>
+        [JsonIgnore]
+        public bool IsMetal => Category.Contains("metal", StringComparison.InvariantCultureIgnoreCase)
+                               && !IsMetalloid
+                               && !IsNonMetal;
+        /// <summary>
+        /// returns true if atom is considered as metalloid
+        /// </summary>
+
+        [JsonIgnore]
+        public bool IsMetalloid => Category == "Metalloid";
+
+        /// <summary>
+        /// Returns true if atom is considered as gas
+        /// </summary>
+        [JsonIgnore]
+        public bool IsGas => Category.Contains("gas", StringComparison.InvariantCultureIgnoreCase);
+
+        /// <summary>
+        /// Returns true if atom is considered nonmetal
+        /// </summary>
+        [JsonIgnore]
+        public bool IsNonMetal => Category.Contains("nonmetal", StringComparison.InvariantCultureIgnoreCase);
     }
 }

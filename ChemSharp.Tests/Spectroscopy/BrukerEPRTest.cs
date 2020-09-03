@@ -3,7 +3,7 @@ using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Spectrum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ChemSharp.Tests
+namespace ChemSharp.Tests.Spectroscopy
 {
     [TestClass]
     public class BrukerEPRTest

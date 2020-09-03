@@ -12,22 +12,31 @@ namespace ChemSharp.Tests
 
         public string path = "files/mescho.xyz";
 
+        private XYZ _xyz;
+        private Atom[] _atoms;
+        private Bond[] _bonds;
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _xyz = new XYZ(path);
+            _atoms = _xyz.Atoms.ToArray();
+            var mol = new Molecule.Molecule(_atoms);
+            _bonds = mol.Bonds.ToArray();
+        }
+
         [TestMethod]
         public void TestXYZAtoms()
         {
-            var file = new XYZ(path);
-            var atoms = new HashSet<Atom>(file.Atoms);
-            Assert.AreEqual(23, atoms.Count());
-            Assert.AreEqual("C10H12O", atoms.SumFormula());
-            Assert.AreEqual(148.205, atoms.Weight(), 0.025);
+            Assert.AreEqual(23, _atoms.Length);
+            Assert.AreEqual("C10H12O", _atoms.SumFormula());
+            Assert.AreEqual(148.205, _atoms.Weight(), 0.025);
         }
 
         [TestMethod]
         public void TextXYZGeneratedBonds()
         {
-            var file = new XYZ(path);
-            var mol = new Molecule.Molecule(file.Atoms);
-            Assert.AreEqual(23,mol.Bonds.Count());
+            Assert.AreEqual(23,_bonds.Length);
         }
     }
 }

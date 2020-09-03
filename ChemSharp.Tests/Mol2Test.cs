@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using ChemSharp.Files.Molecule;
+using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ChemSharp.Tests
@@ -8,20 +9,33 @@ namespace ChemSharp.Tests
     public class Mol2Test
     {
         public string path = "files/benzene.mol2";
+
+        private MOL2 _mol2;
+        private Atom[] _atoms;
+        private Bond[] _bonds;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _mol2 = new MOL2(path);
+            _atoms = _mol2.Atoms.ToArray();
+            _bonds = _mol2.Bonds.ToArray();
+
+        }
+
         [TestMethod]
         public void TestMol2Atoms()
         {
             var mol2 = new MOL2(path);
-            Assert.AreEqual(12, mol2.Atoms.Count());
-            Assert.AreEqual(6, mol2.Atoms.Count(s => s.Symbol == "C"));
-            Assert.AreEqual(6, mol2.Atoms.Count(s => s.Symbol == "H"));
+            Assert.AreEqual(12, _atoms.Length);
+            Assert.AreEqual(6, _atoms.Count(s => s.Symbol == "C"));
+            Assert.AreEqual(6, _atoms.Count(s => s.Symbol == "H"));
         }
 
         [TestMethod]
         public void TestMol2Bonds()
         {
-            var mol2 = new MOL2(path);
-            Assert.AreEqual(12, mol2.Bonds.Count());
+            Assert.AreEqual(12, _bonds.Length);
         }
     }
 }

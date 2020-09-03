@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using ChemSharp.Extensions;
+using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace ChemSharp.Molecule
 {
@@ -33,6 +34,11 @@ namespace ChemSharp.Molecule
                                                       (s.Atom1.Equals(a1) && s.Atom2.Equals(a2))
                                                       || (s.Atom2.Equals(a1) && s.Atom1.Equals(a2)))
                                                   != null;
+
+        /// <summary>
+        /// Wrapper for IEnumerable<Atom>.Centroid()
+        /// </summary>
+        public Vector3 Centroid => Atoms.Centroid();
 
         /// <summary>
         /// Generate Bonds if not given

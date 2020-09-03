@@ -29,7 +29,7 @@ namespace ChemSharp.Tests.Spectroscopy
         [TestMethod]
         public void TestEPRCreation()
         {
-            var epr = SpectrumFactory.Create<EPRSpectrum, PAR, SPC>($"{path}.par", $"{path}.spc");
+            var epr = SpectrumFactory.Create<EPRSpectrum>($"{path}.par", $"{path}.spc");
             //check length of created vector property
             Assert.AreEqual(2048, epr.Data.Length);
         }
@@ -37,7 +37,7 @@ namespace ChemSharp.Tests.Spectroscopy
         [TestMethod]
         public void TestGAxis()
         {
-            var epr = SpectrumFactory.Create<EPRSpectrum, PAR, SPC>($"{path}.par", $"{path}.spc");
+            var epr = SpectrumFactory.Create<EPRSpectrum>($"{path}.par", $"{path}.spc");
             var g = epr.GAxis.ToArray();
             Assert.AreEqual(2048, g.Length);
             CollectionAssert.AreEqual(g, epr.SecondaryXAxis);

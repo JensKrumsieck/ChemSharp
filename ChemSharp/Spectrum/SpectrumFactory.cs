@@ -2,6 +2,7 @@
 using ChemSharp.Files.Spectroscopy;
 using System;
 using System.Numerics;
+using ChemSharp.Extensions;
 
 namespace ChemSharp.Spectrum
 {
@@ -59,12 +60,11 @@ namespace ChemSharp.Spectrum
         /// <typeparam name="TSource"></typeparam>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static TResult Create<TResult, TSource>(string path)
+        public static TResult Create<TResult>(string path)
             where TResult : AbstractSpectrum
-            where TSource : AbstractFile, IXYSpectrumFile
         {
-            var file = (TSource)Activator.CreateInstance(typeof(TSource), path);
-            return (TResult)CreateFromFile<TResult>(file);
+            var file = path.CreateObjectFromFile("Spectroscopy");
+            return (TResult)CreateFromFile<TResult>(file as IXYSpectrumFile);
         }
 
         /// <summary>
@@ -76,14 +76,12 @@ namespace ChemSharp.Spectrum
         /// <param name="xPath"></param>
         /// <param name="yPath"></param>
         /// <returns></returns>
-        public static TResult Create<TResult, TSourceX, TSourceY>(string xPath, string yPath)
+        public static TResult Create<TResult>(string xPath, string yPath)
             where TResult : AbstractSpectrum
-            where TSourceX : AbstractFile, IXSpectrumFile
-            where TSourceY : AbstractFile, IYSpectrumFile
         {
-            var xFile = (TSourceX)Activator.CreateInstance(typeof(TSourceX), xPath);
-            var yFile = (TSourceY)Activator.CreateInstance(typeof(TSourceY), yPath);
-            return (TResult)CreateFromFiles<TResult>(xFile, yFile);
+            var xFile = xPath.CreateObjectFromFile("Spectroscopy");
+            var yFile = yPath.CreateObjectFromFile("Spectroscopy");
+            return (TResult)CreateFromFiles<TResult>(xFile as IXSpectrumFile, yFile as IYSpectrumFile);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ChemSharp.Extensions;
 using ChemSharp.Files.Molecule;
 
 namespace ChemSharp.Molecule
@@ -28,13 +29,6 @@ namespace ChemSharp.Molecule
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static Molecule Create(string path)
-        {
-            var ext = Path.GetExtension(path);
-            const string ns = "ChemSharp.Files.Molecule";
-            var type = Assembly.GetExecutingAssembly().GetType(ns + ext.ToUpper(), true);
-            var file = Activator.CreateInstance(type, path);
-            return Create(file as IAtomFile);
-        }
+        public static Molecule Create(string path) => Create(path.CreateObjectFromFile("Molecule") as IAtomFile);
     }
 }

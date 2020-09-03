@@ -19,7 +19,7 @@ namespace ChemSharp.Tests.Spectroscopy
         [TestMethod]
         public void TestUVVis()
         {
-            var uvvis = SpectrumFactory.Create<UVVisSpectrum, DSW>(path);
+            var uvvis = SpectrumFactory.Create<UVVisSpectrum>(path);
             Assert.AreEqual(901, uvvis.Data.Length);
             //check if file information is saved correctly
             Assert.AreEqual(uvvis.Files[0].Path, path);

@@ -26,7 +26,6 @@ namespace ChemSharp.Tests
         [TestMethod]
         public void TestMol2Atoms()
         {
-            var mol2 = new MOL2(path);
             Assert.AreEqual(12, _atoms.Length);
             Assert.AreEqual(6, _atoms.Count(s => s.Symbol == "C"));
             Assert.AreEqual(6, _atoms.Count(s => s.Symbol == "H"));

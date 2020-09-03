@@ -1,21 +1,39 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ChemSharp.Molecule
 {
     public class Molecule
     {
+        /// <summary>
+        /// Title for Molecule
+        /// </summary>
+        public string Title { get; set; }
+
         public IEnumerable<Atom> Atoms { get; set; }
 
         public IEnumerable<Bond> Bonds { get; set; }
 
         public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null)
         {
+            Debug.WriteLine(atoms.First().GetHashCode());
             Atoms = atoms;
             Bonds = bonds;
             if (bonds == null)
                 Bonds = GenerateBonds();
         }
+
+        /// <summary>
+        /// Determines if two Atoms are bond together.
+        /// </summary>
+        /// <param name="a1"></param>
+        /// <param name="a2"></param>
+        /// <returns></returns>
+        public bool IsBond(Atom a1, Atom a2) => Bonds.FirstOrDefault(s =>
+                                                      (s.Atom1.Equals(a1) && s.Atom2.Equals(a2))
+                                                      || (s.Atom2.Equals(a1) && s.Atom1.Equals(a2)))
+                                                  != null;
 
         /// <summary>
         /// Generate Bonds if not given

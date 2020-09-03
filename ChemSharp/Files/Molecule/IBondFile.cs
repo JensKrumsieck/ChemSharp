@@ -3,7 +3,7 @@ using ChemSharp.Molecule;
 
 namespace ChemSharp.Files.Molecule
 {
-    interface IBondFile
+    public interface IBondFile
     {
         public IEnumerable<Bond> Bonds { get; set; }
     }

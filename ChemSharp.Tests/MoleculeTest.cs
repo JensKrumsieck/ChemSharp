@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ChemSharp.Files.Molecule;
+using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ChemSharp.Tests
@@ -22,6 +23,15 @@ namespace ChemSharp.Tests
         {
             var mol2 = new MOL2(path);
             _molecule = new Molecule.Molecule(mol2.Atoms, mol2.Bonds);
+        }
+
+        [TestMethod]
+        public void FactoryCreationTest()
+        {
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(_molecule.Centroid, mol.Centroid);
+            Assert.AreEqual(_molecule.Atoms.Count(), mol.Atoms.Count());
+            Assert.AreEqual(_molecule.Bonds.Count(), mol.Bonds.Count());
         }
 
         [TestMethod]

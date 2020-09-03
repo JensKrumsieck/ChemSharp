@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="files\benzene.mol2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\cif.cif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

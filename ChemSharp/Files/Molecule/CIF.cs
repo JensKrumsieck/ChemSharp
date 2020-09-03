@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace ChemSharp.Files.Molecule
 {
-    public class CIF : TextFile, IAtomFile
+    public class CIF : TextFile, IAtomFile, IBondFile
     {
         public CIF(string path) : base(path)
         {
@@ -15,7 +15,13 @@ namespace ChemSharp.Files.Molecule
             Bonds = ReadBonds();
         }
 
+        /// <summary>
+        /// IAtomFile:Atoms
+        /// </summary>
         public IEnumerable<Atom> Atoms { get; set; }
+        /// <summary>
+        /// IBondFile:Bonds
+        /// </summary>
         public IEnumerable<Bond> Bonds { get; set; }
 
         /// <summary>

@@ -1,6 +1,8 @@
 ﻿using ChemSharp.Files.Molecule;
 using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace ChemSharp.Tests.MoleculeFiles
@@ -10,24 +12,17 @@ namespace ChemSharp.Tests.MoleculeFiles
     public class CIFTest
     {
         //Mo-Corrole, Cl2 Ligand, OMePh Meso
-        public string path = "files/cif.cif";
+        private const string path = "files/cif.cif";
 
-        private CIF _cif;
-        private Atom[] _atoms;
-        private Bond[] _bonds;
-
-        [TestInitialize]
-        public void Setup()
-        {
-            _cif = new CIF(path); 
-            _atoms = _cif.Atoms.ToArray();
-            _bonds = _cif.Bonds.ToArray();
-        }
+        private static readonly CIF _cif =  new CIF(path);
+        private HashSet<Atom> _atoms;
+        private HashSet<Bond> _bonds;
 
         [TestMethod]
         public void TestCIFAtoms()
         {
-            Assert.AreEqual(79, _atoms.Length);
+            _atoms = _cif.Atoms.ToHashSet();
+            Assert.AreEqual(79, _atoms.Count);
             Assert.AreEqual(780.51, _atoms.Weight(), 0.05);
             Assert.AreEqual("C40Cl2H29MoN4O3", _atoms.SumFormula());
         }
@@ -35,7 +30,8 @@ namespace ChemSharp.Tests.MoleculeFiles
         [TestMethod]
         public void TestCIFBonds()
         {
-            Assert.AreEqual(89, _bonds.Length);
+            _bonds = _cif.Bonds.ToHashSet();
+            Assert.AreEqual(89, _bonds.Count);
         }
     }
 }

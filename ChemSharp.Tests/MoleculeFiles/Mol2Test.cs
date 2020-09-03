@@ -8,19 +8,17 @@ namespace ChemSharp.Tests.MoleculeFiles
     [TestClass]
     public class Mol2Test
     {
-        public string path = "files/benzene.mol2";
+        private const string path = "files/benzene.mol2";
 
-        private MOL2 _mol2;
+        private static readonly MOL2 _mol2 = new MOL2(path);
         private Atom[] _atoms;
         private Bond[] _bonds;
 
         [TestInitialize]
         public void Setup()
         {
-            _mol2 = new MOL2(path);
             _atoms = _mol2.Atoms.ToArray();
             _bonds = _mol2.Bonds.ToArray();
-
         }
 
         [TestMethod]

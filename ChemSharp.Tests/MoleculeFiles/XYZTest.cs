@@ -9,16 +9,15 @@ namespace ChemSharp.Tests.MoleculeFiles
     public class XYZTest
     {
 
-        public string path = "files/mescho.xyz";
+        private const string path = "files/mescho.xyz";
 
-        private XYZ _xyz;
+        private static readonly XYZ _xyz = new XYZ(path);
         private Atom[] _atoms;
         private Bond[] _bonds;
 
         [TestInitialize]
         public void SetUp()
         {
-            _xyz = new XYZ(path);
             _atoms = _xyz.Atoms.ToArray();
             var mol = new Molecule.Molecule(_atoms);
             _bonds = mol.Bonds.ToArray();

@@ -1,0 +1,26 @@
+##TITLE= Parameter file, TopSpin 3.5 pl 5
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrusers
+$$ 2017-05-02 11:28:41.734 +0200  nmrusers@nmr17
+$$ D:/u/data/zam/nmr/zam-170502-111227_ab/1/scon2
+$$ process C:\Bruker\TopSpin3.5pl5\prog\mod\go4.exe
+##$BLKTR= (0..19)
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##$DE1= 4.5
+##$DEADC= 0.5
+##$DEPA= 4.5
+##$DERX= 1.5
+##$FILCOR= 0
+##$GRADCHAN= 0
+##$GRADPRE= (0..1)
+10 10
+##$HD_BLKTR= (0..19)
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##$HD_DE1= 5
+##$HD_DEADC= 0
+##$HD_DEPA= 2.5
+##$HD_DERX= 0
+##END=

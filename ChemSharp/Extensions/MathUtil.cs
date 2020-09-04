@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Extensions
 {
@@ -75,6 +77,42 @@ namespace ChemSharp.Extensions
             var sumY = array.Sum(s => s.Y);
             var sumZ = array.Sum(s => s.Z);
             return new Vector3(sumX, sumY, sumZ);
+        }
+
+        public static Complex[] FFT(this Complex[] x)
+        {
+           var N = x.Length;
+           var y = new Complex[N];
+
+           Complex[] d, D, e, E;
+
+           if (N == 1) return x;
+           int k;
+           e = new Complex[N / 2];
+           d= new Complex[N / 2];
+
+           for (k = 0; k < N / 2; k++)
+           {
+               e[k] = x[2 * k];
+               d[k] = x[2 * k + 1];
+           }
+
+            D = FFT(d);
+            E = FFT(e);
+
+            for (k = 0; k < N/2; k++)
+            {
+                var term = Complex.FromPolarCoordinates(1, -2 * Math.PI * k / N);
+                D[k] *= term;
+            }
+
+            for (k = 0; k < N / 2; k++)
+            {
+                y[k] = E[k] + D[k];
+                y[k + N / 2] = E[k] - D[k];
+            }
+
+            return y;
         }
     }
 }

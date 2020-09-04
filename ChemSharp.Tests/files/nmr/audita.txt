@@ -1,0 +1,23 @@
+##TITLE= Audit trail, TopSpin 3.5 pl 5
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrusers
+$$ D:/u/data/zam/nmr/zam-170502-111227_ab/1/audita.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2017-05-02 11:30:53.539 +0200>,<nmrusers>,<nmr17>,<go4>,<TopSpin 3.5.5>,
+      <created by zg
+	started at 2017-05-02 11:28:41.765 +0200,
+	POWCHK enabled, PULCHK disabled,
+       configuration hash MD5:
+       EE AE 8B 4C AA 46 8C 9F F8 C4 5F 44 2D 75 C5 16
+       data hash MD5: 48K
+       19 A3 E7 A7 57 3E 08 71 DF BD FD E9 03 20 D5 5E>)
+(   2,<2017-05-02 11:30:53.601 +0200>,<nmrusers>,<nmr17>,<audit>,<TopSpin 3.5.5>,
+      <user comment:
+       ICON-NMR User ID: zam
+       data hash MD5: 48K
+       19 A3 E7 A7 57 3E 08 71 DF BD FD E9 03 20 D5 5E>)
+##END=
+
+$$ hash MD5
+$$ 3D 92 BD 69 21 8B 59 D0 CC 7D 17 93 93 A2 9F AF

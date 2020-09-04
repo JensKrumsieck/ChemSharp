@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 
 namespace ChemSharp.Files.Spectroscopy
 {
@@ -33,9 +33,9 @@ namespace ChemSharp.Files.Spectroscopy
 
             }
             //Generate X Axis Data from Parameters
-            var RES = int.Parse(Parameters["RES"], CultureInfo.InvariantCulture);
-            var HCF = float.Parse(Parameters["HCF"], CultureInfo.InvariantCulture);
-            var HSW = float.Parse(Parameters["HSW"], CultureInfo.InvariantCulture);
+            var RES = Parameters["RES"].ToInt();
+            var HCF = Parameters["HCF"].ToFloat();
+            var HSW = Parameters["HSW"].ToFloat();
             var min = HCF - (HSW / 2);
             var d = HSW / (RES - 1);
             XData = new float[RES];

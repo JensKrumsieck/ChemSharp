@@ -8,7 +8,7 @@ namespace ChemSharp.Tests.Spectroscopy
     [TestClass]
     public class BrukerEPRTest
     {
-        private readonly string path = "files/epr";
+        public const string path = "files/epr";
 
         [TestMethod]
         public void TestSPC()

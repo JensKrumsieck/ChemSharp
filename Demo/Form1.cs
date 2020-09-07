@@ -1,15 +1,12 @@
-﻿using ChemSharp.Extensions;
+﻿using ChemSharp.Files.Spectroscopy;
+using ChemSharp.Spectrum;
 using ChemSharp.Tests.Spectroscopy;
 using OxyPlot;
-using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ChemSharp.Files.Spectroscopy;
-using ChemSharp.Spectrum;
-using Fourier = ChemSharp.Extensions.Fourier;
 
 namespace Demo
 {
@@ -37,6 +34,16 @@ namespace Demo
             uvPV.Model = model;
         }
 
+        private void LoadEPR()
+        {
+            var model = new PlotModel();
+            var datapoints = SpectrumFactory.Create<EPRSpectrum>($"{BrukerEPRTest.path}.par", $"{BrukerEPRTest.path}.spc").Data
+                .Select(s => new DataPoint(s.X, s.Y));
+
+            model.Series.Add(new LineSeries() { ItemsSource = datapoints });
+            eprPV.Model = model;
+        }
+
         public IEnumerable<DataPoint> CreateDataPoints(IXSpectrumFile xData, IYSpectrumFile yData)
         {
             for(var i = 0; i < xData.XData.Length; i++) yield return new DataPoint(xData.XData[i], yData.YData[i]);
@@ -46,6 +53,7 @@ namespace Demo
         {
             LoadNMR();
             LoadUVVis();
+            LoadEPR();
         }
     }
 }

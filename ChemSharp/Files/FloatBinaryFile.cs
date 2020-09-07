@@ -9,7 +9,7 @@ namespace ChemSharp.Files
         public FloatBinaryFile(string path) : base(path)
         {
             FloatData = new float[Data.Length / 4];
-            Buffer.BlockCopy(Data, 0, FloatData, 0, FloatData.Length);
+            Buffer.BlockCopy(Data, 0, FloatData, 0, Data.Length);
         }
     }
 }

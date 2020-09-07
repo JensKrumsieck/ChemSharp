@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp", "ChemSharp\Chem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Tests", "ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{E5CD6E13-CEB5-4B42-9D2C-F56766B6016D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo\Demo.csproj", "{E5CD6E13-CEB5-4B42-9D2C-F56766B6016D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

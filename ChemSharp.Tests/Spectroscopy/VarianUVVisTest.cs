@@ -7,12 +7,12 @@ namespace ChemSharp.Tests.Spectroscopy
     [TestClass]
     public class VarianUVVisTest
     {
-        private readonly string path = "files/uvvis.dsw";
+        public const string path = "files/uvvis.dsw";
+        public readonly DSW dsw = new DSW(path);
 
         [TestMethod]
         public void TestDSW()
         {
-            var dsw = new DSW(path);
             Assert.AreEqual(901, dsw.XYData.Length);
         }
 

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Numerics;
 
 namespace ChemSharp.Extensions
@@ -13,12 +16,34 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static float ToFloat(this string? input) => input == null ? 0f : Convert.ToSingle(input, CultureInfo.InvariantCulture);
 
+
+        /// <summary>
+        /// Returns complex data to int by magnitude
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static float[] ToFloat(this IEnumerable<Complex> input) => input.Select(s => (float)s.Magnitude).ToArray();
+
+        /// <summary>
+        /// Converts int to float
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static float[] ToFloat(this IEnumerable<int> input) => input.Select(s => (float) s).ToArray();
+
         /// <summary>
         /// small parse extension as i like the ToXYZ() Syntax more ;)
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public static int ToInt(this string? input) => input == null ? 0 : Convert.ToInt32(input, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Returns complex data to int by magnitude
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static int[] ToInt(this IEnumerable<Complex> input) => input.Select(s => (int)s.Magnitude).ToArray();
 
         /// <summary>
         /// converts float array [3] to vector3

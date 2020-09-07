@@ -1,27 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
+using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Spectroscopy
 {
-    public class FID : BinaryFile
+    public class FID : Int32BinaryFile, IYSpectrumFile
     {
-        public Complex[] YData { get; set; }
+        public float[] YData { get; set; }
+
+        public Complex[] FIDData { get; set; }
         public FID(string path) : base(path)
         {
-            var data = new int[Data.Length / 4];
-            Buffer.BlockCopy(Data, 0, data, 0, data.Length);
-            //odd is real, even is imag
-            YData = ReadData(data);
+            FIDData = ReadData(Int32Data);
+            YData = FourierTransform(FIDData);
         }
 
+        /// <summary>
+        /// Read in raw data to complex
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private static Complex[] ReadData(IReadOnlyList<int> data)
         {
-            var complex = new Complex[data.Count/2];
-            for (var i = 0; i < data.Count/2; i++) 
-                complex[i] = new Complex(data[2 * i], data[2 * i + 1]);
+            var complex = new Complex[data.Count / 2];
+
+            for (var i = 0; i < data.Count / 2; i++)
+                complex[i] = new Complex(
+                    data[2 * i], 
+                    data[2 * i + 1]);
 
             return complex;
         }
+
+        /// <summary>
+        /// Fourier Transforms fid data and handles conversions
+        /// </summary>
+        /// <param name="fid"></param>
+        /// <returns></returns>
+        private static float[] FourierTransform(Complex[] fid)=> fid.Radix2FFT().ToInt().FftShift().ToFloat();
     }
 }

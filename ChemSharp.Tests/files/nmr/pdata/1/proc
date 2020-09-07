@@ -1,12 +1,12 @@
-##TITLE= Parameter file, TopSpin 3.5 pl 5
+##TITLE= Parameter file, TopSpin 3.6.1
 ##JCAMPDX= 5.0
 ##DATATYPE= Parameter Values
 ##NPOINTS= 10	$$ modification sequence number
 ##ORIGIN= Bruker BioSpin GmbH
 ##OWNER= nmrusers
-$$ 2017-05-02 11:30:54.381 +0200  nmrusers@nmr17
-$$ D:/u/data/zam/nmr/zam-170502-111227_ab/1/pdata/1/proc
-$$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
+$$ 2020-02-03 10:16:56.022 +0100  nmrusers@nmr17
+$$ D:/u/data/kre/nmr/kre-200203-100919_ab/1/pdata/1/proc
+$$ process C:\Bruker\TopSpin3.6.1\prog\au\bin\user\proc_1dclf.i.exe
 ##$ABSF1= 10
 ##$ABSF2= -3
 ##$ABSG= 5
@@ -72,6 +72,10 @@ $$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
 ##$Mdd_CsNORM= 0
 ##$Mdd_CsVE= yes
 ##$Mdd_CsZF= 0
+##$Mdd_LrLAMBDA= 0
+##$Mdd_LrNITER= 0
+##$Mdd_LrRANK= 0
+##$Mdd_LrZF= 0
 ##$Mdd_mod= 0
 ##$NCOEF= 0
 ##$NC_proc= 0
@@ -81,10 +85,10 @@ $$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
 ##$NSP= 1
 ##$NTH_PI= 0
 ##$NZP= 0
-##$OFFSET= 16.30104
+##$OFFSET= 16.43563
 ##$PC= 1
-##$PHC0= 46.70436
-##$PHC1= -7.032855
+##$PHC0= 44.84606
+##$PHC1= -8.698391
 ##$PH_mod= 0
 ##$PKNL= yes
 ##$PPARMOD= 0
@@ -101,7 +105,7 @@ $$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
 ##$RDINT= 0
 ##$RDPOS= 0
 ##$REVERSE= no
-##$SF= 300.260060991525
+##$SF= 300.260020579057
 ##$SI= 32768
 ##$SIGF1= 0
 ##$SIGF2= 0
@@ -109,7 +113,7 @@ $$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
 ##$SIOLD= 32768
 ##$SPECTYP= <>
 ##$SREF_mod= 1
-##$SREGLST= <1H.C6D6>
+##$SREGLST= <1H.THF>
 ##$SSB= 0
 ##$STSI= 0
 ##$STSR= 0
@@ -118,7 +122,7 @@ $$ process C:\Bruker\TopSpin3.5pl5\prog\au\bin\user\proc_1dclf.i.exe
 ##$S_DEV= 0
 ##$TDeff= 0
 ##$TDoff= 0
-##$TI= <no. of the sticker on the nmr tube 576
+##$TI= <no. of the sticker on the nmr tube 561
 color of the label blue
 workgrou>
 ##$TILT= no

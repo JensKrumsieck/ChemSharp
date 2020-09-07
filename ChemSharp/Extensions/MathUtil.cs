@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Extensions
 {
@@ -18,7 +16,7 @@ namespace ChemSharp.Extensions
         public static Vector3 FractionalToCartesian(Vector3 fractional, Vector3[] conversionMatrix)
         {
             var vector = new float[3];
-            for (var i = 0; i <= 2; i++) vector[i] = fractional.X* conversionMatrix[i].X + fractional.Y * conversionMatrix[i].Y +
+            for (var i = 0; i <= 2; i++) vector[i] = fractional.X * conversionMatrix[i].X + fractional.Y * conversionMatrix[i].Y +
                     fractional.Z * conversionMatrix[i].Y;
             return vector.ToVector3();
         }
@@ -37,21 +35,21 @@ namespace ChemSharp.Extensions
         {
             var line1 = new Vector3(a, b * MathF.Cos(gamma * MathF.PI / 180f), c * MathF.Cos(beta * MathF.PI / 180f));
             var line2 = new Vector3(
-                0, 
+                0,
                 a * MathF.Sin(gamma * MathF.PI / 180f),
                 c * (MathF.Cos(alpha * MathF.PI / 180f) -
                      MathF.Cos(beta * MathF.PI / 180f) * MathF.Cos(gamma * MathF.PI / 180f)) /
                 MathF.Sin(gamma * MathF.PI / 180f));
 
             var line3 = new Vector3(
-                0, 
+                0,
                 0,
                 c * (MathF.Sqrt(1f - MathF.Pow(MathF.Cos(alpha * MathF.PI / 180f), 2f) -
                     MathF.Pow(MathF.Cos(beta * MathF.PI / 180f), 2f) -
                     MathF.Pow(MathF.Cos(gamma * MathF.PI / 180f), 2f) + 2f *
                     MathF.Cos(alpha * MathF.PI / 180f) * MathF.Cos(beta * MathF.PI / 180f) *
                     MathF.Cos(gamma * MathF.PI / 180f))) / MathF.Sin(gamma * MathF.PI / 180f));
-            return new[] {line1, line2, line3};
+            return new[] { line1, line2, line3 };
         }
 
         /// <summary>
@@ -79,40 +77,31 @@ namespace ChemSharp.Extensions
             return new Vector3(sumX, sumY, sumZ);
         }
 
-        public static Complex[] FFT(this Complex[] x)
+        /// <summary>
+        /// Equivalent to linspace in python
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static IEnumerable<float> LinearRange(float from, float to, int count)
         {
-           var N = x.Length;
-           var y = new Complex[N];
-
-           Complex[] d, D, e, E;
-
-           if (N == 1) return x;
-           int k;
-           e = new Complex[N / 2];
-           d= new Complex[N / 2];
-
-           for (k = 0; k < N / 2; k++)
-           {
-               e[k] = x[2 * k];
-               d[k] = x[2 * k + 1];
-           }
-
-            D = FFT(d);
-            E = FFT(e);
-
-            for (k = 0; k < N/2; k++)
-            {
-                var term = Complex.FromPolarCoordinates(1, -2 * Math.PI * k / N);
-                D[k] *= term;
-            }
-
-            for (k = 0; k < N / 2; k++)
-            {
-                y[k] = E[k] + D[k];
-                y[k + N / 2] = E[k] - D[k];
-            }
-
-            return y;
+            var step = (to - from) / (count - 1.0f);
+            return Enumerable.Range(0, count).Select(s => (float)s * step + from);
         }
+
+        /// <summary>
+        /// Checks if number is power of 2
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static bool PowerOf2(int x) => (x & (x - 1)) == 0;
+
+        /// <summary>
+        /// returns the next power of 2 of xs
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static int NextPowerOf2(int x) => (int)Math.Pow(2, Math.Floor(Math.Log(x, 2)) + 1);
     }
 }

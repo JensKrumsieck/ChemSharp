@@ -1,0 +1,14 @@
+##TITLE= Audit trail, TopSpin 3.6.1
+##JCAMPDX= 5.01
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrusers
+$$ D:/u/data/kre/nmr/kre-200203-100919_ab/1/pdata/700/auditp.txt
+##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+(   1,<2020-02-03 10:12:27.577 +0100>,<nmrusers>,<nmr17>,<go4>,<TopSpin 3.6.1>,
+      <1H wobble curve at 300.262 MHz
+       data hash MD5: 512
+       B6 40 3A 1E 1B B3 C2 6D 31 94 C1 4F 81 52 01 62>)
+##END=
+
+$$ hash MD5
+$$ D3 6A 40 37 AC 4D 74 26 F3 D7 8D 9E 02 FB 77 60

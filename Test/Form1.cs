@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Tests.Spectroscopy;
-using MathNet.Numerics;
-using MathNet.Numerics.IntegralTransforms;
 using OxyPlot;
+using OxyPlot.Axes;
 using OxyPlot.Series;
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using Fourier = ChemSharp.Extensions.Fourier;
 
 namespace Test
 {
@@ -28,15 +21,19 @@ namespace Test
         {
             var model = new PlotModel();
             var fid = BrukerNMRTest.fid;
-            //var data = fid.YData;
-            var oneR = BrukerNMRTest.oneR.YData;
-            var oneI = BrukerNMRTest.oneI.YData;
-            var dp = new DataPoint[fid.YData.Length/2];
-            for (int i = 0; i < fid.YData.Length/2; i++)
+            var xs = BrukerNMRTest.ac.XData;
+            var ft = fid.YData;
+            var fidd = new DataPoint[fid.YData.Length];
+            for (var i = 0; i < fid.YData.Length; i++)
             {
-                dp[i] = new DataPoint(i,new Complex(oneR[i], oneI[i]).Magnitude);
+                fidd[i] = new DataPoint(xs.Select(s => (double)s).ElementAt(i), ft[i]);
             }
-            model.Series.Add(new LineSeries(){ItemsSource =  dp});
+            model.Series.Add(new LineSeries() { ItemsSource = fidd });
+            var axis = new LinearAxis()
+            {
+                Position = AxisPosition.Bottom
+            };
+            model.Axes.Add(axis);
             plotView1.Model = model;
         }
     }

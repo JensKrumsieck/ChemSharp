@@ -112,7 +112,7 @@ namespace ChemSharp.Spectrum
                 _ => xInput
             };
 
-            return (float) (Constants.Planck * frequency * 1e9 / (Constants.BohrM * value));
+            return (float)(Constants.Planck * frequency * 1e9 / (Constants.BohrM * value));
         }
 
 

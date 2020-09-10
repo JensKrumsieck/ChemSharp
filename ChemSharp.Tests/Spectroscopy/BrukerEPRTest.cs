@@ -1,7 +1,7 @@
-using System.Linq;
 using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Spectrum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace ChemSharp.Tests.Spectroscopy
 {

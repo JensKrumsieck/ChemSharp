@@ -13,13 +13,13 @@ namespace ChemSharp.Files
         /// JCAMP Data format saves keys with two leading #-signs, raw value follows after =-sign.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<KeyValuePair<string, string>> ReadData() => 
-            from line in Data 
+        private IEnumerable<KeyValuePair<string, string>> ReadData() =>
+            from line in Data
             select line.Split("=")
-            into raw 
-            where raw.Length == 2 
-            let key = raw[0].Remove(0, 2) 
-            let value = raw[1].Trim() 
+            into raw
+            where raw.Length == 2
+            let key = raw[0].Remove(0, 2)
+            let value = raw[1].Trim()
             select new KeyValuePair<string, string>(key, value);
     }
 }

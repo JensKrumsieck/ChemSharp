@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ChemSharp.Molecule;
+﻿using ChemSharp.Molecule;
+using System.Collections.Generic;
 
 namespace ChemSharp.Files.Molecule
 {

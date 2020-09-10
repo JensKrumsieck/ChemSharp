@@ -27,7 +27,7 @@ namespace ChemSharp.Tests
         [TestMethod]
         public void TestCentroid()
         {
-            Assert.AreEqual(new Vector3(1/3f, 1/3f, 1/3f), _vectors.Centroid());
+            Assert.AreEqual(new Vector3(1 / 3f, 1 / 3f, 1 / 3f), _vectors.Centroid());
         }
     }
 }

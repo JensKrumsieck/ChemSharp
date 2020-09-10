@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using ChemSharp.Extensions;
+using System.Collections.Generic;
 using System.Numerics;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Spectroscopy
 {
@@ -27,7 +26,7 @@ namespace ChemSharp.Files.Spectroscopy
 
             for (var i = 0; i < data.Count / 2; i++)
                 complex[i] = new Complex(
-                    data[2 * i], 
+                    data[2 * i],
                     data[2 * i + 1]);
 
             return complex;
@@ -38,6 +37,6 @@ namespace ChemSharp.Files.Spectroscopy
         /// </summary>
         /// <param name="fid"></param>
         /// <returns></returns>
-        private static float[] FourierTransform(Complex[] fid)=> fid.Radix2FFT().ToInt().FftShift().ToFloat();
+        private static float[] FourierTransform(Complex[] fid) => fid.Radix2FFT().ToInt().FftShift().ToFloat();
     }
 }

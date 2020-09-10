@@ -20,6 +20,6 @@ namespace ChemSharp.Extensions
         public static string StripUncertainity(this string input) => input.Split('(').First();
 
         public static string[] WhiteSpaceSplit(this string input) => input
-            .Split(new[] {" ", "\t"}, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+            .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
     }
 }

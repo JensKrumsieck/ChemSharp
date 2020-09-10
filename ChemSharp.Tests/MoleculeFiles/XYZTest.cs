@@ -34,7 +34,7 @@ namespace ChemSharp.Tests.MoleculeFiles
         [TestMethod]
         public void TextXYZGeneratedBonds()
         {
-            Assert.AreEqual(23,_bonds.Length);
+            Assert.AreEqual(23, _bonds.Length);
         }
     }
 }

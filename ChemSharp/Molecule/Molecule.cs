@@ -49,7 +49,7 @@ namespace ChemSharp.Molecule
             var matched = new HashSet<(int, int)>();
             for (var i = 0; i < Atoms.Count(); i++)
             {
-                for (var j = i+1; j < Atoms.Count(); j++)
+                for (var j = i + 1; j < Atoms.Count(); j++)
                 {
                     if (i != j
                         && Atoms.ElementAt(i).BondTo(Atoms.ElementAt(j))

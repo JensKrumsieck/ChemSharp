@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -29,7 +28,7 @@ namespace ChemSharp.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static float[] ToFloat(this IEnumerable<int> input) => input.Select(s => (float) s).ToArray();
+        public static float[] ToFloat(this IEnumerable<int> input) => input.Select(s => (float)s).ToArray();
 
         /// <summary>
         /// small parse extension as i like the ToXYZ() Syntax more ;)

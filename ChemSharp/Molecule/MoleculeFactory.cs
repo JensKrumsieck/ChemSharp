@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files.Molecule;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChemSharp.Molecule
 {
@@ -20,7 +17,7 @@ namespace ChemSharp.Molecule
         {
             IEnumerable<Bond> bonds = null;
             if (input.GetType().GetInterfaces().Contains(typeof(IBondFile))) //has bond information
-                bonds = ((IBondFile) input).Bonds;
+                bonds = ((IBondFile)input).Bonds;
             return new Molecule(input.Atoms, bonds);
         }
 

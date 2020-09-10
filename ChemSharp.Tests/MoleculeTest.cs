@@ -35,7 +35,7 @@ namespace ChemSharp.Tests
         {
             var c1 = _molecule.Atoms.ElementAt(0);
             var c2 = _molecule.Atoms.ElementAt(1);
-            Assert.IsTrue(_molecule.IsBond(c1,c2));
+            Assert.IsTrue(_molecule.IsBond(c1, c2));
         }
 
     }

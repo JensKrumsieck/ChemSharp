@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets Bond Length
         /// </summary>
-        public float Length => Atom1.DistanceTo(Atom2); 
+        public float Length => Atom1.DistanceTo(Atom2);
 
         public Bond(Atom a1, Atom a2)
         {

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Threading.Tasks;
-using ChemSharp.Files.Spectroscopy;
 
 namespace ChemSharp.Extensions
 {
@@ -37,7 +35,7 @@ namespace ChemSharp.Extensions
 
             Radix2Reorder(x);
             for (var levelSize = 1; levelSize < x.Length; levelSize *= 2)
-                for (var k = 0; k < levelSize; k++) 
+                for (var k = 0; k < levelSize; k++)
                     Radix2Step(x, -1, levelSize, k);
             return FullRescale(x);
         }

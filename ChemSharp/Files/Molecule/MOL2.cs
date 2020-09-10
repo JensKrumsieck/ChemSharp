@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Molecule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Molecule
 {
@@ -39,7 +39,7 @@ namespace ChemSharp.Files.Molecule
             var lines = atoms.LineSplit();
             foreach (var line in lines)
             {
-                if(string.IsNullOrEmpty(line) || line == "ATOM") continue;
+                if (string.IsNullOrEmpty(line) || line == "ATOM") continue;
                 var columns = line.WhiteSpaceSplit();
                 var identifier = columns[1];
                 var x = columns[2].ToFloat();

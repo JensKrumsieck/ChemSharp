@@ -43,8 +43,8 @@ namespace ChemSharp.Files.Spectroscopy
             if (File.Exists(procsPath)) PPMOffset = new PROCS(procsPath).Offset;
 
             //get ppm
-            PPMData = FFTSize == Count 
-                ? FrequencyData.Select(s => s / Frequency * 1e6f).ToArray() 
+            PPMData = FFTSize == Count
+                ? FrequencyData.Select(s => s / Frequency * 1e6f).ToArray()
                 : CollectionsUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, FFTSize).Select(s => s / Frequency * 1e6f).ToArray();
 
             //if processing offset is not 0, correct ppm scale

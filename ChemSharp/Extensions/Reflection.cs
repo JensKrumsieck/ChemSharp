@@ -17,7 +17,7 @@ namespace ChemSharp.Extensions
             var ext = Path.GetExtension(path);
             const string ns = "ChemSharp.Files";
             var type = Assembly.GetExecutingAssembly().GetType($"{ns}.{folder}{ext.ToUpper()}", false);
-            return type == null ? null:Activator.CreateInstance(type, path);
+            return type == null ? null : Activator.CreateInstance(type, path);
         }
     }
 }

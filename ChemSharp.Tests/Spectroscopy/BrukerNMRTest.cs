@@ -8,7 +8,7 @@ namespace ChemSharp.Tests.Spectroscopy
     public class BrukerNMRTest
     {
         private const string path = "files/nmr/";
-        public  static readonly ACQUS ac = new ACQUS(path + "acqus");
+        public static readonly ACQUS ac = new ACQUS(path + "acqus");
         public static readonly PROCS procs = new PROCS(path + "pdata/1/procs");
         public static readonly FID fid = new FID(path + "fid");
         public static readonly OneFile oneR = new OneFile(path + "pdata/1/1r");

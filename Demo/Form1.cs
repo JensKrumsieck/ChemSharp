@@ -35,7 +35,7 @@ namespace Demo
             for (var i = 0; i < data.Length; i++)
             {
                 var model = new PlotModel();
-                model.Series.Add(new LineSeries() {ItemsSource = data[i]});
+                model.Series.Add(new LineSeries() { ItemsSource = data[i] });
                 pvReference[i].Model = model;
             }
         }

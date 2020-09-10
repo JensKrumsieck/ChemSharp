@@ -2,7 +2,6 @@
 using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace ChemSharp.Tests.MoleculeFiles
@@ -14,7 +13,7 @@ namespace ChemSharp.Tests.MoleculeFiles
         //Mo-Corrole, Cl2 Ligand, OMePh Meso
         private const string path = "files/cif.cif";
 
-        private static readonly CIF _cif =  new CIF(path);
+        private static readonly CIF _cif = new CIF(path);
         private HashSet<Atom> _atoms;
         private HashSet<Bond> _bonds;
 

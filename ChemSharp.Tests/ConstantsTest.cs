@@ -24,7 +24,7 @@ namespace ChemSharp.Tests
         {
             Assert.AreEqual(4.3597447222071e-18, Constants.Hartree, 1e-28);
         }
-        
+
         [TestMethod]
         public void TestGasConstant()
         {

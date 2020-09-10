@@ -9,10 +9,7 @@ namespace ChemSharp.Files.Spectroscopy
     {
         public float[] YData { get; set; }
 
-        public SPC(string path) : base(path)
-        {
-            YData = ConvertedData;
-        }
+        public SPC(string path) : base(path) => YData = ConvertedData; 
 
     }
 }

@@ -6,10 +6,7 @@ namespace ChemSharp.Files
     public class JCampFile : TextFile
     {
         public Dictionary<string, string> Parameters;
-        public JCampFile(string path) : base(path)
-        {
-            Parameters = ReadData().ToDictionary(s => s.Key, s => s.Value);
-        }
+        public JCampFile(string path) : base(path) => Parameters = ReadData().ToDictionary(s => s.Key, s => s.Value);
 
         /// <summary>
         /// Reads in Data from JCamp Format

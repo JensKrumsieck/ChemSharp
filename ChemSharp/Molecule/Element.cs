@@ -41,7 +41,7 @@ namespace ChemSharp.Molecule
         public Element(string symbol)
         {
             //get Data via API
-            var shadow = ElementDataProvider.Elements.Find(s => s.Symbol == symbol);
+            var shadow = ElementDataProvider.Elements.FirstOrDefault(s => s.Symbol == symbol);
             var props = typeof(Element).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var p in props.Where(s => !Attribute.IsDefined(s, typeof(JsonIgnoreAttribute))))
             {

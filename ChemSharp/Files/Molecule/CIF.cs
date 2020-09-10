@@ -48,9 +48,9 @@ namespace ChemSharp.Files.Molecule
                     && raw[disorderGroupIndex] == "2"
                     || (raw.Length != headers.Length)) continue;
                 var rawCoordinates = new Vector3(
-                    raw[2].StripUncertainity().ToFloat(),
-                    raw[3].StripUncertainity().ToFloat(),
-                    raw[4].StripUncertainity().ToFloat());
+                    raw[2].StripUncertainty().ToFloat(),
+                    raw[3].StripUncertainty().ToFloat(),
+                    raw[4].StripUncertainty().ToFloat());
                 var coordinates = MathUtil.FractionalToCartesian(rawCoordinates, conversionMatrix);
                 yield return new Atom(raw[1]) { Location = coordinates, Title = raw[0] };
             }
@@ -83,7 +83,7 @@ namespace ChemSharp.Files.Molecule
         /// <param name="param"></param>
         /// <returns></returns>
         private IEnumerable<float> CellParameters(string param) => Data.Where(s => s.StartsWith($"_{param}"))
-            .Select(s => s.Split(' ').Last().StripUncertainity().ToFloat());
+            .Select(s => s.Split(' ').Last().StripUncertainty().ToFloat());
 
         private string[] _loops { get; set; }
 

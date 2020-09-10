@@ -1,7 +1,6 @@
 ﻿using ChemSharp.Extensions;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace ChemSharp.Files.Spectroscopy
 {
@@ -30,7 +29,7 @@ namespace ChemSharp.Files.Spectroscopy
             SweepWidth = Parameters.TryAndGet("$SW_h").ToFloat();
             Count = Parameters.TryAndGet("$TD").ToInt() / 2;
             Frequency = Parameters.TryAndGet("$SFO1").ToFloat() * 1e6f;
-            Type = Regex.Replace(Parameters.TryAndGet("$NUC1"), "<|>", "");
+            Type = Parameters.TryAndGet("$NUC1").Replace("<", "").Replace(">", "");
 
             //get seconds
             SecondsData = CollectionsUtil.LinearRange(0, Count - 1 / SweepWidth, Count).ToArray();
@@ -48,7 +47,8 @@ namespace ChemSharp.Files.Spectroscopy
                 : CollectionsUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, FFTSize).Select(s => s / Frequency * 1e6f).ToArray();
 
             //if processing offset is not 0, correct ppm scale
-            PPMData = PPMData.Select(s => s + PPMOffset - PPMData.Max()).ToArray();
+            var max = PPMData.Max();
+            PPMData = PPMData.Select(s => s + PPMOffset - max).ToArray();
 
             //set PPM to X by defaults
             XData = PPMData;

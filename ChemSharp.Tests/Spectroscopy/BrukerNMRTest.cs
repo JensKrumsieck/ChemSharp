@@ -1,6 +1,7 @@
 ﻿using ChemSharp.Files.Spectroscopy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using ChemSharp.Spectrum;
 
 namespace ChemSharp.Tests.Spectroscopy
 {
@@ -35,6 +36,16 @@ namespace ChemSharp.Tests.Spectroscopy
             Assert.AreEqual(procs.FTSize, ac.FFTSize);
             Assert.AreEqual(ac.FFTSize, oneR.YData.Length);
             Assert.IsTrue(oneR.Is1R);
+        }
+        [TestMethod]
+        public void TestCreationMethod()
+        {
+            var nmr = SpectrumFactory.Create<NMRSpectrum>(path + "acqus", path + "fid");
+            Assert.AreEqual(procs.FTSize, nmr.Data.Length);
+            
+            //test processed generation
+            nmr = SpectrumFactory.Create<NMRSpectrum>(ac, oneR);
+            Assert.AreEqual(procs.FTSize, nmr.Data.Length);
         }
     }
 }

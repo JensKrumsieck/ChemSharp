@@ -17,7 +17,7 @@ namespace ChemSharp.Spectrum
         /// <typeparam name="T"></typeparam>
         /// <param name="src"></param>
         /// <returns></returns>
-        public static AbstractSpectrum CreateFromFile<T>(IXYSpectrumFile src)
+        public static T Create<T>(IXYSpectrumFile src)
             where T : AbstractSpectrum
         {
             var spc = (T)Activator.CreateInstance(typeof(T));
@@ -35,7 +35,7 @@ namespace ChemSharp.Spectrum
         /// <param name="xSrc"></param>
         /// <param name="ySrc"></param>
         /// <returns></returns>
-        public static AbstractSpectrum CreateFromFiles<T>(IXSpectrumFile xSrc, IYSpectrumFile ySrc)
+        public static T Create<T>(IXSpectrumFile xSrc, IYSpectrumFile ySrc)
             where T : AbstractSpectrum
         {
             var data = new Vector2[xSrc.XData.Length];
@@ -64,7 +64,7 @@ namespace ChemSharp.Spectrum
             where TResult : AbstractSpectrum
         {
             var file = path.CreateObjectFromFile("Spectroscopy");
-            return (TResult)CreateFromFile<TResult>(file as IXYSpectrumFile);
+            return (TResult)Create<TResult>(file as IXYSpectrumFile);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace ChemSharp.Spectrum
         {
             var xFile = xPath.CreateObjectFromFile("Spectroscopy");
             var yFile = yPath.CreateObjectFromFile("Spectroscopy");
-            return (TResult)CreateFromFiles<TResult>(xFile as IXSpectrumFile, yFile as IYSpectrumFile);
+            return (TResult)Create<TResult>(xFile as IXSpectrumFile, yFile as IYSpectrumFile);
         }
     }
 }

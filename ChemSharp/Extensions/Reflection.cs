@@ -15,6 +15,7 @@ namespace ChemSharp.Extensions
         public static object CreateObjectFromFile(this string path, string folder)
         {
             var ext = Path.GetExtension(path);
+            if (string.IsNullOrEmpty(ext)) ext = "." + Path.GetFileName(path);
             const string ns = "ChemSharp.Files";
             var type = Assembly.GetExecutingAssembly().GetType($"{ns}.{folder}{ext.ToUpper()}", false);
             return type == null ? null : Activator.CreateInstance(type, path);

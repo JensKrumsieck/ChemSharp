@@ -13,3 +13,4 @@
 * Spectroscopy
 	* Varian/Agilient DSW
 	* Bruker EMX SPC/PAR
+	* Bruker TopSpin (fid, JCAMP-DX (acqus, procs, ...))

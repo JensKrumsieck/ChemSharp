@@ -23,4 +23,8 @@
     <Resource Include="Resources\elements.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Math\Unit\NewFolder\" />
+  </ItemGroup>
+
 </Project>

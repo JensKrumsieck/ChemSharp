@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace ChemSharp.Extensions
+namespace ChemSharp.Math
 {
     public static class Fourier
     {
@@ -14,7 +14,7 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static IEnumerable<int> FftShift(this int[] input)
         {
-            var n = (int)Math.Ceiling(input.Length / 2.0);
+            var n = (int)System.Math.Ceiling(input.Length / 2.0);
             for (var i = n; i < input.Length; i++) yield return input[i];
             for (var i = 0; i < n; i++) yield return input[i];
         }
@@ -42,8 +42,8 @@ namespace ChemSharp.Extensions
 
         private static void Radix2Step(IList<Complex> x, int exponentSign, int levelSize, int k)
         {
-            var exponent = (exponentSign * k) * Math.PI / levelSize;
-            var w = new Complex(Math.Cos(exponent), Math.Sin(exponent));
+            var exponent = (exponentSign * k) * System.Math.PI / levelSize;
+            var w = new Complex(System.Math.Cos(exponent), System.Math.Sin(exponent));
             var step = levelSize << 1;
             for (var i = k; i < x.Count; i += step)
             {

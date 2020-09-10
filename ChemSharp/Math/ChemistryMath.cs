@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace ChemSharp.Extensions
+namespace ChemSharp.Math
 {
     public static class ChemistryMath
     {

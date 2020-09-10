@@ -1,4 +1,4 @@
-﻿using ChemSharp.Extensions;
+﻿using ChemSharp.Math;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;

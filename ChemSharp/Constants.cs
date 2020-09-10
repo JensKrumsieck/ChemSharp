@@ -12,7 +12,7 @@ namespace ChemSharp
         /// <summary> 
         /// reduced planck number in Js
         /// </summary>
-        public const double ReducedPlanck = Planck / (2 * Math.PI);
+        public const double ReducedPlanck = Planck / (2 * System.Math.PI);
 
         /// <summary>
         /// Speed of Light in m/s
@@ -37,7 +37,7 @@ namespace ChemSharp
         /// <summary>
         /// Bohr magneton
         /// </summary>
-        public const double BohrM = (ElectronCharge * Planck / (2 * Math.PI)) / (2 * ElectronMass);
+        public const double BohrM = (ElectronCharge * Planck / (2 * System.Math.PI)) / (2 * ElectronMass);
 
         /// <summary>
         /// Epsilon_0 in As/Vm
@@ -49,7 +49,7 @@ namespace ChemSharp
         /// </summary>
         public const double BohrRadius =
             (4 *
-             Math.PI *
+             System.Math.PI *
              Permittivity *
              (ReducedPlanck * ReducedPlanck) /
              (ElectronMass * (ElectronCharge * ElectronCharge)));

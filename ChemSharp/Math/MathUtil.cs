@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using ChemSharp.Extensions;
 
-namespace ChemSharp.Extensions
+namespace ChemSharp.Math
 {
     public static class MathUtil
     {
@@ -89,6 +90,6 @@ namespace ChemSharp.Extensions
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static int NextPowerOf2(int x) => (int)Math.Pow(2, Math.Floor(Math.Log(x, 2)) + 1);
+        public static int NextPowerOf2(int x) => (int)System.Math.Pow(2, System.Math.Floor(System.Math.Log(x, 2)) + 1);
     }
 }

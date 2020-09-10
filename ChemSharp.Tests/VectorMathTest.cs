@@ -1,4 +1,4 @@
-﻿using ChemSharp.Extensions;
+﻿using ChemSharp.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 

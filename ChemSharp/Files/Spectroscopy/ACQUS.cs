@@ -33,9 +33,9 @@ namespace ChemSharp.Files.Spectroscopy
             Type = Regex.Replace(Parameters.TryAndGet("$NUC1"), "<|>", "");
 
             //get seconds
-            SecondsData = MathUtil.LinearRange(0, Count - 1 / SweepWidth, Count).ToArray();
+            SecondsData = CollectionsUtil.LinearRange(0, Count - 1 / SweepWidth, Count).ToArray();
             //get frequency
-            FrequencyData = MathUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, Count).ToArray();
+            FrequencyData = CollectionsUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, Count).ToArray();
 
 
             FFTSize = MathUtil.PowerOf2(Count) ? Count : MathUtil.NextPowerOf2(Count);
@@ -45,7 +45,7 @@ namespace ChemSharp.Files.Spectroscopy
             //get ppm
             PPMData = FFTSize == Count 
                 ? FrequencyData.Select(s => s / Frequency * 1e6f).ToArray() 
-                : MathUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, FFTSize).Select(s => s / Frequency * 1e6f).ToArray();
+                : CollectionsUtil.LinearRange(-SweepWidth / 2, SweepWidth / 2, FFTSize).Select(s => s / Frequency * 1e6f).ToArray();
 
             //if processing offset is not 0, correct ppm scale
             PPMData = PPMData.Select(s => s + PPMOffset - PPMData.Max()).ToArray();

@@ -78,19 +78,6 @@ namespace ChemSharp.Extensions
         }
 
         /// <summary>
-        /// Equivalent to linspace in python
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        public static IEnumerable<float> LinearRange(float from, float to, int count)
-        {
-            var step = (to - from) / (count - 1.0f);
-            return Enumerable.Range(0, count).Select(s => (float)s * step + from);
-        }
-
-        /// <summary>
         /// Checks if number is power of 2
         /// </summary>
         /// <param name="x"></param>

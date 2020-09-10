@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Threading.Tasks;
+using ChemSharp.Files.Spectroscopy;
 
 namespace ChemSharp.Extensions
 {
@@ -19,7 +21,11 @@ namespace ChemSharp.Extensions
             for (var i = 0; i < n; i++) yield return input[i];
         }
 
-
+        /// <summary>
+        /// Radix 2 FFT Algorithm (inspired by Math.NET implementation)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static Complex[] Radix2FFT(this Complex[] x)
         {
             if (!MathUtil.PowerOf2(x.Length))
@@ -31,12 +37,11 @@ namespace ChemSharp.Extensions
 
             Radix2Reorder(x);
             for (var levelSize = 1; levelSize < x.Length; levelSize *= 2)
-            {
-                for (var k = 0; k < levelSize; k++) Radix2Step(x, -1, levelSize, k);
-
-            }
+                for (var k = 0; k < levelSize; k++) 
+                    Radix2Step(x, -1, levelSize, k);
             return FullRescale(x);
         }
+
         private static void Radix2Step(IList<Complex> x, int exponentSign, int levelSize, int k)
         {
             var exponent = (exponentSign * k) * Math.PI / levelSize;

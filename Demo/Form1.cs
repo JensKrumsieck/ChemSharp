@@ -25,6 +25,14 @@ namespace Demo
             nmrPV.Model = model;
         }
 
+        private void LoadProcessedNMR()
+        {
+            var model = new PlotModel();
+            var dataPoints = CreateDataPoints(BrukerNMRTest.ac, BrukerNMRTest.oneR);
+            model.Series.Add(new LineSeries() { ItemsSource = dataPoints });
+            processedPV.Model = model;
+        }
+
         private void LoadUVVis()
         {
             var model = new PlotModel();
@@ -54,6 +62,7 @@ namespace Demo
             LoadNMR();
             LoadUVVis();
             LoadEPR();
+            LoadProcessedNMR();
         }
     }
 }

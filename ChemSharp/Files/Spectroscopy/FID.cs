@@ -5,14 +5,14 @@ using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Spectroscopy
 {
-    public class FID : Int32BinaryFile, IYSpectrumFile
+    public class FID : DataBinaryFile<int>, IYSpectrumFile
     {
         public float[] YData { get; set; }
 
         public Complex[] FIDData { get; set; }
         public FID(string path) : base(path)
         {
-            FIDData = ReadData(Int32Data);
+            FIDData = ReadData(ConvertedData);
             YData = FourierTransform(FIDData);
         }
 

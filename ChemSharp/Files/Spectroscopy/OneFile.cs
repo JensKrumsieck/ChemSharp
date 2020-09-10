@@ -7,24 +7,24 @@ namespace ChemSharp.Files.Spectroscopy
     /// <summary>
     /// Wrapper Class for 1r/1i files (processed Bruker NMR spectra)
     /// </summary>
-    public class OneFile : Int32BinaryFile, IYSpectrumFile
+    public class OneFile : DataBinaryFile<int>, IYSpectrumFile
     {
         /// <summary>
         /// The other part of 1r/1i files
         /// </summary>
-        private Int32BinaryFile OtherPart { get; }
+        private DataBinaryFile<int> OtherPart { get; }
 
         public OneFile(string path) : base(path)
         {
             //check whether self is 1r or 1i
             var oldValue = Is1R ? "1r" : "1i";
             var newValue = Is1R ? "1i" : "1r";
-            OtherPart = new Int32BinaryFile(Path.Replace(oldValue, newValue));
-            if(OtherPart.Int32Data.Length != Int32Data.Length) 
+            OtherPart = new DataBinaryFile<int>(Path.Replace(oldValue, newValue));
+            if(OtherPart.ConvertedData.Length != ConvertedData.Length) 
                 throw new InvalidDataException("The 1r/1i files do not match");
-            YData = new float[Int32Data.Length];
-            var real = Is1R ? Int32Data : OtherPart.Int32Data;
-            var imag = Is1R ? OtherPart.Int32Data : Int32Data;
+            YData = new float[ConvertedData.Length];
+            var real = Is1R ? ConvertedData : OtherPart.ConvertedData;
+            var imag = Is1R ? OtherPart.ConvertedData : ConvertedData;
             for (var i = 0; i < YData.Length; i++)  YData[i] = (float) new Complex(real[i], imag[i]).Magnitude;
             YData = YData.Reverse().ToArray();
         }

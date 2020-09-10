@@ -17,52 +17,27 @@ namespace Demo
             InitializeComponent();
         }
 
-        private void LoadNMR()
-        {
-            var model = new PlotModel();
-            var dataPoints = CreateDataPoints(BrukerNMRTest.ac, BrukerNMRTest.fid);
-            model.Series.Add(new LineSeries() {ItemsSource = dataPoints});
-            nmrPV.Model = model;
-        }
-
-        private void LoadProcessedNMR()
-        {
-            var model = new PlotModel();
-            var dataPoints = CreateDataPoints(BrukerNMRTest.ac, BrukerNMRTest.oneR);
-            model.Series.Add(new LineSeries() { ItemsSource = dataPoints });
-            processedPV.Model = model;
-        }
-
-        private void LoadUVVis()
-        {
-            var model = new PlotModel();
-            var datapoints = SpectrumFactory.Create<UVVisSpectrum>(VarianUVVisTest.path).Data
-                .Select(s => new DataPoint(s.X, s.Y));
-            model.Series.Add(new LineSeries() {ItemsSource = datapoints});
-            uvPV.Model = model;
-        }
-
-        private void LoadEPR()
-        {
-            var model = new PlotModel();
-            var datapoints = SpectrumFactory.Create<EPRSpectrum>($"{BrukerEPRTest.path}.par", $"{BrukerEPRTest.path}.spc").Data
-                .Select(s => new DataPoint(s.X, s.Y));
-
-            model.Series.Add(new LineSeries() { ItemsSource = datapoints });
-            eprPV.Model = model;
-        }
-
-        public IEnumerable<DataPoint> CreateDataPoints(IXSpectrumFile xData, IYSpectrumFile yData)
-        {
-            for(var i = 0; i < xData.XData.Length; i++) yield return new DataPoint(xData.XData[i], yData.YData[i]);
-        }
+        public IEnumerable<DataPoint> CreateDataPoints(IXSpectrumFile xData, IYSpectrumFile yData) => xData.XData.Select((t, i) => new DataPoint(t, yData.YData[i]));
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadNMR();
-            LoadUVVis();
-            LoadEPR();
-            LoadProcessedNMR();
+            var pvReference = new[]
+            {
+                nmrPV, processedPV, uvPV, eprPV
+            };
+            var data = new IEnumerable<DataPoint>[4];
+            data[0] = CreateDataPoints(BrukerNMRTest.ac, BrukerNMRTest.fid);
+            data[1] = CreateDataPoints(BrukerNMRTest.ac, BrukerNMRTest.oneR);
+            data[2] = SpectrumFactory.Create<UVVisSpectrum>(VarianUVVisTest.path).Data
+                .Select(s => new DataPoint(s.X, s.Y));
+            data[3] = SpectrumFactory.Create<EPRSpectrum>($"{BrukerEPRTest.path}.par", $"{BrukerEPRTest.path}.spc").Data
+                .Select(s => new DataPoint(s.X, s.Y));
+            for (var i = 0; i < data.Length; i++)
+            {
+                var model = new PlotModel();
+                model.Series.Add(new LineSeries() {ItemsSource = data[i]});
+                pvReference[i].Model = model;
+            }
         }
     }
 }

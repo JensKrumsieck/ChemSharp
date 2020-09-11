@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 
-namespace ChemSharp.Tests
+namespace ChemSharp.Tests.Math
 {
     [TestClass]
     public class VectorMathTest

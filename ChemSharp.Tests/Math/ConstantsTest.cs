@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ChemSharp.Tests
+namespace ChemSharp.Tests.Math
 {
     [TestClass]
     //Test calculated constants

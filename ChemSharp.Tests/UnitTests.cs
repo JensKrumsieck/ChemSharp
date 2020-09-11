@@ -24,5 +24,14 @@ namespace ChemSharp.Tests
             Assert.AreEqual(.1, converter.Convert(1));
             Assert.AreEqual(10, converter.ConvertInverted(1));
         }
+
+        [TestMethod]
+        public void TestMass()
+        {
+            var converter = new MassUnitConverter("Solar Mass", "Earth Mass");
+            Assert.AreEqual(332946.0487, converter.Convert(1), 1.25);
+            converter = new MassUnitConverter("lbs", "g");
+            Assert.AreEqual(453.59237, converter.Convert(1));
+        }
     }
 }

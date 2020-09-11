@@ -57,6 +57,9 @@
     <None Update="files\nmr\pdata\1\procs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="files\uvvis.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\uvvis.dsw">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

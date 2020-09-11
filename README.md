@@ -24,4 +24,4 @@
 	* Varian/Agilient DSW
 	* Bruker EMX SPC/PAR
 	* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
-
+	* CSV

@@ -7,6 +7,7 @@
 ### Features
 * Open and process Spectroscopy related files (see Supported Filetypes)
 * Open and process Molecular files (see Supported Filetypes)
+* Sum formula operations and elemental analysis calculation
 * Unit Conversion for 
 	* Energy
 	* Magnetic Units

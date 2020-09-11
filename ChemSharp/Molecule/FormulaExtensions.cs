@@ -46,7 +46,7 @@ namespace ChemSharp.Molecule
         {
             //replace complex brackets
             input = input.Replace("[", "(".Replace("]", ")"));
-            List<List<Element>> result = new List<List<Element>>()
+            var result = new List<List<Element>>
             {
                 new List<Element>()
             };
@@ -106,7 +106,7 @@ namespace ChemSharp.Molecule
         private static List<Element> Factor(this List<Element> input, int multiplicity)
         {
             var tmp = new List<Element>(input);
-            for (int i = 0; i < multiplicity - 1; i++) input.AddRange(tmp);
+            for (var i = 0; i < multiplicity - 1; i++) input.AddRange(tmp);
             return input;
         }
 

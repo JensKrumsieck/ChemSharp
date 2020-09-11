@@ -6,10 +6,18 @@ using System.Linq;
 
 namespace ChemSharp.Files
 {
+    /// <summary>
+    /// Generic CSV File Class, use ChemSharp.Files.Spectroscopy.CSV if T is float for
+    /// being significantly faster
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CSV<T> : TextFile where T : IConvertible
     {
         public List<T[]> CsvTable;
 
+        /// <summary>
+        /// Separator char, default is comma
+        /// </summary>
         public char Separator { get; }
 
         /// <summary>

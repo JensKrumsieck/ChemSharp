@@ -44,16 +44,14 @@ namespace ChemSharp.Files
                     var data = line.Split(Separator)
                         .Select(element =>
                         {
-                            T ret;
                             try
                             {
-                                ret = (T) Convert.ChangeType(element, typeof(T), CultureInfo.InvariantCulture);
+                                return (T) Convert.ChangeType(element, typeof(T), CultureInfo.InvariantCulture);
                             }
                             catch
                             {
-                                ret = default;
+                                return default;
                             }
-                            return ret;
                         })
                         .ToArray();
                     //check if line length is not 0 and is not full of default values

@@ -1,5 +1,4 @@
-﻿using System;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using System.Collections.Generic;
 
 namespace ChemSharp.Math.Unit

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ChemSharp.Extensions;
+using ChemSharp.Math.Unit;
 
 namespace ChemSharp.Spectrum
 {
@@ -106,14 +107,8 @@ namespace ChemSharp.Spectrum
         public static float GValue(float xInput, float frequency, string unit = "G")
         {
             //convert input to Tesla unit
-            var value = unit switch
-            {
-                "G" => xInput / 10000,
-                "mT" => xInput / 1000,
-                _ => xInput
-            };
-
-            return (float)(Constants.Planck * frequency * 1e9 / (Constants.BohrM * value));
+            var converter = new MagneticUnitConverter(unit, "T");
+            return (float)(Constants.Planck * frequency * 1e9 / (Constants.BohrM * converter.Convert(xInput)));
         }
 
 

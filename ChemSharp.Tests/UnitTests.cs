@@ -16,5 +16,13 @@ namespace ChemSharp.Tests
             Assert.AreEqual(20000, converter.Convert(500));
             Assert.AreEqual(500, converter.ConvertInverted(20000));
         }
+
+        [TestMethod]
+        public void TestMagnetic()
+        {
+            var converter = new MagneticUnitConverter("G", "mT");
+            Assert.AreEqual(.1, converter.Convert(1));
+            Assert.AreEqual(10, converter.ConvertInverted(1));
+        }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Files
 {
@@ -46,7 +45,7 @@ namespace ChemSharp.Files
                         {
                             try
                             {
-                                return (T) Convert.ChangeType(element, typeof(T), CultureInfo.InvariantCulture);
+                                return (T)Convert.ChangeType(element, typeof(T), CultureInfo.InvariantCulture);
                             }
                             catch
                             {
@@ -55,7 +54,7 @@ namespace ChemSharp.Files
                         })
                         .ToArray();
                     //check if line length is not 0 and is not full of default values
-                    if (data.Length != 0 && data.Count(s => s.Equals(default(T)))!= data.Length) yield return data;
+                    if (data.Length != 0 && data.Count(s => s.Equals(default(T))) != data.Length) yield return data;
                 }
             }
             else

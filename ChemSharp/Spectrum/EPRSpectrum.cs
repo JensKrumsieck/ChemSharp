@@ -1,10 +1,9 @@
-﻿using ChemSharp.Math;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files.Spectroscopy;
+using ChemSharp.Math.Unit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ChemSharp.Extensions;
-using ChemSharp.Math.Unit;
 
 namespace ChemSharp.Spectrum
 {

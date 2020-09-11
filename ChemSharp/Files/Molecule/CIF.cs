@@ -1,10 +1,10 @@
-﻿using ChemSharp.Math;
+﻿using ChemSharp.Extensions;
+using ChemSharp.Math;
 using ChemSharp.Molecule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Molecule
 {

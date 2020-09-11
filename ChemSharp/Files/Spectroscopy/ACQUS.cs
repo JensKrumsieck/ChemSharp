@@ -1,7 +1,7 @@
-﻿using ChemSharp.Math;
+﻿using ChemSharp.Extensions;
+using ChemSharp.Math;
 using System.IO;
 using System.Linq;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Files.Spectroscopy
 {

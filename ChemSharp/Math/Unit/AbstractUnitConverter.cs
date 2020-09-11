@@ -40,7 +40,7 @@ namespace ChemSharp.Math.Unit
             var baseUnit = SIUnitLookup.TryAndGet(from).Function(val);
             var mfunc = SIUnitLookup.TryAndGet(to);
             var toVal = baseUnit / mfunc.Function(1);
-            return mfunc.Reciprocal? 1/ toVal: toVal ;
+            return mfunc.Reciprocal ? 1 / toVal : toVal;
         }
 
         /// <summary>

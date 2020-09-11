@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ChemSharp.Math.Unit;
+using System.Collections.Generic;
 using System.Linq;
-using ChemSharp.Math.Unit;
 
 namespace ChemSharp.Spectrum
 {

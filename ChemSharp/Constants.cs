@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp
+﻿namespace ChemSharp
 {
     public static class Constants
     {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using ChemSharp.Files;
+﻿using ChemSharp.Files;
 using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Spectrum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 
 namespace ChemSharp.Tests.Spectroscopy
 {
@@ -45,7 +45,7 @@ namespace ChemSharp.Tests.Spectroscopy
             var csvFloat = new CSV(csvpath, ',');
             for (var i = 0; i < csvFloat.CsvTable.Count; i++)
             {
-                for (var j = 0; j < csvFloat.CsvTable[i].Length; j++) 
+                for (var j = 0; j < csvFloat.CsvTable[i].Length; j++)
                     Assert.AreEqual(csvFloat.CsvTable[i][j], csvGeneric.CsvTable[i][j]);
             }
         }

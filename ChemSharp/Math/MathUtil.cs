@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Math
 {

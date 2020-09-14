@@ -31,7 +31,7 @@ namespace ChemSharp.Math
                 var vec = data[i].Location - centroid;
                 matrix[0, i] = vec.X;
                 matrix[1, i] = vec.Y;
-                matrix[2, i] = vec.Y;
+                matrix[2, i] = vec.Z;
             }
 
             var svd = matrix.Svd();
@@ -40,5 +40,20 @@ namespace ChemSharp.Math
             var c = svd.U[2, 2];
             return new Plane(a, b, c, -centroid.Dot(new Vector3(a, b, c)));
         }
+
+        /// <summary>
+        /// Wrapper for MathUtil method
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="p"></param>
+        public static float DistanceToPlane(this Atom a, Plane p) => p.Distance(a.Location);
+
+        /// <summary>
+        /// Calculates mean plane distance (for huge number of atoms use separate methods)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="atoms"></param>
+        /// <returns></returns>
+        public static float DistanceToMeanPlane(this Atom a, IEnumerable<Atom> atoms) => atoms.MeanPlane().Distance(a.Location);
     }
 }

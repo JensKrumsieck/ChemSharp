@@ -11,7 +11,7 @@ namespace ChemSharp.Tests.MoleculeFiles
 
         private const string path = "files/mescho.xyz";
 
-        private static readonly XYZ _xyz = new XYZ(path);
+        public static readonly XYZ _xyz = new XYZ(path);
         private Atom[] _atoms;
         private Bond[] _bonds;
 

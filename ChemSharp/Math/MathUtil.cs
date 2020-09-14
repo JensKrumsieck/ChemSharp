@@ -99,5 +99,32 @@ namespace ChemSharp.Math
         /// <param name="right"></param>
         /// <returns></returns>
         public static float Dot(this Vector3 left, Vector3 right) => Vector3.Dot(left, right);
+
+
+        /// <summary>
+        /// Calculates distance to plane
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static float Distance(this Plane p, Vector3 point)
+        {
+            var projection = p.Project(point);
+            var vectorTo = point - projection;
+            return vectorTo.Dot(p.Normal);
+        }
+
+        /// <summary>
+        /// Projects a point onto plane p
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public static Vector3 Project(this Plane p, Vector3 point)
+        {
+            var dotProduct = p.Normal.Dot(point);
+            var projVec = (dotProduct + p.D) * p.Normal;
+            return point - projVec;
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿using ChemSharp.Math;
+﻿using System.Linq;
+using ChemSharp.Math;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
+using ChemSharp.Tests.MoleculeFiles;
 
 namespace ChemSharp.Tests.Math
 {
@@ -28,6 +30,20 @@ namespace ChemSharp.Tests.Math
         public void TestCentroid()
         {
             Assert.AreEqual(new Vector3(1 / 3f, 1 / 3f, 1 / 3f), _vectors.Centroid());
+        }
+
+        [TestMethod]
+        public void DistanceToPlane()
+        {
+            //use XYZ her
+            var xyz = XYZTest._xyz;
+            //from mercury
+            var centroid = new Vector3(.258f, .052f,-0.015f);
+            Assert.AreEqual(centroid.X, xyz.Atoms.Centroid().X, 0.001f);
+            Assert.AreEqual(centroid.Y, xyz.Atoms.Centroid().Y, 0.001f);
+            Assert.AreEqual(centroid.Z, xyz.Atoms.Centroid().Z, 0.001f);
+            //Data from mercury
+            Assert.AreEqual(0.057, xyz.Atoms.FirstOrDefault(s => s.Symbol == "O").DistanceToMeanPlane(xyz.Atoms), 0.001);
         }
     }
 }

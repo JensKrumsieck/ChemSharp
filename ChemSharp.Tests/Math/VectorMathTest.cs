@@ -31,20 +31,5 @@ namespace ChemSharp.Tests.Math
         {
             Assert.AreEqual(new Vector3(1 / 3f, 1 / 3f, 1 / 3f), _vectors.Centroid());
         }
-
-        [TestMethod]
-        public void DistanceToPlane()
-        {
-            //use XYZ her
-            var xyz = XYZTest._xyz;
-            //from mercury
-            var centroid = new Vector3(.258f, .052f,-0.015f);
-            var calcCentroid = xyz.Atoms.Centroid();
-            Assert.AreEqual(centroid.X, calcCentroid.X, 0.001f);
-            Assert.AreEqual(centroid.Y, calcCentroid.Y, 0.001f);
-            Assert.AreEqual(centroid.Z, calcCentroid.Z, 0.001f);
-            //Data from mercury
-            Assert.AreEqual(0.057, xyz.Atoms.FirstOrDefault(s => s.Symbol == "O").DistanceToMeanPlane(xyz.Atoms), 0.001);
-        }
     }
 }

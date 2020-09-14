@@ -2,6 +2,8 @@
 using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using System.Numerics;
+using ChemSharp.Math;
 
 namespace ChemSharp.Tests.MoleculeFiles
 {
@@ -35,6 +37,18 @@ namespace ChemSharp.Tests.MoleculeFiles
         public void TextXYZGeneratedBonds()
         {
             Assert.AreEqual(23, _bonds.Length);
+        }
+        [TestMethod]
+        public void DistanceToPlane()
+        {
+            //from mercury
+            var centroid = new Vector3(.258f, .052f, -0.015f);
+            var calcCentroid = _xyz.Atoms.Centroid();
+            Assert.AreEqual(centroid.X, calcCentroid.X, 0.001f);
+            Assert.AreEqual(centroid.Y, calcCentroid.Y, 0.001f);
+            Assert.AreEqual(centroid.Z, calcCentroid.Z, 0.001f);
+            //Data from mercury
+            Assert.AreEqual(0.057, _xyz.Atoms.FirstOrDefault(s => s.Symbol == "O").DistanceToMeanPlane(_xyz.Atoms), 0.001);
         }
     }
 }

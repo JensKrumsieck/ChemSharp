@@ -25,3 +25,7 @@
 	* Bruker EMX SPC/PAR
 	* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
 	* CSV
+
+Used Libraries:
+
+MathNet.Numerics (https://github.com/mathnet/mathnet-numerics)

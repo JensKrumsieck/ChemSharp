@@ -39,9 +39,10 @@ namespace ChemSharp.Tests.Math
             var xyz = XYZTest._xyz;
             //from mercury
             var centroid = new Vector3(.258f, .052f,-0.015f);
-            Assert.AreEqual(centroid.X, xyz.Atoms.Centroid().X, 0.001f);
-            Assert.AreEqual(centroid.Y, xyz.Atoms.Centroid().Y, 0.001f);
-            Assert.AreEqual(centroid.Z, xyz.Atoms.Centroid().Z, 0.001f);
+            var calcCentroid = xyz.Atoms.Centroid();
+            Assert.AreEqual(centroid.X, calcCentroid.X, 0.001f);
+            Assert.AreEqual(centroid.Y, calcCentroid.Y, 0.001f);
+            Assert.AreEqual(centroid.Z, calcCentroid.Z, 0.001f);
             //Data from mercury
             Assert.AreEqual(0.057, xyz.Atoms.FirstOrDefault(s => s.Symbol == "O").DistanceToMeanPlane(xyz.Atoms), 0.001);
         }

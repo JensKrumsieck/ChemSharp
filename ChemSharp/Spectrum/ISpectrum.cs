@@ -1,6 +1,9 @@
-﻿namespace ChemSharp.Spectrum
+﻿using System.Numerics;
+
+namespace ChemSharp.Spectrum
 {
-    interface ISpectrum
+    public interface ISpectrum
     {
+        public Vector2[] Data { get; set; }
     }
 }

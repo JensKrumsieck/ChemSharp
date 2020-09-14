@@ -7,7 +7,7 @@ namespace ChemSharp.Spectrum
 {
     public class AbstractSpectrum : ISpectrum
     {
-        public Vector2[] Data { get; internal set; }
+        public Vector2[] Data { get; set; }
 
         /// <summary>
         /// associated files

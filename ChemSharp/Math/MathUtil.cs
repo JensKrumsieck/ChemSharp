@@ -91,5 +91,13 @@ namespace ChemSharp.Math
         /// <param name="x"></param>
         /// <returns></returns>
         public static int NextPowerOf2(int x) => (int)System.Math.Pow(2, System.Math.Floor(System.Math.Log(x, 2)) + 1);
+
+        /// <summary>
+        /// Wrapper for dot product
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static float Dot(this Vector3 left, Vector3 right) => Vector3.Dot(left, right);
     }
 }

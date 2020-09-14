@@ -12,6 +12,9 @@ namespace ChemSharp.Spectrum
             SecondaryXAxis = EnergyAxis.ToArray();
         }
 
+        /// <summary>
+        /// Gets EnergyAxis;
+        /// </summary>
         public IEnumerable<float> EnergyAxis
         {
             get

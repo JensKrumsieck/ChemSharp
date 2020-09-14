@@ -47,6 +47,8 @@ namespace ChemSharp.Tests.Spectroscopy
             //test processed generation
             nmr = SpectrumFactory.Create<NMRSpectrum>(ac, oneR);
             Assert.AreEqual(procs.FTSize, nmr.Data.Length);
+
+            Assert.AreEqual(300, nmr.Frequency / 1e6, 1);
         }
     }
 }

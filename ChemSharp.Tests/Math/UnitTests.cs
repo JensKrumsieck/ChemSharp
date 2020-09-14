@@ -1,7 +1,7 @@
 ﻿using ChemSharp.Math.Unit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ChemSharp.Tests
+namespace ChemSharp.Tests.Math
 {
     [TestClass]
     public class UnitTests

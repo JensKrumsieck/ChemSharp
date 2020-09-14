@@ -19,7 +19,20 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static string StripUncertainty(this string input) => input.Split('(').First();
 
+
+        /// <summary>
+        /// Splits and Whitespace
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string[] WhiteSpaceSplit(this string input) => input
             .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+
+        /// <summary>
+        /// Remove < and >
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string BrukerRemove(this string input) => input.Replace("<", "").Replace(">", "");
     }
 }

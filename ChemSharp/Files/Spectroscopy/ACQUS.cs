@@ -30,7 +30,7 @@ namespace ChemSharp.Files.Spectroscopy
             SweepWidth = Parameters.TryAndGet("$SW_h").ToFloat();
             Count = Parameters.TryAndGet("$TD").ToInt() / 2;
             Frequency = Parameters.TryAndGet("$SFO1").ToFloat() * 1e6f;
-            Type = Parameters.TryAndGet("$NUC1").Replace("<", "").Replace(">", "");
+            Type = Parameters.TryAndGet("$NUC1").BrukerRemove();
 
             //get seconds
             SecondsData = CollectionsUtil.LinearRange(0, Count - 1 / SweepWidth, Count).ToArray();

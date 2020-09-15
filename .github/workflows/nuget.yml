@@ -7,7 +7,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,13 +19,7 @@ jobs:
       
     - name: Install dependencies
       run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-      
+            
     - name: Get Latest Release
       id: latest_version
       uses: abatilo/release-info-action@v1.2.0

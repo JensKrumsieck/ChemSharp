@@ -9,6 +9,8 @@
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

@@ -51,6 +51,7 @@ namespace ChemSharp.Tests
             var prop = typeof(Element).GetProperties().First(s => s.Name == property);
             for (var i = 0; i < Elements.Length; i++)
             {
+                //null equals test fails, so the opposite value  of assertion is returned
                 if (trueIndices.Contains(i))
                     Assert.IsTrue((bool)(prop.GetValue(Elements[i]) ?? false));
                 else 

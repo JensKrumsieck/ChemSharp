@@ -33,6 +33,7 @@
             this.uvPV = new OxyPlot.WindowsForms.PlotView();
             this.nmrPV = new OxyPlot.WindowsForms.PlotView();
             this.processedPV = new OxyPlot.WindowsForms.PlotView();
+            this.ElementsTB = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,11 +107,20 @@
             this.processedPV.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.processedPV.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             // 
+            // ElementsTB
+            // 
+            this.ElementsTB.Location = new System.Drawing.Point(12, 456);
+            this.ElementsTB.Name = "ElementsTB";
+            this.ElementsTB.Size = new System.Drawing.Size(776, 120);
+            this.ElementsTB.TabIndex = 1;
+            this.ElementsTB.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 596);
+            this.Controls.Add(this.ElementsTB);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -127,6 +137,7 @@
         private OxyPlot.WindowsForms.PlotView uvPV;
         private OxyPlot.WindowsForms.PlotView eprPV;
         private OxyPlot.WindowsForms.PlotView processedPV;
+        private System.Windows.Forms.RichTextBox ElementsTB;
     }
 }
 

@@ -5,8 +5,10 @@ using OxyPlot;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ChemSharp.Molecule;
 
 namespace Demo
 {
@@ -38,6 +40,27 @@ namespace Demo
                 model.Series.Add(new LineSeries() { ItemsSource = data[i] });
                 pvReference[i].Model = model;
             }
+
+            ElementsTB.Font = new Font(new FontFamily("Arial"), 14, FontStyle.Regular);
+            PaintElements();
+        }
+
+        private void PaintElements()
+        {
+            for(var i = 0; i < 118; i++)
+            {
+                var element = ElementDataProvider.Elements.ElementAt(i);
+                AppendText(ElementsTB, element.Name + "(" + element.Symbol + ")", ColorTranslator.FromHtml(element.Color));
+            }
+        }
+
+        private static void AppendText(RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
         }
     }
 }

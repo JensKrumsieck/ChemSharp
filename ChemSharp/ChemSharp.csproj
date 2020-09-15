@@ -1,8 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+	  <PackageId>ChemSharp</PackageId>
+	  <Authors>Jens Krumsieck</Authors>
+	  <TargetFramework>netstandard2.1</TargetFramework>
 	  <LangVersion>latest</LangVersion>
+	  <Version>0.0.1</Version>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

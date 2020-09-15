@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\colorData.txt" />
     <None Remove="Resources\elements.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\colorData.txt" />
     <EmbeddedResource Include="Resources\elements.json" />
   </ItemGroup>
 

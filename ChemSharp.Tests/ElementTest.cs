@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Molecule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace ChemSharp.Tests
 {
@@ -65,6 +66,17 @@ namespace ChemSharp.Tests
             Assert.IsFalse(al.IsNonMetal);
             Assert.IsFalse(ne.IsNonMetal);
             Assert.IsFalse(he.IsNonMetal);
+        }
+
+        [TestMethod]
+        public void PSETest()
+        {
+            for (var i = 1; i <= 118; i++)
+            {
+                var element = ElementDataProvider.Elements.ElementAt(i - 1);
+                Assert.AreEqual(i, element.AtomicNumber);
+                Assert.IsNotNull(element.Color);
+            }
         }
     }
 }

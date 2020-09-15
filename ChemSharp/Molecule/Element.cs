@@ -75,5 +75,14 @@ namespace ChemSharp.Molecule
         /// </summary>
         [JsonIgnore]
         public bool IsNonMetal => Category.Contains("nonmetal", StringComparison.InvariantCultureIgnoreCase);
+
+        /// <summary>
+        /// Returns Element Color
+        /// </summary>
+        [JsonIgnore]
+        public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
+
+        [JsonIgnore]
+        private string _color { get; set; }
     }
 }

@@ -21,28 +21,28 @@ namespace ChemSharp.Tests
         [TestMethod]
         public void TestMetal()
         {
-            var trueIndices = new int[] {2, 3, 5};
+            var trueIndices = new[] {2, 3, 5}; //Fe, Co, Al
             Test("IsMetal", trueIndices);
         }
 
         [TestMethod]
         public void TestMetalloid()
         {
-            var trueIndices = new int[] { 0, 1 };
+            var trueIndices = new[] { 0, 1 }; //B, Si
             Test("IsMetalloid", trueIndices);
         }
 
         [TestMethod]
         public void TestGas()
         {
-            var trueIndices = new int[] { 6 };
+            var trueIndices = new[] { 6 }; //Ne
             Test("IsGas", trueIndices);
         }
 
         [TestMethod]
         public void TestNonMetal()
         {
-            var trueIndices = new int[] { 4,7 };
+            var trueIndices = new[] { 4,7 }; //P, H 
             Test("IsNonMetal", trueIndices);
         }
 

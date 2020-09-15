@@ -66,7 +66,7 @@ namespace ChemSharp.Tests
             {
                 var element = ElementDataProvider.Elements.ElementAt(i - 1);
                 Assert.AreEqual(i, element.AtomicNumber);
-                Assert.IsNotNull(element.Color);
+                Assert.IsFalse(string.IsNullOrEmpty(element.Color));
             }
         }
     }

@@ -7,65 +7,55 @@ namespace ChemSharp.Tests
     [TestClass]
     public class ElementTest
     {
-        private static readonly Element b = new Element("B");
-        private static readonly Element si = new Element("Si");
-        private static readonly Element fe = new Element("Fe");
-        private static readonly Element co = new Element("Co");
-        private static readonly Element p = new Element("P");
-        private static readonly Element al = new Element("Al");
-        private static readonly Element ne = new Element("Ne");
-        private static readonly Element he = new Element("He");
+        public static Element[] Elements { get; } = {
+            new Element("B"),
+            new Element("Si"),
+            new Element("Fe"),
+            new Element("Co"),
+            new Element("P"),
+            new Element("Al"),
+            new Element("Ne"),
+            new Element("H")
+        };
 
         [TestMethod]
         public void TestMetal()
         {
-            Assert.IsFalse(b.IsMetal);
-            Assert.IsFalse(si.IsMetal);
-            Assert.IsTrue(fe.IsMetal);
-            Assert.IsTrue(co.IsMetal);
-            Assert.IsFalse(p.IsMetal);
-            Assert.IsTrue(al.IsMetal);
-            Assert.IsFalse(ne.IsMetal);
-            Assert.IsFalse(he.IsMetal);
+            var trueIndices = new int[] {2, 3, 5};
+            Test("IsMetal", trueIndices);
         }
 
         [TestMethod]
         public void TestMetalloid()
         {
-            Assert.IsTrue(b.IsMetalloid);
-            Assert.IsTrue(si.IsMetalloid);
-            Assert.IsFalse(fe.IsMetalloid);
-            Assert.IsFalse(co.IsMetalloid);
-            Assert.IsFalse(p.IsMetalloid);
-            Assert.IsFalse(al.IsMetalloid);
-            Assert.IsFalse(ne.IsMetalloid);
-            Assert.IsFalse(he.IsMetalloid);
+            var trueIndices = new int[] { 0, 1 };
+            Test("IsMetalloid", trueIndices);
         }
 
         [TestMethod]
         public void TestGas()
         {
-            Assert.IsFalse(b.IsGas);
-            Assert.IsFalse(si.IsGas);
-            Assert.IsFalse(fe.IsGas);
-            Assert.IsFalse(co.IsGas);
-            Assert.IsFalse(p.IsGas);
-            Assert.IsFalse(al.IsGas);
-            Assert.IsTrue(ne.IsGas);
-            Assert.IsTrue(he.IsGas);
+            var trueIndices = new int[] { 6 };
+            Test("IsGas", trueIndices);
         }
 
         [TestMethod]
         public void TestNonMetal()
         {
-            Assert.IsFalse(b.IsNonMetal);
-            Assert.IsFalse(si.IsNonMetal);
-            Assert.IsFalse(fe.IsNonMetal);
-            Assert.IsFalse(co.IsNonMetal);
-            Assert.IsTrue(p.IsNonMetal);
-            Assert.IsFalse(al.IsNonMetal);
-            Assert.IsFalse(ne.IsNonMetal);
-            Assert.IsFalse(he.IsNonMetal);
+            var trueIndices = new int[] { 4,7 };
+            Test("IsNonMetal", trueIndices);
+        }
+
+        public void Test(string property, int[] trueIndices)
+        {
+            var prop = typeof(Element).GetProperties().First(s => s.Name == property);
+            for (var i = 0; i < Elements.Length; i++)
+            {
+                if (trueIndices.Contains(i))
+                    Assert.IsTrue((bool)(prop.GetValue(Elements[i]) ?? false));
+                else 
+                    Assert.IsFalse((bool)(prop.GetValue(Elements[i]) ?? true));
+            }
         }
 
         [TestMethod]

@@ -1,15 +1,16 @@
 ﻿using ChemSharp.Math.Unit;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace ChemSharp.Spectrum
 {
     public class UVVisSpectrum : AbstractSpectrum, ISecondaryXAxis
     {
-        public override void OnInit()
+        protected override void OnInit(object sender, NotifyCollectionChangedEventArgs args)
         {
-            base.OnInit();
-            SecondaryXAxis = EnergyAxis.ToArray();
+            base.OnInit(sender, args);
+            SecondaryXAxis ??= EnergyAxis.ToArray();
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace ChemSharp.Spectrum
         private static float Converter(float input, bool inverted = false)
         {
             var converter = new EnergyUnitConverter("nm", "cm^-1");
-            return (float) (inverted ? converter.ConvertInverted(input) : converter.Convert(input));
+            return (float)(inverted ? converter.ConvertInverted(input) : converter.Convert(input));
         }
 
         public float[] SecondaryXAxis { get; set; }

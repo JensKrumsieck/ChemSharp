@@ -1,5 +1,7 @@
 ﻿using ChemSharp.Files;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Numerics;
 
@@ -8,12 +10,17 @@ namespace ChemSharp.Spectrum
     public class AbstractSpectrum : ISpectrum
     {
 
+        public AbstractSpectrum()
+        {
+            Files.CollectionChanged += OnInit;
+        }
+
         public Vector2[] Data { get; set; }
 
         /// <summary>
         /// associated files
         /// </summary>
-        public IList<IFile> Files { get; set; } = new List<IFile>();
+        public ObservableCollection<IFile> Files { get; set; } = new ObservableCollection<IFile>();
 
         private Vector2[] _derivative;
 
@@ -60,12 +67,11 @@ namespace ChemSharp.Spectrum
         }
 
         /// <summary>
-        /// must be called after initialization if
-        /// properties need to be set automatically
+        /// will be called if files are added
         /// </summary>
-        public virtual void OnInit()
+        protected virtual void OnInit(object sender, NotifyCollectionChangedEventArgs args)
         {
-            //does nothing
+            //does nothing for now
         }
     }
 }

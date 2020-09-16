@@ -3,6 +3,7 @@ using ChemSharp.Files.Spectroscopy;
 using ChemSharp.Math.Unit;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace ChemSharp.Spectrum
@@ -67,9 +68,9 @@ namespace ChemSharp.Spectrum
         /// <summary>
         /// Calls directly after initialization
         /// </summary>
-        public override void OnInit()
+        protected override void OnInit(object sender, NotifyCollectionChangedEventArgs args)
         {
-            base.OnInit();
+            base.OnInit(sender, args);
 
             var file = (PAR)Files.FirstOrDefault(s => s.Path.Contains(".par"));
 
@@ -93,7 +94,7 @@ namespace ChemSharp.Spectrum
             Unit = file.Parameters.TryAndGet("JUN");
 
             //set secondary X Axis to G Axis
-            SecondaryXAxis = GAxis.ToArray();
+            SecondaryXAxis ??= GAxis.ToArray();
         }
 
         public IEnumerable<float> GAxis

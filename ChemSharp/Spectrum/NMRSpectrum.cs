@@ -1,7 +1,8 @@
-﻿using System;
-using System.Linq;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files.Spectroscopy;
+using System;
+using System.Collections.Specialized;
+using System.Linq;
 
 namespace ChemSharp.Spectrum
 {
@@ -32,15 +33,16 @@ namespace ChemSharp.Spectrum
         /// </summary>
         public string Solvent;
 
-        public override void OnInit()
+        protected override void OnInit(object sender, NotifyCollectionChangedEventArgs args)
         {
+            base.OnInit(sender, args);
             var file = (ACQUS)Files.FirstOrDefault(s => s.Path.Contains("acqus"));
-            if(file == null) return;
+            if (file == null) return;
             Frequency = file.Frequency;
             Nucleus = file.Type;
 
             var timestamp = file.Parameters.TryAndGet("$DATE");
-            Date = new DateTime(1970,1,1,0,0,0);
+            Date = new DateTime(1970, 1, 1, 0, 0, 0);
             Date = Date.AddSeconds(timestamp.ToInt()).ToLocalTime();
             Holder = file.Parameters.TryAndGet("$HOLDER").ToInt();
             Instrument = file.Parameters.TryAndGet("$INSTRUM").BrukerRemove();

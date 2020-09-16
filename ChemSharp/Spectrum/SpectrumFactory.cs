@@ -2,6 +2,8 @@
 using ChemSharp.Files;
 using ChemSharp.Files.Spectroscopy;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace ChemSharp.Spectrum
@@ -80,6 +82,21 @@ namespace ChemSharp.Spectrum
             var xFile = xPath.CreateObjectFromFile("Spectroscopy");
             var yFile = yPath.CreateObjectFromFile("Spectroscopy");
             return (TResult)Create<TResult>(xFile as IXSpectrumFile, yFile as IYSpectrumFile);
+        }
+
+        /// <summary>
+        /// Wrapper for giving file names as array
+        /// X must come first and Y second
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="paths"></param>
+        /// <returns></returns>
+        public static TResult Create<TResult>(IEnumerable<string> paths) 
+            where TResult : AbstractSpectrum
+        {
+            var array = paths as string[] ?? paths.ToArray();
+            if(array.Length > 2) throw new NotSupportedException("More than two files provided - not supported as of now");
+            return Create<TResult>(array[0], array[1]);
         }
     }
 }

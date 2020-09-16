@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ChemSharp.Spectrum
 {
-    public class EPRSpectrum : AbstractSpectrum
+    public class EPRSpectrum : AbstractSpectrum, ISecondaryXAxis
     {
         /// <summary>
         /// EPR Frequency
@@ -96,27 +96,20 @@ namespace ChemSharp.Spectrum
             SecondaryXAxis = GAxis.ToArray();
         }
 
-        /// <summary>
-        /// Calculate GValue for one given point.
-        /// </summary>
-        /// <param name="xInput"></param>
-        /// <param name="frequency"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
-        public static float GValue(float xInput, float frequency, string unit = "G")
-        {
-            //convert input to Tesla unit
-            var converter = new MagneticUnitConverter(unit, "T");
-            return (float)(Constants.Planck * frequency * 1e9 / (Constants.BohrM * converter.Convert(xInput)));
-        }
-
-
         public IEnumerable<float> GAxis
         {
             get
             {
-                for (var i = 0; i < Data.Length; i++) yield return GValue(Data[i].X, Frequency, !string.IsNullOrEmpty(Unit) ? Unit : "G");
+                for (var i = 0; i < Data.Length; i++) yield return SpecialConverters.GFromB(Data[i].X, Frequency, !string.IsNullOrEmpty(Unit) ? Unit : "G");
             }
         }
+
+        #region ISecondaryXAxis
+        public float[] SecondaryXAxis { get; set; }
+        public float PrimaryToSecondary(float primaryValue) => SpecialConverters.GFromB(primaryValue, Frequency, Unit);
+
+        public float SecondaryToPrimary(float secondaryValue) => SpecialConverters.BFromG(secondaryValue, Frequency, Unit);
+
+        #endregion
     }
 }

@@ -35,7 +35,7 @@ namespace ChemSharp.Spectrum
         public override void OnInit()
         {
             var file = (ACQUS)Files.FirstOrDefault(s => s.Path.Contains("acqus"));
-
+            if(file == null) return;
             Frequency = file.Frequency;
             Nucleus = file.Type;
 

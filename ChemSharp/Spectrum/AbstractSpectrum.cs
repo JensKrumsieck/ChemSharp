@@ -7,6 +7,7 @@ namespace ChemSharp.Spectrum
 {
     public class AbstractSpectrum : ISpectrum
     {
+
         public Vector2[] Data { get; set; }
 
         /// <summary>
@@ -59,18 +60,12 @@ namespace ChemSharp.Spectrum
         }
 
         /// <summary>
-        /// Can be called after initialization through factory;
+        /// must be called after initialization if
+        /// properties need to be set automatically
         /// </summary>
         public virtual void OnInit()
         {
             //does nothing
         }
-
-        /// <summary>
-        /// Dummy Method to link secondary x axis for plotting
-        /// Dummy Method makes it exchangeable
-        /// </summary>
-        /// <returns></returns>
-        public float[] SecondaryXAxis { get; set; }
     }
 }

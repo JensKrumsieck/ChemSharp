@@ -95,8 +95,9 @@ namespace ChemSharp.Spectrum
             where TResult : AbstractSpectrum
         {
             var array = paths as string[] ?? paths.ToArray();
-            if(array.Length > 2) throw new NotSupportedException("More than two files provided - not supported as of now");
-            return Create<TResult>(array[0], array[1]);
+            if(array.Length > 2) 
+                throw new NotSupportedException("More than two files provided - not supported as of now");
+            return array.Length == 1 ? Create<TResult>(array[0]) : Create<TResult>(array[0], array[1]);
         }
     }
 }

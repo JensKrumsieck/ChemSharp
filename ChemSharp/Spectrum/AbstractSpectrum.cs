@@ -15,7 +15,7 @@ namespace ChemSharp.Spectrum
             Files.CollectionChanged += OnInit;
         }
 
-        public ObservableCollection<Vector2> Data { get; set; }
+        public ObservableCollection<Vector2> Data { get; set; } = new ObservableCollection<Vector2>();
 
         /// <summary>
         /// associated files

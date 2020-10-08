@@ -31,7 +31,7 @@ namespace ChemSharp.Tests.Spectroscopy
         {
             var epr = SpectrumFactory.Create<EPRSpectrum>($"{path}.par", $"{path}.spc");
             //check length of created vector property
-            Assert.AreEqual(2048, epr.Data.Length);
+            Assert.AreEqual(2048, epr.Data.Count);
         }
 
         [TestMethod]

@@ -3,6 +3,7 @@ using ChemSharp.Files;
 using ChemSharp.Files.Spectroscopy;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 
@@ -23,7 +24,7 @@ namespace ChemSharp.Spectrum
             where T : AbstractSpectrum
         {
             var spc = (T)Activator.CreateInstance(typeof(T));
-            spc.Data = src.XYData;
+            spc.Data = new ObservableCollection<Vector2>(src.XYData);
             spc.Files.Add((IFile)(src));
             //add files
             return spc;
@@ -45,7 +46,7 @@ namespace ChemSharp.Spectrum
                 data[i] = new Vector2(xSrc.XData[i], ySrc.YData[i]);
             }
             var spc = (T)Activator.CreateInstance(typeof(T));
-            spc.Data = data;
+            spc.Data = new ObservableCollection<Vector2>(data);
             //add files
             spc.Files.Add((IFile)(xSrc));
             spc.Files.Add((IFile)(ySrc));

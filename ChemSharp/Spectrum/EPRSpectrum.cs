@@ -101,7 +101,7 @@ namespace ChemSharp.Spectrum
         {
             get
             {
-                for (var i = 0; i < Data.Length; i++) yield return SpecialConverters.GFromB(Data[i].X, Frequency, !string.IsNullOrEmpty(Unit) ? Unit : "G");
+                for (var i = 0; i < Data.Count; i++) yield return SpecialConverters.GFromB(Data[i].X, Frequency, !string.IsNullOrEmpty(Unit) ? Unit : "G");
             }
         }
 

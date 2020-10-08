@@ -15,7 +15,7 @@ namespace ChemSharp.Spectrum
             Files.CollectionChanged += OnInit;
         }
 
-        public Vector2[] Data { get; set; }
+        public ObservableCollection<Vector2> Data { get; set; }
 
         /// <summary>
         /// associated files
@@ -48,7 +48,7 @@ namespace ChemSharp.Spectrum
         /// <returns></returns>
         private IEnumerable<Vector2> Derive()
         {
-            for (var i = 0; i < Data.Length; i++)
+            for (var i = 0; i < Data.Count; i++)
                 yield return i == 0
                     ? new Vector2(Data[i].X, 0)
                     : new Vector2(Data[i].X, (Data[i].Y - Data[i - 1].Y) / (Data[i].X - Data[i - 1].X));
@@ -60,7 +60,7 @@ namespace ChemSharp.Spectrum
         /// <returns></returns>
         private IEnumerable<Vector2> Integrate()
         {
-            for (var i = 0; i < Data.Length; i++)
+            for (var i = 0; i < Data.Count; i++)
                 yield return i == 0
                     ? Data[i]
                     : new Vector2(Data[i].X, Data[i].Y + Data[i - 1].Y);

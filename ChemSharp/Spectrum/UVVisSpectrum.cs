@@ -21,7 +21,7 @@ namespace ChemSharp.Spectrum
             get
             {
                 var converter = new EnergyUnitConverter("nm", "cm^-1");
-                for (var i = 0; i < Data.Length; i++) yield return (float)converter.Convert(Data[i].X);
+                for (var i = 0; i < Data.Count; i++) yield return (float)converter.Convert(Data[i].X);
             }
         }
 

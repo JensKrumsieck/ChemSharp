@@ -5,26 +5,26 @@
 ![.NET Core](https://github.com/JensKrumsieck/ChemSharp/workflows/.NET%20Core/badge.svg)
 
 ### Features
-* Open and process Spectroscopy related files (see Supported Filetypes)
-* Open and process Molecular files (see Supported Filetypes)
-* Sum formula operations and elemental analysis calculation
-* Unit Conversion for 
-	* Energy
-	* Magnetic Units
-	* Mass
-* Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
+* [x] Open and process Spectroscopy related files (see Supported Filetypes)
+* [ ] Open and process Molecular files (see Supported Filetypes)
+* [ ] Sum formula operations and elemental analysis calculation
+* [ ] Unit Conversion for 
+	* [ ] Energy
+	* [ ] Magnetic Units
+	* [ ] Mass
+* [ ] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes
-* Molecule
-	* XYZ
-	* CIF (crystallographic information file)
-	* MOL2 (TRIPOS Mol2)
+* [ ] Molecule
+	* [ ] XYZ
+	* [ ] CIF (crystallographic information file)
+	* [ ] MOL2 (TRIPOS Mol2)
 
-* Spectroscopy
-	* Varian/Agilient DSW
-	* Bruker EMX SPC/PAR
-	* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
-	* CSV
+* [x] Spectroscopy
+	* [x] Varian/Agilient DSW
+	* [x] Bruker EMX SPC/PAR
+	* [x] Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
+	* [x] CSV
 
 #### Used Libraries:
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)

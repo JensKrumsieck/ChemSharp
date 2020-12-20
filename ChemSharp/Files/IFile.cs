@@ -11,6 +11,5 @@
         /// Reads file content and saves it.
         /// </summary>
         void ReadFile();
-
     }
 }

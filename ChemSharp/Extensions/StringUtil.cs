@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Globalization;
 
 namespace ChemSharp.Extensions
 {
@@ -10,29 +10,28 @@ namespace ChemSharp.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string[] LineSplit(this string input) => input.Split(new[] { "\n", "\r\n", "\r" }, StringSplitOptions.None);
+        public static string[] DefaultSplit(this string input) => input.Split(new[] { "\n", "\r\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
         /// <summary>
-        /// Remove brackets from number string
+        /// Converts String to Int in Invariant Culture
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string StripUncertainty(this string input) => input.Split('(').First();
-
+        public static int ToInt(this string input) => Convert.ToInt32(input, CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Splits and Whitespace
+        /// Converts String to float in Invariant Culture
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string[] WhiteSpaceSplit(this string input) => input
-            .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+        public static float ToSingle(this string input) => Convert.ToSingle(input, CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Remove < and >
+        /// Converts String to double in Invariant Culture
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string BrukerRemove(this string input) => input.Replace("<", "").Replace(">", "");
+        public static double ToDouble(this string input) => Convert.ToDouble(input, CultureInfo.InvariantCulture);
+
     }
 }

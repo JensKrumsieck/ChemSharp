@@ -5,8 +5,7 @@ using System.Numerics;
 namespace ChemSharp.Math
 {
     public static class Fourier
-    {
-        /// <summary>
+    {/// <summary>
         /// Shift zero-frequency component to center of spectrum
         /// </summary>
         /// <param name="input"></param>

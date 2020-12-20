@@ -49,9 +49,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         private void SelectStrategy(string path)
         {
             var builder = PathBuilder(path);
-
-            var acqusFile = (ParameterFile)FileHandler.Handle(builder["acqus"]);
-            Storage = acqusFile.Storage;
+            Storage = ((ParameterFile)FileHandler.Handle(builder["acqus"])).Storage;
 
             var sw = this["##$SW_h"].ToDouble();
             var cnt = this["##$TD"].ToInt() / 2;
@@ -59,7 +57,6 @@ namespace ChemSharp.Spectroscopy.DataProviders
 
             //array needs to be power of 2
             var fftSize = MathUtil.PowerOf2(cnt) ? cnt : MathUtil.NextPowerOf2(cnt);
-
             var freqData = CollectionsUtil.LinearRange(-sw / 2, sw / 2, cnt).ToArray();
 
             //get ppm scale
@@ -69,23 +66,14 @@ namespace ChemSharp.Spectroscopy.DataProviders
 
             if (File.Exists(builder["procs"]))
             {
-                var procsFile = (ParameterFile)FileHandler.Handle(builder["procs"]);
-                Storage.Add("##$OFFSET", procsFile.Storage["##$OFFSET"]);
+                Storage.Add("##$OFFSET", ((ParameterFile)FileHandler.Handle(builder["procs"])).Storage["##$OFFSET"]);
                 var max = ppmData.Max();
                 ppmData = ppmData.Select(s => s + this["##$OFFSET"].ToDouble() - max).ToArray();
             }
 
-            //use processed data
+            //use processed data, 1r and 1i contain processed nmr data where 1r contains the real and 1i the imaginary part.
             if (File.Exists(builder["1i"]) && File.Exists(builder["1r"]) && !_forceFID)
-            {
-                //1r and 1i contain processed nmr data where 1r contains the real and 1i the imaginary part.
-                var oneR = (PlainFile<int>)FileHandler.Handle(builder["1r"]);
-                var oneI = (PlainFile<int>)FileHandler.Handle(builder["1i"]);
-                if(oneR.Content.Length != oneI.Content.Length && oneI.Content.Length != ppmData.Length) throw new InvalidDataException("The 1r/1i files do not match");
-                var data = new DataPoint[oneR.Content.Length];
-                for (var i = 0; i < oneR.Content.Length; i++)data[i] = new DataPoint(ppmData[i], new Complex(oneR.Content[i], oneI.Content[i]).Magnitude);
-                XYData = data.Reverse().ToArray();
-            }
+                XYData = DataPoint.FromDoubles(ppmData, HandleProcessed(builder).Reverse().ToArray()).ToArray();
             else XYData = DataPoint.FromDoubles(ppmData, HandleFid(builder["fid"]).ToArray()).ToArray();
 
         }
@@ -111,12 +99,29 @@ namespace ChemSharp.Spectroscopy.DataProviders
             return dic;
         }
 
+        /// <summary>
+        /// Handles FID
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private static IEnumerable<double> HandleFid(string path)
         {
             var file = (PlainFile<int>)FileHandler.Handle(path);
             var cmplx = file.Content.ToComplexes().ToArray();
             var fourier = cmplx.Radix2FFT().ToInts().FftShift().ToDoubles();
             return fourier;
+        }
+
+        /// <summary>
+        /// Handles 1r/1i
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        private static IEnumerable<double> HandleProcessed(Dictionary<string,string> builder)
+        {
+            var oneR = (PlainFile<int>)FileHandler.Handle(builder["1r"]);
+            var oneI = (PlainFile<int>)FileHandler.Handle(builder["1i"]);
+            for (var i = 0; i < oneR.Content.Length; i++) yield return new Complex(oneR.Content[i], oneI.Content[i]).Magnitude;
         }
 
         /// <inheritdoc />

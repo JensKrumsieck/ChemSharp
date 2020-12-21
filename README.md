@@ -12,7 +12,7 @@
 	* [ ] Energy
 	* [ ] Magnetic Units
 	* [ ] Mass
-* [ ] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
+* [x] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes
 * [ ] Molecule

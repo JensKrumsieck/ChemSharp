@@ -58,8 +58,8 @@ namespace ChemSharp.Molecules
         [JsonIgnore]
         public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
 
-        [JsonIgnore]
-        private string _color { get; set; }
+        [JsonIgnore] 
+        private string _color;
     }
 
 }

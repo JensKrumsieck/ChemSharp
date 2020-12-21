@@ -6,10 +6,10 @@ namespace ChemSharp.Math
 {
     public static class Fourier
     {/// <summary>
-        /// Shift zero-frequency component to center of spectrum
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+     /// Shift zero-frequency component to center of spectrum
+     /// </summary>
+     /// <param name="input"></param>
+     /// <returns></returns>
         public static IEnumerable<int> FftShift(this int[] input)
         {
             var n = (int)System.Math.Ceiling(input.Length / 2.0);

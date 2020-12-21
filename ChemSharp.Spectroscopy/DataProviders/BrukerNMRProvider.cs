@@ -86,7 +86,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         private static Dictionary<string, string> PathBuilder(string filename)
         {
             var path = Path.GetDirectoryName(filename);
-            if(path != null && path.Contains("pdata")) path = Path.GetFullPath(Path.Combine(path, @"..\..\"));
+            if (path != null && path.Contains("pdata")) path = Path.GetFullPath(Path.Combine(path, @"..\..\"));
             var dic = new Dictionary<string, string>
             {
                 {"fid", path + "\\fid"},
@@ -117,7 +117,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        private static IEnumerable<double> HandleProcessed(Dictionary<string,string> builder)
+        private static IEnumerable<double> HandleProcessed(Dictionary<string, string> builder)
         {
             var oneR = (PlainFile<int>)FileHandler.Handle(builder["1r"]);
             var oneI = (PlainFile<int>)FileHandler.Handle(builder["1i"]);

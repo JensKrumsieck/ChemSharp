@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ChemSharp.Molecules.DataProviders;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules
 {
@@ -58,7 +58,7 @@ namespace ChemSharp.Molecules
         [JsonIgnore]
         public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
 
-        [JsonIgnore] 
+        [JsonIgnore]
         private string _color;
     }
 

@@ -37,8 +37,8 @@ namespace ChemSharp
         /// <returns></returns>
         public static IEnumerable<DataPoint> FromDoubles(double[] xData, double[] yData)
         {
-            if(xData.Length != yData.Length) throw new Exception("X and Y Length does not match");
-            for(var i = 0; i < xData.Length; i++) yield return new DataPoint(xData[i], yData[i]);
+            if (xData.Length != yData.Length) throw new Exception("X and Y Length does not match");
+            for (var i = 0; i < xData.Length; i++) yield return new DataPoint(xData[i], yData[i]);
         }
     }
 }

@@ -3,6 +3,9 @@ using System.Numerics;
 
 namespace ChemSharp.Molecules
 {
+    /// <summary>
+    /// Atom represents an Element in 3d Space
+    /// </summary>
     public class Atom : Element, IEquatable<Atom>
     {
         /// <summary>
@@ -10,7 +13,6 @@ namespace ChemSharp.Molecules
         /// </summary>
         public Vector3 Location { get; set; }
 
-        /// <inheritdoc cref="Element"/>
         public Atom(string symbol) : base(symbol)
         { }
 
@@ -30,10 +32,10 @@ namespace ChemSharp.Molecules
         {
             get => !string.IsNullOrEmpty(_title) ? _title : Symbol;
             set => _title = value;
-        } 
+        }
 
         public override string ToString() => $"{Title}: {Location}";
-        
+
 
         /// <summary>
         /// Gets HashCode, defined by title and location

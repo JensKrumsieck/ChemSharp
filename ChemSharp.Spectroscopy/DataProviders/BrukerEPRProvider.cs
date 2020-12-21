@@ -37,7 +37,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <param name="path"></param>
         private IEnumerable<DataPoint> HandleData(string path)
         {
-            var parFile = (ParameterFile) FileHandler.Handle(path + ".par");
+            var parFile = (ParameterFile)FileHandler.Handle(path + ".par");
             var spcFile = (PlainFile<float>)FileHandler.Handle(path + ".spc");
 
             //copy storage

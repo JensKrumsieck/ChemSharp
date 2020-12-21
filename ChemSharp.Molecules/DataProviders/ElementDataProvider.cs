@@ -23,7 +23,7 @@ namespace ChemSharp.Molecules.DataProviders
             ReadColorData();
             ReadApiData();
         }
-        
+
         /// <summary>
         /// contains color data
         /// </summary>

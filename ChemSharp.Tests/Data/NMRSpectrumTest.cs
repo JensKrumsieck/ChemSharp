@@ -11,8 +11,8 @@ namespace ChemSharp.Tests.Data
         public void TestNMRCreationRaw()
         {
             const string path = "files/nmr/fid";
-            var prov = new BrukerNMRProvider(path,true);
-            var nmr = new Spectrum(){DataProvider = prov};
+            var prov = new BrukerNMRProvider(path, true);
+            var nmr = new Spectrum() { DataProvider = prov };
             //32768 Data points, taken from procs file
             Assert.AreEqual(32768, nmr.XYData.Count);
         }

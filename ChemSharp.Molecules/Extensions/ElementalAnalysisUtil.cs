@@ -32,7 +32,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="theory"></param>
         /// <param name="exp"></param>
         /// <returns></returns>
-        public static Dictionary<string, double> Deviation(Dictionary<string, double> theory, Dictionary<string, double> exp) => 
+        public static Dictionary<string, double> Deviation(Dictionary<string, double> theory, Dictionary<string, double> exp) =>
             theory.Where(item => exp.ContainsKey(item.Key) && exp[item.Key] != 0d)
                 .ToDictionary(item => item.Key,
                 item => System.Math.Round(System.Math.Abs(item.Value - exp[item.Key]), 3));

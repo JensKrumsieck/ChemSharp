@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.Extensions
@@ -94,12 +93,8 @@ namespace ChemSharp.Molecules.Extensions
         /// </summary>
         /// <param name="composition"></param>
         /// <returns></returns>
-        public static string Parse(this Dictionary<string, double> composition)
-        {
-            var sb = new StringBuilder();
-            foreach (var (key, value) in composition) sb.Append(key + value);
-            return sb.ToString();
-        }
+        public static string Parse(this Dictionary<string, double> composition) =>
+            string.Join("", (composition.Select(s => s.Key + s.Value)));
 
         /// <summary>
         /// multiplies each element with factor

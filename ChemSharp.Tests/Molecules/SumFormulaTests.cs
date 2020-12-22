@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ChemSharp.Molecules.DataProviders;
+﻿using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -63,7 +63,7 @@ namespace ChemSharp.Tests.Molecules
             };
             const double delta = 2.258;
             var deviation = ElementalAnalysisUtil.Deviation(chn, experimental);
-            Assert.AreEqual(delta,deviation["C"]);
+            Assert.AreEqual(delta, deviation["C"]);
             Assert.AreEqual(delta, deviation["H"]);
             var err = ElementalAnalysisUtil.Error(chn, experimental);
             Assert.AreEqual(16.2595931744669, err, .05);

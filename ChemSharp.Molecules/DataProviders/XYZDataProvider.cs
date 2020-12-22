@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ChemSharp.Files;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Numerics;
-using System.Text;
 using System.Text.RegularExpressions;
-using ChemSharp.Files;
 
 namespace ChemSharp.Molecules.DataProviders
 {
@@ -33,21 +32,18 @@ namespace ChemSharp.Molecules.DataProviders
         /// Read Atom data from CIF File
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Atom> ReadAtoms(string[] data)
-        {
-            foreach (var line in data)
+        private static IEnumerable<Atom> ReadAtoms(string[] data) =>
+            from line in data
+            select Regex.Match(line, Pattern)
+            into atomMatch
+            where atomMatch.Groups.Count == 5
+            select new Atom(atomMatch.Groups[1].Value)
             {
-                var atomMatch = Regex.Match(line, Pattern);
-                if (atomMatch.Groups.Count == 5)
-                    yield return new Atom(atomMatch.Groups[1].Value)
-                    {
-                        Location = new Vector3(
-                            float.Parse(atomMatch.Groups[2].Value, CultureInfo.InvariantCulture),
-                            float.Parse(atomMatch.Groups[3].Value, CultureInfo.InvariantCulture),
-                            float.Parse(atomMatch.Groups[4].Value, CultureInfo.InvariantCulture)
-                        )
-                    };
-            }
-        }
+                Location = new Vector3(
+                    float.Parse(atomMatch.Groups[2].Value, CultureInfo.InvariantCulture),
+                    float.Parse(atomMatch.Groups[3].Value, CultureInfo.InvariantCulture),
+                    float.Parse(atomMatch.Groups[4].Value, CultureInfo.InvariantCulture)
+                )
+            };
     }
 }

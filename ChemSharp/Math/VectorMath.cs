@@ -31,7 +31,7 @@ namespace ChemSharp.Math
             return new Vector3(sumX, sumY, sumZ);
         }
 
-        // <summary>
+        /// <summary>
         /// Wrapper for dot product
         /// </summary>
         /// <param name="left"></param>

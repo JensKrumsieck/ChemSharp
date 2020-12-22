@@ -27,7 +27,7 @@ namespace ChemSharp.Files
             ext = string.IsNullOrEmpty(ext) ? Path.GetFileName(filename) : ext.Remove(0, 1);
             if (!RecipeDictionary.ContainsKey(ext)) throw new NotSupportedException("This file type is not supported, did you add your recipe?");
             var file = RecipeDictionary[ext.ToLower()](filename);
-            if (file == null) throw new FileLoadException("Could not load file");
+            if (file is null) throw new FileLoadException("Could not load file");
             //read any data
             file.ReadFile();
 

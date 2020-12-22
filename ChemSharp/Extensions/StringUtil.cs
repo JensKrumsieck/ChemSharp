@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 
 namespace ChemSharp.Extensions
 {
@@ -32,6 +33,13 @@ namespace ChemSharp.Extensions
         /// <param name="input"></param>
         /// <returns></returns>
         public static double ToDouble(this string input) => Convert.ToDouble(input, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Remove brackets from number string
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string  RemoveUncertainty(this string input) => input.Split('(').First();
 
     }
 }

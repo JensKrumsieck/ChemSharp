@@ -64,7 +64,7 @@ namespace ChemSharp.Files
         /// <exception cref="NotSupportedException"></exception>
         public void ReadFile()
         {
-            if (Bytes == null) ReadBytes();
+            if (Bytes is null) ReadBytes();
             if (Bytes.Length == 0) throw new FileLoadException($@"Could not load File {Path}");
 
             if (typeof(T).IsNumeric())

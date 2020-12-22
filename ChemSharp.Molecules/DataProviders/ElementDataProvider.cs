@@ -11,7 +11,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <summary>
         /// Where the colorData is located
         /// </summary>
-        public static string ColorSource = "ChemSharp.Resources.colorData.txt";
+        private const string ColorSource = "ChemSharp.Resources.colorData.txt";
 
         /// <summary>
         /// Where the element data is located

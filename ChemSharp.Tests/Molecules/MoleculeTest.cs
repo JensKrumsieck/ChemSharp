@@ -19,7 +19,7 @@ namespace ChemSharp.Tests.Molecules
             Assert.IsNull(mol.Bonds);
             mol.BondDataProvider = provider;
             Assert.AreEqual(89, mol.Bonds?.Count);
-            Assert.AreEqual(780.51, mol.Atoms.MolecularWeight(), 0.035); 
+            Assert.AreEqual(780.51, mol.Atoms.MolecularWeight(), 0.035);
         }
 
         [TestMethod]

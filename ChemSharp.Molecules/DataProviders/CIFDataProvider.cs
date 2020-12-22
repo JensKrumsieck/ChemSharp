@@ -3,7 +3,6 @@ using ChemSharp.Files;
 using ChemSharp.Math;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 
@@ -23,19 +22,16 @@ namespace ChemSharp.Molecules.DataProviders
         public CIFDataProvider(string path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
-            var wt = new Stopwatch();
-            wt.Start();
             var loops = Loops(file.Content);
-            var cellLengths = CellParameters(file.Content, "cell_length").ToArray();
-            var cellAngles = CellParameters(file.Content, "cell_angle").ToArray();
+            var infoLoop = Array.Find(loops, s => s.Contains("_cell_length_a"));
             var moleculeLoop = Array.Find(loops, s => s.Contains("_atom_site_label")).DefaultSplit();
             var bondLoop = Array.Find(loops, s => s.Contains("_geom_bond")).DefaultSplit();
+            var cellLengths = CellParameters(infoLoop.DefaultSplit(), "cell_length").ToArray();
+            var cellAngles = CellParameters(infoLoop.DefaultSplit(), "cell_angle").ToArray();
             var conversionMatrix = FractionalCoordinates.ConversionMatrix(cellLengths[0], cellLengths[1],
                 cellLengths[2], cellAngles[0], cellAngles[1], cellAngles[2]);
-
             Atoms = ReadAtoms(moleculeLoop, conversionMatrix);
             Bonds = ReadBonds(bondLoop);
-
         }
 
 
@@ -52,7 +48,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// Create loop data
         /// </summary>
         /// <returns></returns>
-        private string[] Loops(string[] data)
+        private static string[] Loops(string[] data)
         {
             var text = string.Join('\n', data);
             return text.Split(new[] { "loop_" }, StringSplitOptions.None);
@@ -64,7 +60,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <param name="moleculeLoop"></param>
         /// <param name="conversionMatrix"></param>
         /// <returns></returns>
-        private IEnumerable<Atom> ReadAtoms(string[] moleculeLoop, Vector3[] conversionMatrix)
+        private static IEnumerable<Atom> ReadAtoms(string[] moleculeLoop, Vector3[] conversionMatrix)
         {
             var headers = moleculeLoop.Where(s => s.Trim().StartsWith("_")).ToArray();
             var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
@@ -90,7 +86,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// </summary>
         /// <param name="bondLoop"></param>
         /// <returns></returns>
-        private IEnumerable<Bond> ReadBonds(string[] bondLoop)
+        private IEnumerable<Bond> ReadBonds(IEnumerable<string> bondLoop)
         {
             var tmp = Atoms.ToDictionary(atom => atom.Title);
             foreach (var line in bondLoop.Where(s => !s.StartsWith("_")))

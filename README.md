@@ -8,10 +8,10 @@
 * [x] Open and process Spectroscopy related files (see Supported Filetypes)
 * [x] Open and process Molecular files (see Supported Filetypes)
 * [x] Sum formula operations and elemental analysis calculation
-* [ ] Unit Conversion for 
-	* [ ] Energy
-	* [ ] Magnetic Units
-	* [ ] Mass
+* [x] Unit Conversion for 
+	* [x] Energy
+	* [x] Magnetic Units
+	* [x] Mass
 * [x] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes

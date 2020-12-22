@@ -3,6 +3,7 @@ using ChemSharp.Molecules.Math;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
@@ -113,6 +114,30 @@ namespace ChemSharp.Molecules
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Recalculates Bonds based on Distances
+        /// WARNING! Discards every existing Bond information
+        /// Add a IBondDataProvider Instance to use Bonds read from file
+        /// WARNING! Any IBondDataProvider will be discarded by <see cref="RecalculateBonds"/>
+        /// </summary>
+        public void RecalculateBonds()
+        {
+            //discard data provider and reset bonds
+            _bondDataProvider = null;
+            Bonds = new ObservableCollection<Bond>();
+            var matched = new HashSet<(int, int)>();
+            for (var i = 0; i < Atoms.Count(); i++)
+            {
+                for (var j = i + 1; j < Atoms.Count(); j++)
+                {
+                    if (i == j || !Atoms.ElementAt(i).InternalBondTo(Atoms.ElementAt(j)) ||
+                        (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
+                    matched.Add((i, j));
+                    Bonds.Add(new Bond(Atoms.ElementAt(i), Atoms.ElementAt(j)));
+                }
+            }
         }
     }
 }

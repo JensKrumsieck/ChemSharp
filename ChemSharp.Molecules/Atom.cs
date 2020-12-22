@@ -9,6 +9,23 @@ namespace ChemSharp.Molecules
     public class Atom : Element, IEquatable<Atom>
     {
         /// <summary>
+        /// See BondTo Method
+        /// </summary>
+        private const float Delta = 5f;
+
+        /// <summary>
+        /// Tests if Atom is Bond to another based on distance!
+        /// allow uncertainity of 5 pm overall
+        /// </summary>
+        /// <param name="test"></param>
+        /// <returns></returns>
+        internal bool InternalBondTo(Atom test)
+        {
+            if (CovalentRadius is null || test.CovalentRadius is null) return false;
+            return DistanceTo(test) < (CovalentRadius + (float)test.CovalentRadius + Delta) / 100f;
+        }
+
+        /// <summary>
         /// Location in 3D Space
         /// </summary>
         public Vector3 Location { get; set; }

@@ -41,5 +41,13 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static string  RemoveUncertainty(this string input) => input.Split('(').First();
 
+        /// <summary>
+        /// Splits and Whitespace
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string[] WhiteSpaceSplit(this string input) => input
+            .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ChemSharp.Molecules
 {
-    public struct Bond
+    public class Bond
     {
         public Atom Atom1;
         public Atom Atom2;

@@ -3,6 +3,7 @@ using ChemSharp.Files;
 using ChemSharp.Math;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 
@@ -22,6 +23,8 @@ namespace ChemSharp.Molecules.DataProviders
         public CIFDataProvider(string path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
+            var wt = new Stopwatch();
+            wt.Start();
             var loops = Loops(file.Content);
             var cellLengths = CellParameters(file.Content, "cell_length").ToArray();
             var cellAngles = CellParameters(file.Content, "cell_angle").ToArray();
@@ -29,8 +32,10 @@ namespace ChemSharp.Molecules.DataProviders
             var bondLoop = Array.Find(loops, s => s.Contains("_geom_bond")).DefaultSplit();
             var conversionMatrix = FractionalCoordinates.ConversionMatrix(cellLengths[0], cellLengths[1],
                 cellLengths[2], cellAngles[0], cellAngles[1], cellAngles[2]);
+
             Atoms = ReadAtoms(moleculeLoop, conversionMatrix);
             Bonds = ReadBonds(bondLoop);
+
         }
 
 
@@ -80,6 +85,11 @@ namespace ChemSharp.Molecules.DataProviders
             }
         }
 
+        /// <summary>
+        /// Reads Bonds, read Atoms first!
+        /// </summary>
+        /// <param name="bondLoop"></param>
+        /// <returns></returns>
         private IEnumerable<Bond> ReadBonds(string[] bondLoop)
         {
             var tmp = Atoms.ToDictionary(atom => atom.Title);
@@ -102,7 +112,12 @@ namespace ChemSharp.Molecules.DataProviders
         /// <param name="input"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        private static IEnumerable<float> CellParameters(string[] input, string param) => input.Where(s => s.StartsWith($"_{param}"))
-            .Select(s => s.Split(' ').Last().RemoveUncertainty().ToSingle());
+        private static IEnumerable<float> CellParameters(IEnumerable<string> input, string param) => input
+            .Where(s => s.StartsWith($"_{param}"))
+            .Select(s =>
+                s.Split(' ')
+                    .Last().
+                    RemoveUncertainty()
+                    .ToSingle());
     }
 }

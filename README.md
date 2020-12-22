@@ -6,7 +6,7 @@
 
 ### Features
 * [x] Open and process Spectroscopy related files (see Supported Filetypes)
-* [ ] Open and process Molecular files (see Supported Filetypes)
+* [x] Open and process Molecular files (see Supported Filetypes)
 * [ ] Sum formula operations and elemental analysis calculation
 * [ ] Unit Conversion for 
 	* [ ] Energy
@@ -15,10 +15,10 @@
 * [x] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes
-* [ ] Molecule
+* [x] Molecule
 	* [ ] XYZ
-	* [ ] CIF (crystallographic information file)
-	* [ ] MOL2 (TRIPOS Mol2)
+	* [x] CIF (crystallographic information file)
+	* [x] MOL2 (TRIPOS Mol2)
 
 * [x] Spectroscopy
 	* [x] Varian/Agilient DSW

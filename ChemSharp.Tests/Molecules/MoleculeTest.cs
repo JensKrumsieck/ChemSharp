@@ -30,5 +30,27 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(79, mol.Atoms.Count);
             Assert.AreEqual(89, mol.Bonds.Count);
         }
+
+        [TestMethod]
+        public void TestMol2()
+        {
+            const string path = "files/benzene.mol2";
+            var provider = new Mol2DataProvider(path);
+            var mol = new Molecule(provider.Atoms, provider.Bonds);
+            Assert.AreEqual(12, mol.Atoms.Count);
+            Assert.AreEqual(12, mol.Bonds.Count);
+        }
+
+        [TestMethod]
+        public void TestMol2_2()
+        {
+            const string path = "files/benzene.mol2";
+            var provider = new Mol2DataProvider(path);
+            var mol = new Molecule() { AtomDataProvider = provider }; ;
+            Assert.AreEqual(12, mol.Atoms.Count); 
+            Assert.IsNull(mol.Bonds);
+            mol.BondDataProvider = provider;;
+            Assert.AreEqual(12, mol.Bonds?.Count);
+        }
     }
 }

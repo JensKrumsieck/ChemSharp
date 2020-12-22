@@ -1,14 +1,14 @@
-﻿using ChemSharp.Molecules.Math;
+﻿using ChemSharp.Molecules.DataProviders;
+using ChemSharp.Molecules.Math;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules
 {
-    public class Molecule: INotifyPropertyChanged
+    public class Molecule : INotifyPropertyChanged
     {
         /// <summary>
         /// Title for Molecule
@@ -41,7 +41,7 @@ namespace ChemSharp.Molecules
         public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null) : this()
         {
             Atoms = new ObservableCollection<Atom>(atoms);
-            if(bonds != null) Bonds = new ObservableCollection<Bond>(bonds);
+            if (bonds != null) Bonds = new ObservableCollection<Bond>(bonds);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace ChemSharp.Molecules
             Atoms = atoms;
             if (bonds != null) Bonds = bonds;
         }
-        
+
 
         /// <summary>
         /// When DataProvider is changed, add data

@@ -39,7 +39,7 @@ namespace ChemSharp.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string  RemoveUncertainty(this string input) => input.Split('(').First();
+        public static string RemoveUncertainty(this string input) => input.Split('(').First();
 
         /// <summary>
         /// Splits and Whitespace

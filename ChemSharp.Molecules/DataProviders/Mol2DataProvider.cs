@@ -40,7 +40,6 @@ namespace ChemSharp.Molecules.DataProviders
         /// <returns></returns>
         private IEnumerable<T> Read<T>(string[] block) where T : class
         {
-            //lol what are you trying to do?
             if ((typeof(T)) != typeof(Atom) && (typeof(T)) != typeof(Bond)) yield break;
             foreach (var line in block)
             {
@@ -49,14 +48,16 @@ namespace ChemSharp.Molecules.DataProviders
                 if (typeof(T) == typeof(Atom))
                 {
                     var id = cols[1];
-                    var x = cols[2].ToSingle();
-                    var y = cols[3].ToSingle();
-                    var z = cols[4].ToSingle();
+                    var loc = new Vector3(
+                        cols[2].ToSingle(),
+                        cols[3].ToSingle(),
+                        cols[4].ToSingle()
+                        );
                     var sym = Regex.Match(id, @"[A-Za-z]*").Value;
                     yield return new Atom(sym)
                     {
                         Title = id,
-                        Location = new Vector3(x, y, z)
+                        Location = loc
                     } as T;
                 }
                 else

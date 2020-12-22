@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ChemSharp.Extensions;
 
 namespace ChemSharp.Molecules.Extensions
 {
@@ -40,7 +41,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <summary>
         /// calculates error between two analysis
         /// </summary>
-        /// <param name="theo"></param>
+        /// <param name="theory"></param>
         /// <param name="exp"></param>
         /// <returns></returns>
         public static double Error(Dictionary<string, double> theory, Dictionary<string, double> exp)
@@ -52,6 +53,50 @@ namespace ChemSharp.Molecules.Extensions
                 err.Add(System.Math.Pow(exp[key] - theory[key], 2));
             }
             return System.Math.Sqrt(err.Sum()) * err.Max();
+        }
+
+        /// <summary>
+        /// gets best composition
+        /// </summary>
+        /// <param name="formula"></param>
+        /// <param name="exp"></param>
+        /// <param name="impurities"></param>
+        /// <returns></returns>
+        public static double[] Solve(string formula, Dictionary<string, double> exp, List<Impurity> impurities)
+        {
+            var calc = new HashSet<Result>();
+            //get all combinations
+            var comp = new HashSet<List<double>>();
+            foreach (var range in from imp in impurities
+                let count = (int) ((imp.Upper - imp.Lower) / imp.Step) + 1 //add 0 to range
+                select CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count))
+            {
+                comp.Add(range.ToList());
+            }
+
+            foreach (var vec in comp.Cartesian())
+            {
+                //build testformula
+                var vecArray = vec.ToArray();
+                var testFormula = formula.SumFormula(impurities, vecArray);
+                calc.Add(new Result(testFormula, Error(testFormula.ElementalAnalysis(),exp), vecArray));
+            }
+            return calc.OrderBy(s => s.Err).First().Vec;
+        }
+
+
+        /// <summary>
+        /// Build Sum Formula with impurities
+        /// </summary>
+        /// <param name="formula"></param>
+        /// <param name="impurities"></param>
+        /// <param name="vec"></param>
+        /// <returns></returns>
+        public static string SumFormula(this string formula, List<Impurity> impurities, double[] vec)
+        {
+            var testFormula = formula;
+            for (var i = 0; i < vec.Count(); i++) testFormula += impurities[i].Formula.CountElements().Factor(vec.ElementAt(i)).Parse();
+            return testFormula;
         }
     }
 }

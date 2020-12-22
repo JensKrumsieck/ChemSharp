@@ -102,7 +102,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="dict"></param>
         /// <param name="multiplier">The factor</param>
         /// <returns></returns>
-        private static Dictionary<string, double> Factor(this Dictionary<string, double> dict, double multiplier)
+        internal static Dictionary<string, double> Factor(this Dictionary<string, double> dict, double multiplier)
         {
             for (var j = 0; j < dict.Count; j++) dict[dict.ElementAt(j).Key] = dict.ElementAt(j).Value * multiplier;
             return dict;
@@ -113,7 +113,7 @@ namespace ChemSharp.Molecules.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private static Dictionary<string, double> Merge(this IEnumerable<Dictionary<string, double>> input)
+        internal static Dictionary<string, double> Merge(this IEnumerable<Dictionary<string, double>> input)
         {
             var dic = new Dictionary<string, double>();
             foreach (var elements in input)

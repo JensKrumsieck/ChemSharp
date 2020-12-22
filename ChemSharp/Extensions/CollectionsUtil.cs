@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ChemSharp.Extensions
 {
@@ -28,5 +29,22 @@ namespace ChemSharp.Extensions
         /// <returns></returns>
         public static TValue TryAndGet<TKey, TValue>(this Dictionary<TKey, TValue> input, TKey key) =>
             input.ContainsKey(key) ? input[key] : default;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sequences"></param>
+        /// <returns></returns>
+        public static IEnumerable<IEnumerable<T>> Cartesian<T>(this IEnumerable<IEnumerable<T>> sequences)
+        {
+            IEnumerable<IEnumerable<T>> emptyProduct = new[] { Enumerable.Empty<T>() };
+            return sequences.Aggregate(
+                emptyProduct,
+                (accumulator, sequence) =>
+                    from accseq in accumulator
+                    from item in sequence
+                    select accseq.Concat(new[] { item }));
+        }
     }
 }

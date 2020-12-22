@@ -2,6 +2,8 @@
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -67,6 +69,27 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(delta, deviation["H"]);
             var err = ElementalAnalysisUtil.Error(chn, experimental);
             Assert.AreEqual(16.2595931744669, err, .05);
+        }
+
+        [TestMethod]
+        public void TestSimulation()
+        {
+            const string file = "files/cif.cif";
+            var prov = new CIFDataProvider(file);
+            var formula = prov.Atoms.SumFormula();
+            var chn = formula.ElementalAnalysis();
+            var experimental = new Dictionary<string, double>
+            {
+                {"C", 60.55},
+                {"H", 2.7},
+                {"N", 7.7}
+            };
+            var deviation = ElementalAnalysisUtil.Deviation(chn, experimental);
+            Assert.AreEqual(1.00, deviation["C"]);
+            var dcm = new Impurity("CH2Cl2", 0, 1, 0.1);
+            var best = ElementalAnalysisUtil.Solve(formula, experimental, new List<Impurity> {dcm});
+            //should be 0.2
+            Assert.AreEqual(.2, best[0]);
         }
     }
 }

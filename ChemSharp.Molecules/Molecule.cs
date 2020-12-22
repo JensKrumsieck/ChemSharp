@@ -21,6 +21,11 @@ namespace ChemSharp.Molecules
         public ObservableCollection<Atom> Atoms { get; set; }
 
         /// <summary>
+        /// The Molecules Bonds
+        /// </summary>
+        public ObservableCollection<Bond> Bonds { get; set; }
+
+        /// <summary>
         /// creates Molecule without Atoms to add later
         /// </summary>
         public Molecule()
@@ -32,12 +37,24 @@ namespace ChemSharp.Molecules
         /// creates Molecule with IEnumerable of Atoms
         /// </summary>
         /// <param name="atoms"></param>
-        public Molecule(IEnumerable<Atom> atoms) :this() => Atoms = new ObservableCollection<Atom>(atoms);
+        /// <param name="bonds"></param>
+        public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null) : this()
+        {
+            Atoms = new ObservableCollection<Atom>(atoms);
+            if(bonds != null) Bonds = new ObservableCollection<Bond>(bonds);
+        }
+
         /// <summary>
         /// creates Molecule with ObservableCollection of Atoms
         /// </summary>
         /// <param name="atoms"></param>
-        public Molecule(ObservableCollection<Atom> atoms) : this() => Atoms = atoms;
+        /// <param name="bonds"></param>
+        public Molecule(ObservableCollection<Atom> atoms, ObservableCollection<Bond> bonds = null) : this()
+        {
+            Atoms = atoms;
+            if (bonds != null) Bonds = bonds;
+        }
+        
 
         /// <summary>
         /// When DataProvider is changed, add data
@@ -46,13 +63,20 @@ namespace ChemSharp.Molecules
         /// <param name="e"></param>
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(AtomDataProvider)) return;
-            Atoms = new ObservableCollection<Atom>(_atomDataProvider.Atoms);
+            switch (e.PropertyName)
+            {
+                case nameof(AtomDataProvider):
+                    Atoms = new ObservableCollection<Atom>(_atomDataProvider.Atoms);
+                    break;
+                case nameof(BondDataProvider):
+                    Bonds = new ObservableCollection<Bond>(_bondDataProvider.Bonds);
+                    break;
+            }
         }
 
         private IAtomDataProvider _atomDataProvider;
         ///<summary>
-        /// <inheritdoc />
+        /// Provides AtomData
         /// </summary>
         public IAtomDataProvider AtomDataProvider
         {
@@ -60,6 +84,20 @@ namespace ChemSharp.Molecules
             set
             {
                 _atomDataProvider = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private IBondDataProvider _bondDataProvider;
+        ///<summary>
+        /// Provides BondData
+        /// </summary>
+        public IBondDataProvider BondDataProvider
+        {
+            get => _bondDataProvider;
+            set
+            {
+                _bondDataProvider = value;
                 OnPropertyChanged();
             }
         }

@@ -1,4 +1,5 @@
-﻿using ChemSharp.Molecules.DataProviders;
+﻿using System.Collections.Generic;
+using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,7 +30,7 @@ namespace ChemSharp.Tests.Molecules
         }
 
         [TestMethod]
-        public void EAAbbreaviationTest()
+        public void EAAbbreviationTest()
         {
             const string formula = "EtOH";
             var parsed = formula.Parse();
@@ -38,6 +39,34 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(52.142, chn["C"]);
             Assert.AreEqual(13.127, chn["H"]);
             Assert.AreEqual(34.731, chn["O"]);
+        }
+
+        [TestMethod]
+        public void EAAbbreviationTest2()
+        {
+            const string formula = "Fe(acac)3";
+            var parsed = formula.Parse();
+            Assert.AreEqual("Fe1C15H21O6", parsed);
+        }
+
+        [TestMethod]
+        public void DeviationTest()
+        {
+            const string formula = "PhH";
+            var parsed = formula.Parse();
+            Assert.AreEqual("C6H6", parsed);
+            var chn = formula.ElementalAnalysis();
+            var experimental = new Dictionary<string, double>
+            {
+                {"C", 90},
+                {"H", 10}
+            };
+            const double delta = 2.258;
+            var deviation = ElementalAnalysisUtil.Deviation(chn, experimental);
+            Assert.AreEqual(delta,deviation["C"]);
+            Assert.AreEqual(delta, deviation["H"]);
+            var err = ElementalAnalysisUtil.Error(chn, experimental);
+            Assert.AreEqual(16.2595931744669, err, .05);
         }
     }
 }

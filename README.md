@@ -7,7 +7,7 @@
 ### Features
 * [x] Open and process Spectroscopy related files (see Supported Filetypes)
 * [x] Open and process Molecular files (see Supported Filetypes)
-* [ ] Sum formula operations and elemental analysis calculation
+* [x] Sum formula operations and elemental analysis calculation
 * [ ] Unit Conversion for 
 	* [ ] Energy
 	* [ ] Magnetic Units
@@ -16,7 +16,7 @@
 
 ### Supported Filetypes
 * [x] Molecule
-	* [ ] XYZ
+	* [x] XYZ
 	* [x] CIF (crystallographic information file)
 	* [x] MOL2 (TRIPOS Mol2)
 

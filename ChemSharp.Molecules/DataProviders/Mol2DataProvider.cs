@@ -38,7 +38,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <typeparam name="T">Atom or Bond!</typeparam>
         /// <param name="block"></param>
         /// <returns></returns>
-        private IEnumerable<T> Read<T>(string[] block) where T : class
+        private IEnumerable<T> Read<T>(IEnumerable<string> block) where T : class
         {
             if ((typeof(T)) != typeof(Atom) && (typeof(T)) != typeof(Bond)) yield break;
             foreach (var line in block)
@@ -55,7 +55,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// </summary>
         /// <param name="cols"></param>
         /// <returns></returns>
-        private Atom ReadAtom(string[] cols)
+        private Atom ReadAtom(IReadOnlyList<string> cols)
         {
             var id = cols[1];
             var loc = new Vector3(
@@ -76,7 +76,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// </summary>
         /// <param name="cols"></param>
         /// <returns></returns>
-        private Bond ReadBond(string[] cols)
+        private Bond ReadBond(IReadOnlyList<string> cols)
         {
             //subtract 1 as mol2 starts counting at 1
             var a1 = cols[1].ToInt() - 1;

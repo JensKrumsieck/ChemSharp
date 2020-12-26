@@ -3,7 +3,7 @@
     /// <summary>
     /// struct for impurity handling
     /// </summary>
-    public struct Impurity
+    public class Impurity
     {
         public string Formula;
         public double Lower;
@@ -22,7 +22,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public struct Result
+    public class Result
     {
         public string Formula;
         public double Err;

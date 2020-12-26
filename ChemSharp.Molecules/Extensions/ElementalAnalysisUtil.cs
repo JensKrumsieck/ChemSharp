@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ChemSharp.Extensions;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
-using ChemSharp.Extensions;
+using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules.Extensions
 {
@@ -46,12 +48,13 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static double Error(Dictionary<string, double> theory, Dictionary<string, double> exp)
         {
-            var err = new HashSet<double>();
-            foreach (var (key, _) in theory)
+            var err = new ConcurrentBag<double>();
+
+            Parallel.ForEach(theory, item =>
             {
-                if (!exp.ContainsKey(key)) continue;
-                err.Add(System.Math.Pow(exp[key] - theory[key], 2));
-            }
+                var (key, _) = item;
+                if (exp.ContainsKey(key)) err.Add(System.Math.Pow(exp[key] - theory[key], 2));
+            });
             return System.Math.Sqrt(err.Sum()) * err.Max();
         }
 
@@ -62,28 +65,27 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="exp"></param>
         /// <param name="impurities"></param>
         /// <returns></returns>
-        public static double[] Solve(string formula, Dictionary<string, double> exp, List<Impurity> impurities)
+        public static double[] Solve(string formula, Dictionary<string, double> exp, IEnumerable<Impurity> impurities)
         {
-            var calc = new HashSet<Result>();
-            //get all combinations
-            var comp = new HashSet<List<double>>();
-            foreach (var range in from imp in impurities
-                let count = (int) ((imp.Upper - imp.Lower) / imp.Step) + 1 //add 0 to range
-                select CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count))
-            {
-                comp.Add(range.ToList());
-            }
+            var calc = new ConcurrentBag<Result>();
 
-            foreach (var vec in comp.Cartesian())
+            //get all combinations
+            var comp = new ConcurrentBag<HashSet<double>>();
+            var imps = impurities.ToArray();
+            Parallel.ForEach(imps, imp =>
             {
-                //build testformula
-                var vecArray = vec.ToArray();
-                var testFormula = formula.SumFormula(impurities, vecArray);
-                calc.Add(new Result(testFormula, Error(testFormula.ElementalAnalysis(),exp), vecArray));
-            }
+                var count = (int)((imp.Upper - imp.Lower) / imp.Step) + 1; //add 0 to range
+                comp.Add(CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count).ToHashSet());
+            });
+            Parallel.ForEach(comp.Cartesian(), item =>
+            {
+                var vecArray = item.ToArray();
+                var testFormula = formula.SumFormula(imps, vecArray);
+                calc.Add(new Result(testFormula, Error(testFormula.ElementalAnalysis(), exp), vecArray));
+            });
+
             return calc.OrderBy(s => s.Err).First().Vec;
         }
-
 
         /// <summary>
         /// Build Sum Formula with impurities
@@ -92,10 +94,12 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="impurities"></param>
         /// <param name="vec"></param>
         /// <returns></returns>
-        public static string SumFormula(this string formula, List<Impurity> impurities, double[] vec)
+        public static string SumFormula(this string formula, IEnumerable<Impurity> impurities, IEnumerable<double> vec)
         {
             var testFormula = formula;
-            for (var i = 0; i < vec.Count(); i++) testFormula += impurities[i].Formula.CountElements().Factor(vec.ElementAt(i)).Parse();
+            var imps = impurities.ToArray();
+            var vecArr = vec.ToArray();
+            for (var i = 0; i < vecArr.Count(); i++) testFormula += imps[i].Formula.CountElements().Factor(vecArr[i]).Parse();
             return testFormula;
         }
     }

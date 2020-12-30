@@ -25,8 +25,9 @@ namespace ChemSharp.Files
             var ext = Path.GetExtension(filename);
             //fallback for nmr files
             ext = string.IsNullOrEmpty(ext) ? Path.GetFileName(filename) : ext.Remove(0, 1);
+            ext = ext.ToLower();
             if (!RecipeDictionary.ContainsKey(ext)) throw new NotSupportedException("This file type is not supported, did you add your recipe?");
-            var file = RecipeDictionary[ext.ToLower()](filename);
+            var file = RecipeDictionary[ext](filename);
             if (file is null) throw new FileLoadException("Could not load file");
             //read any data
             file.ReadFile();

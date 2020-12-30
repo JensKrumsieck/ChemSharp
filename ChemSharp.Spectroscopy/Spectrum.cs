@@ -1,5 +1,6 @@
 ﻿using ChemSharp.DataProviders;
 using ChemSharp.Extensions;
+using ChemSharp.Spectroscopy.Extension;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -104,6 +105,11 @@ namespace ChemSharp.Spectroscopy
                 throw new Exception("There is no Parameter Provider added");
             }
         }
+
+        /// <summary>
+        /// <inheritdoc cref="ISpectrum.Title"/>
+        /// </summary>
+        public DateTime CreationDate => this.CreationDate();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

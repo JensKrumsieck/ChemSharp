@@ -1,6 +1,8 @@
-﻿using ChemSharp.Extensions;
+﻿using System;
+using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy;
 using ChemSharp.Spectroscopy.DataProviders;
+using ChemSharp.Spectroscopy.Extension;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ChemSharp.Tests.Data
@@ -8,16 +10,30 @@ namespace ChemSharp.Tests.Data
     [TestClass]
     public class EPRSpectrumTest
     {
-        [TestMethod]
-        public void TestEPRCreation()
+        private Spectrum epr;
+        [TestInitialize]
+        public void Init()
         {
             const string par = "files/epr.par";
             var prov = new BrukerEPRProvider(par);
-            var epr = new Spectrum() { DataProvider = prov };
+            epr = new Spectrum() { DataProvider = prov };
+        }
+
+        [TestMethod]
+        public void TestEPRCreation()
+        {
+            
             Assert.AreEqual(2048, epr.XYData.Count);
             Assert.AreEqual(2048, epr.Derivative.Count);
             Assert.AreEqual(2048, epr.Integral.Count);
             Assert.AreEqual(2048, epr["RES"].ToInt());
+        }
+
+        [TestMethod]
+        public void TestProperties()
+        {
+            Assert.AreEqual("G", epr.Unit());
+            Assert.AreEqual(DateTime.Parse("04.08.2017"), epr.CreationDate());
         }
     }
 }

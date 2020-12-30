@@ -52,6 +52,7 @@ namespace ChemSharp.Spectroscopy
         {
             if (e.PropertyName != nameof(DataProvider)) return;
             XYData = new ObservableCollection<DataPoint>(_dataProvider.XYData);
+            Title = _dataProvider.Path;
         }
 
         /// <summary>

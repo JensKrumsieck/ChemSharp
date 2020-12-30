@@ -3,12 +3,11 @@ using ChemSharp.Extensions;
 using ChemSharp.Files;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace ChemSharp.Spectroscopy.DataProviders
 {
-    public class BrukerEPRProvider : IDataProvider, IParameterProvider
+    public class BrukerEPRProvider : IXYDataProvider, IParameterProvider
     {
         /// <summary>
         /// import recipes
@@ -27,8 +26,9 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <param name="path"></param>
         public BrukerEPRProvider(string path)
         {
-            var filePath = Path.GetDirectoryName(path) + "/" + Path.GetFileNameWithoutExtension(path);
+            var filePath = System.IO.Path.GetDirectoryName(path) + "/" + System.IO.Path.GetFileNameWithoutExtension(path);
             XYData = HandleData(filePath).ToArray();
+            Path = path;
         }
 
         /// <summary>
@@ -54,9 +54,14 @@ namespace ChemSharp.Spectroscopy.DataProviders
         }
 
         /// <summary>
-        /// <inheritdoc cref="IDataProvider.XYData"/>
+        /// <inheritdoc cref="IXYDataProvider.XYData"/>
         /// </summary>
         public DataPoint[] XYData { get; set; }
+
+        /// <summary>
+        /// <inheritdoc cref="IXYDataProvider.Path"/>
+        /// </summary>
+        public string Path { get; set; }
 
         /// <summary>
         /// <inheritdoc/>

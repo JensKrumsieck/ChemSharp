@@ -102,7 +102,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
                     break;
                 case nameof(ExperimentalAnalysis):
                 case nameof(TheoreticalAnalysis):
-                    if(TheoreticalAnalysis != null && ExperimentalAnalysis != null) 
+                    if (TheoreticalAnalysis != null && ExperimentalAnalysis != null)
                         Deviation = ElementalAnalysisUtil.Deviation(TheoreticalAnalysis, ExperimentalAnalysis);
                     break;
             }

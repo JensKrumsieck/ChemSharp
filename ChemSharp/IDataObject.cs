@@ -7,6 +7,6 @@ namespace ChemSharp
     /// </summary>
     public interface IDataObject
     {
-        IDataProvider DataProvider { get; set; }
+        IXYDataProvider DataProvider { get; set; }
     }
 }

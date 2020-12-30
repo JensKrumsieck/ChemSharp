@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace ChemSharp.Spectroscopy.DataProviders
 {
-    public class BrukerNMRProvider : IDataProvider, IParameterProvider
+    public class BrukerNMRProvider : IXYDataProvider, IParameterProvider
     {
         static BrukerNMRProvider()
         {
@@ -33,12 +33,13 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="path"></param>
         /// <param name="forceFid">Use FID instead of processed files</param>
-        public BrukerNMRProvider(string filename, bool forceFid = false)
+        public BrukerNMRProvider(string path, bool forceFid = false)
         {
             _forceFID = forceFid;
-            SelectStrategy(filename);
+            SelectStrategy(path);
+            Path = Path;
         }
 
         /// <summary>
@@ -85,8 +86,8 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <returns></returns>
         private static Dictionary<string, string> PathBuilder(string filename)
         {
-            var path = Path.GetDirectoryName(filename);
-            if (path != null && path.Contains("pdata")) path = Path.GetFullPath(Path.Combine(path, @"..\..\"));
+            var path = System.IO.Path.GetDirectoryName(filename);
+            if (path != null && path.Contains("pdata")) path = System.IO.Path.GetFullPath(System.IO.Path.Combine(path, @"..\..\"));
             var dic = new Dictionary<string, string>
             {
                 {"fid", path + "\\fid"},
@@ -123,6 +124,11 @@ namespace ChemSharp.Spectroscopy.DataProviders
             var oneI = (PlainFile<int>)FileHandler.Handle(builder["1i"]);
             for (var i = 0; i < oneR.Content.Length; i++) yield return new Complex(oneR.Content[i], oneI.Content[i]).Magnitude;
         }
+
+        /// <summary>
+        /// <inheritdoc cref="IXYDataProvider.Path"/>
+        /// </summary>
+        public string Path { get; set; }
 
         /// <inheritdoc />
         public DataPoint[] XYData { get; set; }

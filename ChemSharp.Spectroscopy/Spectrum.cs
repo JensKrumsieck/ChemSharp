@@ -18,11 +18,11 @@ namespace ChemSharp.Spectroscopy
         }
 
 
-        private IDataProvider _dataProvider;
+        private IXYDataProvider _dataProvider;
         ///<summary>
         /// <inheritdoc />
         /// </summary>
-        public IDataProvider DataProvider
+        public IXYDataProvider DataProvider
         {
             get => _dataProvider;
             set

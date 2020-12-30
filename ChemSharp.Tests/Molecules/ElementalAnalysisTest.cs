@@ -1,10 +1,10 @@
-﻿using ChemSharp.Molecules.DataProviders;
+﻿using ChemSharp.Molecules;
+using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.ElementalAnalysis;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChemSharp.Molecules;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -61,7 +61,7 @@ namespace ChemSharp.Tests.Molecules
         public async Task TestWithClass()
         {
             const string file = "files/cif.cif";
-            var mol = new Molecule() {AtomDataProvider = new CIFDataProvider(file)};
+            var mol = new Molecule() { AtomDataProvider = new CIFDataProvider(file) };
             var ea = Analysis.FromMolecule(mol);
             ea.Impurities.Add(new Impurity("CH2Cl2", 0, 1, 0.1));
             ea.Impurities.Add(new Impurity("C6H14", 0, 1, 0.1));

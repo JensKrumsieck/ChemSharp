@@ -33,7 +33,7 @@ namespace ChemSharp.Tests.Data
         public void TestProperties()
         {
             Assert.AreEqual("G", epr.Unit());
-            Assert.AreEqual(DateTime.Parse("04.08.2017"), epr.CreationDate());
+            Assert.AreEqual(DateTime.Parse("04.08.2017 15:19"), epr.CreationDate());
         }
     }
 }

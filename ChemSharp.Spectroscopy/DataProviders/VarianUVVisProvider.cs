@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ChemSharp.Spectroscopy.DataProviders
 {
-    public class VarianUVVisProvider : IXYDataProvider
+    public class VarianUVVisProvider : AbstractXYDataProvider
     {
         /// <summary>
         /// import recipes
@@ -27,11 +27,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// ctor
         /// </summary>
         /// <param name="path"></param>
-        public VarianUVVisProvider(string path)
-        {
-            Path = path;
-            XYData = HandleData(path).ToArray();
-        }
+        public VarianUVVisProvider(string path) : base(path) => XYData = HandleData(path).ToArray();
 
         /// <summary>
         /// Handles UVVis Data
@@ -44,15 +40,5 @@ namespace ChemSharp.Spectroscopy.DataProviders
             if (file.Content.Length % 2 != 0) throw new InvalidDataException("X and Y Axis Length mismatch");
             for (var i = 0; i < file.Content.Length; i += 2) yield return new DataPoint(file.Content[i], file.Content[i + 1]);
         }
-
-        /// <summary>
-        /// <inheritdoc cref="IXYDataProvider.Path"/>
-        /// </summary>
-        public string Path { get; set; }
-
-        /// <summary>
-        /// <inheritdoc />
-        /// </summary>
-        public DataPoint[] XYData { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace ChemSharp.Spectroscopy.DataProviders
 {
-    public class BrukerNMRProvider : IXYDataProvider, IParameterProvider
+    public class BrukerNMRProvider : AbstractXYDataProvider, IParameterProvider
     {
         static BrukerNMRProvider()
         {
@@ -35,18 +35,17 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// </summary>
         /// <param name="path"></param>
         /// <param name="forceFid">Use FID instead of processed files</param>
-        public BrukerNMRProvider(string path, bool forceFid = false)
+        public BrukerNMRProvider(string path, bool forceFid = false) : base(path)
         {
             _forceFID = forceFid;
             SelectStrategy(path);
-            Path = Path;
         }
 
         /// <summary>
         /// default ctor
         /// </summary>
         /// <param name="path"></param>
-        public BrukerNMRProvider(string path) : this(path, false){ }
+        public BrukerNMRProvider(string path) : this(path, false) { }
 
         /// <summary>
         /// Selects which strategy to use for XYData Generation
@@ -130,14 +129,6 @@ namespace ChemSharp.Spectroscopy.DataProviders
             var oneI = (PlainFile<int>)FileHandler.Handle(builder["1i"]);
             for (var i = 0; i < oneR.Content.Length; i++) yield return new Complex(oneR.Content[i], oneI.Content[i]).Magnitude;
         }
-
-        /// <summary>
-        /// <inheritdoc cref="IXYDataProvider.Path"/>
-        /// </summary>
-        public string Path { get; set; }
-
-        /// <inheritdoc />
-        public DataPoint[] XYData { get; set; }
 
         /// <inheritdoc />
         public IDictionary<string, string> Storage { get; set; }

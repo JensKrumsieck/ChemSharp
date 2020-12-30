@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ChemSharp.Spectroscopy.DataProviders
 {
-    public class BrukerEPRProvider : IXYDataProvider, IParameterProvider
+    public class BrukerEPRProvider : AbstractXYDataProvider, IParameterProvider
     {
         /// <summary>
         /// import recipes
@@ -24,11 +24,10 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// ctor
         /// </summary>
         /// <param name="path"></param>
-        public BrukerEPRProvider(string path)
+        public BrukerEPRProvider(string path) : base(path)
         {
             var filePath = System.IO.Path.GetDirectoryName(path) + "/" + System.IO.Path.GetFileNameWithoutExtension(path);
             XYData = HandleData(filePath).ToArray();
-            Path = path;
         }
 
         /// <summary>
@@ -52,16 +51,6 @@ namespace ChemSharp.Spectroscopy.DataProviders
 
             for (var i = 0; i < res; i++) yield return new DataPoint(min + (d * i), Convert.ToDouble(spcFile.Content[i]));
         }
-
-        /// <summary>
-        /// <inheritdoc cref="IXYDataProvider.XYData"/>
-        /// </summary>
-        public DataPoint[] XYData { get; set; }
-
-        /// <summary>
-        /// <inheritdoc cref="IXYDataProvider.Path"/>
-        /// </summary>
-        public string Path { get; set; }
 
         /// <summary>
         /// <inheritdoc/>

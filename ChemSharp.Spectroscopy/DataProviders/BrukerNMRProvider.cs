@@ -43,6 +43,12 @@ namespace ChemSharp.Spectroscopy.DataProviders
         }
 
         /// <summary>
+        /// default ctor
+        /// </summary>
+        /// <param name="path"></param>
+        public BrukerNMRProvider(string path) : this(path, false){ }
+
+        /// <summary>
         /// Selects which strategy to use for XYData Generation
         /// </summary>
         /// <param name="path"></param>

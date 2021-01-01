@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ChemSharp
 {
-    public struct DataPoint : IEquatable<DataPoint>
+    public readonly struct DataPoint : IEquatable<DataPoint>
     {
         public static readonly DataPoint Zero = new DataPoint(0, 0);
 

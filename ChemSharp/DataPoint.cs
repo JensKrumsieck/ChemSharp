@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ChemSharp
 {
-    public struct DataPoint
+    public struct DataPoint : IEquatable<DataPoint>
     {
         public static readonly DataPoint Zero = new DataPoint(0, 0);
 
@@ -16,11 +16,11 @@ namespace ChemSharp
         /// <summary>
         /// X coordinate
         /// </summary>
-        public double X { get; set; }
+        public double X { get; }
         /// <summary>
         /// Y coordinate
         /// </summary>
-        public double Y { get; set; }
+        public double Y { get; }
 
         /// <summary>
         /// Returns a string
@@ -40,5 +40,15 @@ namespace ChemSharp
             if (xData.Length != yData.Length) throw new Exception("X and Y Length does not match");
             for (var i = 0; i < xData.Length; i++) yield return new DataPoint(xData[i], yData[i]);
         }
+
+        public bool Equals(DataPoint other) => X.Equals(other.X) && Y.Equals(other.Y);
+
+        public override bool Equals(object obj) => obj is DataPoint other && Equals(other);
+
+        public override int GetHashCode() => HashCode.Combine(X, Y);
+
+        public static bool operator ==(DataPoint left, DataPoint right) => left.Equals(right);
+
+        public static bool operator !=(DataPoint left, DataPoint right) => !left.Equals(right);
     }
 }

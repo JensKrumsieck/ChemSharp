@@ -1,8 +1,6 @@
 ﻿using ChemSharp.Extensions;
 using System;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -12,7 +10,7 @@ namespace ChemSharp.Files
     /// Note: T can be either numeric or string!
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PlainFile<T> : IFile, INotifyPropertyChanged where T : IComparable, IConvertible, IComparable<T>, IEquatable<T>
+    public class PlainFile<T> : IFile where T : IComparable, IConvertible, IComparable<T>, IEquatable<T>
     {
         private string _path;
         /// <summary>
@@ -24,7 +22,7 @@ namespace ChemSharp.Files
             set
             {
                 _path = value;
-                OnPropertyChanged();
+                ReadBytes();
             }
         }
 
@@ -38,7 +36,7 @@ namespace ChemSharp.Files
             set
             {
                 _content = value;
-                OnPropertyChanged();
+                ContentChanged();
             }
         }
 
@@ -90,13 +88,7 @@ namespace ChemSharp.Files
         /// <summary>
         /// ctor without arguments
         /// </summary>
-        public PlainFile() => PropertyChanged += PlainFile_PropertyChanged;
-
-        public void PlainFile_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName != nameof(Path)) return;
-            ReadBytes();
-        }
+        public PlainFile() { }
 
         /// <summary>
         /// Reads file as bytes, used to read in file at path change
@@ -108,15 +100,9 @@ namespace ChemSharp.Files
             Bytes = File.ReadAllBytes(Path);
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
-        /// Invokes PropertyChanged Event
+        /// Fires when content changes
         /// </summary>
-        /// <param name="propertyName"></param>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
+        protected virtual void ContentChanged() { }
     }
 }

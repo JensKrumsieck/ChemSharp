@@ -1,13 +1,13 @@
-﻿using ChemSharp.Spectroscopy.DataProviders;
+﻿using ChemSharp.Extensions;
+using ChemSharp.Spectroscopy.DataProviders;
 using System;
 using System.IO;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Spectroscopy.Extension
 {
     public static class SpectrumExtensions
     {
-        private static readonly DateTime UNIX = new DateTime(1970,1,1,0,0,0).ToLocalTime();
+        private static readonly DateTime UNIX = new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime();
 
         /// <summary>
         /// Returns default Unit as String

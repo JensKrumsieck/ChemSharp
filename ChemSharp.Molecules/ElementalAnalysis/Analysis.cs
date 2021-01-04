@@ -1,13 +1,11 @@
 ﻿using ChemSharp.Molecules.Extensions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules.ElementalAnalysis
 {
-    public class Analysis : INotifyPropertyChanged
+    public class Analysis
     {
         private string _formula;
         /// <summary>
@@ -19,7 +17,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
             set
             {
                 _formula = value;
-                OnPropertyChanged();
+                TheoreticalAnalysis = Formula.ElementalAnalysis();
             }
         }
 
@@ -34,7 +32,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
             set
             {
                 _theoreticalAnalysis = value;
-                OnPropertyChanged();
+                UpdateDeviation();
             }
         }
 
@@ -48,23 +46,13 @@ namespace ChemSharp.Molecules.ElementalAnalysis
             set
             {
                 _experimentalAnalysis = value;
-                OnPropertyChanged();
+                UpdateDeviation();
             }
         }
-
-        private Dictionary<string, double> _deviation;
         /// <summary>
         /// Contains the deviation between experimental and theoretical data
         /// </summary>
-        public Dictionary<string, double> Deviation
-        {
-            get => _deviation;
-            set
-            {
-                _deviation = value;
-                OnPropertyChanged();
-            }
-        }
+        public Dictionary<string, double> Deviation { get; set; }
 
         /// <summary>
         /// contains Impurities
@@ -74,10 +62,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
         /// <summary>
         /// ctor
         /// </summary>
-        public Analysis()
-        {
-            PropertyChanged += OnPropertyChanged;
-        }
+        public Analysis() { }
 
         /// <summary>
         /// Pass-through method to <see cref="ElementalAnalysisUtil.Solve"/>
@@ -93,29 +78,13 @@ namespace ChemSharp.Molecules.ElementalAnalysis
         /// <returns></returns>
         public static Analysis FromMolecule(Molecule mol) => new Analysis() { Formula = mol.Atoms.SumFormula() };
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        /// <summary>
+        /// Updates Deviation
+        /// </summary>
+        private void UpdateDeviation()
         {
-            switch (e.PropertyName)
-            {
-                case nameof(Formula):
-                    TheoreticalAnalysis = Formula.ElementalAnalysis();
-                    break;
-                case nameof(ExperimentalAnalysis):
-                case nameof(TheoreticalAnalysis):
-                    if (TheoreticalAnalysis != null && ExperimentalAnalysis != null)
-                        Deviation = ElementalAnalysisUtil.Deviation(TheoreticalAnalysis, ExperimentalAnalysis);
-                    break;
-            }
+            if (TheoreticalAnalysis != null && ExperimentalAnalysis != null)
+                Deviation = ElementalAnalysisUtil.Deviation(TheoreticalAnalysis, ExperimentalAnalysis);
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
     }
 }

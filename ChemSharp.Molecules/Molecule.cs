@@ -2,14 +2,12 @@
 using ChemSharp.Molecules.Math;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Molecules
 {
-    public class Molecule : INotifyPropertyChanged
+    public class Molecule
     {
         /// <summary>
         /// Title for Molecule
@@ -29,11 +27,7 @@ namespace ChemSharp.Molecules
         /// <summary>
         /// creates Molecule without Atoms to add later
         /// </summary>
-        public Molecule()
-        {
-            PropertyChanged += OnPropertyChanged;
-        }
-
+        public Molecule() { }
         /// <summary>
         /// creates Molecule with IEnumerable of Atoms
         /// </summary>
@@ -56,25 +50,6 @@ namespace ChemSharp.Molecules
             if (bonds != null) Bonds = bonds;
         }
 
-
-        /// <summary>
-        /// When DataProvider is changed, add data
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(AtomDataProvider):
-                    Atoms = new ObservableCollection<Atom>(_atomDataProvider.Atoms);
-                    break;
-                case nameof(BondDataProvider):
-                    Bonds = new ObservableCollection<Bond>(_bondDataProvider.Bonds);
-                    break;
-            }
-        }
-
         private IAtomDataProvider _atomDataProvider;
         ///<summary>
         /// Provides AtomData
@@ -85,7 +60,7 @@ namespace ChemSharp.Molecules
             set
             {
                 _atomDataProvider = value;
-                OnPropertyChanged();
+                Atoms = new ObservableCollection<Atom>(_atomDataProvider.Atoms);
             }
         }
 
@@ -99,22 +74,14 @@ namespace ChemSharp.Molecules
             set
             {
                 _bondDataProvider = value;
-                OnPropertyChanged();
+                Bonds = new ObservableCollection<Bond>(_bondDataProvider.Bonds);
             }
         }
-
 
         /// <summary>
         /// Wrapper for Centroid Method
         /// </summary>
         public Vector3 Centroid => Atoms.Centroid();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         /// <summary>
         /// Recalculates Bonds based on Distances

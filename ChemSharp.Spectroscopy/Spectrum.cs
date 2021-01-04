@@ -5,17 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Spectroscopy
 {
-    public class Spectrum : ISpectrum, IDataObject, INotifyPropertyChanged
+    public class Spectrum : ISpectrum, IDataObject
     {
         public Spectrum()
         {
             XYData.CollectionChanged += OnXYChanged;
-            PropertyChanged += OnPropertyChanged;
         }
 
 
@@ -29,7 +26,7 @@ namespace ChemSharp.Spectroscopy
             set
             {
                 _dataProvider = value;
-                OnPropertyChanged();
+                DataProviderChanged();
             }
         }
 
@@ -49,9 +46,8 @@ namespace ChemSharp.Spectroscopy
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DataProviderChanged()
         {
-            if (e.PropertyName != nameof(DataProvider)) return;
             XYData = new ObservableCollection<DataPoint>(_dataProvider.XYData);
             Title = _dataProvider.Path;
         }
@@ -110,12 +106,5 @@ namespace ChemSharp.Spectroscopy
         /// <inheritdoc cref="ISpectrum.Title"/>
         /// </summary>
         public DateTime CreationDate => this.CreationDate();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

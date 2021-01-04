@@ -1,9 +1,9 @@
-﻿using System;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy;
 using ChemSharp.Spectroscopy.DataProviders;
 using ChemSharp.Spectroscopy.Extension;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ChemSharp.Tests.Data
 {
@@ -22,7 +22,7 @@ namespace ChemSharp.Tests.Data
         [TestMethod]
         public void TestEPRCreation()
         {
-            
+
             Assert.AreEqual(2048, epr.XYData.Count);
             Assert.AreEqual(2048, epr.Derivative.Count);
             Assert.AreEqual(2048, epr.Integral.Count);

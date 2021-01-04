@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace ChemSharp.Files
@@ -21,7 +20,6 @@ namespace ChemSharp.Files
         public ParameterFile(string path, string delimiter) : base(path)
         {
             Delimiter = delimiter;
-            PropertyChanged += OnPropertyChanged;
         }
 
         /// <summary>
@@ -31,16 +29,13 @@ namespace ChemSharp.Files
         public ParameterFile(string delimiter)
         {
             Delimiter = delimiter;
-            PropertyChanged += OnPropertyChanged;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void ContentChanged()
         {
-            //content changed = data is ready!
-            if (e.PropertyName != nameof(Content)) return;
+            base.ContentChanged();
             Storage = ReadStorage().ToDictionary(s => s.Key, s => s.Value);
         }
-
 
         private IEnumerable<KeyValuePair<string, string>> ReadStorage() =>
             from line in Content

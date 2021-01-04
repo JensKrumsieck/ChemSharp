@@ -1,11 +1,14 @@
 ﻿using ChemSharp.Spectroscopy.DataProviders;
 using System;
 using System.IO;
+using ChemSharp.Extensions;
 
 namespace ChemSharp.Spectroscopy.Extension
 {
     public static class SpectrumExtensions
     {
+        private static readonly DateTime UNIX = new DateTime(1970,1,1,0,0,0).ToLocalTime();
+
         /// <summary>
         /// Returns default Unit as String
         /// </summary>
@@ -57,6 +60,7 @@ namespace ChemSharp.Spectroscopy.Extension
             input.DataProvider switch
             {
                 BrukerEPRProvider => DateTime.Parse($"{input["JDA"]} {input["JTM"]}"),
+                BrukerNMRProvider => UNIX.AddSeconds(input["##$DATE"].ToInt()),
                 _ => File.GetCreationTime(input.Title)
             };
     }

@@ -90,7 +90,8 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <returns></returns>
         private int CheckHeaderPos(IReadOnlyList<string> lines)
         {
-            for (var i = 0; i < lines.Count; i++)
+            //start at 1 as 0 is fallback pos and we are returning i-1
+            for (var i = 1; i < lines.Count; i++)
             {
                 var line = lines[i];
                 var split = line.Split(Delimiter);

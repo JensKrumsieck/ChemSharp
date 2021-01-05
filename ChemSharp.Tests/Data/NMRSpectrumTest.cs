@@ -40,7 +40,7 @@ namespace ChemSharp.Tests.Data
         public void TestProperties()
         {
             Assert.AreEqual("ppm", nmr.Unit());
-            Assert.AreEqual(DateTime.Parse("03.02.2020 10:16:52"), nmr.CreationDate());
+            Assert.AreEqual(DateTime.Parse("03.Feb.2020 10:16:52"), nmr.CreationDate());
         }
     }
 }

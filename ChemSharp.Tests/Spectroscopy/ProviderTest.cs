@@ -1,7 +1,7 @@
 ﻿using ChemSharp.Spectroscopy.DataProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ChemSharp.Tests.Data
+namespace ChemSharp.Tests.Spectroscopy
 {
     [TestClass]
     public class ProviderTest
@@ -36,6 +36,14 @@ namespace ChemSharp.Tests.Data
             const string fid = "files/nmr/fid";
             var provider = new BrukerNMRProvider(fid, true);
             Assert.AreEqual(32768, provider.XYData.Length);
+        }
+
+        [TestMethod]
+        public void TestCSVProvider()
+        {
+            const string file = "files/uvvis.csv";
+            var provider = new GenericCSVProvider(file, ',', 1);
+            Assert.AreEqual(901, provider.XYData.Length);
         }
     }
 }

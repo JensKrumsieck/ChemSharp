@@ -4,19 +4,19 @@ using ChemSharp.Spectroscopy.Extension;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ChemSharp.Tests.Data
+namespace ChemSharp.Tests.Spectroscopy
 {
     [TestClass]
     public class NMRSpectrumTest
     {
 
-        private Spectrum nmr;
+        private Spectrum _nmr;
         [TestInitialize]
         public void SetUp()
         {
             const string path = "files/nmr/pdata/1/1r";
             var prov = new BrukerNMRProvider(path);
-            nmr = new Spectrum() { DataProvider = prov };
+            _nmr = new Spectrum() { DataProvider = prov };
         }
 
         [TestMethod]
@@ -33,14 +33,14 @@ namespace ChemSharp.Tests.Data
         public void TestNMRCreationProcessed()
         {
             //32768 Data points, taken from procs file
-            Assert.AreEqual(32768, nmr.XYData.Count);
+            Assert.AreEqual(32768, _nmr.XYData.Count);
         }
 
         [TestMethod]
         public void TestProperties()
         {
-            Assert.AreEqual("ppm", nmr.Unit());
-            Assert.AreEqual(DateTime.Parse("03.Feb.2020 10:16:52"), nmr.CreationDate());
+            Assert.AreEqual("ppm", _nmr.Unit());
+            Assert.AreEqual(DateTime.Parse("03.Feb.2020 10:16:52"), _nmr.CreationDate());
         }
     }
 }

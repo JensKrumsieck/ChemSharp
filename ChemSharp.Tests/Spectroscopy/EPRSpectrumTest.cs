@@ -5,7 +5,7 @@ using ChemSharp.Spectroscopy.Extension;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ChemSharp.Tests.Data
+namespace ChemSharp.Tests.Spectroscopy
 {
     [TestClass]
     public class EPRSpectrumTest

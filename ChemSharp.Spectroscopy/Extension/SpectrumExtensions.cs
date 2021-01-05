@@ -20,6 +20,7 @@ namespace ChemSharp.Spectroscopy.Extension
                 BrukerEPRProvider epr => epr["JUN"],
                 BrukerNMRProvider => "ppm",
                 VarianUVVisProvider => "nm",
+                GenericCSVProvider csv => csv["Unit"],
                 _ => ""
             };
 
@@ -34,6 +35,7 @@ namespace ChemSharp.Spectroscopy.Extension
                 BrukerEPRProvider => "B",
                 BrukerNMRProvider => "δ",
                 VarianUVVisProvider => "λ",
+                GenericCSVProvider csv => csv["XTitle"],
                 _ => ""
             };
 
@@ -48,6 +50,7 @@ namespace ChemSharp.Spectroscopy.Extension
                 BrukerEPRProvider => "a.u.",
                 BrukerNMRProvider => "a.u.",
                 VarianUVVisProvider => "rel. Abs.",
+                GenericCSVProvider csv => csv["YTitle"],
                 _ => ""
             };
 

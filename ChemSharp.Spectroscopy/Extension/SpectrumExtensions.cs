@@ -35,7 +35,7 @@ namespace ChemSharp.Spectroscopy.Extension
                 BrukerEPRProvider => "B",
                 BrukerNMRProvider => "δ",
                 VarianUVVisProvider => "λ",
-                GenericCSVProvider csv => csv["XTitle"],
+                GenericCSVProvider csv => csv["XHeader"],
                 _ => ""
             };
 
@@ -50,7 +50,7 @@ namespace ChemSharp.Spectroscopy.Extension
                 BrukerEPRProvider => "a.u.",
                 BrukerNMRProvider => "a.u.",
                 VarianUVVisProvider => "rel. Abs.",
-                GenericCSVProvider csv => csv["YTitle"],
+                GenericCSVProvider csv => csv["YHeader"],
                 _ => ""
             };
 

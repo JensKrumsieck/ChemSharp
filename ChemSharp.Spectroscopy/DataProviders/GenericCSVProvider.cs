@@ -15,10 +15,10 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <param name="delimiter"></param>
         /// <param name="headerPos"></param>
         /// <param name="dataOffset"></param>
-        public GenericCSVProvider(string path, char delimiter = ',', int headerPos = 0, int dataOffset = 0)
+        public GenericCSVProvider(string path, char delimiter = ',', int dataOffset = 0)
         {
             Path = path;
-            var multiCSV = new MultiCSVProvider(path, delimiter, headerPos);
+            var multiCSV = new MultiCSVProvider(path, delimiter);
             XYData = multiCSV.MultiXYData[dataOffset];
             var (xHeader, yHeader) = multiCSV.XYHeaders[dataOffset];
 

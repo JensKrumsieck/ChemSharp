@@ -41,14 +41,14 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// </summary>
         /// <param name="path"></param>
         /// <param name="delimiter">The CSV column delimiter</param>
-        /// <param name="headerPos">position of header line, default is 0 == first line</param>
         /// <exception cref="NotSupportedException">When File Length less or equal 3</exception>
-        public MultiCSVProvider(string path, char delimiter = ',', int headerPos = 0)
+        public MultiCSVProvider(string path, char delimiter = ',')
         {
             Path = path;
             Delimiter = delimiter;
             var file = (PlainFile<string>)FileHandler.Handle(path);
             if (file.Content.Length <= 3) throw new NotSupportedException("File Length to small");
+            var headerPos = CheckHeaderPos(file.Content);
             GetData(file.Content, headerPos);
         }
 
@@ -57,7 +57,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// </summary>
         /// <param name="lines"></param>
         /// <param name="headerPos"></param>
-        public void GetData(string[] lines, int headerPos)
+        private void GetData(string[] lines, int headerPos)
         {
             var data = lines.Skip(headerPos + 1).ToArray();
             var dataLength = data[0].Split(Delimiter).Length;
@@ -81,6 +81,22 @@ namespace ChemSharp.Spectroscopy.DataProviders
                     MultiXYData[j / 2][i] = dp;
                 }
             }
+        }
+
+        /// <summary>
+        /// Try to get header position
+        /// </summary>
+        /// <param name="lines"></param>
+        /// <returns></returns>
+        private int CheckHeaderPos(IReadOnlyList<string> lines)
+        {
+            for (var i = 0; i < lines.Count; i++)
+            {
+                var line = lines[i];
+                var split = line.Split(Delimiter);
+                if (double.TryParse(split[0], out _)) return i - 1;
+            }
+            return 0;
         }
     }
 }

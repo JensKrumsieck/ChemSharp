@@ -7,7 +7,7 @@ namespace ChemSharp.Tests.Spectroscopy
     public class ProviderTest
     {
         [TestMethod]
-        public void TestEprProvider()
+        public void TestEPRProvider()
         {
             const string par = "files/epr.par";
             var provider = new BrukerEPRProvider(par);
@@ -42,7 +42,7 @@ namespace ChemSharp.Tests.Spectroscopy
         public void TestCSVProvider()
         {
             const string file = "files/uvvis.csv";
-            var provider = new GenericCSVProvider(file, ',', 1);
+            var provider = new GenericCSVProvider(file);
             Assert.AreEqual(901, provider.XYData.Length);
         }
 

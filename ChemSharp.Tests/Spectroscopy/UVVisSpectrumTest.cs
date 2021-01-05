@@ -22,7 +22,7 @@ namespace ChemSharp.Tests.Spectroscopy
         public void TestUVVisFromCSV()
         {
             const string path = "files/uvvis.csv";
-            var prov = new GenericCSVProvider(path, ',', 1);
+            var prov = new GenericCSVProvider(path);
             var uvvis = new Spectrum() { DataProvider = prov };
             Assert.AreEqual(901, uvvis.XYData.Count);
             Assert.AreEqual(901, uvvis.Derivative.Count);

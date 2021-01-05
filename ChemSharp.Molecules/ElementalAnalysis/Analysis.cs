@@ -1,6 +1,5 @@
 ﻿using ChemSharp.Molecules.Extensions;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules.ElementalAnalysis
@@ -55,9 +54,9 @@ namespace ChemSharp.Molecules.ElementalAnalysis
         public Dictionary<string, double> Deviation { get; set; }
 
         /// <summary>
-        /// contains Impurities
+        /// contains Impurities 
         /// </summary>
-        public ObservableCollection<Impurity> Impurities { get; set; } = new ObservableCollection<Impurity>();
+        public List<Impurity> Impurities { get; set; } = new List<Impurity>();
 
         /// <summary>
         /// ctor

@@ -3,19 +3,12 @@ using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.Extension;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using System.Linq;
 
 namespace ChemSharp.Spectroscopy
 {
     public class Spectrum : ISpectrum, IDataObject
     {
-        public Spectrum()
-        {
-            XYData.CollectionChanged += OnXYChanged;
-        }
-
-
         private IXYDataProvider _dataProvider;
         ///<summary>
         /// <inheritdoc />
@@ -31,31 +24,20 @@ namespace ChemSharp.Spectroscopy
         }
 
         /// <summary>
-        /// When data changes -> recalculate properties
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnXYChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            _derivative = XYData.Derive();
-            _integral = XYData.Integrate();
-        }
-
-        /// <summary>
         /// When DataProvider is changed, add data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DataProviderChanged()
         {
-            XYData = new ObservableCollection<DataPoint>(_dataProvider.XYData);
+            XYData = _dataProvider.XYData.ToList();
             Title = _dataProvider.Path;
         }
 
         /// <summary>
         /// <inheritdoc cref="ISpectrum.XYData"/>
         /// </summary>
-        public ObservableCollection<DataPoint> XYData { get; set; } = new ObservableCollection<DataPoint>();
+        public List<DataPoint> XYData { get; set; } = new List<DataPoint>();
 
         /// <summary>
         /// Backing field for <see cref="Spectrum.Derivative"/>
@@ -65,7 +47,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// Derivative of XYData
         /// </summary>
-        public ObservableCollection<DataPoint> Derivative => new ObservableCollection<DataPoint>(_derivative ??= XYData.Derive());
+        public List<DataPoint> Derivative => (_derivative ??= XYData.Derive()).ToList();
 
         /// <summary>
         /// Backing field for <see cref="Spectrum.Integral"/>
@@ -75,7 +57,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// Integral of XYData
         /// </summary>
-        public ObservableCollection<DataPoint> Integral => new ObservableCollection<DataPoint>(_integral ??= XYData.Integrate());
+        public List<DataPoint> Integral => (_integral ??= XYData.Integrate()).ToList();
 
         /// <summary>
         /// <inheritdoc cref="ISpectrum.Title"/>

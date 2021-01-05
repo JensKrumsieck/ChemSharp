@@ -1,7 +1,6 @@
 ﻿using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Math;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 
@@ -17,12 +16,12 @@ namespace ChemSharp.Molecules
         /// <summary>
         /// The Molecules Atoms
         /// </summary>
-        public ObservableCollection<Atom> Atoms { get; set; }
+        public List<Atom> Atoms { get; set; }
 
         /// <summary>
         /// The Molecules Bonds
         /// </summary>
-        public ObservableCollection<Bond> Bonds { get; set; }
+        public List<Bond> Bonds { get; set; }
 
         /// <summary>
         /// creates Molecule without Atoms to add later
@@ -35,19 +34,8 @@ namespace ChemSharp.Molecules
         /// <param name="bonds"></param>
         public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null) : this()
         {
-            Atoms = new ObservableCollection<Atom>(atoms);
-            if (bonds != null) Bonds = new ObservableCollection<Bond>(bonds);
-        }
-
-        /// <summary>
-        /// creates Molecule with ObservableCollection of Atoms
-        /// </summary>
-        /// <param name="atoms"></param>
-        /// <param name="bonds"></param>
-        public Molecule(ObservableCollection<Atom> atoms, ObservableCollection<Bond> bonds = null) : this()
-        {
-            Atoms = atoms;
-            if (bonds != null) Bonds = bonds;
+            Atoms = atoms.ToList();
+            if (bonds != null) Bonds = bonds.ToList();
         }
 
         private IAtomDataProvider _atomDataProvider;
@@ -60,7 +48,7 @@ namespace ChemSharp.Molecules
             set
             {
                 _atomDataProvider = value;
-                Atoms = new ObservableCollection<Atom>(_atomDataProvider.Atoms);
+                Atoms = _atomDataProvider.Atoms.ToList();
             }
         }
 
@@ -74,7 +62,7 @@ namespace ChemSharp.Molecules
             set
             {
                 _bondDataProvider = value;
-                Bonds = new ObservableCollection<Bond>(_bondDataProvider.Bonds);
+                Bonds = _bondDataProvider.Bonds.ToList();
             }
         }
 
@@ -93,7 +81,7 @@ namespace ChemSharp.Molecules
         {
             //discard data provider and reset bonds
             _bondDataProvider = null;
-            Bonds = new ObservableCollection<Bond>();
+            Bonds = new List<Bond>();
             var matched = new HashSet<(int, int)>();
             for (var i = 0; i < Atoms.Count(); i++)
             {

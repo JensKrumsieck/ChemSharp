@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 
 namespace ChemSharp.Spectroscopy
 {
@@ -7,7 +7,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// The X and Y Axis data as collection of two doubles in the <see cref="DataPoint"/> struct
         /// </summary>
-        public ObservableCollection<DataPoint> XYData { get; set; }
+        public List<DataPoint> XYData { get; set; }
 
         /// <summary>
         /// Title of Spectrum

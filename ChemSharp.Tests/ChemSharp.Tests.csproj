@@ -35,6 +35,9 @@
     <None Update="files\mescho.xyz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="files\multicsv.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\nmr\acqu">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

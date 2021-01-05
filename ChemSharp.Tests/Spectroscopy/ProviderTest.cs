@@ -45,5 +45,13 @@ namespace ChemSharp.Tests.Spectroscopy
             var provider = new GenericCSVProvider(file, ',', 1);
             Assert.AreEqual(901, provider.XYData.Length);
         }
+
+        [TestMethod]
+        public void TestCSVMultiProvider()
+        {
+            const string file = "files/multicsv.csv";
+            var provider = new MultiCSVProvider(file);
+            Assert.AreEqual(23, provider.MultiXYData.Count);
+        }
     }
 }

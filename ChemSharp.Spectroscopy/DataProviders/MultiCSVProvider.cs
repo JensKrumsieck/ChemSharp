@@ -60,9 +60,10 @@ namespace ChemSharp.Spectroscopy.DataProviders
         public void GetData(string[] lines, int headerPos)
         {
             var data = lines.Skip(headerPos + 1).ToArray();
-            var dataLength = System.Math.Floor(data[0].Split(Delimiter).Length / 2d);
+            var dataLength = data[0].Split(Delimiter).Length;
+            if (dataLength % 2 != 0) dataLength -= 1;
             var headers = lines.ToArray()[headerPos];
-            for (var i = 0; i < dataLength; i++)
+            for (var i = 0; i < dataLength; i += 2)
             {
                 MultiXYData.Add(new DataPoint[data.Length]);
                 var line = headers.Split(Delimiter);
@@ -71,12 +72,13 @@ namespace ChemSharp.Spectroscopy.DataProviders
             for (var i = 0; i < data.Length; i++) //loop through lines
             {
                 var columns = data[i].Split(Delimiter);
-                for (var j = 0; j < dataLength; j++) //loop through columns
+                for (var j = 0; j < dataLength - 1; j += 2) //loop through columns
                 {
                     var x = columns[j];
                     var y = columns[j + 1];
+                    if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y)) continue;
                     var dp = new DataPoint(x.ToDouble(), y.ToDouble());
-                    MultiXYData[j][i] = dp;
+                    MultiXYData[j / 2][i] = dp;
                 }
             }
         }

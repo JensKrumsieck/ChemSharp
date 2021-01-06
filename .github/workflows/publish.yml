@@ -27,5 +27,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Pack
       run: dotnet pack -c Release -o tmp
+    - run: cd ../
+    - run: echo "$HOME"
     - name: Push
-      run: dotnet nuget push tmp/*.nupkg --skip-duplicate --no-symbols true
+      run: dotnet nuget push tmp\*.nupkg --skip-duplicate --no-symbols true

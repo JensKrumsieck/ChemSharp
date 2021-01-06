@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
@@ -23,3 +22,18 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+
+  coverage:
+    needs: [build]
+    name: coverage
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.101
+      - uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: 0c648bfa85a6c955f3d48dfa659b7c4e8fcad2a6d7275361123bb56cc96ee830
+          coverageCommand: dotnet test --collect:"XPlat Code Coverage"
+          debug: true

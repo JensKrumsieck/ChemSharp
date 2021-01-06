@@ -1,0 +1,31 @@
+name: Publish
+on:
+  push:
+    tags:
+      - v*.*.*
+
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.101
+        source-url: https://api.nuget.org/v3/index.json        
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack -c Release -o tmp
+    - name: Push
+      run: dotnet nuget push tmp/*.nupkg --skip-duplicate --no-symbols true

@@ -31,3 +31,5 @@ jobs:
     - run: echo "$HOME"
     - name: Push
       run: dotnet nuget push tmp\*.nupkg --skip-duplicate --no-symbols true
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}

@@ -16,7 +16,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.101
-        source-url: https://api.nuget.org/v3/index.json        
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
     - name: Install dependencies
@@ -28,8 +27,5 @@ jobs:
     - name: Pack
       run: dotnet pack -c Release -o tmp
     - run: cd ../
-    - run: echo "$HOME"
     - name: Push
-      run: dotnet nuget push tmp\*.nupkg --skip-duplicate --no-symbols true
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+      run: dotnet nuget push tmp\*.nupkg --skip-duplicate --no-symbols true -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json  

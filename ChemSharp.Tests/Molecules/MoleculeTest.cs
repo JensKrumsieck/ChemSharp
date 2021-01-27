@@ -49,7 +49,7 @@ namespace ChemSharp.Tests.Molecules
         {
             const string path = "files/benzene.mol2";
             var provider = new Mol2DataProvider(path);
-            var mol = new Molecule() { AtomDataProvider = provider }; ;
+            var mol = new Molecule() { AtomDataProvider = provider }; 
             Assert.AreEqual(12, mol.Atoms.Count);
             Assert.IsNull(mol.Bonds);
             mol.BondDataProvider = provider; ;

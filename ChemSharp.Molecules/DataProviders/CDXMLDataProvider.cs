@@ -1,10 +1,9 @@
-﻿using System;
-using ChemSharp.Files;
+﻿using ChemSharp.Files;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
-using System.Threading;
 using System.Xml;
 
 namespace ChemSharp.Molecules.DataProviders
@@ -14,7 +13,8 @@ namespace ChemSharp.Molecules.DataProviders
     /// </summary>
     public class CDXMLDataProvider : IAtomDataProvider, IBondDataProvider
     {
-        private Dictionary<int, Atom> idToAtoms = new Dictionary<int, Atom>();
+        private readonly Dictionary<int, Atom> _idToAtoms = new Dictionary<int, Atom>();
+        private Dictionary<Atom, int> _atomToBondOrder = new Dictionary<Atom, int>();
 
         /// <summary>
         /// import recipes
@@ -70,7 +70,7 @@ namespace ChemSharp.Molecules.DataProviders
                 {
                     Location = loc
                 };
-                idToAtoms.Add(int.Parse(id), atom);
+                _idToAtoms.Add(int.Parse(id), atom);
                 yield return atom;
             }
         }
@@ -86,9 +86,14 @@ namespace ChemSharp.Molecules.DataProviders
                 if (!(b is XmlElement bond)) yield break;
                 var begin = bond.GetAttribute("B");
                 var end = bond.GetAttribute("E");
+                var bondOrder = 1;
+                var order = bond.GetAttribute("Order");
+                if (!string.IsNullOrEmpty(order) && int.TryParse(order, out _)) bondOrder = int.Parse(order);
                 int.TryParse(begin, out var firstId);
                 int.TryParse(end, out var lastId);
-                yield return new Bond(idToAtoms[firstId], idToAtoms[lastId]);
+                if (!_atomToBondOrder.ContainsKey(_idToAtoms[firstId])) _atomToBondOrder.Add(_idToAtoms[firstId], bondOrder);
+                if (!_atomToBondOrder.ContainsKey(_idToAtoms[lastId])) _atomToBondOrder.Add(_idToAtoms[lastId], bondOrder);
+                yield return new Bond(_idToAtoms[firstId], _idToAtoms[lastId]);
             }
         }
 

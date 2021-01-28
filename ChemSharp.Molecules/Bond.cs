@@ -6,6 +6,11 @@
         public Atom Atom2;
 
         /// <summary>
+        /// Bond order, not supported by all file types
+        /// </summary>
+        public int Order = 1;
+
+        /// <summary>
         /// Gets Bond Length
         /// </summary>
         public float Length => Atom1.DistanceTo(Atom2);

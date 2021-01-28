@@ -14,7 +14,6 @@ namespace ChemSharp.Molecules.DataProviders
     public class CDXMLDataProvider : IAtomDataProvider, IBondDataProvider
     {
         private readonly Dictionary<int, Atom> _idToAtoms = new Dictionary<int, Atom>();
-        private Dictionary<Atom, int> _atomToBondOrder = new Dictionary<Atom, int>();
 
         /// <summary>
         /// import recipes
@@ -23,7 +22,19 @@ namespace ChemSharp.Molecules.DataProviders
         {
             if (!FileHandler.RecipeDictionary.ContainsKey("cdxml"))
                 FileHandler.RecipeDictionary.Add("cdxml", s => new PlainFile<string>(s));
+            var transitionGroups = new List<int> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            foreach (var element in ElementDataProvider.ElementData)
+            {
+                if(element.Group == 0) continue;
+                var saturation = transitionGroups.Contains(element.Group) ? 0 : element.Group <= 3 ? element.Group : element.Group <= 14 ? 4 : 8 - (element.Group - 10);
+                _desiredSaturation.Add(element.Symbol, saturation);
+            }
         }
+
+        /// <summary>
+        /// Desired saturation numbers
+        /// </summary>
+        private static Dictionary<string, int> _desiredSaturation = new Dictionary<string, int>();
 
         public CDXMLDataProvider(string path)
         {
@@ -36,6 +47,8 @@ namespace ChemSharp.Molecules.DataProviders
             foreach(XmlNode page in pages)
                 foreach (XmlNode fragment in page) 
                     AnalyzeFragment(fragment);
+
+            AddImplicitHydrogens();
         }
 
         /// <summary>
@@ -46,15 +59,17 @@ namespace ChemSharp.Molecules.DataProviders
         {
             var atoms = fragment.Cast<XmlNode>().Where(node => node.Name == "n");
             var bonds = fragment.Cast<XmlNode>().Where(node => node.Name == "b");
-            Atoms = ReadAtoms(atoms);
-            Bonds = ReadBonds(bonds);
+            //cast to list to prevent multi enumeration
+            Atoms = ReadAtoms(atoms).ToList();
+            Bonds = ReadBonds(bonds).ToList();
         }
+
 
         /// <summary>
         /// Reads Atom Properties
         /// </summary>
         /// <param name="atoms"></param>
-        public IEnumerable<Atom> ReadAtoms(IEnumerable<XmlNode> atoms)
+        private IEnumerable<Atom> ReadAtoms(IEnumerable<XmlNode> atoms)
         {
             foreach (var n in atoms)
             {
@@ -79,22 +94,46 @@ namespace ChemSharp.Molecules.DataProviders
         /// Reads Bond Properties
         /// </summary>
         /// <param name="bonds"></param>
-        public IEnumerable<Bond> ReadBonds(IEnumerable<XmlNode> bonds)
+        private IEnumerable<Bond> ReadBonds(IEnumerable<XmlNode> bonds)
         {
             foreach (var b in bonds)
             {
                 if (!(b is XmlElement bond)) yield break;
                 var begin = bond.GetAttribute("B");
                 var end = bond.GetAttribute("E");
-                var bondOrder = 1;
-                var order = bond.GetAttribute("Order");
-                if (!string.IsNullOrEmpty(order) && int.TryParse(order, out _)) bondOrder = int.Parse(order);
                 int.TryParse(begin, out var firstId);
                 int.TryParse(end, out var lastId);
-                if (!_atomToBondOrder.ContainsKey(_idToAtoms[firstId])) _atomToBondOrder.Add(_idToAtoms[firstId], bondOrder);
-                if (!_atomToBondOrder.ContainsKey(_idToAtoms[lastId])) _atomToBondOrder.Add(_idToAtoms[lastId], bondOrder);
-                yield return new Bond(_idToAtoms[firstId], _idToAtoms[lastId]);
+                var bondObj = new Bond(_idToAtoms[firstId], _idToAtoms[lastId]);
+
+                var order = bond.GetAttribute("Order");
+                if (!string.IsNullOrEmpty(order) && int.TryParse(order, out var bondOrder))
+                    bondObj.Order = bondOrder;
+
+                yield return bondObj;
             }
+        }
+        
+        /// <summary>
+        /// Adds implicit hydrogens
+        /// </summary>
+        private void AddImplicitHydrogens()
+        {
+            var atomList = Atoms.ToList();
+            var bondList = Bonds.ToList();
+            foreach (var atom in Atoms)
+            {
+                var bonds = Bonds.Where(s => s.Atom1.Equals(atom) || s.Atom2.Equals(atom));
+                var order = bonds.Sum(s => s.Order);
+                var maxOrder = _desiredSaturation.ContainsKey(atom.Symbol) ? _desiredSaturation[atom.Symbol] : 4;
+                for (var i = order; i < maxOrder; i++)
+                {
+                    var h = new Atom("H") {Title = $"implicit hydrogen at {atom}"};
+                    atomList.Add(h);
+                    bondList.Add(new Bond(atom, h));
+                }
+            }
+            Atoms = atomList;
+            Bonds = bondList;
         }
 
         public IEnumerable<Atom> Atoms { get; set; }

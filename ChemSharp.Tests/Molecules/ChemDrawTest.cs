@@ -13,7 +13,7 @@ namespace ChemSharp.Tests.Molecules
         {
             const string path = "files/porphin.cdxml";
             var provider = new CDXMLDataProvider(path);
-            var mol = new Molecule() { AtomDataProvider = provider, BondDataProvider = provider};
+            var mol = new Molecule() { AtomDataProvider = provider, BondDataProvider = provider };
             // C20H14N4
             Assert.AreEqual(38, mol.Atoms.Count);
             Assert.AreEqual("C20H14N4", mol.Atoms.SumFormula());

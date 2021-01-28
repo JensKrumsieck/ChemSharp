@@ -22,10 +22,10 @@ namespace ChemSharp.Molecules.DataProviders
         {
             if (!FileHandler.RecipeDictionary.ContainsKey("cdxml"))
                 FileHandler.RecipeDictionary.Add("cdxml", s => new PlainFile<string>(s));
-            var transitionGroups = new List<int> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            var transitionGroups = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             foreach (var element in ElementDataProvider.ElementData)
             {
-                if(element.Group == 0) continue;
+                if (element.Group == 0) continue;
                 var saturation = transitionGroups.Contains(element.Group) ? 0 : element.Group <= 3 ? element.Group : element.Group <= 14 ? 4 : 8 - (element.Group - 10);
                 _desiredSaturation.Add(element.Symbol, saturation);
             }
@@ -44,8 +44,8 @@ namespace ChemSharp.Molecules.DataProviders
             xmlDoc.LoadXml(data);
             var pages = xmlDoc.SelectNodes("CDXML/page");
             if (pages == null) return;
-            foreach(XmlNode page in pages)
-                foreach (XmlNode fragment in page) 
+            foreach (XmlNode page in pages)
+                foreach (XmlNode fragment in page)
                     AnalyzeFragment(fragment);
 
             AddImplicitHydrogens();
@@ -112,7 +112,7 @@ namespace ChemSharp.Molecules.DataProviders
                 yield return bondObj;
             }
         }
-        
+
         /// <summary>
         /// Adds implicit hydrogens
         /// </summary>
@@ -127,7 +127,7 @@ namespace ChemSharp.Molecules.DataProviders
                 var maxOrder = _desiredSaturation.ContainsKey(atom.Symbol) ? _desiredSaturation[atom.Symbol] : 4;
                 for (var i = order; i < maxOrder; i++)
                 {
-                    var h = new Atom("H") {Title = $"implicit hydrogen at {atom}"};
+                    var h = new Atom("H") { Title = $"implicit hydrogen at {atom}" };
                     atomList.Add(h);
                     bondList.Add(new Bond(atom, h));
                 }

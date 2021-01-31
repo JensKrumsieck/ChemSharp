@@ -30,8 +30,8 @@ namespace ChemSharp.Molecules.DataProviders
             var cellAngles = CellParameters(infoLoop.DefaultSplit(), "cell_angle").ToArray();
             var conversionMatrix = FractionalCoordinates.ConversionMatrix(cellLengths[0], cellLengths[1],
                 cellLengths[2], cellAngles[0], cellAngles[1], cellAngles[2]);
-            Atoms = ReadAtoms(moleculeLoop, conversionMatrix);
-            Bonds = ReadBonds(bondLoop);
+            Atoms = ReadAtoms(moleculeLoop, conversionMatrix).ToList();
+            Bonds = ReadBonds(bondLoop).ToList();
         }
 
 

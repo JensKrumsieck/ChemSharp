@@ -17,4 +17,8 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
+  </ItemGroup>
+
 </Project>

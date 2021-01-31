@@ -51,5 +51,11 @@ namespace ChemSharp.Rendering.Primitives
 
         [XmlAttribute("y")]
         public double Y { get; set; }
+
+        [XmlAttribute("text-anchor")]
+        public string HorizontalAlign { get; set; }
+
+        [XmlAttribute("alignment-baseline")]
+        public string VerticalAlign { get; set; }
     }
 }

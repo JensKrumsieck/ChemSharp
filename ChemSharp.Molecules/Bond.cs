@@ -1,4 +1,6 @@
-﻿namespace ChemSharp.Molecules
+﻿using System.Collections.Generic;
+
+namespace ChemSharp.Molecules
 {
     public class Bond
     {
@@ -9,6 +11,11 @@
         /// Bond order, not supported by all file types
         /// </summary>
         public int Order = 1;
+
+        /// <summary>
+        /// Indicates whether bond is aromatic
+        /// </summary>
+        public bool IsAromatic = false;
 
         /// <summary>
         /// Gets Bond Length
@@ -22,5 +29,11 @@
         }
 
         public override string ToString() => $"{Atom1.Title} - {Atom2.Title} : {Length}";
+
+        /// <summary>
+        /// Returns Atoms as List
+        /// to do LINQ
+        /// </summary>
+        public List<Atom> Atoms => new List<Atom> { Atom1, Atom2 };
     }
 }

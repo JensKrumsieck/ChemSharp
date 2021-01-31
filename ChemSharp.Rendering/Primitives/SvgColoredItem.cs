@@ -24,5 +24,8 @@ namespace ChemSharp.Rendering.Primitives
 
         [XmlIgnore]
         public Color? ActualFill { get; set; }
+
+        [XmlAttribute("stroke-width")]
+        public double StrokeThickness { get; set; } = 1;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Math;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -36,6 +37,18 @@ namespace ChemSharp.Molecules
         {
             Atoms = atoms.ToList();
             if (bonds != null) Bonds = bonds.ToList();
+            else RecalculateBonds();
+        }
+
+        /// <summary>
+        /// creates Molecule with provider
+        /// </summary>
+        /// <param name="provider"></param>
+        public Molecule(IAtomDataProvider provider) : this()
+        {
+            AtomDataProvider = provider;
+            if (provider is IBondDataProvider bondProvider) BondDataProvider = bondProvider;
+            else RecalculateBonds();
         }
 
         private IAtomDataProvider _atomDataProvider;
@@ -93,6 +106,16 @@ namespace ChemSharp.Molecules
                     Bonds.Add(new Bond(Atoms.ElementAt(i), Atoms.ElementAt(j)));
                 }
             }
+        }
+
+        /// <summary>
+        /// Updates coordinate system mapping function
+        /// </summary>
+        /// <param name="mapping"></param>
+        public void SetMapping(Func<Vector3, Vector3> mapping)
+        {
+            foreach (var atom in Atoms)
+                atom.Mapping = mapping;
         }
     }
 }

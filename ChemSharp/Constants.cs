@@ -76,5 +76,10 @@
         /// Free g factor for electron
         /// </summary>
         public const double GFree = 2.00231930436256;
+
+        /// <summary>
+        /// Angstroms to pixels factor
+        /// </summary>
+        public const float AngstromToPixels = 20;
     }
 }

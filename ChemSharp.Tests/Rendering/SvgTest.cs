@@ -1,6 +1,9 @@
-﻿using ChemSharp.Rendering.Primitives;
+﻿using ChemSharp.Molecules;
+using ChemSharp.Molecules.DataProviders;
+using ChemSharp.Molecules.Math;
+using ChemSharp.Rendering.Extensions;
+using ChemSharp.Rendering.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -17,9 +20,18 @@ namespace ChemSharp.Tests.Rendering
         {
             var ns = new XmlSerializerNamespaces();
             ns.Add("xlink", "http://www.w3.org/1999/xlink");
-            var doc = new SvgRoot { ActualWidth = 1000, ActualHeight = 300 };
-            var svg = new SvgText { Text = "Hello World", ActualFill = Color.Blue, ActualFontSize = 100, Y = 200 };
-            doc.Elements.Add(svg);
+            var doc = new SvgRoot { ActualWidth = 700, ActualHeight = 700 };
+
+            const string cdxmlPath = "files/porphin.cdxml";
+            var porphin = new Molecule(new CDXMLDataProvider(cdxmlPath)).ToSvg();
+            doc.Elements.AddRange(porphin.Tags);
+
+            const string cifPath = "files/cif.cif";
+            var cor = new Molecule(new CIFDataProvider(cifPath));
+            cor.SetMapping(cor.Atoms.CenterMapping());
+            var corrole = cor.ToSvg();
+            doc.Elements.AddRange(corrole.Tags);
+
             var ser = new XmlSerializer(typeof(SvgRoot));
             using var sw = new UTF8Writer();
             using var xw = XmlWriter.Create(sw, new XmlWriterSettings

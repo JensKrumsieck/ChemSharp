@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace ChemSharp.Molecules
 {
@@ -8,6 +10,8 @@ namespace ChemSharp.Molecules
     /// </summary>
     public class Atom : Element, IEquatable<Atom>
     {
+        public Guid InstanceID { get; private set; }
+
         /// <summary>
         /// See BondTo Method
         /// </summary>
@@ -15,7 +19,7 @@ namespace ChemSharp.Molecules
 
         /// <summary>
         /// Tests if Atom is Bond to another based on distance!
-        /// allow uncertainity of 5 pm overall
+        /// allow uncertainty of 5 pm overall
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
@@ -25,13 +29,31 @@ namespace ChemSharp.Molecules
             return DistanceTo(test) < (CovalentRadius + (float)test.CovalentRadius + Delta) / 100f;
         }
 
+        private Vector3 _location;
         /// <summary>
         /// Location in 3D Space
         /// </summary>
-        public Vector3 Location { get; set; }
+        public Vector3 Location
+        {
+            get => Mapping(_location);
+            set => _location = value;
+        }
 
-        public Atom(string symbol) : base(symbol)
-        { }
+        /// <summary>
+        /// Add a Mapping for Location to recalculate points
+        /// into different coordinate systems
+        /// </summary>
+        public Func<Vector3, Vector3> Mapping { get; set; } = s => s;
+
+        /// <summary>
+        /// default ctor
+        /// </summary>
+        /// <param name="symbol"></param>
+        public Atom(string symbol, [CallerMemberName] string? caller = null) : base(symbol)
+        {
+            InstanceID = Guid.NewGuid();
+            Debug.WriteLine(Title + caller + InstanceID);
+        }
 
         /// <summary>
         /// Computes Distance To Other Atom
@@ -53,19 +75,18 @@ namespace ChemSharp.Molecules
 
         public override string ToString() => $"{Title}: {Location}";
 
-
         /// <summary>
         /// Gets HashCode, defined by title and location
         /// </summary>
         /// <returns></returns>
         // ReSharper disable NonReadonlyMemberInGetHashCode
-        public override int GetHashCode() => HashCode.Combine(_title, Location);
+        public override int GetHashCode() => HashCode.Combine(_title, _location);
         // ReSharper enable NonReadonlyMemberInGetHashCode
 
         public bool Equals(Atom other) =>
             !(other is null) &&
             (ReferenceEquals(this, other)
-             || _title == other._title && Location.Equals(other.Location));
+             || _title == other._title && Location.Equals(other._location));
 
         public override bool Equals(object obj) =>
             !(obj is null) &&

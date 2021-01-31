@@ -21,7 +21,7 @@ namespace ChemSharp.Molecules.DataProviders
         public XYZDataProvider(string path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
-            Atoms = ReadAtoms(file.Content);
+            Atoms = ReadAtoms(file.Content).ToList();
         }
 
         internal const string Pattern = @"([A-Z][a-z]{0,1}){1}\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)";

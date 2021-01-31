@@ -52,7 +52,7 @@ namespace ChemSharp.Tests.Molecules
             var mol = new Molecule() { AtomDataProvider = provider };
             Assert.AreEqual(12, mol.Atoms.Count);
             Assert.IsNull(mol.Bonds);
-            mol.BondDataProvider = provider; ;
+            mol.BondDataProvider = provider;
             Assert.AreEqual(12, mol.Bonds?.Count);
             mol.RecalculateBonds();
             Assert.AreEqual(12, mol.Bonds.Count);

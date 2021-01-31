@@ -25,8 +25,8 @@ namespace ChemSharp.Molecules.DataProviders
             var blocks = TriposBlocks(file.Content).ToArray();
             var atomBlock = Array.Find(blocks, s => s.Contains("ATOM")).DefaultSplit();
             var bondBlock = Array.Find(blocks, s => s.Contains("BOND")).DefaultSplit();
-            Atoms = Read<Atom>(atomBlock);
-            Bonds = Read<Bond>(bondBlock);
+            Atoms = Read<Atom>(atomBlock).ToList();
+            Bonds = Read<Bond>(bondBlock).ToList();
         }
 
         public IEnumerable<Atom> Atoms { get; set; }

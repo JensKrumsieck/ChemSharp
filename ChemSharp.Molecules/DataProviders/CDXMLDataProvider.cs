@@ -83,7 +83,7 @@ namespace ChemSharp.Molecules.DataProviders
                     atomSymbol = ElementDataProvider.ElementData.FirstOrDefault(s => s.AtomicNumber == numberResult)?.Symbol;
                 var atom = new Atom(atomSymbol)
                 {
-                    Location = loc
+                    Location = loc / Constants.AngstromToPixels
                 };
                 _idToAtoms.Add(int.Parse(id), atom);
                 yield return atom;

@@ -13,6 +13,7 @@ namespace ChemSharp.Rendering.Primitives
 
         [XmlElement("text", typeof(SvgText))]
         [XmlElement("path", typeof(SvgPath))]
+        [XmlElement("circle", typeof(SvgCircle))]
         public object[] ElementsProperty
         {
             get => Elements.ToArray();
@@ -22,7 +23,7 @@ namespace ChemSharp.Rendering.Primitives
         [XmlAttribute("width")]
         public string Width
         {
-            get => ActualWidth.ToString(CultureInfo.InvariantCulture)+"px"; 
+            get => ActualWidth.ToString(CultureInfo.InvariantCulture) + "px";
             set => Convert.ToDouble(value.Replace("px", ""), CultureInfo.InvariantCulture);
         }
 
@@ -45,7 +46,7 @@ namespace ChemSharp.Rendering.Primitives
         [XmlAttribute("viewBox")]
         public string ViewBox
         {
-            get => $"0 0 {ActualWidth} {ActualHeight}";
+            get => $"{-ActualWidth / 2} {-ActualHeight / 2} {ActualWidth} {ActualHeight}";
             set { }
         }
     }

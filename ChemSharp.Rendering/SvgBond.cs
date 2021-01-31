@@ -34,7 +34,7 @@ namespace ChemSharp.Rendering
 
             var path = new SvgPath { Stroke = "#000000", StrokeThickness = 2 };
             path.PathPartList.AddRange(AddSingleBondParts(realStart, realEnd));
-            if (Bond.Order == 2) path.PathPartList.AddRange(AddMultipleBondParts(realStart, realEnd));
+            if (Bond.Order == 2 || Bond.Order == 3) path.PathPartList.AddRange(AddMultipleBondParts(realStart, realEnd));
             if (Bond.Order == 3) path.PathPartList.AddRange(AddMultipleBondParts(realStart, realEnd, 1));
             path.PathPartList.Add(SvgPathPart.ClosePart);
             return path;

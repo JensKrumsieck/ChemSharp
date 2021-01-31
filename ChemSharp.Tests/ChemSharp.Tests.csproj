@@ -72,6 +72,9 @@
     <None Update="files\porphin.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="files\tep.mol2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\uvvis.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

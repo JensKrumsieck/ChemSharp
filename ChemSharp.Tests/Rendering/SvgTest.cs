@@ -22,15 +22,15 @@ namespace ChemSharp.Tests.Rendering
             ns.Add("xlink", "http://www.w3.org/1999/xlink");
             var doc = new SvgRoot { ActualWidth = 700, ActualHeight = 700 };
 
-            const string cdxmlPath = "files/porphin.cdxml";
-            var porphin = new Molecule(new CDXMLDataProvider(cdxmlPath)).ToSvg();
+            const string cdxmlPath = "files/tep.mol2";
+            var porphin = new Molecule(new Mol2DataProvider(cdxmlPath)).ToSvg();
             doc.Elements.AddRange(porphin.Tags);
 
-            const string cifPath = "files/cif.cif";
-            var cor = new Molecule(new CIFDataProvider(cifPath));
-            cor.SetMapping(cor.Atoms.CenterMapping());
-            var corrole = cor.ToSvg();
-            doc.Elements.AddRange(corrole.Tags);
+            //const string cifPath = "files/cif.cif";
+            //var cor = new Molecule(new CIFDataProvider(cifPath));
+            //cor.SetMapping(cor.Atoms.CenterMapping());
+            //var corrole = cor.ToSvg();
+            //doc.Elements.AddRange(corrole.Tags);
 
             var ser = new XmlSerializer(typeof(SvgRoot));
             using var sw = new UTF8Writer();

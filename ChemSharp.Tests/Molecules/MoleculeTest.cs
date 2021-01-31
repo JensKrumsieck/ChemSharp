@@ -51,15 +51,12 @@ namespace ChemSharp.Tests.Molecules
         [TestMethod]
         public void TestMol2_2()
         {
-            const string path = "files/benzene.mol2";
+            const string path = "files/tep.mol2";
             var provider = new Mol2DataProvider(path);
-            var mol = new Molecule() { AtomDataProvider = provider };
-            Assert.AreEqual(12, mol.Atoms.Count);
-            Assert.IsNull(mol.Bonds);
-            mol.BondDataProvider = provider;
-            Assert.AreEqual(12, mol.Bonds?.Count);
-            mol.RecalculateBonds();
-            Assert.AreEqual(12, mol.Bonds.Count);
+            var mol = new Molecule(provider);
+            Assert.AreEqual(46, mol.Atoms.Count);
+            Assert.AreEqual(10, mol.Bonds.Count(s => s.IsAromatic));
+            Assert.AreEqual(4, mol.Bonds.Count(s => s.Order == 3));
         }
 
         [TestMethod]

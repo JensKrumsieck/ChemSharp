@@ -1,4 +1,5 @@
-﻿using ChemSharp.Molecules;
+﻿using System.Linq;
+using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,6 +43,9 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(12, mol.Atoms.Count);
             Assert.AreEqual(12, mol.Bonds.Count);
             Assert.AreEqual(78.11184, mol.Atoms.MolecularWeight(), 0.02);
+            //are C-C bonds in benzene aromatic? :D
+            foreach (var b in mol.Bonds.Where(b => b.Atoms.Count(c => c.Symbol == "C") == 2))
+                Assert.IsTrue(b.IsAromatic);
         }
 
         [TestMethod]

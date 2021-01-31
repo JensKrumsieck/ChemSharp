@@ -81,7 +81,11 @@ namespace ChemSharp.Molecules.DataProviders
             //subtract 1 as mol2 starts counting at 1
             var a1 = cols[1].ToInt() - 1;
             var a2 = cols[2].ToInt() - 1;
-            return new Bond(Atoms.ElementAt(a1), Atoms.ElementAt(a2));
+            var bond = new Bond(Atoms.ElementAt(a1), Atoms.ElementAt(a2));
+            var type = cols[3];
+            if (type == "ar") bond.IsAromatic = true;
+            if (int.TryParse(type, out var order)) bond.Order = order;
+            return bond;
         }
 
 

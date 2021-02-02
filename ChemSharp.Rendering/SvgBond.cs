@@ -8,21 +8,18 @@ namespace ChemSharp.Rendering
 {
     public class SvgBond
     {
-        protected Bond Bond;
+        public readonly Bond Bond;
+
+        public SvgBond(Bond bond) { Bond = bond; }
 
         public ISvgItem Tag => CreateTag();
 
-        public SvgBond(Bond bond)
-        {
-            Bond = bond;
-        }
-
         private ISvgItem CreateTag()
         {
-            var atom1 = Bond.Atom1.Location;
-            var atom2 = Bond.Atom2.Location;
-            var start = new Vector2(atom1.X * Constants.AngstromToPixels, atom1.Y * Constants.AngstromToPixels);
-            var end = new Vector2(atom2.X * Constants.AngstromToPixels, atom2.Y * Constants.AngstromToPixels);
+            var atom1 = Bond.Atom1.Location * Constants.AngstromToPixels;
+            var atom2 = Bond.Atom2.Location * Constants.AngstromToPixels;
+            var start = new Vector2(atom1.X, atom1.Y);
+            var end = new Vector2(atom2.X, atom2.Y);
 
             var realStart = start;
             var realEnd = end;
@@ -39,6 +36,8 @@ namespace ChemSharp.Rendering
             path.PathPartList.Add(SvgPathPart.ClosePart);
             return path;
         }
+
+
 
         private static IEnumerable<SvgPathPart> AddSingleBondParts(Vector2 start, Vector2 end)
         {

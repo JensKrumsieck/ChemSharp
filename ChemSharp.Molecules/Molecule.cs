@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules
 {
@@ -117,5 +118,12 @@ namespace ChemSharp.Molecules
             foreach (var atom in Atoms)
                 atom.Mapping = mapping;
         }
+
+        /// <summary>
+        /// returns neighbors of specific atom
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public IEnumerable<Atom> Neighbors(Atom a) => AtomUtil.Neighbors(a, this);
     }
 }

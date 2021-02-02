@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Molecules.DataProviders;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -60,6 +61,18 @@ namespace ChemSharp.Molecules
 
         [JsonIgnore]
         private string _color;
+
+        static Element()
+        {
+            var transitionGroups = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            foreach (var element in ElementDataProvider.ElementData)
+            {
+                if (element.Group == 0) continue;
+                var saturation = transitionGroups.Contains(element.Group) ? 0 : element.Group <= 3 ? element.Group : element.Group <= 14 ? 4 : 8 - (element.Group - 10);
+                DesiredSaturation.Add(element.Symbol, saturation);
+            }
+        }
+        public static Dictionary<string, int> DesiredSaturation = new Dictionary<string, int>();
     }
 
 }

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Xml;
+using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
@@ -22,19 +23,8 @@ namespace ChemSharp.Molecules.DataProviders
         {
             if (!FileHandler.RecipeDictionary.ContainsKey("cdxml"))
                 FileHandler.RecipeDictionary.Add("cdxml", s => new PlainFile<string>(s));
-            var transitionGroups = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-            foreach (var element in ElementDataProvider.ElementData)
-            {
-                if (element.Group == 0) continue;
-                var saturation = transitionGroups.Contains(element.Group) ? 0 : element.Group <= 3 ? element.Group : element.Group <= 14 ? 4 : 8 - (element.Group - 10);
-                _desiredSaturation.Add(element.Symbol, saturation);
-            }
         }
 
-        /// <summary>
-        /// Desired saturation numbers
-        /// </summary>
-        private static Dictionary<string, int> _desiredSaturation = new Dictionary<string, int>();
 
         public CDXMLDataProvider(string path)
         {
@@ -122,9 +112,8 @@ namespace ChemSharp.Molecules.DataProviders
             var bondList = Bonds.ToList();
             foreach (var atom in Atoms)
             {
-                var bonds = Bonds.Where(s => s.Atom1.Equals(atom) || s.Atom2.Equals(atom));
-                var order = bonds.Sum(s => s.Order);
-                var maxOrder = _desiredSaturation.ContainsKey(atom.Symbol) ? _desiredSaturation[atom.Symbol] : 4;
+                var order = Bonds.Saturation(atom);
+                var maxOrder = Element.DesiredSaturation.ContainsKey(atom.Symbol) ? Element.DesiredSaturation[atom.Symbol] : 4;
                 for (var i = order; i < maxOrder; i++)
                 {
                     var h = new Atom("H") { Title = $"implicit hydrogen at {atom}" };

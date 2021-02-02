@@ -5,7 +5,9 @@ namespace ChemSharp.Rendering
 {
     public class SvgAtom
     {
-        protected Atom Atom;
+        public readonly Atom Atom;
+
+        public bool HasImplicitHydrogen;
 
         public ISvgItem Tag => new SvgText
         {
@@ -16,11 +18,10 @@ namespace ChemSharp.Rendering
             VerticalAlign = "central",
             X = Atom.Location.X * Constants.AngstromToPixels,
             Y = Atom.Location.Y * Constants.AngstromToPixels,
-            Text = Atom.Symbol
+            Text = Atom.Symbol + (HasImplicitHydrogen ? "H" : "")
         };
 
-        public SvgAtom(Atom atom)
-        { Atom = atom; }
+        public SvgAtom(Atom atom) { Atom = atom; }
     }
 }
 

@@ -11,6 +11,7 @@
 | `ChemSharp.Molecules` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Molecules)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
 | `ChemSharp.Spectroscopy` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Spectroscopy)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
 |`ChemSharp.UnitConversion` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.UnitConversion)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
+| `ChemSharp.Rendering` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Rendering)](https://www.nuget.org/packages/ChemSharp.Rendering/)|
 
 ### Features
 * [x] Open and process Spectroscopy related files (see Supported Filetypes)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Serialization;
@@ -33,7 +34,7 @@ namespace ChemSharp.Rendering.Primitives
         [XmlAttribute("font-size")]
         public string FontSize
         {
-            get => ActualFontSize.ToString(CultureInfo.InvariantCulture) + "px";
+            get => ActualFontSize.ToInvariantString() + "px";
             set => Convert.ToDouble(value.Replace("px", ""), CultureInfo.InvariantCulture);
         }
 

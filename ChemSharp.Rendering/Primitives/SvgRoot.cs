@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace ChemSharp.Rendering.Primitives
         [XmlAttribute("width")]
         public string Width
         {
-            get => ActualWidth.ToString(CultureInfo.InvariantCulture) + "px";
+            get => ActualWidth.ToInvariantString() + "px";
             set => Convert.ToDouble(value.Replace("px", ""), CultureInfo.InvariantCulture);
         }
 
@@ -33,7 +34,7 @@ namespace ChemSharp.Rendering.Primitives
         [XmlAttribute("height")]
         public string Height
         {
-            get => ActualHeight.ToString(CultureInfo.InvariantCulture) + "px";
+            get => ActualHeight.ToInvariantString() + "px";
             set => Convert.ToDouble(value.Replace("px", ""), CultureInfo.InvariantCulture);
         }
 

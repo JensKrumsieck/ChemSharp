@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using ChemSharp.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ChemSharp.Rendering.Primitives
@@ -21,7 +21,7 @@ namespace ChemSharp.Rendering.Primitives
         public SvgPartType SvgPartType;
         public List<double> Parameters = new List<double>();
 
-        public override string ToString() => $"{(char)SvgPartType} {(Parameters != null ? string.Join(",", Parameters.Select(s => s.ToString(CultureInfo.InvariantCulture))) : "")}";
+        public override string ToString() => $"{(char)SvgPartType} {(Parameters != null ? string.Join(",", Parameters.Select(s => s.ToInvariantString())) : "")}";
 
         public static SvgPathPart ClosePart => new SvgPathPart { SvgPartType = SvgPartType.ClosePath };
     }

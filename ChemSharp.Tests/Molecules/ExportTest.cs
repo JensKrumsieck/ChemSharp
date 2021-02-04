@@ -28,8 +28,8 @@ namespace ChemSharp.Tests.Molecules
         [TestMethod]
         public void TestExportMol2()
         {
-            const string path = "files/tep.mol2"; 
-            var mol = new Molecule(new Mol2DataProvider(path)); 
+            const string path = "files/tep.mol2";
+            var mol = new Molecule(new Mol2DataProvider(path));
             const string export = dir + "test.mol2";
             Mol2Exporter.Export(mol, export);
             var importMol = new Molecule(new Mol2DataProvider(export));

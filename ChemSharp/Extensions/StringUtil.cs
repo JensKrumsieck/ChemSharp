@@ -14,6 +14,19 @@ namespace ChemSharp.Extensions
         public static string Spaces(int n) => new string(' ', n);
 
         /// <summary>
+        /// Shorthand for culture conversion
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToInvariantString(this float input) => input.ToString(CultureInfo.InvariantCulture);
+        /// <summary>
+        /// Shorthand for culture conversion
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToInvariantString(this double input) => input.ToString(CultureInfo.InvariantCulture);
+
+        /// <summary>
         /// shorthand for splitting strings into line array
         /// </summary>
         /// <param name="input"></param>

@@ -26,24 +26,23 @@ namespace ChemSharp.Molecules.Export
         public override void Export(IExportable exportable, Stream stream)
         {
             base.Export(exportable, stream);
-            var mol = exportable as Molecule;
-            Debug.Assert(mol != null, nameof(mol) + " != null");
-            var atomsCount = mol.Atoms.Count;
-            var bondsCount = mol.Bonds.Count;
+            Debug.Assert(Molecule != null, nameof(Molecule) + " != null");
+            var atomsCount = Molecule.Atoms.Count;
+            var bondsCount = Molecule.Bonds.Count;
             using var sw = new StreamWriter(stream);
-            sw.WriteLine($"@<TRIPOS>MOLECULE\n{mol.Title}");
+            sw.WriteLine($"@<TRIPOS>MOLECULE\n{Molecule.Title}");
             sw.WriteLine($"{atomsCount} {bondsCount} {0} {0} {0}\n");
             sw.WriteLine("SMALL\nNO_CHARGES\n\n@<TRIPOS>ATOM");
             for (var i = 0; i < atomsCount; i++)
             {
-                var atom = mol.Atoms[i];
+                var atom = Molecule.Atoms[i];
                 _atomsDictionary.Add(atom, i + 1);
                 sw.WriteLine(AtomBlock(atom, i));
             }
             sw.WriteLine("@<TRIPOS>BOND");
             for (var i = 0; i < bondsCount; i++)
             {
-                var bond = mol.Bonds[i];
+                var bond = Molecule.Bonds[i];
                 sw.WriteLine(BondBlock(bond, i));
             }
         }

@@ -6,9 +6,11 @@ namespace ChemSharp.Molecules.Export
 {
     public abstract class AbstractMoleculeExporter : IExporter
     {
+        public Molecule Molecule { get; protected set; }
+
         public virtual void Export(IExportable exportable, Stream stream)
         {
-            if (!(exportable is Molecule)) throw new NotSupportedException("Please use Molecule Type");
+            Molecule = exportable as Molecule ?? throw new NotSupportedException("Please use Molecule Type");
         }
     }
 }

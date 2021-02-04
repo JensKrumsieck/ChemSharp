@@ -2,11 +2,11 @@
 using ChemSharp.Molecules;
 using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
+using ChemSharp.Rendering.Svg;
 using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using ChemSharp.Rendering.Svg;
 
 namespace ChemSharp.Rendering.Export
 {

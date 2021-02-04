@@ -1,4 +1,5 @@
 ﻿using ChemSharp.DataProviders;
+using ChemSharp.Export;
 using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.Extension;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace ChemSharp.Spectroscopy
 {
-    public class Spectrum : ISpectrum, IDataObject
+    public class Spectrum : ISpectrum, IDataObject, IExportable
     {
         ///<summary>
         /// <inheritdoc />
@@ -16,7 +17,7 @@ namespace ChemSharp.Spectroscopy
 
         public Spectrum(IXYDataProvider provider)
         {
-            DataProvider = provider; 
+            DataProvider = provider;
             DataProviderChanged();
         }
 

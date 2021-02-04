@@ -1,7 +1,6 @@
 ﻿using ChemSharp.Export;
-using System;
+using ChemSharp.Extensions;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 
 namespace ChemSharp.Molecules.Export
@@ -21,19 +20,18 @@ namespace ChemSharp.Molecules.Export
         public override void Export(IExportable exportable, Stream stream)
         {
             base.Export(exportable, stream);
-            var mol = (exportable as Molecule);
-            Debug.Assert(mol != null, nameof(mol) + " != null");
+            Debug.Assert(Molecule != null, nameof(Molecule) + " != null");
 
-            var count = mol.Atoms.Count;
-            var name = mol.Title;
+            var count = Molecule.Atoms.Count;
+            var name = Molecule.Title;
             using var sw = new StreamWriter(stream);
             sw.WriteLine(count);
             sw.WriteLine(name);
-            foreach (var atom in mol.Atoms)
+            foreach (var atom in Molecule.Atoms)
                 sw.WriteLine($"{atom.Symbol}" +
-                             $"\t{atom.Location.X.ToString(CultureInfo.InvariantCulture)}" +
-                             $"\t{atom.Location.Y.ToString(CultureInfo.InvariantCulture)}" +
-                             $"\t{atom.Location.Z.ToString(CultureInfo.InvariantCulture)}");
+                             $"\t{atom.Location.X.ToInvariantString()}" +
+                             $"\t{atom.Location.Y.ToInvariantString()}" +
+                             $"\t{atom.Location.Z.ToInvariantString()}");
         }
     }
 }

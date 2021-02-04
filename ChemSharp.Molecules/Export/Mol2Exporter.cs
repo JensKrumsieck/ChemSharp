@@ -1,9 +1,9 @@
 ﻿using ChemSharp.Export;
+using ChemSharp.Extensions;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Molecules.Export
 {
@@ -47,15 +47,16 @@ namespace ChemSharp.Molecules.Export
                 sw.WriteLine(BondBlock(bond, i));
             }
         }
-        
+
         private static string AtomBlock(Atom atom, int i) => $"{StringUtil.Spaces(i < 9 ? 5 : 4)}{i + 1} {atom.Title}" +
-                                                             $"{StringUtil.Spaces(atom.Location.X > 0 && atom.Location.X < 10 ? 12 : 11)}{atom.Location.X.ToString("N4", CultureInfo.InvariantCulture)}" +
-                                                             $"{StringUtil.Spaces(atom.Location.Y > 0 && atom.Location.Y < 10 ? 4 : 3)}{atom.Location.Y.ToString("N4", CultureInfo.InvariantCulture)}" +
-                                                             $"{StringUtil.Spaces(atom.Location.Z > 0 && atom.Location.Z < 10 ? 4 : 3)}{atom.Location.Z.ToString("N4", CultureInfo.InvariantCulture)}" +
+                                                             $"{StringUtil.Spaces(4)}" +
+                                                             $"{CoordinateString(atom.Location.X)}" +
+                                                             $"{CoordinateString(atom.Location.Y)}" +
+                                                             $"{CoordinateString(atom.Location.Z)}" +
                                                              $" {atom.Symbol}" +
                                                              $"{StringUtil.Spaces(4)}1" +
                                                              $" UNL1 {StringUtil.Spaces(4)} 0.000";
-
+        private static string CoordinateString(float position) => $"{StringUtil.Spaces(position > 0 && position < 10 ? 4 : 3)}{position.ToString("N4", CultureInfo.InvariantCulture)}";
         private string BondBlock(Bond bond, int i)
         {
             var atom1 = _atomsDictionary[bond.Atom1];

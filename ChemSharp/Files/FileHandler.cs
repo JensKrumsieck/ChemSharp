@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace ChemSharp.Files
 {
@@ -33,6 +34,41 @@ namespace ChemSharp.Files
             file.ReadFile();
 
             return file;
+        }
+
+        /// <summary>
+        /// Get Extension as string
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetExtension(string path)
+        {
+            var ext = Path.GetExtension(path);
+            //fallback for nmr files
+            ext = string.IsNullOrEmpty(ext) ? Path.GetFileName(path) : ext.Remove(0, 1);
+            return ext.ToLower();
+        }
+
+        /// <summary>
+        /// Handles IDataProvider creation
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="dataProviderDictionary"></param>
+        /// <returns></returns>
+        public static T CreateProvider<T>(string path, Dictionary<string, Type> dataProviderDictionary)
+        {
+            var ext = FileHandler.GetExtension(path);
+            //check if ext is supported
+            if (!dataProviderDictionary.ContainsKey(ext)) throw new FileLoadException($"File type {ext} is not supported");
+            var type = dataProviderDictionary[ext];
+            var param = Expression.Parameter(typeof(string), "path");
+            var creator = Expression
+                .Lambda<Func<string, T>>(
+                    Expression.New(
+                        type.GetConstructor(new[] { typeof(string) }) ??
+                        throw new InvalidOperationException("null given, Extension Handling failed"), param), param)
+                .Compile();
+            return creator(path);
         }
     }
 }

@@ -9,18 +9,15 @@ namespace ChemSharp.Spectroscopy
 {
     public class Spectrum : ISpectrum, IDataObject
     {
-        private IXYDataProvider _dataProvider;
         ///<summary>
         /// <inheritdoc />
         /// </summary>
-        public IXYDataProvider DataProvider
+        public IXYDataProvider DataProvider { get; }
+
+        public Spectrum(IXYDataProvider provider)
         {
-            get => _dataProvider;
-            set
-            {
-                _dataProvider = value;
-                DataProviderChanged();
-            }
+            DataProvider = provider; 
+            DataProviderChanged();
         }
 
         /// <summary>
@@ -28,8 +25,8 @@ namespace ChemSharp.Spectroscopy
         /// </summary>
         private void DataProviderChanged()
         {
-            XYData = _dataProvider.XYData.ToList();
-            Title = _dataProvider.Path;
+            XYData = DataProvider.XYData.ToList();
+            Title = DataProvider.Path;
         }
 
         /// <summary>

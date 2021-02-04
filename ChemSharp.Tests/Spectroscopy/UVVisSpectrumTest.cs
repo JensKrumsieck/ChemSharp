@@ -12,7 +12,7 @@ namespace ChemSharp.Tests.Spectroscopy
         {
             const string path = "files/uvvis.dsw";
             var prov = new VarianUVVisProvider(path);
-            var uvvis = new Spectrum() { DataProvider = prov };
+            var uvvis = new Spectrum(prov);
             Assert.AreEqual(901, uvvis.XYData.Count);
             Assert.AreEqual(901, uvvis.Derivative.Count);
             Assert.AreEqual(901, uvvis.Integral.Count);
@@ -23,7 +23,7 @@ namespace ChemSharp.Tests.Spectroscopy
         {
             const string path = "files/uvvis.csv";
             var prov = new GenericCSVProvider(path);
-            var uvvis = new Spectrum() { DataProvider = prov };
+            var uvvis = new Spectrum(prov);
             Assert.AreEqual(901, uvvis.XYData.Count);
             Assert.AreEqual(901, uvvis.Derivative.Count);
             Assert.AreEqual(901, uvvis.Integral.Count);

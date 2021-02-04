@@ -16,7 +16,7 @@ namespace ChemSharp.Tests.Spectroscopy
         {
             const string par = "files/epr.par";
             var prov = new BrukerEPRProvider(par);
-            epr = new Spectrum() { DataProvider = prov };
+            epr = new Spectrum(prov);
         }
 
         [TestMethod]

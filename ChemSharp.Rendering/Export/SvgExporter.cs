@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using ChemSharp.Export;
+﻿using ChemSharp.Export;
 using ChemSharp.Molecules;
 using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
+using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ChemSharp.Rendering.Export
 {
@@ -20,7 +20,7 @@ namespace ChemSharp.Rendering.Export
         public static void Export(Molecule mol, string filename, double width, double height)
         {
             var svgMol = mol.ToSvg();
-            var exporter = new SvgExporter {Width = width, Height = height};
+            var exporter = new SvgExporter { Width = width, Height = height };
             exporter.Export(svgMol, File.Create(filename));
         }
 
@@ -59,7 +59,7 @@ namespace ChemSharp.Rendering.Export
         public void Export(IExportable exportable, Stream stream)
         {
             if (!(exportable is SvgMolecule mol)) throw new NotSupportedException("Please use SvgMolecule Type");
-            
+
             using var streamWriter = new StreamWriter(stream);
             streamWriter.Write(ExportToString(mol));
         }

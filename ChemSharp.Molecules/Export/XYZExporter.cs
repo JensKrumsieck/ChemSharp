@@ -25,7 +25,7 @@ namespace ChemSharp.Molecules.Export
             using var sw = new StreamWriter(stream);
             sw.WriteLine(count);
             sw.WriteLine(name);
-            foreach(var atom in mol.Atoms) 
+            foreach (var atom in mol.Atoms)
                 sw.WriteLine($"{atom.Symbol}" +
                              $"\t{atom.Location.X.ToString(CultureInfo.InvariantCulture)}" +
                              $"\t{atom.Location.Y.ToString(CultureInfo.InvariantCulture)}" +

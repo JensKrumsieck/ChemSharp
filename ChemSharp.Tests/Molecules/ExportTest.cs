@@ -1,9 +1,9 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Export;
+using ChemSharp.Rendering.Export;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using ChemSharp.Rendering.Export;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -31,7 +31,7 @@ namespace ChemSharp.Tests.Molecules
             const string path = "files/tep.mol2";
             var mol = new Molecule(new Mol2DataProvider(path));
             const string export = dir + "test.svg";
-            SvgExporter.Export(mol, export, 1000,1000);
+            SvgExporter.Export(mol, export, 1000, 1000);
             Assert.IsTrue(File.Exists(dir + "test.svg"));
         }
 

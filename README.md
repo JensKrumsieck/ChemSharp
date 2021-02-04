@@ -22,23 +22,23 @@
 
 ### Supported Filetypes
 * ### Molecule
-	* Import
+	* #### Import
 		* XYZ
 		* CIF (crystallographic information file)
 		* MOL2 (TRIPOS Mol2)
 		* CDXML (Single Molecule only)
-	* Export
+	* #### Export
 		* XYZ
 		* MOL2
 		* SVG
 
 * ### Spectroscopy
-	* Import
+	* #### Import
 		* Varian/Agilient DSW
 		* Bruker EMX SPC/PAR
 		* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
 		* CSV
-	* Export
+	* #### Export
 		* CSV
 
 #### Used Libraries:

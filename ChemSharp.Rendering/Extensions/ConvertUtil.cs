@@ -1,4 +1,5 @@
 ﻿using ChemSharp.Molecules;
+using ChemSharp.Rendering.Svg;
 
 namespace ChemSharp.Rendering.Extensions
 {

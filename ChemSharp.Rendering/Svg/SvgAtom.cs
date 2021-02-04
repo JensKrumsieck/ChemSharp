@@ -1,7 +1,7 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Primitives;
 
-namespace ChemSharp.Rendering
+namespace ChemSharp.Rendering.Svg
 {
     public class SvgAtom
     {

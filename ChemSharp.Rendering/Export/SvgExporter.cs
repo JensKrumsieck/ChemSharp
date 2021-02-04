@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using ChemSharp.Rendering.Svg;
 
 namespace ChemSharp.Rendering.Export
 {

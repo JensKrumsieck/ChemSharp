@@ -1,12 +1,12 @@
-﻿using ChemSharp.Export;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ChemSharp.Export;
 using ChemSharp.Molecules;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace ChemSharp.Rendering
+namespace ChemSharp.Rendering.Svg
 {
     public class SvgMolecule : IExportable
     {

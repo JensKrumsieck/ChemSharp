@@ -1,10 +1,10 @@
-﻿using ChemSharp.Molecules;
-using ChemSharp.Rendering.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using ChemSharp.Molecules;
+using ChemSharp.Rendering.Primitives;
 
-namespace ChemSharp.Rendering
+namespace ChemSharp.Rendering.Svg
 {
     public class SvgBond
     {

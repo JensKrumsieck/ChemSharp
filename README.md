@@ -14,26 +14,32 @@
 | `ChemSharp.Rendering` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Rendering)](https://www.nuget.org/packages/ChemSharp.Rendering/)|
 
 ### Features
-* [x] Open and process Spectroscopy related files (see Supported Filetypes)
-* [x] Open and process Molecular files (see Supported Filetypes)
-* [x] Sum formula operations and elemental analysis calculation
-* [x] Unit Conversion for 
-	* [x] Energy
-	* [x] Magnetic Units
-	* [x] Mass
-* [x] Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
+* Open and process Spectroscopy related files (see Supported Filetypes)
+* Open and process Molecular files (see Supported Filetypes)
+* Sum formula operations and elemental analysis calculation
+* Unit Conversion for (Energy, Magnetic Units, Mass)
+* Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes
-* [x] Molecule
-	* [x] XYZ
-	* [x] CIF (crystallographic information file)
-	* [x] MOL2 (TRIPOS Mol2)
+* Molecule
+	* Import
+		* XYZ
+		* CIF (crystallographic information file)
+		* MOL2 (TRIPOS Mol2)
+		* CDXML (Single Molecule only)
+	* Export
+		* XYZ
+		* MOL2
+		* SVG
 
-* [x] Spectroscopy
-	* [x] Varian/Agilient DSW
-	* [x] Bruker EMX SPC/PAR
-	* [x] Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
-	* [x] CSV
+* Spectroscopy
+	* Import
+		* Varian/Agilient DSW
+		* Bruker EMX SPC/PAR
+		* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
+		* CSV
+	* Export
+		* CSV
 
 #### Used Libraries:
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)

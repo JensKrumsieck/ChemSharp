@@ -30,7 +30,6 @@ namespace ChemSharp.Molecules.Export
                              $"\t{atom.Location.X.ToString(CultureInfo.InvariantCulture)}" +
                              $"\t{atom.Location.Y.ToString(CultureInfo.InvariantCulture)}" +
                              $"\t{atom.Location.Z.ToString(CultureInfo.InvariantCulture)}");
-            sw.Close();
         }
     }
 }

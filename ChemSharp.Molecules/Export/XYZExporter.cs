@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Export;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 
@@ -8,7 +9,7 @@ namespace ChemSharp.Molecules.Export
     /// <summary>
     /// Exports a Molecule to XYZ
     /// </summary>
-    public class XYZExporter : IExporter
+    public class XYZExporter : AbstractMoleculeExporter
     {
         public static void Export(Molecule molecule, string filename)
         {
@@ -17,9 +18,12 @@ namespace ChemSharp.Molecules.Export
             exporter.Export(molecule, stream);
         }
 
-        public void Export(IExportable exportable, Stream stream)
+        public override void Export(IExportable exportable, Stream stream)
         {
-            if (!(exportable is Molecule mol)) throw new NotSupportedException("Please use Molecule Type");
+            base.Export(exportable, stream);
+            var mol = (exportable as Molecule);
+            Debug.Assert(mol != null, nameof(mol) + " != null");
+
             var count = mol.Atoms.Count;
             var name = mol.Title;
             using var sw = new StreamWriter(stream);

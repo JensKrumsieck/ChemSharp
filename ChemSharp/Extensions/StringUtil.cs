@@ -7,6 +7,13 @@ namespace ChemSharp.Extensions
     public static class StringUtil
     {
         /// <summary>
+        /// Provides string with n spaces
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static string Spaces(int n) => new string(' ', n);
+
+        /// <summary>
         /// shorthand for splitting strings into line array
         /// </summary>
         /// <param name="input"></param>

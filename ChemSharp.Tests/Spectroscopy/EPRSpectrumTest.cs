@@ -1,6 +1,5 @@
 ﻿using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy;
-using ChemSharp.Spectroscopy.DataProviders;
 using ChemSharp.Spectroscopy.Extension;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -14,9 +13,8 @@ namespace ChemSharp.Tests.Spectroscopy
         [TestInitialize]
         public void Init()
         {
-            const string par = "files/epr.par";
-            var prov = new BrukerEPRProvider(par);
-            epr = new Spectrum(prov);
+            const string path = "files/epr.par";
+            epr = SpectrumFactory.Create(path);
         }
 
         [TestMethod]

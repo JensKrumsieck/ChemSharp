@@ -15,8 +15,7 @@ namespace ChemSharp.Tests.Spectroscopy
         public void SetUp()
         {
             const string path = "files/nmr/pdata/1/1r";
-            var prov = new BrukerNMRProvider(path);
-            _nmr = new Spectrum(prov);
+            _nmr = SpectrumFactory.Create(path);
         }
 
         [TestMethod]
@@ -24,7 +23,7 @@ namespace ChemSharp.Tests.Spectroscopy
         {
             const string path = "files/nmr/fid";
             var prov = new BrukerNMRProvider(path, true);
-            var nmr = new Spectrum(prov);
+            var nmr = SpectrumFactory.Create(path);
             //32768 Data points, taken from procs file
             Assert.AreEqual(32768, nmr.XYData.Count);
         }

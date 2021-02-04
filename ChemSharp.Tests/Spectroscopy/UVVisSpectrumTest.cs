@@ -11,8 +11,7 @@ namespace ChemSharp.Tests.Spectroscopy
         public void TestUVVisCreation()
         {
             const string path = "files/uvvis.dsw";
-            var prov = new VarianUVVisProvider(path);
-            var uvvis = new Spectrum(prov);
+            var uvvis = SpectrumFactory.Create(path);
             Assert.AreEqual(901, uvvis.XYData.Count);
             Assert.AreEqual(901, uvvis.Derivative.Count);
             Assert.AreEqual(901, uvvis.Integral.Count);

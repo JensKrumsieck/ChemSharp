@@ -40,8 +40,21 @@ const string file = "files/multicsv.csv";
 var provider = new MultiCSVProvider(file);
 ```
 #### Create Molecules
-{Documentation Coming Soon}
+```csharp
+//Creates a molecule from cif file
+const string path = "files/cif.cif";
+var mol = MoleculeFactory.Create(path);
 
+//You can also create molecules by selecting the provider yourself
+const string path = "files/benzene.mol2";
+var provider = new Mol2DataProvider(path);
+var mol = new Molecule(provider);
+
+//...or by just adding the Atoms & Bonds as Lists
+const string path = "files/cif.cif";
+var provider = new CIFDataProvider(path);
+var mol = new Molecule(provider.Atoms, provider.Bonds);
+```
 ### Supported Filetypes
 * ### Molecule
 	* #### Import

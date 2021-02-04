@@ -1,14 +1,16 @@
-﻿using ChemSharp.Molecules.DataProviders;
+﻿using ChemSharp.DataProviders;
+using ChemSharp.Export;
+using ChemSharp.Molecules.DataProviders;
+using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Math;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules
 {
-    public class Molecule
+    public class Molecule : IExportable
     {
         /// <summary>
         /// Title for Molecule
@@ -48,37 +50,25 @@ namespace ChemSharp.Molecules
         public Molecule(IAtomDataProvider provider) : this()
         {
             AtomDataProvider = provider;
-            if (provider is IBondDataProvider bondProvider) BondDataProvider = bondProvider;
+            Atoms = provider.Atoms.ToList();
+            if (provider is IBondDataProvider bondProvider)
+            {
+                BondDataProvider = bondProvider;
+                Bonds = bondProvider.Bonds.ToList();
+            }
             else RecalculateBonds();
+            Title = ((AbstractDataProvider)AtomDataProvider).Path;
         }
 
-        private IAtomDataProvider _atomDataProvider;
         ///<summary>
         /// Provides AtomData
         /// </summary>
-        public IAtomDataProvider AtomDataProvider
-        {
-            get => _atomDataProvider;
-            set
-            {
-                _atomDataProvider = value;
-                Atoms = _atomDataProvider.Atoms.ToList();
-            }
-        }
+        public readonly IAtomDataProvider AtomDataProvider;
 
-        private IBondDataProvider _bondDataProvider;
         ///<summary>
         /// Provides BondData
         /// </summary>
-        public IBondDataProvider BondDataProvider
-        {
-            get => _bondDataProvider;
-            set
-            {
-                _bondDataProvider = value;
-                Bonds = _bondDataProvider.Bonds.ToList();
-            }
-        }
+        public IBondDataProvider BondDataProvider { get; private set; }
 
         /// <summary>
         /// Wrapper for Centroid Method
@@ -94,7 +84,7 @@ namespace ChemSharp.Molecules
         public void RecalculateBonds()
         {
             //discard data provider and reset bonds
-            _bondDataProvider = null;
+            BondDataProvider = null;
             Bonds = new List<Bond>();
             var matched = new HashSet<(int, int)>();
             for (var i = 0; i < Atoms.Count(); i++)

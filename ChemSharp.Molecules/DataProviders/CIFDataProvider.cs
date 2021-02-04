@@ -1,4 +1,5 @@
-﻿using ChemSharp.Extensions;
+﻿using ChemSharp.DataProviders;
+using ChemSharp.Extensions;
 using ChemSharp.Files;
 using ChemSharp.Math;
 using System;
@@ -8,7 +9,7 @@ using System.Numerics;
 
 namespace ChemSharp.Molecules.DataProviders
 {
-    public class CIFDataProvider : IAtomDataProvider, IBondDataProvider
+    public class CIFDataProvider : AbstractDataProvider, IAtomDataProvider, IBondDataProvider
     {
         /// <summary>
         /// import recipes
@@ -19,7 +20,7 @@ namespace ChemSharp.Molecules.DataProviders
                 FileHandler.RecipeDictionary.Add("cif", s => new PlainFile<string>(s));
         }
 
-        public CIFDataProvider(string path)
+        public CIFDataProvider(string path) : base(path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
             var loops = Loops(file.Content);

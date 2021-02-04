@@ -26,8 +26,6 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// When DataProvider is changed, add data
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DataProviderChanged()
         {
             XYData = _dataProvider.XYData.ToList();
@@ -84,9 +82,6 @@ namespace ChemSharp.Spectroscopy
             }
         }
 
-        /// <summary>
-        /// <inheritdoc cref="ISpectrum.Title"/>
-        /// </summary>
         public DateTime CreationDate => this.CreationDate();
     }
 }

@@ -1,18 +1,19 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.DataProviders;
+using ChemSharp.Files;
+using ChemSharp.Molecules.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Xml;
-using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
     /// <summary>
     /// This class does not precisely render ChemDraw Files, but reads atom positions to get a 2D Molecule in 3D Space
     /// </summary>
-    public class CDXMLDataProvider : IAtomDataProvider, IBondDataProvider
+    public class CDXMLDataProvider : AbstractDataProvider, IAtomDataProvider, IBondDataProvider
     {
         private readonly Dictionary<int, Atom> _idToAtoms = new Dictionary<int, Atom>();
 
@@ -26,7 +27,7 @@ namespace ChemSharp.Molecules.DataProviders
         }
 
 
-        public CDXMLDataProvider(string path)
+        public CDXMLDataProvider(string path) : base(path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
             var data = string.Join('\n', file.Content);

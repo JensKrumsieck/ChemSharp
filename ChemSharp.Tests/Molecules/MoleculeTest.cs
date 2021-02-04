@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using ChemSharp.Molecules;
+﻿using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -15,10 +15,8 @@ namespace ChemSharp.Tests.Molecules
             //Mo-Corrole, Cl2 Ligand, OMePh Meso, 79 Atoms, 89 Bonds C40Cl2H29MoN4O3, M=780.51
             const string path = "files/cif.cif";
             var provider = new CIFDataProvider(path);
-            var mol = new Molecule() { AtomDataProvider = provider };
+            var mol = new Molecule(provider);
             Assert.AreEqual(79, mol.Atoms.Count);
-            Assert.IsNull(mol.Bonds);
-            mol.BondDataProvider = provider;
             Assert.AreEqual(89, mol.Bonds?.Count);
             Assert.AreEqual(780.51, mol.Atoms.MolecularWeight(), 0.035);
         }
@@ -76,9 +74,8 @@ namespace ChemSharp.Tests.Molecules
         {
             const string path = "files/mescho.xyz";
             var provider = new XYZDataProvider(path);
-            var mol = new Molecule() { AtomDataProvider = provider }; ;
+            var mol = new Molecule(provider);
             Assert.AreEqual(23, mol.Atoms.Count);
-            Assert.IsNull(mol.Bonds);
         }
     }
 }

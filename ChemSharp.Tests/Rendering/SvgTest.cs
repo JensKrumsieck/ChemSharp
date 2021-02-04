@@ -26,7 +26,7 @@ namespace ChemSharp.Tests.Rendering
         {
             const string cif = "files/cif.cif";
             var molecule = new Molecule(new CIFDataProvider(cif)).ToSvg();
-            var text = molecule.GetSerializedDocument(); 
+            var text = molecule.GetSerializedDocument();
             Assert.IsInstanceOfType(text, typeof(string));
         }
 
@@ -36,7 +36,7 @@ namespace ChemSharp.Tests.Rendering
             const string path = "files/porphin.svg";
             var ser = new XmlSerializer(typeof(SvgRoot));
             var xmlReader = new XmlTextReader(path);
-            var data = ser.Deserialize(xmlReader); 
+            var data = ser.Deserialize(xmlReader);
             Assert.IsInstanceOfType(data, typeof(SvgRoot));
         }
     }

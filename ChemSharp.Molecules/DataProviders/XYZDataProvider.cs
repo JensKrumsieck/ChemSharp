@@ -1,4 +1,5 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.DataProviders;
+using ChemSharp.Files;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
-    public class XYZDataProvider : IAtomDataProvider
+    public class XYZDataProvider : AbstractDataProvider, IAtomDataProvider
     {
         /// <summary>
         /// import recipes
@@ -18,7 +19,7 @@ namespace ChemSharp.Molecules.DataProviders
                 FileHandler.RecipeDictionary.Add("xyz", s => new PlainFile<string>(s));
         }
 
-        public XYZDataProvider(string path)
+        public XYZDataProvider(string path) : base(path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
             Atoms = ReadAtoms(file.Content).ToList();

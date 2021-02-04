@@ -21,7 +21,7 @@
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Supported Filetypes
-* Molecule
+* ## Molecule
 	* Import
 		* XYZ
 		* CIF (crystallographic information file)
@@ -32,7 +32,7 @@
 		* MOL2
 		* SVG
 
-* Spectroscopy
+* ## Spectroscopy
 	* Import
 		* Varian/Agilient DSW
 		* Bruker EMX SPC/PAR

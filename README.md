@@ -20,6 +20,28 @@
 * Unit Conversion for (Energy, Magnetic Units, Mass)
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
+### Basic Usage
+#### Create Spectra
+```csharp
+//Creates an UV/Vis Spectrum
+const string path = "files/uvvis.dsw";
+var uvvis = SpectrumFactory.Create(path);
+
+//You can also create spectra by choosing the provider 
+//explicitly. e.g. csv files
+//Reads in an CSV Spectrum (first data only)
+const string path = "files/uvvis.csv";
+var prov = new GenericCSVProvider(path);
+var uvvis = new Spectrum(prov);
+
+//To read in all CSV Data stored as (X,Y) pairs use the MultiCSVProvider
+//Each Spectrum will be stored as DataPoint[] in MultiXYData
+const string file = "files/multicsv.csv";
+var provider = new MultiCSVProvider(file);
+```
+#### Create Molecules
+{Documentation Coming Soon}
+
 ### Supported Filetypes
 * ### Molecule
 	* #### Import

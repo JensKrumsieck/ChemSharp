@@ -80,5 +80,5 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)
 
 #### Compatibility
-* NET Standard 2.0 (tested against NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
-* NET Standard 2.1 (tested against NET 5.0, see Unit Tests)
+* NET Standard 2.0 (tested with NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
+* NET Standard 2.1 (tested with NET 5.0, see Unit Tests)

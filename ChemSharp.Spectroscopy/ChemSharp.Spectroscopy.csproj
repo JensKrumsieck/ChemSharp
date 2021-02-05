@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageId>ChemSharp.Spectroscopy</PackageId>
     <Authors>Jens Krumsieck</Authors>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 	  <Version>1.0.0-beta1</Version>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

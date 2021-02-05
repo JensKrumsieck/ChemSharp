@@ -11,13 +11,13 @@ namespace ChemSharp.Files
     {
         public IDictionary<string, string> Storage { get; set; }
 
-        public string Delimiter;
+        public char Delimiter;
         /// <summary>
         /// <inheritdoc cref="PlainFile{T}(string)"/>
         /// </summary>
         /// <param name="path"></param>
         /// <param name="delimiter"></param>
-        public ParameterFile(string path, string delimiter) : base(path)
+        public ParameterFile(string path, char delimiter) : base(path)
         {
             Delimiter = delimiter;
         }
@@ -26,7 +26,7 @@ namespace ChemSharp.Files
         ///<inheritdoc cref="PlainFile{T}()"/>
         /// </summary>
         /// <param name="delimiter"></param>
-        public ParameterFile(string delimiter)
+        public ParameterFile(char delimiter)
         {
             Delimiter = delimiter;
         }
@@ -39,7 +39,7 @@ namespace ChemSharp.Files
 
         private IEnumerable<KeyValuePair<string, string>> ReadStorage() =>
             from line in Content
-            select line.Split(Delimiter, 2, StringSplitOptions.RemoveEmptyEntries)
+            select line.Split(new[] { Delimiter }, 2, StringSplitOptions.RemoveEmptyEntries)
             into raw
             where raw.Length == 2
             select new KeyValuePair<string, string>(raw[0].Trim(),

@@ -14,9 +14,9 @@ namespace ChemSharp.Spectroscopy.DataProviders
         static BrukerNMRProvider()
         {
             if (!FileHandler.RecipeDictionary.ContainsKey("acqus"))
-                FileHandler.RecipeDictionary.Add("acqus", s => new ParameterFile(s, "="));
+                FileHandler.RecipeDictionary.Add("acqus", s => new ParameterFile(s, '='));
             if (!FileHandler.RecipeDictionary.ContainsKey("procs"))
-                FileHandler.RecipeDictionary.Add("procs", s => new ParameterFile(s, "="));
+                FileHandler.RecipeDictionary.Add("procs", s => new ParameterFile(s, '='));
             if (!FileHandler.RecipeDictionary.ContainsKey("fid"))
                 FileHandler.RecipeDictionary.Add("fid", s => new PlainFile<int>(s));
             if (!FileHandler.RecipeDictionary.ContainsKey("1r"))

@@ -30,7 +30,7 @@ namespace ChemSharp.Molecules.DataProviders
         public CDXMLDataProvider(string path) : base(path)
         {
             var file = (PlainFile<string>)FileHandler.Handle(path);
-            var data = string.Join('\n', file.Content);
+            var data = string.Join("\n", file.Content);
             var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(data);
             var pages = xmlDoc.SelectNodes("CDXML/page");
@@ -66,7 +66,7 @@ namespace ChemSharp.Molecules.DataProviders
             {
                 if (!(n is XmlElement element)) yield break;
                 var id = element.GetAttribute("id");
-                var pos = element.GetAttribute("p").Split(" "); //position in pixels...
+                var pos = element.GetAttribute("p").Split(' '); //position in pixels...
                 var loc = new Vector3(Convert.ToSingle(pos[0], CultureInfo.InvariantCulture), Convert.ToSingle(pos[1], CultureInfo.InvariantCulture), 0f);
                 var atomSymbol = "C";
                 var elementNumber = element.GetAttribute("Element");

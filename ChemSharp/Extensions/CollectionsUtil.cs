@@ -45,5 +45,38 @@ namespace ChemSharp.Extensions
                     from item in sequence
                     select accseq.Concat(new[] { item }));
         }
+
+#if NETSTANDARD2_0
+        /// <summary>
+        /// Wrapper for netstandard2.1 deconstruct
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="kvp"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void Deconstruct<TKey, TValue>(
+            this KeyValuePair<TKey, TValue> kvp,
+            out TKey key,
+            out TValue value)
+        {
+            key = kvp.Key;
+            value = kvp.Value;
+        }
+
+        /// <summary>
+        /// Wrapper for ToHashSet function in netstandard2.1
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="comparer"></param>
+        /// <returns></returns>
+        public static HashSet<T> ToHashSet<T>(
+            this IEnumerable<T> source,
+            IEqualityComparer<T> comparer = null)
+        {
+            return new HashSet<T>(source, comparer);
+        }
+#endif
     }
 }

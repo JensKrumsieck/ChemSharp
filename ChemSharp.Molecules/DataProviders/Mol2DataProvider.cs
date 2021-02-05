@@ -97,7 +97,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <returns></returns>
         private static IEnumerable<string> TriposBlocks(string[] data)
         {
-            var text = string.Join('\n', data);
+            var text = string.Join("\n", data);
             return text.Split(new[] { "@<TRIPOS>" }, StringSplitOptions.None);
         }
     }

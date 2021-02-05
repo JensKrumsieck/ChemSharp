@@ -51,7 +51,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <returns></returns>
         private static string[] Loops(string[] data)
         {
-            var text = string.Join('\n', data);
+            var text = string.Join("\n", data);
             return text.Split(new[] { "loop_" }, StringSplitOptions.None);
         }
 
@@ -67,7 +67,7 @@ namespace ChemSharp.Molecules.DataProviders
             var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
             foreach (var line in moleculeLoop.Where(s => !s.StartsWith("_")))
             {
-                var raw = line.Split(" ");
+                var raw = line.Split(' ');
                 //ignore disorder group
                 if (disorderGroupIndex >= 0
                     && disorderGroupIndex < raw.Length
@@ -93,7 +93,7 @@ namespace ChemSharp.Molecules.DataProviders
             foreach (var line in bondLoop.Where(s => !s.StartsWith("_")))
             {
                 if (string.IsNullOrEmpty(line)) continue;
-                var raw = line.Split(" ");
+                var raw = line.Split(' ');
                 if (raw.Length == 0) continue;
                 var a1 = tmp.TryAndGet(raw[0]);
                 var a2 = tmp.TryAndGet(raw[1]);

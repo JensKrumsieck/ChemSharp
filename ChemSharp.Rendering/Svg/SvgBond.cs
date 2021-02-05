@@ -1,8 +1,13 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Primitives;
+#if NETSTANDARD2_1
 using System;
+#endif
 using System.Collections.Generic;
 using System.Numerics;
+#if NETSTANDARD2_0
+using ChemSharp.Math;
+#endif
 
 namespace ChemSharp.Rendering.Svg
 {

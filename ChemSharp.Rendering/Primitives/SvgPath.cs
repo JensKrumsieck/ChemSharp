@@ -21,9 +21,9 @@ namespace ChemSharp.Rendering.Primitives
                 var matches = Regex.Matches(raw, SvgPathPart.PartPattern);
                 foreach (Match m in matches)
                 {
-                    var parts = m.Value.Split(" ");
+                    var parts = m.Value.Split(' ');
                     var type = parts[0];
-                    var coordinates = parts[1].Split(",");
+                    var coordinates = parts[1].Split(',');
                     if (string.IsNullOrEmpty(coordinates[0])) coordinates = null;
                     PathPartList.Add(new SvgPathPart()
                     {
@@ -39,6 +39,5 @@ namespace ChemSharp.Rendering.Primitives
         /// </summary>
         [XmlIgnore]
         public readonly List<SvgPathPart> PathPartList = new List<SvgPathPart>();
-
     }
 }

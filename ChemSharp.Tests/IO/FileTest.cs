@@ -26,7 +26,7 @@ namespace ChemSharp.Tests.IO
             Assert.AreEqual(2048, spcFile.Content.Length);
 
             const string par = "files/epr.par";
-            var parFile = new ParameterFile(par, " ");
+            var parFile = new ParameterFile(par, ' ');
             parFile.ReadFile();
 
             //this file has 23 lines
@@ -57,7 +57,7 @@ namespace ChemSharp.Tests.IO
             Assert.AreEqual(49152, fidFile.Content.Length);
 
             const string acqus = "files/nmr/acqus";
-            var acqusFile = new ParameterFile(acqus, "=");
+            var acqusFile = new ParameterFile(acqus, '=');
             acqusFile.ReadFile();
 
             //this file has 328 lines with string.Empty removed, tested against File.ReadAllLines

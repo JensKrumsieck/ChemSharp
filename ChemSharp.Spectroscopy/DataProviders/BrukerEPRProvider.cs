@@ -15,7 +15,7 @@ namespace ChemSharp.Spectroscopy.DataProviders
         static BrukerEPRProvider()
         {
             if (!FileHandler.RecipeDictionary.ContainsKey("par"))
-                FileHandler.RecipeDictionary.Add("par", s => new ParameterFile(s, " "));
+                FileHandler.RecipeDictionary.Add("par", s => new ParameterFile(s, ' '));
             if (!FileHandler.RecipeDictionary.ContainsKey("spc"))
                 FileHandler.RecipeDictionary.Add("spc", s => new PlainFile<float>(s));
         }

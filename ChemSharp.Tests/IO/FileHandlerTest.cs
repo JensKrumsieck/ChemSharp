@@ -10,7 +10,7 @@ namespace ChemSharp.Tests.IO
         public void TestEprFiles()
         {
             //not necessary if added by ProviderTest.cs
-            if (!FileHandler.RecipeDictionary.ContainsKey("par")) FileHandler.RecipeDictionary.Add("par", s => new ParameterFile(s, " "));
+            if (!FileHandler.RecipeDictionary.ContainsKey("par")) FileHandler.RecipeDictionary.Add("par", s => new ParameterFile(s, ' '));
             if (!FileHandler.RecipeDictionary.ContainsKey("spc")) FileHandler.RecipeDictionary.Add("spc", s => new PlainFile<float>(s));
 
             const string par = "files/epr.par";

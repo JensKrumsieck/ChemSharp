@@ -19,10 +19,10 @@ namespace ChemSharp.Generator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var math = typeof(System.Math);
-            var methods = math.GetMethods(BindingFlags.Static | BindingFlags.Public);
+            var sysmath = typeof(System.Math);
+            var methods = sysmath.GetMethods(BindingFlags.Static | BindingFlags.Public);
             methods = (from m in methods where m.ReturnType == typeof(double) select m).ToArray();
-            var constants = math.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            var constants = sysmath.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
             var src = new StringBuilder();
             src.AppendLine("//Auto Generated Code");
             src.AppendLine("#if NETSTANDARD2_0");

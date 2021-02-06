@@ -1,9 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>ChemSharp.Generator</PackageId>
+    <Authors>Jens Krumsieck</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0-beta2</Version>
     <Langversion>preview</Langversion>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

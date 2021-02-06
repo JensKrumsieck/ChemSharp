@@ -15,7 +15,7 @@
   
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
-    <ProjectReference Include="..\ChemSharp.Generator\ChemSharp.Generator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer"/>
+    <ProjectReference Include="..\Generators\ChemSharp.Generator\ChemSharp.Generator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

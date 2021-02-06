@@ -7,6 +7,7 @@ using MathF = ChemSharp.Mathematics.MathF;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace ChemSharp.Mathematics
 {
@@ -148,6 +149,37 @@ namespace ChemSharp.Mathematics
             return MathF.Atan2(Dot(c3, c2), Dot(c1, c2));
         }
 
+        /// <summary>
+        /// Gets the mean plane of a list of atoms
+        /// </summary>
+        /// <returns></returns>
+        public static Plane MeanPlane(IList<Vector3> input)
+        {
+            //calculate Centroid first
+            //get the centroid
+            var centroid = Centroid(input);
+
+            //subtract centroid from each point... & build matrix of that
+            var A = Matrix<float>.Build.Dense(3, input.Count);
+            for (var x = 0; x < input.Count; x++)
+            {
+                A[0, x] = (input[x] - centroid).X;
+                A[1, x] = (input[x] - centroid).Y;
+                A[2, x] = (input[x] - centroid).Z;
+            }
+
+            //get svd
+            var svd = A.Svd(true);
+
+            //get plane unit vector
+            var a = svd.U[0, 2];
+            var b = svd.U[1, 2];
+            var c = svd.U[2, 2];
+
+            var d = -Dot(centroid, new Vector3(a, b, c));
+
+            return new Plane(a, b, c, d);
+        }
 
     }
 }

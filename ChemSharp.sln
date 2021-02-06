@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.UnitConversion", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Rendering", "ChemSharp.Rendering\ChemSharp.Rendering.csproj", "{CC0EC873-EC01-4496-8637-0F1313FF1725}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Generator", "ChemSharp.Generator\ChemSharp.Generator.csproj", "{C731EEA3-40A6-4694-8247-16F46ED0F2FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Generator", "Generators\ChemSharp.Generator\ChemSharp.Generator.csproj", "{C731EEA3-40A6-4694-8247-16F46ED0F2FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{CA4A529D-2EE9-4196-B069-328706EDE088}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C731EEA3-40A6-4694-8247-16F46ED0F2FD} = {CA4A529D-2EE9-4196-B069-328706EDE088}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C226C1E-BECB-41C3-BB05-E624764E4793}

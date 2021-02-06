@@ -71,11 +71,6 @@ namespace ChemSharp.Molecules
         public IBondDataProvider BondDataProvider { get; private set; }
 
         /// <summary>
-        /// Wrapper for Centroid Method
-        /// </summary>
-        public Vector3 Centroid => Atoms.Centroid();
-
-        /// <summary>
         /// Recalculates Bonds based on Distances
         /// WARNING! Discards every existing Bond information
         /// Add a IBondDataProvider Instance to use Bonds read from file

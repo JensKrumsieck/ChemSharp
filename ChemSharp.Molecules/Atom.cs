@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Numerics;
+using ChemSharp.Mathematics;
+using ChemSharp.Molecules.Mathematics;
 
 namespace ChemSharp.Molecules
 {
@@ -7,9 +9,10 @@ namespace ChemSharp.Molecules
     /// Atom represents an Element in 3d Space
     /// </summary>
     public class Atom : Element, IEquatable<Atom>
-    {        /// <summary>
-             /// See BondTo Method
-             /// </summary>
+    {        
+        /// <summary>
+        /// See BondTo Method
+        /// </summary>
         private const float Delta = 5f;
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
+        public float DistanceTo(Atom test) => MathV.Distance(Location, test.Location);
 
         private string _title;
         /// <summary>

@@ -2,7 +2,7 @@
 using ChemSharp.Export;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
-using ChemSharp.Molecules.Math;
+using ChemSharp.Molecules.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;

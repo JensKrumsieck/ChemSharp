@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Numerics;
 
-namespace ChemSharp.Math
+namespace ChemSharp.Mathematics
 {
     public static class Fourier
     {/// <summary>
@@ -30,7 +30,6 @@ namespace ChemSharp.Math
                 var paddingSeq = new Complex[padding];
                 x = paddingSeq.Concat(x).Concat(paddingSeq).ToArray();
             }
-
             MathNet.Numerics.IntegralTransforms.Fourier.Forward(x);
             return x;
         }

@@ -1,25 +1,24 @@
-﻿using ChemSharp.Math;
+﻿using ChemSharp.Mathematics;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace ChemSharp.Molecules.Math
+namespace ChemSharp.Molecules.Mathematics
 {
     public static class ChemMathUtil
     {
         /// <summary>
-        /// Wrapper for Vector3.Centroid()
+        /// Wrapper for <inheritdoc cref="MathV.Centroid"/>
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static Vector3 Centroid(this IEnumerable<Atom> input) => (from atom in input select atom.Location).Centroid();
+        public static Vector3 Centroid(this IEnumerable<Atom> input) => MathV.Centroid(from atom in input select atom.Location);
 
         /// <summary>
         /// Centers the molecule at point
         /// </summary>
-        /// <param name="point"></param>
         /// <param name="atoms"></param>
         public static Func<Vector3, Vector3> CenterMapping(this IEnumerable<Atom> atoms)
         {
@@ -54,7 +53,7 @@ namespace ChemSharp.Molecules.Math
             var b = svd.U[1, 2];
             var c = svd.U[2, 2];
 
-            var d = -centroid.Dot(new Vector3(a, b, c));
+            var d = -MathV.Dot(centroid, new Vector3(a, b, c));
 
             return new Plane(a, b, c, d);
         }

@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Molecules", "Chem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.UnitConversion", "ChemSharp.UnitConversion\ChemSharp.UnitConversion.csproj", "{7048A489-2F7C-4F06-96A0-09E3B102C1FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Rendering", "ChemSharp.Rendering\ChemSharp.Rendering.csproj", "{CC0EC873-EC01-4496-8637-0F1313FF1725}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Rendering", "ChemSharp.Rendering\ChemSharp.Rendering.csproj", "{CC0EC873-EC01-4496-8637-0F1313FF1725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
 ﻿using ChemSharp.DataProviders;
 using ChemSharp.Extensions;
 using ChemSharp.Files;
-using ChemSharp.Math;
+using ChemSharp.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace ChemSharp.Math
+namespace ChemSharp.Mathematics
 {
     public static class FractionalCoordinates
     {
@@ -16,7 +16,7 @@ namespace ChemSharp.Math
             var vector = new float[3];
             for (var i = 0; i <= 2; i++) vector[i] = fractional.X * conversionMatrix[i].X + fractional.Y * conversionMatrix[i].Y +
                     fractional.Z * conversionMatrix[i].Y;
-            return vector.ToVector3();
+            return new Vector3(vector[0], vector[1], vector[2]);
         }
 
         /// <summary>

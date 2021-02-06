@@ -1,4 +1,4 @@
-﻿namespace ChemSharp.Math
+﻿namespace ChemSharp.Mathematics
 {
     public static class MathUtil
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 #if NETSTANDARD2_0 
-using ChemSharp.Extensions; 
+using ChemSharp.Extensions;
 #endif
 
 namespace ChemSharp.Molecules.Extensions

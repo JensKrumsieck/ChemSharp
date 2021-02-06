@@ -1,6 +1,6 @@
 ﻿using ChemSharp.DataProviders;
 using ChemSharp.Export;
-using ChemSharp.Extensions;
+using ChemSharp.Mathematics;
 using ChemSharp.Spectroscopy.Extension;
 using System;
 using System.Collections.Generic;

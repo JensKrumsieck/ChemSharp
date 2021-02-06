@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.UnitConversion", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Rendering", "ChemSharp.Rendering\ChemSharp.Rendering.csproj", "{CC0EC873-EC01-4496-8637-0F1313FF1725}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Generator", "ChemSharp.Generator\ChemSharp.Generator.csproj", "{C731EEA3-40A6-4694-8247-16F46ED0F2FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{CC0EC873-EC01-4496-8637-0F1313FF1725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0EC873-EC01-4496-8637-0F1313FF1725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0EC873-EC01-4496-8637-0F1313FF1725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

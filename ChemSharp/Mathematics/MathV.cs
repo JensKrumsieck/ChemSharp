@@ -1,4 +1,9 @@
-using System;
+#if NETSTANDARD2_1
+using MathF = System.MathF;
+#endif
+#if NETSTANDARD2_0
+using MathF = ChemSharp.Mathematics.MathF;
+#endif
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;

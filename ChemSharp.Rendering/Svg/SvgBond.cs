@@ -5,9 +5,8 @@ using System;
 #endif
 using System.Collections.Generic;
 using System.Numerics;
-using ChemSharp.Mathematics;
 #if NETSTANDARD2_0
-
+using ChemSharp.Mathematics;
 #endif
 
 namespace ChemSharp.Rendering.Svg

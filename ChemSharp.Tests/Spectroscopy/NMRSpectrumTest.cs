@@ -22,7 +22,6 @@ namespace ChemSharp.Tests.Spectroscopy
         public void TestNMRCreationRaw()
         {
             const string path = "files/nmr/fid";
-            var prov = new BrukerNMRProvider(path, true);
             var nmr = SpectrumFactory.Create(path);
             //32768 Data points, taken from procs file
             Assert.AreEqual(32768, nmr.XYData.Count);

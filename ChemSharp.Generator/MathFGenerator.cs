@@ -1,11 +1,11 @@
-﻿using System;
-using System.Globalization;
+﻿using ChemSharp.Generator.Extension;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using ChemSharp.Generator.Extension;
 
 namespace ChemSharp.Generator
 {
@@ -19,10 +19,11 @@ namespace ChemSharp.Generator
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var sysmath = typeof(System.Math);
-            var methods = sysmath.GetMethods(BindingFlags.Static | BindingFlags.Public);
+            var math = typeof(Math);
+            var methods = math.GetMethods(BindingFlags.Static | BindingFlags.Public);
             methods = (from m in methods where m.ReturnType == typeof(double) select m).ToArray();
-            var constants = sysmath.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            var constants = math.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            
             var src = new StringBuilder();
             src.AppendLine("//Auto Generated Code");
             src.AppendLine("#if NETSTANDARD2_0");

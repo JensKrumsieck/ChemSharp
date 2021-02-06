@@ -14,16 +14,23 @@ namespace ChemSharp.Generator
     {
         private const string Indent = "    ";
 
+        /// <summary>
+        /// To make sure it does not generate with higher NET Version
+        /// May be changed in future
+        /// </summary>
+        private readonly string[] _filter =
+            {"Sin", "Cos", "Tan", "Atan", "Acos", "Asin", "Atan2", "Sqrt", "Pow", "Log", "Exp"};
+
         public void Initialize(GeneratorInitializationContext context)
         { }
 
         public void Execute(GeneratorExecutionContext context)
         {
             var math = typeof(Math);
-            var methods = math.GetMethods(BindingFlags.Static | BindingFlags.Public);
-            methods = (from m in methods where m.ReturnType == typeof(double) select m).ToArray();
+            var methods = math.GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .Where(m => _filter.Contains(m.Name) && m.ReturnType == typeof(double)).ToArray();
             var constants = math.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-            
+
             var src = new StringBuilder();
             src.AppendLine("//Auto Generated Code");
             src.AppendLine("#if NETSTANDARD2_0");

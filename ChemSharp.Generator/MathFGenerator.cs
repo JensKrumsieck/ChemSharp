@@ -25,6 +25,7 @@ namespace ChemSharp.Generator
             var constants = math.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
             var src = new StringBuilder();
             src.AppendLine("//Auto Generated Code");
+            src.AppendLine("#if NETSTANDARD2_0");
             src.AppendLine("namespace ChemSharp.Mathematics");
             src.AppendLine("{");
             src.AppendLine($"{Indent}public static class MathF");
@@ -35,6 +36,7 @@ namespace ChemSharp.Generator
 
             src.AppendLine($"{Indent}}}"); //close class
             src.AppendLine("}"); //close ns
+            src.AppendLine("#endif");
 
             context.AddSource("MathF.cs", SourceText.From(src.ToString(), Encoding.UTF8));
         }

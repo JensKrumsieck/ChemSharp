@@ -76,7 +76,7 @@ namespace ChemSharp.Molecules.DataProviders
                 var rawCoordinates = new Vector3(
                     raw[2].RemoveUncertainty().ToSingle(),
                     raw[3].RemoveUncertainty().ToSingle(),
-                    raw[3].RemoveUncertainty().ToSingle());
+                    raw[4].RemoveUncertainty().ToSingle());
                 var coordinates = FractionalCoordinates.FractionalToCartesian(rawCoordinates, conversionMatrix);
                 yield return new Atom(raw[1]) { Location = coordinates, Title = raw[0] };
             }

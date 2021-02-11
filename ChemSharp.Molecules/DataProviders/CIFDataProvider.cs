@@ -63,7 +63,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <returns></returns>
         private static IEnumerable<Atom> ReadAtoms(string[] moleculeLoop, Vector3[] conversionMatrix)
         {
-            var headers = moleculeLoop.Where(s => s.Trim().StartsWith("_")).ToArray();
+            var headers = moleculeLoop.Where(s => s.Trim().StartsWith("_")).Select(s => s.Trim()).ToArray();
             var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
             var label = Array.IndexOf(headers, "_atom_site_label");
             var symbol = Array.IndexOf(headers, "_atom_site_type_symbol");

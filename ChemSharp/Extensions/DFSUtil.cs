@@ -48,11 +48,13 @@ namespace ChemSharp.Extensions
         /// <param name="vertex"></param>
         /// <param name="visited"></param>
         /// <param name="func"></param>
-        private static async Task Traverse<T>(T vertex, HashSet<T> visited, Func<T, IEnumerable<T>> func)
+        private static async Task Traverse<T>(T vertex, ISet<T> visited, Func<T, IEnumerable<T>> func)
         {
             visited.Add(vertex);
-            foreach (var neighbor in func(vertex).Where(n => !visited.Contains(n)))
-                await Traverse(neighbor, visited, func);
+            foreach (var neighbor in func(vertex))
+            {
+                if (!visited.Contains(neighbor)) await Traverse(neighbor, visited, func);
+            }
         }
 
         /// <summary>

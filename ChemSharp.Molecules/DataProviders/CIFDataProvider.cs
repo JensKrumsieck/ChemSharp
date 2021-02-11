@@ -65,6 +65,11 @@ namespace ChemSharp.Molecules.DataProviders
         {
             var headers = moleculeLoop.Where(s => s.Trim().StartsWith("_")).ToArray();
             var disorderGroupIndex = Array.IndexOf(headers, "_atom_site_disorder_group");
+            var label = Array.IndexOf(headers, "_atom_site_label");
+            var symbol = Array.IndexOf(headers, "_atom_site_type_symbol");
+            var x = Array.IndexOf(headers, "_atom_site_fract_x");
+            var y = Array.IndexOf(headers, "_atom_site_fract_y");
+            var z = Array.IndexOf(headers, "_atom_site_fract_z");
             foreach (var line in moleculeLoop.Where(s => !s.StartsWith("_")))
             {
                 var raw = line.Split(' ');
@@ -74,11 +79,11 @@ namespace ChemSharp.Molecules.DataProviders
                     && raw[disorderGroupIndex] == "2"
                     || (raw.Length != headers.Length)) continue;
                 var rawCoordinates = new Vector3(
-                    raw[2].RemoveUncertainty().ToSingle(),
-                    raw[3].RemoveUncertainty().ToSingle(),
-                    raw[4].RemoveUncertainty().ToSingle());
+                    raw[x].RemoveUncertainty().ToSingle(),
+                    raw[y].RemoveUncertainty().ToSingle(),
+                    raw[z].RemoveUncertainty().ToSingle());
                 var coordinates = FractionalCoordinates.FractionalToCartesian(rawCoordinates, conversionMatrix);
-                yield return new Atom(raw[1]) { Location = coordinates, Title = raw[0] };
+                yield return new Atom(raw[symbol]) { Location = coordinates, Title = raw[label] };
             }
         }
 

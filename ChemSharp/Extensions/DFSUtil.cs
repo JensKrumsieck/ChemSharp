@@ -64,14 +64,14 @@ namespace ChemSharp.Extensions
         /// <param name="func">Neighbor function</param>
         /// <param name="length">desired path length</param>
         /// <returns></returns>
-        //public static HashSet<HashSet<T>> GetAllPaths<T>(T start, T end, Func<T, IEnumerable<T>> func, int length = int.MaxValue)
-        //{
-        //    var visited = new HashSet<T>();
-        //    var localPaths = new HashSet<T>();
-        //    var output = new HashSet<HashSet<T>>();
-        //    output = AllPaths(start, end, visited, localPaths, func, output, length).AsParallel().ToHashSet();
-        //    return output;
-        //}
+        public static HashSet<HashSet<T>> GetAllPaths<T>(T start, T end, Func<T, IEnumerable<T>> func, int length = int.MaxValue)
+        {
+            var visited = new HashSet<T>();
+            var localPaths = new HashSet<T>();
+            var output = new HashSet<HashSet<T>>();
+            output = AllPaths(start, end, visited, localPaths, func, output, length).AsParallel().ToHashSet();
+            return output;
+        }
 
         /// <summary>
         /// Returns all paths

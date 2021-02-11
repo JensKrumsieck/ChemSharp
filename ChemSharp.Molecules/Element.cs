@@ -46,10 +46,11 @@ namespace ChemSharp.Molecules
         {
             var elements = ElementDataProvider.ElementData.ToArray();
             var shadow = elements.FirstOrDefault(s => s.Symbol == symbol);
+            if (shadow == null) return;
             var props = typeof(Element).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var p in props.Where(s => !Attribute.IsDefined(s, typeof(JsonIgnoreAttribute))))
             {
-                p.SetValue(this as Element, p.GetValue(shadow), null);
+                p.SetValue(this, p.GetValue(shadow), null);
             }
         }
 

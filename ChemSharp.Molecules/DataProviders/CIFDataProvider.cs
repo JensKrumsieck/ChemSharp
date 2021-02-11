@@ -26,7 +26,7 @@ namespace ChemSharp.Molecules.DataProviders
             var loops = Loops(file.Content);
             var infoLoop = Array.Find(loops, s => s.Contains("_cell_length_a"));
             var moleculeLoop = Array.Find(loops, s => s.Contains("_atom_site_label")).DefaultSplit();
-            var bondLoop = Array.Find(loops, s => s.Contains("_geom_bond")).DefaultSplit();
+            var bondLoop = Array.Find(loops, s => s.Contains("_geom_bond"))?.DefaultSplit();
             var cellLengths = CellParameters(infoLoop.DefaultSplit(), "cell_length").ToArray();
             var cellAngles = CellParameters(infoLoop.DefaultSplit(), "cell_angle").ToArray();
             var conversionMatrix = FractionalCoordinates.ConversionMatrix(cellLengths[0], cellLengths[1],
@@ -89,6 +89,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// <returns></returns>
         private IEnumerable<Bond> ReadBonds(IEnumerable<string> bondLoop)
         {
+            if (bondLoop == null) yield break;
             var tmp = Atoms.ToDictionary(atom => atom.Title);
             foreach (var line in bondLoop.Where(s => !s.StartsWith("_")))
             {

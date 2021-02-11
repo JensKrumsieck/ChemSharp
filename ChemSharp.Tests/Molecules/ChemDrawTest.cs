@@ -18,6 +18,8 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(38, mol.Atoms.Count);
             Assert.AreEqual("C20H14N4", mol.Atoms.SumFormula());
             Assert.AreEqual(42, mol.Bonds.Count);
+
+            const string file = @"D:\Desktop\HomeOffice\Corrole\Ni\762765.cif";
         }
     }
 }

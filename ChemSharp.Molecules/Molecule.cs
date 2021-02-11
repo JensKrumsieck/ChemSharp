@@ -51,7 +51,7 @@ namespace ChemSharp.Molecules
         {
             AtomDataProvider = provider;
             Atoms = provider.Atoms.ToList();
-            if (provider is IBondDataProvider bondProvider)
+            if (provider is IBondDataProvider bondProvider && bondProvider.Bonds != null)
             {
                 BondDataProvider = bondProvider;
                 Bonds = bondProvider.Bonds.ToList();
@@ -110,5 +110,12 @@ namespace ChemSharp.Molecules
         /// <param name="a"></param>
         /// <returns></returns>
         public IEnumerable<Atom> Neighbors(Atom a) => AtomUtil.Neighbors(a, this);
+
+        /// <summary>
+        /// returns nonmetal neighbors of specific atom
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => AtomUtil.Neighbors(a, this).Where(s => s.IsNonMetal);
     }
 }

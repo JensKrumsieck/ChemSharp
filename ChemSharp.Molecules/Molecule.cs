@@ -87,7 +87,7 @@ namespace ChemSharp.Molecules
             {
                 for (var j = i + 1; j < Atoms.Count(); j++)
                 {
-                    if (i == j || !Atoms.ElementAt(i).InternalBondTo(Atoms.ElementAt(j)) ||
+                    if (i == j || !Atoms.ElementAt(i).BondToByCovalentRadii(Atoms.ElementAt(j)) ||
                         (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
                     matched.Add((i, j));
                     Bonds.Add(new Bond(Atoms.ElementAt(i), Atoms.ElementAt(j)));

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using ChemSharp.Mathematics;
+using System;
 using System.Numerics;
-using ChemSharp.Mathematics;
-using ChemSharp.Molecules.Mathematics;
 
 namespace ChemSharp.Molecules
 {
@@ -9,24 +8,7 @@ namespace ChemSharp.Molecules
     /// Atom represents an Element in 3d Space
     /// </summary>
     public class Atom : Element, IEquatable<Atom>
-    {        
-        /// <summary>
-        /// See BondTo Method
-        /// </summary>
-        private const float Delta = 5f;
-
-        /// <summary>
-        /// Tests if Atom is Bond to another based on distance!
-        /// allow uncertainty of 5 pm overall
-        /// </summary>
-        /// <param name="test"></param>
-        /// <returns></returns>
-        internal bool InternalBondTo(Atom test)
-        {
-            if (CovalentRadius is null || test.CovalentRadius is null) return false;
-            return DistanceTo(test) < (CovalentRadius + (float)test.CovalentRadius + Delta) / 100f;
-        }
-
+    {
         private Vector3 _location;
         /// <summary>
         /// Location in 3D Space

@@ -20,7 +20,7 @@ namespace ChemSharp.Mathematics
         {
             var vector = new float[3];
             for (var i = 0; i <= 2; i++) vector[i] = fractional.X * conversionMatrix[i].X + fractional.Y * conversionMatrix[i].Y +
-                    fractional.Z * conversionMatrix[i].Y;
+                    fractional.Z * conversionMatrix[i].Z;
             return new Vector3(vector[0], vector[1], vector[2]);
         }
 

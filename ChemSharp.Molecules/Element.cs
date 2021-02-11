@@ -62,6 +62,16 @@ namespace ChemSharp.Molecules
         [JsonIgnore]
         private string _color;
 
+        [JsonIgnore] public bool IsMetal => !IsMetalloid && !IsNonMetal;
+
+        [JsonIgnore]
+        public bool IsMetalloid => new[] { "B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po" }.Contains(Symbol);
+
+        [JsonIgnore]
+        public bool IsNonMetal =>
+            new[] { "H", "C", "N", "O", "P", "S", "Se" }.Contains(Symbol) || Group == 18 ||
+            Group == 17;
+
         static Element()
         {
             var transitionGroups = new List<int> { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };

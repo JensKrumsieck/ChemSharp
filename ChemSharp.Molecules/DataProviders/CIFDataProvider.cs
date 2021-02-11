@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
@@ -83,7 +84,8 @@ namespace ChemSharp.Molecules.DataProviders
                     raw[y].RemoveUncertainty().ToSingle(),
                     raw[z].RemoveUncertainty().ToSingle());
                 var coordinates = FractionalCoordinates.FractionalToCartesian(rawCoordinates, conversionMatrix);
-                yield return new Atom(raw[symbol]) { Location = coordinates, Title = raw[label] };
+                var type = symbol != -1 ? raw[symbol] : Regex.Match(raw[label], @"([A-Z][a-z]*)").Value;
+                yield return new Atom(type) { Location = coordinates, Title = raw[label] };
             }
         }
 

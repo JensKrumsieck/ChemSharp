@@ -58,72 +58,60 @@ namespace ChemSharp.Extensions
         }
 
         /// <summary>
-        /// Returns all Paths from start to end
+        /// Calculates the vertex degree (count) of vertex by func(vertex)
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="func">Neighbor function</param>
-        /// <param name="length">desired path length</param>
-        /// <returns></returns>
-        public static HashSet<HashSet<T>> GetAllPaths<T>(T start, T end, Func<T, IEnumerable<T>> func, int length = int.MaxValue)
-        {
-            var visited = new HashSet<T>();
-            var localPaths = new HashSet<T>();
-            var output = new HashSet<HashSet<T>>();
-            output = AllPaths(start, end, visited, localPaths, func, output, length).AsParallel().ToHashSet();
-            return output;
-        }
-
-        /// <summary>
-        /// Returns all paths
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="visited"></param>
-        /// <param name="localPaths"></param>
-        /// <param name="func"></param>
-        /// <param name="output"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        private static HashSet<HashSet<T>> AllPaths<T>(T start, T end, ISet<T> visited, HashSet<T> localPaths, Func<T, IEnumerable<T>> func, HashSet<HashSet<T>> output, int length = int.MaxValue)
-        {
-            visited.Add(start);
-            if (localPaths.Count == 0) localPaths.Add(start);
-            if (start.Equals(end) && localPaths.Count() == length) BuildPath(localPaths, output);
-            foreach (var node in func(start).Where(node => !visited.Contains(node)).Select(node => node).AsParallel())
-            {
-                localPaths.Add(node);
-                AllPaths(node, end, visited, localPaths, func, output, length).AsParallel();
-                localPaths.Remove(node);
-            }
-
-            visited.Remove(start);
-            return output;
-        }
-
-        /// <summary>
-        /// Copys the localpath to output hashset
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="localPath"></param>
-        /// <param name="output"></param>
-        private static void BuildPath<T>(HashSet<T> localPath, ISet<HashSet<T>> output)
-        {
-            var buildPath = new HashSet<T>();
-            foreach (var node in localPath) buildPath.Add(node);
-            output.Add(buildPath);
-        }
-
-        /// <summary>
-        /// Calculates the vertex degree (count) of vertex in collection by func(vertex,collection)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
         /// <param name="vertex"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static int VertexDegree<T>(IEnumerable<T> collection, T vertex, Func<T, IEnumerable<T>, IEnumerable<T>> func) => func(vertex, collection).Count();
+        public static int VertexDegree<T>(T vertex, Func<T, IEnumerable<T>> func) => func(vertex).Count();
+
+        /// <summary>
+        /// Uses backtracking for path detection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="start"></param>
+        /// <param name="goal"></param>
+        /// <param name="neighbors"></param>
+        /// <param name="limit"></param>
+        /// <returns></returns>
+        public static HashSet<T> BackTrack<T>(T start, T goal, Func<T, IEnumerable<T>> neighbors, int limit)
+        {
+            var path = new HashSet<T> { start };
+            var maxSteps = 2000;
+            BackTrack(goal, path, neighbors, limit, ref maxSteps);
+            return path;
+        }
+
+        /// <summary>
+        /// Recursive Implementation of backtracking
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="goal"></param>
+        /// <param name="visited"></param>
+        /// <param name="neighbors"></param>
+        /// <param name="limit"></param>
+        /// <param name="maxSteps"></param>
+        /// <returns></returns>
+        private static bool BackTrack<T>(T goal, ISet<T> visited, Func<T, IEnumerable<T>> neighbors, int limit, ref int maxSteps)
+        {
+            if (--maxSteps <= 0) return false;
+            var last = visited.Last();
+            if (Equals(last, goal) && visited.Count == limit)
+            {
+                visited.Add(goal);
+                return true;
+            }
+            if (visited.Count >= limit) return false;
+
+            foreach (var neighbor in neighbors(last))
+            {
+                if (visited.Contains(neighbor)) continue;
+                visited.Add(neighbor);
+                if (BackTrack(goal, visited, neighbors, limit, ref maxSteps)) return true;
+                visited.Remove(visited.Last());
+            }
+            return false;
+        }
     }
 }

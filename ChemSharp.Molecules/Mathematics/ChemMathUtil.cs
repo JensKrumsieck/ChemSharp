@@ -33,7 +33,7 @@ namespace ChemSharp.Molecules.Mathematics
         /// <returns></returns>
         public static bool BondToByCovalentRadii(this Atom atom, Atom test, float delta = Delta)
         {
-            if (atom.CovalentRadius is null || test.CovalentRadius is null) return false;
+            if (atom?.CovalentRadius is null || test?.CovalentRadius is null) return false;
             return atom.DistanceTo(test) < (atom.CovalentRadius + (float)test.CovalentRadius + delta) / 100f;
         }
     }

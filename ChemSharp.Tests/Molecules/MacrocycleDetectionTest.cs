@@ -23,7 +23,7 @@ namespace ChemSharp.Tests.Molecules
         [TestMethod]
         public async Task DetectPorphin() => await RunTest(@"files\porphin.cdxml", 24);
 
-        private async Task RunTest(string path, int size)
+        private static async Task RunTest(string path, int size)
         {
             var molecule = MoleculeFactory.Create(path);
             await Detect(molecule, size);
@@ -36,16 +36,15 @@ namespace ChemSharp.Tests.Molecules
         /// <param name="molecule"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        private async Task Detect(Molecule molecule, int size)
+        private static async Task Detect(Molecule molecule, int size)
         {
             var deadEnds = Element.DesiredSaturation.Where(s => s.Value == 1).Select(s => s.Key).ToList();
-            Func<Atom, IEnumerable<Atom>> nonMetalNonDeadEnd = atom =>
-                molecule.NonMetalNeighbors(atom)?.Where(a => !deadEnds.Contains(a.Symbol));
+            IEnumerable<Atom> NonMetalNonDeadEnd(Atom atom) => molecule.NonMetalNeighbors(atom)?.Where(a => !deadEnds.Contains(a.Symbol));
             var figures = await DFSUtil.ConnectedFigures(molecule.Atoms.Where(s => molecule.Neighbors(s).Count() >= 2),
                 molecule.NonMetalNeighbors).ToListAsync();
             foreach (var fig in figures.Distinct())
             {
-                var data = FindCorpus(fig, nonMetalNonDeadEnd, size);
+                var data = FindCorpus(fig, NonMetalNonDeadEnd, size);
                 if (data.Count != size) continue;
                 Assert.AreEqual(4, data.Count(s => s.Symbol == "N"));
                 Assert.AreEqual(size - 4, data.Count(s => s.Symbol == "C"));
@@ -59,7 +58,7 @@ namespace ChemSharp.Tests.Molecules
         /// <param name="func"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        private HashSet<Atom> FindCorpus(IEnumerable<Atom> part, Func<Atom, IEnumerable<Atom>> func, int size)
+        private static HashSet<Atom> FindCorpus(IEnumerable<Atom> part, Func<Atom, IEnumerable<Atom>> func, int size)
         {
             foreach (var atom in part)
             {
@@ -81,7 +80,7 @@ namespace ChemSharp.Tests.Molecules
         /// <param name="size"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        private HashSet<Atom> FuncRingPath(Atom atom, int size, Func<Atom, IEnumerable<Atom>> func)
+        private static HashSet<Atom> FuncRingPath(Atom atom, int size, Func<Atom, IEnumerable<Atom>> func)
         {
             var goal = func(atom).FirstOrDefault();
             return goal == null ? new HashSet<Atom>() : DFSUtil.BackTrack(atom, goal, func, size);

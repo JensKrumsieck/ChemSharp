@@ -39,7 +39,7 @@ namespace ChemSharp.Mathematics
             var line1 = new Vector3(a, b * MathF.Cos(gamma * MathF.PI / 180f), c * MathF.Cos(beta * MathF.PI / 180f));
             var line2 = new Vector3(
                 0,
-                a * MathF.Sin(gamma * MathF.PI / 180f),
+                b * MathF.Sin(gamma * MathF.PI / 180f),
                 c * (MathF.Cos(alpha * MathF.PI / 180f) -
                      MathF.Cos(beta * MathF.PI / 180f) * MathF.Cos(gamma * MathF.PI / 180f)) /
                 MathF.Sin(gamma * MathF.PI / 180f));

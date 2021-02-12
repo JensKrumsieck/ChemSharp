@@ -117,6 +117,6 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s!= null && s.IsNonMetal) : Enumerable.Empty<Atom>();
+        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s != null && s.IsNonMetal) : Enumerable.Empty<Atom>();
     }
 }

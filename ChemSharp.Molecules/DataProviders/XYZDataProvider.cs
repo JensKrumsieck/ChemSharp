@@ -33,11 +33,14 @@ namespace ChemSharp.Molecules.DataProviders
         /// Read Atom data from CIF File
         /// </summary>
         /// <returns></returns>
-        private static IEnumerable<Atom> ReadAtoms(string[] data) =>
+        private static IEnumerable<Atom> ReadAtoms(IEnumerable<string> data) =>
             from line in data
             select Regex.Match(line, Pattern)
             into atomMatch
-            where atomMatch.Groups.Count == 5
+            where atomMatch.Groups.Count == 5 
+                  && !string.IsNullOrEmpty(atomMatch.Groups[4].Value) 
+                  && !string.IsNullOrEmpty(atomMatch.Groups[3].Value) 
+                  && !string.IsNullOrEmpty(atomMatch.Groups[2].Value)
             select new Atom(atomMatch.Groups[1].Value)
             {
                 Location = new Vector3(

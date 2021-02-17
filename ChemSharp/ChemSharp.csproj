@@ -5,7 +5,7 @@
 	  <Authors>Jens Krumsieck</Authors>
 	  <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 	  <LangVersion>9.0</LangVersion>
-	  <Version>1.0.0-beta4</Version>
+	  <Version>1.0.0-beta5</Version>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>

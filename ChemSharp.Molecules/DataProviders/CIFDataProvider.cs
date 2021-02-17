@@ -4,13 +4,14 @@ using ChemSharp.Files;
 using ChemSharp.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
-    public class CIFDataProvider : AbstractDataProvider, IAtomDataProvider, IBondDataProvider
+    public class CIFDataProvider : AbstractAtomDataProvider, IBondDataProvider
     {
         /// <summary>
         /// import recipes
@@ -21,10 +22,13 @@ namespace ChemSharp.Molecules.DataProviders
                 FileHandler.RecipeDictionary.Add("cif", s => new PlainFile<string>(s));
         }
 
-        public CIFDataProvider(string path) : base(path)
+        public CIFDataProvider(string path) : base(path) => ReadData();
+
+        public CIFDataProvider(Stream stream) : base(stream) => ReadData();
+
+        public void ReadData()
         {
-            var file = (PlainFile<string>)FileHandler.Handle(path);
-            var loops = Loops(file.Content);
+            var loops = Loops(Content);
             var infoLoop = Array.Find(loops, s => s.Contains("_cell_length_a"));
             var moleculeLoop = Array.Find(loops, s => s.Contains("_atom_site_label")).DefaultSplit();
             var bondLoop = Array.Find(loops, s => s.Contains("_geom_bond"))?.DefaultSplit();
@@ -36,11 +40,6 @@ namespace ChemSharp.Molecules.DataProviders
             Bonds = ReadBonds(bondLoop).ToList();
         }
 
-
-        /// <summary>
-        /// <inheritdoc />
-        /// </summary>
-        public IEnumerable<Atom> Atoms { get; set; }
         /// <summary>
         /// <inheritdoc />
         /// </summary>

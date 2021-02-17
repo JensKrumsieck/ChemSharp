@@ -3,13 +3,14 @@ using ChemSharp.Extensions;
 using ChemSharp.Files;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
-    public class Mol2DataProvider : AbstractDataProvider, IAtomDataProvider, IBondDataProvider
+    public class Mol2DataProvider : AbstractAtomDataProvider, IBondDataProvider
     {
         /// <summary>
         /// import recipes
@@ -20,17 +21,18 @@ namespace ChemSharp.Molecules.DataProviders
                 FileHandler.RecipeDictionary.Add("mol2", s => new PlainFile<string>(s));
         }
 
-        public Mol2DataProvider(string path) : base(path)
+        public Mol2DataProvider(string path) : base(path) => ReadData();
+        public Mol2DataProvider(Stream stream) : base(stream) => ReadData();
+
+        public void ReadData()
         {
-            var file = (PlainFile<string>)FileHandler.Handle(path);
-            var blocks = TriposBlocks(file.Content).ToArray();
+            var blocks = TriposBlocks(Content).ToArray();
             var atomBlock = Array.Find(blocks, s => s.Contains("ATOM")).DefaultSplit();
             var bondBlock = Array.Find(blocks, s => s.Contains("BOND")).DefaultSplit();
             Atoms = Read<Atom>(atomBlock).ToList();
             Bonds = Read<Bond>(bondBlock).ToList();
         }
 
-        public IEnumerable<Atom> Atoms { get; set; }
         public IEnumerable<Bond> Bonds { get; set; }
 
         /// <summary>

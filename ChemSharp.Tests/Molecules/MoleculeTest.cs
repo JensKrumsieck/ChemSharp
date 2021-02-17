@@ -1,4 +1,5 @@
-﻿using ChemSharp.Molecules;
+﻿using System.IO;
+using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -60,6 +61,18 @@ namespace ChemSharp.Tests.Molecules
         {
             const string path = "files/mescho.xyz";
             var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(23, mol.Atoms.Count);
+            Assert.AreEqual(23, mol.Bonds.Count);
+            Assert.AreEqual(148.205, mol.Atoms.MolecularWeight(), 0.02);
+        }
+
+        [TestMethod]
+        public void TestXYZStream()
+        {
+            const string path = "files/mescho.xyz";
+            var stream = File.Open(path, FileMode.Open);
+            var xyz = new XYZDataProvider(stream);
+            var mol = new Molecule(xyz);
             Assert.AreEqual(23, mol.Atoms.Count);
             Assert.AreEqual(23, mol.Bonds.Count);
             Assert.AreEqual(148.205, mol.Atoms.MolecularWeight(), 0.02);

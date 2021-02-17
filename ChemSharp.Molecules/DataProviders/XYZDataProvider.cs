@@ -2,13 +2,14 @@
 using ChemSharp.Files;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
-    public class XYZDataProvider : AbstractDataProvider, IAtomDataProvider
+    public class XYZDataProvider : AbstractAtomDataProvider
     {
         /// <summary>
         /// import recipes
@@ -21,13 +22,15 @@ namespace ChemSharp.Molecules.DataProviders
 
         public XYZDataProvider(string path) : base(path)
         {
-            var file = (PlainFile<string>)FileHandler.Handle(path);
-            Atoms = ReadAtoms(file.Content).ToList();
+            Atoms = ReadAtoms(Content).ToList();
+        }
+
+        public XYZDataProvider(Stream stream) : base(stream)
+        {
+            Atoms = ReadAtoms(Content).ToList();
         }
 
         internal const string Pattern = @"([A-Z][a-z]{0,1}){1}\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)";
-
-        public IEnumerable<Atom> Atoms { get; set; }
 
         /// <summary>
         /// Read Atom data from CIF File

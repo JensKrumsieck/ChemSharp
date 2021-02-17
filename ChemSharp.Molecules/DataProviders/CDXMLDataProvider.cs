@@ -4,6 +4,7 @@ using ChemSharp.Molecules.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Xml;
@@ -13,7 +14,7 @@ namespace ChemSharp.Molecules.DataProviders
     /// <summary>
     /// This class does not precisely render ChemDraw Files, but reads atom positions to get a 2D Molecule in 3D Space
     /// </summary>
-    public class CDXMLDataProvider : AbstractDataProvider, IAtomDataProvider, IBondDataProvider
+    public class CDXMLDataProvider : AbstractAtomDataProvider, IBondDataProvider
     {
         private readonly Dictionary<int, Atom> _idToAtoms = new Dictionary<int, Atom>();
 
@@ -27,17 +28,19 @@ namespace ChemSharp.Molecules.DataProviders
         }
 
 
-        public CDXMLDataProvider(string path) : base(path)
+        public CDXMLDataProvider(string path) : base(path) => ReadData();
+        public CDXMLDataProvider(Stream stream) : base(stream) => ReadData();
+
+        public void ReadData()
         {
-            var file = (PlainFile<string>)FileHandler.Handle(path);
-            var data = string.Join("\n", file.Content);
+            var data = string.Join("\n", Content);
             var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(data);
             var pages = xmlDoc.SelectNodes("CDXML/page");
             if (pages == null) return;
             foreach (XmlNode page in pages)
-                foreach (XmlNode fragment in page)
-                    AnalyzeFragment(fragment);
+            foreach (XmlNode fragment in page)
+                AnalyzeFragment(fragment);
 
             AddImplicitHydrogens();
         }
@@ -126,7 +129,6 @@ namespace ChemSharp.Molecules.DataProviders
             Bonds = bondList;
         }
 
-        public IEnumerable<Atom> Atoms { get; set; }
         public IEnumerable<Bond> Bonds { get; set; }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace ChemSharp.Mathematics
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ChemSharp.Mathematics
 {
     public static class MathUtil
     {
@@ -15,5 +19,24 @@
         /// <param name="x"></param>
         /// <returns></returns>
         public static int NextPowerOf2(int x) => (int)System.Math.Pow(2, System.Math.Floor(System.Math.Log(x, 2)) + 1);
+
+        /// <summary>
+        /// Calculates the L2 Norm (Euclidean) of an array
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static double Length(this IEnumerable<double> input) => Math.Sqrt(input.Sum(s => Math.Pow(s, 2)));
+
+        /// <summary>
+        /// Normalizes Vector by dividing by L2Norm
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static double[] Normalize(this IEnumerable<double> input)
+        {
+            var inputArr = input as double[] ?? input.ToArray();
+            var len = inputArr.Length();
+            return inputArr.Select(s => s / len).ToArray();
+        }
     }
 }

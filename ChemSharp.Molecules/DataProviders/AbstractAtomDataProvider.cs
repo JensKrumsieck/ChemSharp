@@ -1,7 +1,7 @@
 ﻿using ChemSharp.DataProviders;
+using ChemSharp.Files;
 using System.Collections.Generic;
 using System.IO;
-using ChemSharp.Files;
 
 namespace ChemSharp.Molecules.DataProviders
 {

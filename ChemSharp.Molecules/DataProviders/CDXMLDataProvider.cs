@@ -1,5 +1,4 @@
-﻿using ChemSharp.DataProviders;
-using ChemSharp.Files;
+﻿using ChemSharp.Files;
 using ChemSharp.Molecules.Extensions;
 using System;
 using System.Collections.Generic;
@@ -39,8 +38,8 @@ namespace ChemSharp.Molecules.DataProviders
             var pages = xmlDoc.SelectNodes("CDXML/page");
             if (pages == null) return;
             foreach (XmlNode page in pages)
-            foreach (XmlNode fragment in page)
-                AnalyzeFragment(fragment);
+                foreach (XmlNode fragment in page)
+                    AnalyzeFragment(fragment);
 
             AddImplicitHydrogens();
         }

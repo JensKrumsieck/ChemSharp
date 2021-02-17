@@ -1,5 +1,4 @@
-﻿using ChemSharp.DataProviders;
-using ChemSharp.Files;
+﻿using ChemSharp.Files;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -40,9 +39,9 @@ namespace ChemSharp.Molecules.DataProviders
             from line in data
             select Regex.Match(line, Pattern)
             into atomMatch
-            where atomMatch.Groups.Count == 5 
-                  && !string.IsNullOrEmpty(atomMatch.Groups[4].Value) 
-                  && !string.IsNullOrEmpty(atomMatch.Groups[3].Value) 
+            where atomMatch.Groups.Count == 5
+                  && !string.IsNullOrEmpty(atomMatch.Groups[4].Value)
+                  && !string.IsNullOrEmpty(atomMatch.Groups[3].Value)
                   && !string.IsNullOrEmpty(atomMatch.Groups[2].Value)
             select new Atom(atomMatch.Groups[1].Value)
             {

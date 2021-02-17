@@ -1,5 +1,4 @@
-﻿using ChemSharp.DataProviders;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files;
 using System;
 using System.Collections.Generic;

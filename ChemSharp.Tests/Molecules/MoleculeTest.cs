@@ -1,8 +1,8 @@
-﻿using System.IO;
-using ChemSharp.Molecules;
+﻿using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using System.Linq;
 
 namespace ChemSharp.Tests.Molecules

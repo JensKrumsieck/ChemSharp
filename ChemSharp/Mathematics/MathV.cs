@@ -4,6 +4,7 @@ using MathF = System.MathF;
 #if NETSTANDARD2_0
 using MathF = ChemSharp.Mathematics.MathF;
 #endif
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -113,7 +114,7 @@ namespace ChemSharp.Mathematics
         /// <returns></returns>
         public static double Angle(Plane p1, Plane p2)
         {
-            var d = MathF.Abs((p1.Normal.X * p2.Normal.X) + (p1.Normal.Y * p2.Normal.Y) + (p1.Normal.Z * p2.Normal.Z));
+            var d = Math.Abs((p1.Normal.X * p2.Normal.X) + (p1.Normal.Y * p2.Normal.Y) + (p1.Normal.Z * p2.Normal.Z));
             var e1 = MathF.Pow(p1.Normal.X, 2) + MathF.Pow(p1.Normal.Y, 2) + MathF.Pow(p1.Normal.Z, 2);
             var e2 = MathF.Pow(p2.Normal.X, 2) + MathF.Pow(p2.Normal.Y, 2) + MathF.Pow(p2.Normal.Z, 2);
 

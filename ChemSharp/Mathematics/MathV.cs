@@ -104,6 +104,22 @@ namespace ChemSharp.Mathematics
         /// <returns></returns>
         /// 
         public static float Angle(Vector3 a, Vector3 b, Vector3 c) => (180f / MathF.PI) * RadAngle(a, b, c);
+
+        /// <summary>
+        /// Calculates an angle between two planes
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
+        public static double Angle(Plane p1, Plane p2)
+        {
+            var d = MathF.Abs((p1.Normal.X * p2.Normal.X) + (p1.Normal.Y * p2.Normal.Y) + (p1.Normal.Z * p2.Normal.Z));
+            var e1 = MathF.Pow(p1.Normal.X, 2) + MathF.Pow(p1.Normal.Y, 2) + MathF.Pow(p1.Normal.Z, 2);
+            var e2 = MathF.Pow(p2.Normal.X, 2) + MathF.Pow(p2.Normal.Y, 2) + MathF.Pow(p2.Normal.Z, 2);
+
+            return 180f / MathF.PI * MathF.Acos(d / (MathF.Sqrt(e1) * MathF.Sqrt(e2)));
+        }
+
         /// <summary>
         /// Returns an Angle between three Vectors in Radian
         /// </summary>

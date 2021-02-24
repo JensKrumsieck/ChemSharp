@@ -82,3 +82,8 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 #### Compatibility
 * NET Standard 2.0 (tested with NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
 * NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
+
+### Used by (Highlights):
+*  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**
+* <img src="https://raw.githubusercontent.com/JensKrumsieck/SPCViewer/chemsharp/.github/spc.png" alt="logo" height="16"/>  **[SPCViewer](https://github.com/JensKrumsieck/SPCViewer)**
+

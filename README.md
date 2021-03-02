@@ -20,7 +20,7 @@
 * Unit Conversion for (Energy, Magnetic Units, Mass)
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
-### Basic Usage
+### Basic Usage (See [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki))
 #### Create Spectra
 ```csharp
 //Creates an UV/Vis Spectrum

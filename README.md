@@ -4,6 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/bb81db40213cc68deb97/maintainability)](https://codeclimate.com/github/JensKrumsieck/ChemSharp/maintainability)
 ![.NET](https://github.com/JensKrumsieck/ChemSharp/workflows/.NET/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/blob/master/LICENSE)
+[![DOI](https://zenodo.org/badge/284711532.svg)](https://zenodo.org/badge/latestdoi/284711532)
 
 | | |
 |-|-|

@@ -85,7 +85,7 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 * NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
 
 ### How to cite
-You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https://doi.org/10.5281/zenodo.4573532)
+You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https://doi.org/10.5281/zenodo.4573532) (universal DOI, there is also one for each version if you want to be specific about that. Just click the link :smirk:)
 
 ### Used by (Highlights):
 *  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**

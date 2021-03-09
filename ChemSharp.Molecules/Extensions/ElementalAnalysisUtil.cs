@@ -28,7 +28,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="formula"></param>
         /// <returns></returns>
         public static Dictionary<string, double> ElementalAnalysis(this string formula) => MassComposition(formula)
-            .ToDictionary(item => item.Key, item => System.Math.Round(item.Value / formula.MolecularWeight() * 100, 3));
+            .ToDictionary(item => item.Key, item => System.Math.Round(item.Value / formula.MolecularWeight() * 100d, 3));
 
         /// <summary>
         /// Calculates Deviation of Exp and Theoretical EA

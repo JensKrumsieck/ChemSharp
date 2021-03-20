@@ -5,7 +5,7 @@ namespace ChemSharp.Molecules.Properties
     public class KeyValueProperty : IComparable<KeyValueProperty>
     {
         public virtual string Key { get; set; }
-        public virtual float Value { get; set; }
+        public virtual double Value { get; set; }
         public virtual string Unit { get; set; }
 
         public override string ToString() => $"{Key}: {Value:N3} {Unit}";

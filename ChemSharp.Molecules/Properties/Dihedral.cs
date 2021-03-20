@@ -4,7 +4,7 @@ namespace ChemSharp.Molecules.Properties
 {
     public class Dihedral : KeyValueProperty
     {
-        public override float Value => MathV.Dihedral(Atom1.Location, Atom2.Location, Atom3.Location, Atom4.Location);
+        public override double Value => MathV.Dihedral(Atom1.Location, Atom2.Location, Atom3.Location, Atom4.Location);
         public override string Key => $"{Atom1.Title} - {Atom2.Title} - {Atom3.Title} - {Atom4.Title}";
         public override string Unit => "°";
         public Atom Atom1;

@@ -20,25 +20,43 @@ namespace ChemSharp.Molecules.DataProviders
 
         static ElementDataProvider()
         {
-            ReadColorData();
-            ReadApiData();
+            EnsureColorData();
+            EnsureApiData();
         }
 
+        private static ReadOnlyDictionary<string, string> _colorData;
         /// <summary>
         /// contains color data
         /// </summary>
-        public static ReadOnlyDictionary<string, string> ColorData { get; private set; }
+        public static ReadOnlyDictionary<string, string> ColorData
+        {
+            get
+            {
+                if (_colorData == null) EnsureColorData();
+                return _colorData;
+            }
+            private set => _colorData = value;
+        }
 
+        private static IEnumerable<Element> _elementData;
         /// <summary>
         /// contains elemental data
         /// </summary>
-        public static IEnumerable<Element> ElementData { get; private set; }
+        public static IEnumerable<Element> ElementData
+        {
+            get
+            {
+                if (_elementData == null) EnsureApiData();
+                return _elementData;
+            }
+            private set => _elementData = value;
+        }
 
         /// <summary>
         /// Loads Color Data from ColorSource
         /// </summary>
         /// <returns></returns>
-        private static void ReadColorData()
+        public static void EnsureColorData()
         {
             var data = ResourceUtil.ReadResourceString(ColorSource);
             var dic = data.DefaultSplit()
@@ -51,7 +69,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// Loads Element Data from ApiSource
         /// </summary>
         /// <returns></returns>
-        private static void ReadApiData()
+        public static void EnsureApiData()
         {
             //Read Data from https://github.com/JensKrumsieck/periodic-table 
             //fetched from http://en.wikipedia.org

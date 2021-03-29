@@ -5,7 +5,7 @@ namespace ChemSharp.Molecules.Properties
 {
     public class Angle : KeyValueProperty
     {
-        public override float Value => MathV.Angle(Atom1.Location, Atom2.Location, Atom3.Location);
+        public override double Value => MathV.Angle(Atom1.Location, Atom2.Location, Atom3.Location);
         public override string Key => $"{Atom1.Title} - {Atom2.Title} - {Atom3.Title}";
         public override string Unit => "°";
         public Atom Atom1;

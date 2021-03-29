@@ -139,7 +139,7 @@ namespace ChemSharp.Molecules.Extensions
         internal static double FragmentWeight(string element, double amount)
         {
             var weight = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == element)?.AtomicWeight;
-            return weight * amount ?? 0;
+            return weight * amount ?? 0d;
         }
 
         /// <summary>

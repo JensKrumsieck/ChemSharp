@@ -25,7 +25,7 @@ namespace ChemSharp.Molecules.DataProviders
 
         public CIFDataProvider(Stream stream) : base(stream) => ReadData();
 
-        public void ReadData()
+        public sealed override void ReadData()
         {
             var loops = Loops(Content);
             var infoLoop = Array.Find(loops, s => s.Contains("_cell_length_a"));

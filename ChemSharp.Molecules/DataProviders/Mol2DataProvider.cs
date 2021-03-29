@@ -23,7 +23,7 @@ namespace ChemSharp.Molecules.DataProviders
         public Mol2DataProvider(string path) : base(path) => ReadData();
         public Mol2DataProvider(Stream stream) : base(stream) => ReadData();
 
-        public void ReadData()
+        public sealed override void ReadData()
         {
             var blocks = TriposBlocks(Content).ToArray();
             var atomBlock = Array.Find(blocks, s => s.Contains("ATOM")).DefaultSplit();

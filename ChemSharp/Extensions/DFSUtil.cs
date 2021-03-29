@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,7 +31,7 @@ namespace ChemSharp.Extensions
         /// <param name="func"></param>
         /// <param name="visited"></param>
         /// <returns></returns>
-        public static HashSet<T> DepthFirstSearch <T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited)
+        public static HashSet<T> DepthFirstSearch<T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited)
         {
             var results = new Stack<T>();
             results.Push(vertex);

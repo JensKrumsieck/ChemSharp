@@ -23,5 +23,7 @@ namespace ChemSharp.Molecules.DataProviders
             using var sr = new StreamReader(stream);
             Content = sr.ReadToEnd().Split('\n');
         }
+
+        public virtual void ReadData() { }
     }
 }

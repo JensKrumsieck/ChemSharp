@@ -19,12 +19,10 @@ namespace ChemSharp.Molecules.DataProviders
                 FileHandler.RecipeDictionary.Add("xyz", s => new PlainFile<string>(s));
         }
 
-        public XYZDataProvider(string path) : base(path)
-        {
-            Atoms = ReadAtoms(Content).ToList();
-        }
+        public XYZDataProvider(string path) : base(path) => ReadData();
+        public XYZDataProvider(Stream stream) : base(stream) => ReadData();
 
-        public XYZDataProvider(Stream stream) : base(stream)
+        public sealed override void ReadData()
         {
             Atoms = ReadAtoms(Content).ToList();
         }

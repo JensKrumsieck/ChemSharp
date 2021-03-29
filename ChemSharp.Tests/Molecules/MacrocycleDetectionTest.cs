@@ -26,7 +26,7 @@ namespace ChemSharp.Tests.Molecules
         private static async Task RunTest(string path, int size)
         {
             var molecule = MoleculeFactory.Create(path);
-            await Detect(molecule, size);
+            await Task.Run(() => Detect(molecule, size));
         }
 
         /// <summary>
@@ -36,12 +36,12 @@ namespace ChemSharp.Tests.Molecules
         /// <param name="molecule"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        private static async Task Detect(Molecule molecule, int size)
+        private static void Detect(Molecule molecule, int size)
         {
             var deadEnds = Element.DesiredSaturation.Where(s => s.Value == 1).Select(s => s.Key).ToList();
             IEnumerable<Atom> NonMetalNonDeadEnd(Atom atom) => molecule.NonMetalNeighbors(atom)?.Where(a => !deadEnds.Contains(a.Symbol));
-            var figures = await DFSUtil.ConnectedFigures(molecule.Atoms.Where(s => molecule.Neighbors(s).Count() >= 2),
-                molecule.NonMetalNeighbors).ToListAsync();
+            var figures = DFSUtil.ConnectedFigures(molecule.Atoms.Where(s => molecule.Neighbors(s).Count() >= 2),
+                molecule.NonMetalNeighbors).ToList();
             foreach (var fig in figures.Distinct())
             {
                 var data = FindCorpus(fig, NonMetalNonDeadEnd, size);

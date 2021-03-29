@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,10 +18,35 @@ namespace ChemSharp.Extensions
         /// <param name="list"></param>
         /// <param name="func"></param>
         /// <returns></returns>
-        public static async IAsyncEnumerable<IEnumerable<T>> ConnectedFigures<T>(IEnumerable<T> list, Func<T, IEnumerable<T>> func)
+        public static IEnumerable<IEnumerable<T>> ConnectedFigures<T>(IEnumerable<T> list, Func<T, IEnumerable<T>> func)
         {
             var visited = new HashSet<T>();
-            foreach (var item in list) if (!visited.Contains(item)) yield return await DFS(item, func, visited);
+            foreach (var item in list) if (!visited.Contains(item)) yield return DepthFirstSearch(item, func, visited);
+        }
+
+        /// <summary>
+        /// DFS Algorithm
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="vertex"></param>
+        /// <param name="func"></param>
+        /// <param name="visited"></param>
+        /// <returns></returns>
+        public static HashSet<T> DepthFirstSearch <T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited)
+        {
+            var results = new Stack<T>();
+            results.Push(vertex);
+            while (results.Count > 0)
+            {
+                var current = results.Pop();
+                if (visited.Contains(current)) continue;
+                visited.Add(current);
+                foreach (var n in func(current))
+                {
+                    if (!visited.Contains(n)) results.Push(n);
+                }
+            }
+            return visited;
         }
 
         /// <summary>
@@ -31,14 +57,15 @@ namespace ChemSharp.Extensions
         /// <param name="func"></param>
         /// <param name="visited">Provide a Hashset if you need to track which figure already has been found</param>
         /// <returns></returns>
-        public static async Task<HashSet<T>> DFS<T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited = null)
+        [Obsolete("Use DepthFirstSearch() instead")]
+        public static async Task<HashSet<T>> DFS<T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited)
         {
             var results = new HashSet<T>();
             await Traverse(vertex, results, func);
 
             //add results to visited if exists
             visited?.UnionWith(results);
-            return results;
+            return visited;
         }
 
         /// <summary>
@@ -47,7 +74,8 @@ namespace ChemSharp.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="vertex"></param>
         /// <param name="visited"></param>
-        /// <param name="func"></param>
+        /// <param name="func"></param> 
+        [Obsolete("Use DepthFirstSearch() instead")]
         private static async Task Traverse<T>(T vertex, ISet<T> visited, Func<T, IEnumerable<T>> func)
         {
             visited.Add(vertex);

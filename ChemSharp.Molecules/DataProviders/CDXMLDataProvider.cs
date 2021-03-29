@@ -30,7 +30,7 @@ namespace ChemSharp.Molecules.DataProviders
         public CDXMLDataProvider(string path) : base(path) => ReadData();
         public CDXMLDataProvider(Stream stream) : base(stream) => ReadData();
 
-        public void ReadData()
+        public sealed override void ReadData()
         {
             var data = string.Join("\n", Content);
             var xmlDoc = new XmlDocument();

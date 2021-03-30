@@ -31,21 +31,23 @@ namespace ChemSharp.Extensions
         /// <param name="func"></param>
         /// <param name="visited"></param>
         /// <returns></returns>
-        public static HashSet<T> DepthFirstSearch<T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited)
+        public static HashSet<T> DepthFirstSearch<T>(T vertex, Func<T, IEnumerable<T>> func, HashSet<T> visited = null)
         {
-            var results = new Stack<T>();
-            results.Push(vertex);
-            while (results.Count > 0)
+            var results = new HashSet<T>();
+            var stack = new Stack<T>();
+            stack.Push(vertex);
+            while (stack.Count > 0)
             {
-                var current = results.Pop();
-                if (visited.Contains(current)) continue;
-                visited.Add(current);
+                var current = stack.Pop();
+                if (results.Contains(current)) continue;
+                results.Add(current);
                 foreach (var n in func(current))
                 {
-                    if (!visited.Contains(n)) results.Push(n);
+                    if (!results.Contains(n)) stack.Push(n);
                 }
             }
-            return visited;
+            visited?.UnionWith(results);
+            return results;
         }
 
         /// <summary>

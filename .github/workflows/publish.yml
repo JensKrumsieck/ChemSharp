@@ -23,7 +23,7 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore -s https://api.nuget.org/v3/index.json
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test

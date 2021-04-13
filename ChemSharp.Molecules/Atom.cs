@@ -56,7 +56,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <returns></returns>
         // ReSharper disable NonReadonlyMemberInGetHashCode
-        public override int GetHashCode() => HashCode.Combine(_title, _location);
+        public override int GetHashCode() => (_title, _location).GetHashCode();
         // ReSharper enable NonReadonlyMemberInGetHashCode
 
         public bool Equals(Atom other) =>

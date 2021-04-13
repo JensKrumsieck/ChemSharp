@@ -45,7 +45,7 @@ namespace ChemSharp
 
         public override bool Equals(object obj) => obj is DataPoint other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(X, Y);
+        public override int GetHashCode() => (X, Y).GetHashCode();
 
         public static bool operator ==(DataPoint left, DataPoint right) => left.Equals(right);
 

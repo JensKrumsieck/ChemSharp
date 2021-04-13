@@ -89,5 +89,6 @@ You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https
 
 ### Used by (Highlights):
 *  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**
-* <img src="https://raw.githubusercontent.com/JensKrumsieck/SPCViewer/chemsharp/.github/spc.png" alt="logo" height="16"/>  **[SPCViewer](https://github.com/JensKrumsieck/SPCViewer)**
+* <img src="https://raw.githubusercontent.com/JensKrumsieck/SPCViewer/master/.github/spc.png" alt="logo" height="16"/>  **[SPCViewer](https://github.com/JensKrumsieck/SPCViewer)**
+* <img src="https://raw.githubusercontent.com/JensKrumsieck/CHN-Tool/master/.github/chn.png" alt="logo" height="16"/>  **[CHN-Tool](https://github.com/JensKrumsieck/CHN-Tool)**
 

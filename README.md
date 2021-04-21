@@ -83,7 +83,7 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 #### Compatibility
 * NET Standard 2.0 (tested with NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
 * NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
-* Unity (see Wiki)
+* Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity))
 
 ### How to cite
 You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https://doi.org/10.5281/zenodo.4573532) (universal DOI, there is also one for each version if you want to be specific about that. Just click the link :smirk:)

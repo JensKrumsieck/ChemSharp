@@ -85,7 +85,7 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 * NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
 * Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity) 
 <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>)
-* Godot Engine
+* Godot Engine (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Godot-Engine) for Snippet)
 
 ### How to cite
 You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https://doi.org/10.5281/zenodo.4573532) (universal DOI, there is also one for each version if you want to be specific about that. Just click the link :smirk:)

@@ -5,7 +5,6 @@
 ![.NET](https://github.com/JensKrumsieck/ChemSharp/workflows/.NET/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4573532.svg)](https://doi.org/10.5281/zenodo.4573532)
-<a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>
 
 | | |
 |-|-|
@@ -84,7 +83,8 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 #### Compatibility
 * NET Standard 2.0 (tested with NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
 * NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
-* Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity))
+* Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity) 
+<a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>)
 * Godot Engine
 
 ### How to cite

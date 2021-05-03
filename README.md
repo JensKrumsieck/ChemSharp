@@ -6,13 +6,13 @@
 [![GitHub license](https://img.shields.io/github/license/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4573532.svg)](https://doi.org/10.5281/zenodo.4573532)
 
-| | | |
-|-|-|-|
-| `ChemSharp` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp)](https://www.nuget.org/packages/ChemSharp/) |![Nuget](https://img.shields.io/nuget/dt/ChemSharp) |
-| `ChemSharp.Molecules` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Molecules)](https://www.nuget.org/packages/ChemSharp.Molecules/) | ![Nuget](https://img.shields.io/nuget/dt/ChemSharp.Molecules) |
-| `ChemSharp.Spectroscopy` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Spectroscopy)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) | ![Nuget](https://img.shields.io/nuget/dt/ChemSharp.Spectroscopy) |
-|`ChemSharp.UnitConversion` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.UnitConversion)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) | ![Nuget](https://img.shields.io/nuget/dt/ChemSharp.UnitConversion) |
-| `ChemSharp.Rendering` | [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/ChemSharp.Rendering)](https://www.nuget.org/packages/ChemSharp.Rendering/) | ![Nuget](https://img.shields.io/nuget/dt/ChemSharp.Rendering) |
+| | |
+|-|-|
+| `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp)](https://www.nuget.org/packages/ChemSharp/) |
+| `ChemSharp.Molecules` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
+| `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
+|`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
+| `ChemSharp.Rendering` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Rendering)](https://www.nuget.org/packages/ChemSharp.Rendering/) |
 
 ### Features
 * Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))

@@ -8,11 +8,11 @@
 
 | | |
 |-|-|
-| `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp)](https://www.nuget.org/packages/ChemSharp/) |
-| `ChemSharp.Molecules` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
-| `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
-|`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
-| `ChemSharp.Rendering` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Rendering)](https://www.nuget.org/packages/ChemSharp.Rendering/) |
+| `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp/) |
+| `ChemSharp.Molecules` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
+| `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
+|`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
+| `ChemSharp.Rendering` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Rendering?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Rendering/) |
 
 ### Features
 * Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))

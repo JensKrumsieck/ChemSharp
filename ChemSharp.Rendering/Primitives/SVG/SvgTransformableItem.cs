@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     /// <summary>
     /// TODO Transform handling!

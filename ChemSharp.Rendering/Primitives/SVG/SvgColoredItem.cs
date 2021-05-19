@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     public abstract class SvgColoredItem : SvgTransformableItem
     {

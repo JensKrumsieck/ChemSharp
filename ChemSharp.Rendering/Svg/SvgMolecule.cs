@@ -5,6 +5,7 @@ using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using ChemSharp.Rendering.Primitives.SVG;
 
 namespace ChemSharp.Rendering.Svg
 {

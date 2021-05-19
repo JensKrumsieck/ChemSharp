@@ -6,6 +6,7 @@ using ChemSharp.Rendering.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
 using System.Xml.Serialization;
+using ChemSharp.Rendering.Primitives.SVG;
 
 namespace ChemSharp.Tests.Rendering
 {

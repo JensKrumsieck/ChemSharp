@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     [XmlRoot("path")]
     public class SvgPath : SvgColoredItem, ISvgItem

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     [XmlRoot("circle")]
     public class SvgCircle : SvgColoredItem, ISvgItem, ISvgCoordinateObject

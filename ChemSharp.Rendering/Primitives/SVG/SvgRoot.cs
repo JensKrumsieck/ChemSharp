@@ -1,11 +1,11 @@
-﻿using ChemSharp.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
+using ChemSharp.Extensions;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     [XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
     public class SvgRoot

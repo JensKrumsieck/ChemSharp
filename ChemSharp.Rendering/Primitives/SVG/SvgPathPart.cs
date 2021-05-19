@@ -1,8 +1,8 @@
-﻿using ChemSharp.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ChemSharp.Extensions;
 
-namespace ChemSharp.Rendering.Primitives
+namespace ChemSharp.Rendering.Primitives.SVG
 {
     public enum SvgPartType
     {

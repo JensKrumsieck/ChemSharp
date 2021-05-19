@@ -1,5 +1,7 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Svg;
+using System.Drawing;
+using System.Numerics;
 
 namespace ChemSharp.Rendering.Extensions
 {
@@ -25,5 +27,11 @@ namespace ChemSharp.Rendering.Extensions
         /// <param name="bond"></param>
         /// <returns></returns>
         public static SvgBond ToSvg(this Bond bond) => new(bond);
+
+        public static Vector3 HexColorToVector(this string hexColor)
+        {
+            var col = ColorTranslator.FromHtml(hexColor);
+            return new Vector3(col.R / 255f, col.G / 255f, col.B / 255f);
+        }
     }
 }

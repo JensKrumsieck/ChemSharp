@@ -1,8 +1,10 @@
 ﻿using ChemSharp.Molecules;
+using ChemSharp.Rendering.Export;
 using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -92,6 +94,27 @@ namespace ChemSharp.Tests.Rendering
             var pov = "background {rgb < 0.1, 0.1, 0.1>}" + //hardcode background to gray
                       string.Join(Environment.NewLine, c.ToPovString(), l.ToPovString(), a);
             File.WriteAllText("mol.pov", pov);
+        }
+
+        [TestMethod]
+        public void TestExporter()
+        {
+            var m = MoleculeFactory.Create("files/cif.cif");
+            var c = new Camera
+            {
+                Location = new Vector3(10, 7, 40),
+                LookAt = m.Atoms.FirstOrDefault(s => s.IsMetal)?.Location ?? Vector3.Zero,
+                FieldOfView = 60
+            };
+            var l = new List<Light>
+            {
+                new()
+                {
+                    Location = new Vector3(15, 5, 5),
+                    Color = new Vector3(1, 1, 1)
+                }
+            };
+            PovRayExporter.Export(m, "export.pov", c, l);
         }
 
         public static Vector3 ToVec3(string hex)

@@ -56,7 +56,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
         /// <summary>
         /// contains Impurities 
         /// </summary>
-        public List<Impurity> Impurities { get; set; } = new List<Impurity>();
+        public List<Impurity> Impurities { get; set; } = new();
 
         /// <summary>
         /// ctor
@@ -75,7 +75,7 @@ namespace ChemSharp.Molecules.ElementalAnalysis
         /// </summary>
         /// <param name="mol"></param>
         /// <returns></returns>
-        public static Analysis FromMolecule(Molecule mol) => new Analysis() { Formula = mol.Atoms.SumFormula() };
+        public static Analysis FromMolecule(Molecule mol) => new() { Formula = mol.Atoms.SumFormula() };
 
         /// <summary>
         /// Updates Deviation

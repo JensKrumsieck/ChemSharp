@@ -10,20 +10,20 @@ namespace ChemSharp.Rendering.Extensions
         /// </summary>
         /// <param name="mol"></param>
         /// <returns></returns>
-        public static SvgMolecule ToSvg(this Molecule mol) => new SvgMolecule(mol);
+        public static SvgMolecule ToSvg(this Molecule mol) => new(mol);
 
         /// <summary>
         /// Converts Atom to Svg Class
         /// </summary>
         /// <param name="atom"></param>
         /// <returns></returns>
-        public static SvgAtom ToSvg(this Atom atom) => new SvgAtom(atom);
+        public static SvgAtom ToSvg(this Atom atom) => new(atom);
 
         /// <summary>
         /// Converts Atom to Svg Class
         /// </summary>
         /// <param name="bond"></param>
         /// <returns></returns>
-        public static SvgBond ToSvg(this Bond bond) => new SvgBond(bond);
+        public static SvgBond ToSvg(this Bond bond) => new(bond);
     }
 }

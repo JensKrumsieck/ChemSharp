@@ -2,10 +2,10 @@
 using ChemSharp.Molecules;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Rendering.Extensions;
-using ChemSharp.Rendering.Primitives;
+using ChemSharp.Rendering.Primitives.SVG;
 using System.Collections.Generic;
 using System.Linq;
-using ChemSharp.Rendering.Primitives.SVG;
+
 
 namespace ChemSharp.Rendering.Svg
 {

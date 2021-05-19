@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ChemSharp.Extensions;
+using System.Collections.Generic;
 using System.Linq;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Rendering.Primitives.SVG
 {
@@ -19,11 +19,11 @@ namespace ChemSharp.Rendering.Primitives.SVG
         public const string PartPattern = @"(M|L|C|A|Q|Z) ((\d+[.]?\d*)[,]?)*";
 
         public SvgPartType SvgPartType;
-        public List<double> Parameters = new List<double>();
+        public List<double> Parameters = new();
 
         public override string ToString() => $"{(char)SvgPartType} {(Parameters != null ? string.Join(",", Parameters.Select(s => s.ToInvariantString())) : "")}";
 
-        public static SvgPathPart ClosePart => new SvgPathPart { SvgPartType = SvgPartType.ClosePath };
+        public static SvgPathPart ClosePart => new() { SvgPartType = SvgPartType.ClosePath };
     }
 
 }

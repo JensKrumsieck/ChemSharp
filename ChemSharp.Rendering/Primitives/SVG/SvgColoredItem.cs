@@ -9,7 +9,7 @@ namespace ChemSharp.Rendering.Primitives.SVG
         public string Stroke
         {
             get => ActualStroke != null ? ColorTranslator.ToHtml(ActualStroke.Value) : "none";
-            set => ActualStroke = value != "none" ? (Color?)ColorTranslator.FromHtml(value) : null;
+            set => ActualStroke = value != "none" ? ColorTranslator.FromHtml(value) : null;
         }
 
         [XmlIgnore]
@@ -19,7 +19,7 @@ namespace ChemSharp.Rendering.Primitives.SVG
         public string Fill
         {
             get => ActualFill != null ? ColorTranslator.ToHtml(ActualFill.Value) : "none";
-            set => ActualFill = value != "none" ? (Color?)ColorTranslator.FromHtml(value) : null;
+            set => ActualFill = value != "none" ? ColorTranslator.FromHtml(value) : null;
         }
 
         [XmlIgnore]

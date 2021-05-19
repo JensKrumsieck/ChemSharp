@@ -34,6 +34,6 @@ namespace ChemSharp.Molecules
         /// Returns Atoms as List
         /// to do LINQ
         /// </summary>
-        public List<Atom> Atoms => new List<Atom> { Atom1, Atom2 };
+        public List<Atom> Atoms => new() { Atom1, Atom2 };
     }
 }

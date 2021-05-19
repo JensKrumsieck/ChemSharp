@@ -17,8 +17,7 @@ namespace ChemSharp.Rendering.Primitives.SVG
             set
             {
                 PathPartList.Clear();
-                var raw = value;
-                var matches = Regex.Matches(raw, SvgPathPart.PartPattern);
+                var matches = Regex.Matches(value, SvgPathPart.PartPattern);
                 foreach (Match m in matches)
                 {
                     var parts = m.Value.Split(' ');
@@ -38,6 +37,6 @@ namespace ChemSharp.Rendering.Primitives.SVG
         /// backing field for PathData
         /// </summary>
         [XmlIgnore]
-        public readonly List<SvgPathPart> PathPartList = new List<SvgPathPart>();
+        public readonly List<SvgPathPart> PathPartList = new();
     }
 }

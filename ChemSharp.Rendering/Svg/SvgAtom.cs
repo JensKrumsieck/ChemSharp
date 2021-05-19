@@ -1,5 +1,4 @@
 ﻿using ChemSharp.Molecules;
-using ChemSharp.Rendering.Primitives;
 using ChemSharp.Rendering.Primitives.SVG;
 
 namespace ChemSharp.Rendering.Svg

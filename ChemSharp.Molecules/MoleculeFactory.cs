@@ -10,7 +10,7 @@ namespace ChemSharp.Molecules
         /// <summary>
         /// Contains a file extension - type relationship
         /// </summary>
-        public static Dictionary<string, Type> DataProviderDictionary = new Dictionary<string, Type>();
+        public static Dictionary<string, Type> DataProviderDictionary = new();
 
         /// <summary>
         /// Import supported types for auto creation
@@ -28,7 +28,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static Molecule Create(string path) => new Molecule((IAtomDataProvider)CreateProvider(path));
+        public static Molecule Create(string path) => new((IAtomDataProvider)CreateProvider(path));
 
         /// <summary>
         /// Handles IDataProvider creation

@@ -4,7 +4,6 @@ using MathF = System.MathF;
 #if NETSTANDARD2_0
 using MathF = ChemSharp.Mathematics.MathF;
 #endif
-using System;
 using System.Numerics;
 
 namespace ChemSharp.Mathematics

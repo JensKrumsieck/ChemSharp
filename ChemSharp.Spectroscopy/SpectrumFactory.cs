@@ -11,7 +11,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// Contains a file extension - type relationship
         /// </summary>
-        public static Dictionary<string, Type> DataProviderDictionary = new Dictionary<string, Type>();
+        public static Dictionary<string, Type> DataProviderDictionary = new();
 
         /// <summary>
         /// Import supported types for auto creation
@@ -33,7 +33,7 @@ namespace ChemSharp.Spectroscopy
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static Spectrum Create(string path) => new Spectrum((IXYDataProvider)CreateProvider(path));
+        public static Spectrum Create(string path) => new((IXYDataProvider)CreateProvider(path));
 
         /// <summary>
         /// Handles IDataProvider creation

@@ -9,7 +9,7 @@ namespace ChemSharp.Molecules.Export
 {
     public class Mol2Exporter : AbstractMoleculeExporter
     {
-        private readonly Dictionary<Atom, int> _atomsDictionary = new Dictionary<Atom, int>();
+        private readonly Dictionary<Atom, int> _atomsDictionary = new();
 
         public static void Export(Molecule mol, string filename)
         {

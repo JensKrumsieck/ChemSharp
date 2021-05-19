@@ -48,10 +48,10 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <summary>
         /// Common CSV Translations
         /// </summary>
-        private static readonly Dictionary<string, string> Translations = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> Translations = new()
         {
-            {"Wavelength", "λ"},
-            {"Abs", "rel. Abs."}
+            { "Wavelength", "λ" },
+            { "Abs", "rel. Abs." }
         };
     }
 }

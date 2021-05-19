@@ -5,7 +5,7 @@ namespace ChemSharp
 {
     public readonly struct DataPoint : IEquatable<DataPoint>
     {
-        public static readonly DataPoint Zero = new DataPoint(0, 0);
+        public static readonly DataPoint Zero = new(0, 0);
 
         public DataPoint(double x, double y)
         {

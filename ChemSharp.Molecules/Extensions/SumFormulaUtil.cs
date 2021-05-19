@@ -19,22 +19,22 @@ namespace ChemSharp.Molecules.Extensions
         /// <summary>
         /// Dictionary with Molecular Abbreviations
         /// </summary>
-        internal static Dictionary<string, string> Abbreviations = new Dictionary<string, string>
+        internal static Dictionary<string, string> Abbreviations = new()
         {
-            {"Mes", "C9H11"},//Mesityl
-            {"Me", "CH2"}, //Methyl
-            {"Et", "C2H5"}, //Ethyl
-            {"iPr","C3H6"}, //iso-Propyl
-            {"Ph", "C6H5"}, //Phenyl
-            {"Ar", "C6H5"}, //Aryl being the same
-            {"Bu", "C4H9"}, //Butyl
-            {"acac", "C5H7O2"}, //Acetylacetonate (deprotonated)
-            {"Bn", "C6H5CH2"}, //Benzyl
-            {"Bz", "C6H5CO"}, //benzoyl
-            {"Cp", "C5H5"}, //cyclopentadienyl
-            {"Cy", "C6H11"}, //cyclohexyl
-            {"Fmoc", "C15H11O2"},
-            {"Boc", "C5H9O2"}
+            { "Mes", "C9H11" },//Mesityl
+            { "Me", "CH2" }, //Methyl
+            { "Et", "C2H5" }, //Ethyl
+            { "iPr", "C3H6" }, //iso-Propyl
+            { "Ph", "C6H5" }, //Phenyl
+            { "Ar", "C6H5" }, //Aryl being the same
+            { "Bu", "C4H9" }, //Butyl
+            { "acac", "C5H7O2" }, //Acetylacetonate (deprotonated)
+            { "Bn", "C6H5CH2" }, //Benzyl
+            { "Bz", "C6H5CO" }, //benzoyl
+            { "Cp", "C5H5" }, //cyclopentadienyl
+            { "Cy", "C6H11" }, //cyclohexyl
+            { "Fmoc", "C15H11O2" },
+            { "Boc", "C5H9O2" }
         };
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace ChemSharp.Molecules.Extensions
         public static Dictionary<string, double> CountElements(this string formula)
         {
             formula = formula.RemoveAbbreviations();
-            var result = new List<Dictionary<string, double>> { new Dictionary<string, double>() };
+            var result = new List<Dictionary<string, double>> { new() };
             var i = 0;
             foreach (Match m in Regex.Matches(formula, Pattern))
             {

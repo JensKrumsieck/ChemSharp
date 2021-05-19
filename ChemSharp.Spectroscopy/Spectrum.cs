@@ -33,7 +33,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// <inheritdoc cref="ISpectrum.XYData"/>
         /// </summary>
-        public List<DataPoint> XYData { get; set; } = new List<DataPoint>();
+        public List<DataPoint> XYData { get; set; } = new();
 
         /// <summary>
         /// Backing field for <see cref="Spectrum.Derivative"/>

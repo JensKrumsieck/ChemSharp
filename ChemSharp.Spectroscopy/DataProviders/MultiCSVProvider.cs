@@ -29,12 +29,12 @@ namespace ChemSharp.Spectroscopy.DataProviders
         /// <summary>
         /// List of Headers for columns (Item1 X, Item2 Y)
         /// </summary>
-        public List<(string, string)> XYHeaders { get; set; } = new List<(string, string)>();
+        public List<(string, string)> XYHeaders { get; set; } = new();
 
         /// <summary>
         /// List of XY DataPoint Lists
         /// </summary>
-        public List<DataPoint[]> MultiXYData { get; set; } = new List<DataPoint[]>();
+        public List<DataPoint[]> MultiXYData { get; set; } = new();
 
         /// <summary>
         /// Creates new MultiCSVProvider.

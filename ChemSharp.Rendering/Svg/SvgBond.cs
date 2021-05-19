@@ -1,5 +1,4 @@
 ﻿using ChemSharp.Molecules;
-using ChemSharp.Rendering.Primitives;
 #if NET5_0_OR_GREATER || NETSTANDARD2_1
 using System;
 #endif

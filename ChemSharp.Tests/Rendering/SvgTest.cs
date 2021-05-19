@@ -2,11 +2,10 @@
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Rendering.Export;
 using ChemSharp.Rendering.Extensions;
-using ChemSharp.Rendering.Primitives;
+using ChemSharp.Rendering.Primitives.SVG;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
 using System.Xml.Serialization;
-using ChemSharp.Rendering.Primitives.SVG;
 
 namespace ChemSharp.Tests.Rendering
 {

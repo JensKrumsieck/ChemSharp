@@ -83,7 +83,7 @@ namespace ChemSharp.Molecules
                 DesiredSaturation.Add(element.Symbol, saturation);
             }
         }
-        public static Dictionary<string, int> DesiredSaturation = new Dictionary<string, int>();
+        public static Dictionary<string, int> DesiredSaturation = new();
     }
 
 }

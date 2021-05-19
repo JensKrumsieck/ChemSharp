@@ -4,11 +4,11 @@ using MathF = System.MathF;
 #if NETSTANDARD2_0
 using MathF = ChemSharp.Mathematics.MathF;
 #endif
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace ChemSharp.Mathematics
 {

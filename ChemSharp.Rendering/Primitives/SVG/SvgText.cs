@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Serialization;
-using ChemSharp.Extensions;
 
 namespace ChemSharp.Rendering.Primitives.SVG
 {
@@ -10,12 +10,12 @@ namespace ChemSharp.Rendering.Primitives.SVG
     public class SvgText : SvgColoredItem, ISvgItem, ISvgCoordinateObject
     {
         [XmlIgnore]
-        public readonly Dictionary<string, int> FontWeights = new Dictionary<string, int>
+        public readonly Dictionary<string, int> FontWeights = new()
         {
-            {"lighter", 100},
-            {"normal", 300},
-            {"bold", 500},
-            {"bolder", 700},
+            { "lighter", 100 },
+            { "normal", 300 },
+            { "bold", 500 },
+            { "bolder", 700 },
         };
 
         [XmlAttribute("font-family")]

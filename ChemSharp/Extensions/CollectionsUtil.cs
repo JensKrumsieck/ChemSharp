@@ -75,7 +75,7 @@ namespace ChemSharp.Extensions
             this IEnumerable<T> source,
             IEqualityComparer<T> comparer = null)
         {
-            return new HashSet<T>(source, comparer);
+            return new(source, comparer);
         }
 #endif
     }

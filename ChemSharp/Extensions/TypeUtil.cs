@@ -5,10 +5,19 @@ namespace ChemSharp.Extensions
 {
     public static class TypeUtil
     {
-        internal static HashSet<Type> NumericTypes = new HashSet<Type>()
+        internal static HashSet<Type> NumericTypes = new()
         {
-            typeof(decimal), typeof(int), typeof(byte), typeof(sbyte), typeof(short), typeof(ushort), typeof(uint),
-            typeof(ulong), typeof(long), typeof(float), typeof(double)
+            typeof(decimal),
+            typeof(int),
+            typeof(byte),
+            typeof(sbyte),
+            typeof(short),
+            typeof(ushort),
+            typeof(uint),
+            typeof(ulong),
+            typeof(long),
+            typeof(float),
+            typeof(double)
         };
 
         /// <summary>

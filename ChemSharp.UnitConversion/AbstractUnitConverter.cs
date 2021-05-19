@@ -14,7 +14,7 @@ namespace ChemSharp.UnitConversion
             _toKey = to;
         }
 
-        protected Dictionary<string, MappedFunction> SIUnitLookup { get; } = new Dictionary<string, MappedFunction>();
+        protected Dictionary<string, MappedFunction> SIUnitLookup { get; } = new();
 
         /// <summary>
         /// Add new Conversion to Lookup

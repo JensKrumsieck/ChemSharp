@@ -11,7 +11,7 @@ namespace ChemSharp.Extensions
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string Spaces(int n) => new string(' ', n);
+        public static string Spaces(int n) => new(' ', n);
 
         /// <summary>
         /// Shorthand for culture conversion

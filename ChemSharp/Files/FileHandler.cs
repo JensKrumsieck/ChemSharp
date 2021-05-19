@@ -10,7 +10,7 @@ namespace ChemSharp.Files
         /// <summary>
         /// Stores file handle recipes
         /// </summary>
-        public static Dictionary<string, Func<string, IFile>> RecipeDictionary = new Dictionary<string, Func<string, IFile>>();
+        public static Dictionary<string, Func<string, IFile>> RecipeDictionary = new();
 
         /// <summary>
         /// Handles file by given path

@@ -15,7 +15,7 @@ namespace ChemSharp.Molecules.DataProviders
     /// </summary>
     public class CDXMLDataProvider : AbstractAtomDataProvider, IBondDataProvider
     {
-        private readonly Dictionary<int, Atom> _idToAtoms = new Dictionary<int, Atom>();
+        private readonly Dictionary<int, Atom> _idToAtoms = new();
 
         /// <summary>
         /// import recipes
@@ -66,7 +66,7 @@ namespace ChemSharp.Molecules.DataProviders
         {
             foreach (var n in atoms)
             {
-                if (!(n is XmlElement element)) yield break;
+                if (n is not XmlElement element) yield break;
                 var id = element.GetAttribute("id");
                 var pos = element.GetAttribute("p").Split(' '); //position in pixels...
                 var loc = new Vector3(Convert.ToSingle(pos[0], CultureInfo.InvariantCulture), Convert.ToSingle(pos[1], CultureInfo.InvariantCulture), 0f);
@@ -91,11 +91,11 @@ namespace ChemSharp.Molecules.DataProviders
         {
             foreach (var b in bonds)
             {
-                if (!(b is XmlElement bond)) yield break;
+                if (b is not XmlElement bond) yield break;
                 var begin = bond.GetAttribute("B");
                 var end = bond.GetAttribute("E");
-                int.TryParse(begin, out var firstId);
-                int.TryParse(end, out var lastId);
+                var firstId = int.Parse(begin);
+                var lastId = int.Parse(end);
                 var bondObj = new Bond(_idToAtoms[firstId], _idToAtoms[lastId]);
 
                 var order = bond.GetAttribute("Order");

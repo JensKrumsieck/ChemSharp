@@ -1,13 +1,12 @@
 ﻿using ChemSharp.Export;
 using ChemSharp.Molecules;
 using ChemSharp.Rendering.Extensions;
-using ChemSharp.Rendering.Primitives;
+using ChemSharp.Rendering.Primitives.SVG;
 using ChemSharp.Rendering.Svg;
 using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
-using ChemSharp.Rendering.Primitives.SVG;
 
 namespace ChemSharp.Rendering.Export
 {
@@ -60,7 +59,7 @@ namespace ChemSharp.Rendering.Export
         /// <param name="stream"></param>
         public void Export(IExportable exportable, Stream stream)
         {
-            if (!(exportable is SvgMolecule mol)) throw new NotSupportedException("Please use SvgMolecule Type");
+            if (exportable is not SvgMolecule mol) throw new NotSupportedException("Please use SvgMolecule Type");
 
             using var streamWriter = new StreamWriter(stream);
             streamWriter.Write(ExportToString(mol));

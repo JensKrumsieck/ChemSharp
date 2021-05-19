@@ -25,7 +25,7 @@ namespace ChemSharp.Mathematics
         /// <param name="current"></param>
         /// <param name="previous"></param>
         /// <returns></returns>
-        internal static DataPoint Derivative(this DataPoint current, DataPoint previous) => new DataPoint(current.X, (current.Y - previous.Y) / (current.X - previous.X));
+        internal static DataPoint Derivative(this DataPoint current, DataPoint previous) => new(current.X, (current.Y - previous.Y) / (current.X - previous.X));
 
         /// <summary>
         /// Integral of DataPoint Collection
@@ -51,6 +51,6 @@ namespace ChemSharp.Mathematics
         /// <param name="current"></param>
         /// <param name="previous"></param>
         /// <returns></returns>
-        internal static DataPoint Integration(this DataPoint current, DataPoint previous) => new DataPoint(current.X, current.Y + previous.Y);
+        internal static DataPoint Integration(this DataPoint current, DataPoint previous) => new(current.X, current.Y + previous.Y);
     }
 }

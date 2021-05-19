@@ -2,7 +2,31 @@
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Rendering.Export;
 using ChemSharp.Rendering.Extensions;
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Tests (net472)"
+Vor:
 using ChemSharp.Rendering.Primitives.SVG;
+Nach:
+using ChemSharp.Rendering.Primitives.Svg;
+using ChemSharp.Rendering.Primitives.SVG;
+*/
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Tests (netcoreapp2.1)"
+Vor:
+using ChemSharp.Rendering.Primitives.SVG;
+Nach:
+using ChemSharp.Rendering.Primitives.Svg;
+using ChemSharp.Rendering.Primitives.SVG;
+*/
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Tests (netcoreapp3.1)"
+Vor:
+using ChemSharp.Rendering.Primitives.SVG;
+Nach:
+using ChemSharp.Rendering.Primitives.Svg;
+using ChemSharp.Rendering.Primitives.SVG;
+*/
+using ChemSharp.Rendering.Primitives.Svg;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml;
 using System.Xml.Serialization;

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives.SVG
+namespace ChemSharp.Rendering.Primitives.Svg
 {
     [XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
     public class SvgRoot

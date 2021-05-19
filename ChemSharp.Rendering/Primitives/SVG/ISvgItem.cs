@@ -1,4 +1,4 @@
-﻿namespace ChemSharp.Rendering.Primitives.SVG
+﻿namespace ChemSharp.Rendering.Primitives.Svg
 {
     public interface ISvgItem { }
 }

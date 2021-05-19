@@ -1,10 +1,11 @@
 ﻿using ChemSharp.Extensions;
+using ChemSharp.Rendering.Primitives.SVG;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Serialization;
 
-namespace ChemSharp.Rendering.Primitives.SVG
+namespace ChemSharp.Rendering.Primitives.Svg
 {
     [XmlRoot("text")]
     public class SvgText : SvgColoredItem, ISvgItem, ISvgCoordinateObject

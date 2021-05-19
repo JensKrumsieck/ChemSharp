@@ -1,7 +1,23 @@
 ﻿using ChemSharp.Export;
 using ChemSharp.Molecules;
 using ChemSharp.Rendering.Extensions;
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Rendering (netstandard2.1)"
+Vor:
 using ChemSharp.Rendering.Primitives.SVG;
+Nach:
+using ChemSharp.Rendering.Primitives.Svg;
+using ChemSharp.Rendering.Primitives.SVG;
+*/
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Rendering (net5.0)"
+Vor:
+using ChemSharp.Rendering.Primitives.SVG;
+Nach:
+using ChemSharp.Rendering.Primitives.Svg;
+using ChemSharp.Rendering.Primitives.SVG;
+*/
+using ChemSharp.Rendering.Primitives.Svg;
 using ChemSharp.Rendering.Svg;
 using System;
 using System.IO;

@@ -4,7 +4,7 @@ using System;
 #endif
 using System.Collections.Generic;
 using System.Numerics;
-using ChemSharp.Rendering.Primitives.SVG;
+using ChemSharp.Rendering.Primitives.Svg;
 
 #if NETSTANDARD2_0
 using ChemSharp.Mathematics;

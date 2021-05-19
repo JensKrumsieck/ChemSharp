@@ -44,7 +44,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static string RemoveAbbreviations(this string formula) =>
             Abbreviations.Aggregate(formula, (current, abbr) => current.Replace(abbr.Key, abbr.Value));
-
+        
         /// <summary>
         /// counts each element from a given string
         /// (Sum formula with Abbreviations)
@@ -53,35 +53,40 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static Dictionary<string, double> CountElements(this string formula)
         {
-            formula = formula.RemoveAbbreviations();
-            var result = new List<Dictionary<string, double>> { new() };
-            var i = 0;
-            foreach (Match m in Regex.Matches(formula, Pattern))
+            formula = formula.RemoveAbbreviations();//remove special abbreviations
+            var parse = Regex.Matches(formula, Pattern);
+            var stack = new Stack<Dictionary<string, double>>();
+            var tmp = new Dictionary<string, double>();
+            stack.Push(tmp);
+            foreach (Match m in parse)
             {
-                //Group one == Element string, Assign Group two == Factor
-                if (m.Groups[1].Success)
+                if (m.Groups[1].Success) //Element Name!
                 {
-                    //does not contain key -> create
-                    if (!result[i].ContainsKey(m.Groups[1].Value)) result[i][m.Groups[1].Value] = (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
+                    var top = stack.Peek();
+                    if (!top.ContainsKey(m.Groups[1].Value))top[m.Groups[1].Value] = (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
                     //contains key -> additon
-                    else result[i][m.Groups[1].Value] += (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
+                    else top[m.Groups[1].Value] += (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
                 }
-                //group 3 == left parentheses
-                if (m.Groups[3].Success)
+
+                if (m.Groups[3].Success) stack.Push(new Dictionary<string, double>()); //left bracket --> new element
+                if (m.Groups[4].Success) //right bracket
                 {
-                    i++;
-                    result.Add(new Dictionary<string, double>());
+                    //remove top element and multiply with factor. Merge into new top element
+                    var top = stack.Pop();
+                    var newTop = stack.Peek();
+                    foreach (var (key, value) in top)
+                    {
+                        var val = value * (m.Groups[5].Success && m.Groups[5].Value != ""
+                            ? Convert.ToDouble(m.Groups[5].Value)
+                            : 1d);
+                        if (!newTop.ContainsKey(key)) newTop.Add(key, val);
+                        else
+                            newTop[key] += val;
+                    }
                 }
-                //group 4 == right parentheses; group 5 == multiplicator
-                if (!m.Groups[4].Success) continue;
-                //add multiplicator to each group element
-                var mult = 1d;
-                if (m.Groups[5].Success && m.Groups[5].Value != "") mult = Convert.ToDouble(m.Groups[5].Value);
-                for (int j = i; j < result.Count; j++) result[j].Factor(mult);
-                ////end of subformula
-                //i--;
             }
-            return result.Merge();
+
+            return stack.Pop();
         }
 
         /// <summary>

@@ -65,8 +65,31 @@ namespace ChemSharp.Tests.Molecules
             var deviation = ElementalAnalysisUtil.Deviation(chn, experimental);
             Assert.AreEqual(delta, deviation["C"]);
             Assert.AreEqual(delta, deviation["H"]);
-            var err = ElementalAnalysisUtil.Error(chn, experimental);
+            var err = ElementalAnalysisUtil.Error(ref chn, ref experimental);
             Assert.AreEqual(16.2595931744669, err, .05);
+        }
+
+        /// <summary>
+        /// Test cases from http://rosettacode.org/wiki/Chemical_calculator#C.23
+        /// </summary>
+        [TestMethod]
+        public void RosettaTest()
+        {
+            var molecules = new[]{
+                "H", "H2", "H2O", "H2O2", "(HO)2", "Na2SO4", "C6H12",
+                 "C6H4O2(OH)4", "C27H46O","COOH(C(CH3)2)3CH3", "(H4O2)0,5"
+            };
+            var masses = new[]
+            {
+                1.008, 2.016, 18.015, 34.014, 34.014, 142.036, 84.162,  176.124, 386.664,186.295, 18.015
+            };
+
+            for (var i = 0; i < molecules.Length; i++)
+            {
+                var mass = molecules[i].MolecularWeight();
+                Assert.AreEqual(mass, masses[i], .1,
+                    $"Failed for {mass} and {masses[i]} with molecule {molecules[i]}");
+            }
         }
     }
 }

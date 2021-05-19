@@ -47,15 +47,14 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="theory"></param>
         /// <param name="exp"></param>
         /// <returns></returns>
-        public static double Error(Dictionary<string, double> theory, Dictionary<string, double> exp)
+        public static double Error(ref Dictionary<string, double> theory, ref Dictionary<string, double> exp)
         {
-            var err = new ConcurrentBag<double>();
-
-            Parallel.ForEach(theory, item =>
+            var err = new Stack<double>();
+            foreach (var item in theory)
             {
                 var (key, _) = item;
-                if (exp.ContainsKey(key)) err.Add(System.Math.Pow(exp[key] - theory[key], 2));
-            });
+                if (exp.ContainsKey(key)) err.Push(System.Math.Pow(exp[key] - theory[key], 2));
+            }
             return System.Math.Sqrt(err.Sum()) * err.Max();
         }
 
@@ -68,21 +67,23 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static double[] Solve(string formula, Dictionary<string, double> exp, IEnumerable<Impurity> impurities)
         {
-            var calc = new ConcurrentBag<Result>();
+            var calc = new ConcurrentStack<Result>();
 
             //get all combinations
-            var comp = new ConcurrentBag<HashSet<double>>();
+            var comp = new List<HashSet<double>>();
             var imps = impurities.ToArray();
-            Parallel.ForEach(imps, imp =>
+            foreach(var imp in imps)
             {
                 var count = (int)((imp.Upper - imp.Lower) / imp.Step) + 1; //add 0 to range
                 comp.Add(CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count).ToHashSet());
-            });
-            Parallel.ForEach(comp.Cartesian(), item =>
+            }
+            var cartesian = comp.Cartesian();
+            Parallel.ForEach(cartesian, item =>
             {
                 var vecArray = item.ToArray();
                 var testFormula = formula.SumFormula(imps, vecArray);
-                calc.Add(new Result(testFormula, Error(testFormula.ElementalAnalysis(), exp), vecArray));
+                var analysis = testFormula.ElementalAnalysis();
+                calc.Push(new Result(testFormula, Error(ref analysis, ref exp), vecArray));
             });
 
             return calc.OrderBy(s => s.Err).First().Vec;
@@ -100,7 +101,7 @@ namespace ChemSharp.Molecules.Extensions
             var testFormula = formula;
             var imps = impurities.ToArray();
             var vecArr = vec.ToArray();
-            for (var i = 0; i < vecArr.Count(); i++) testFormula += imps[i].Formula.CountElements().Factor(vecArr[i]).Parse();
+            for (var i = 0; i < vecArr.Length; i++) testFormula += imps[i].Formula.CountElements().Factor(vecArr[i]).Parse();
             return testFormula;
         }
     }

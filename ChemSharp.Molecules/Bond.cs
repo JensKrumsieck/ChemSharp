@@ -2,10 +2,10 @@
 
 namespace ChemSharp.Molecules
 {
-    public class Bond
+    public sealed class Bond
     {
-        public Atom Atom1;
-        public Atom Atom2;
+        public readonly Atom Atom1;
+        public readonly Atom Atom2;
 
         /// <summary>
         /// Bond order, not supported by all file types
@@ -26,14 +26,14 @@ namespace ChemSharp.Molecules
         {
             Atom1 = a1;
             Atom2 = a2;
+            Atoms = new List<Atom> {a1, a2};
         }
 
         public override string ToString() => $"{Atom1.Title} - {Atom2.Title} : {Length}";
-
+        
         /// <summary>
-        /// Returns Atoms as List
-        /// to do LINQ
+        /// Returns Atoms as List to do LINQ
         /// </summary>
-        public List<Atom> Atoms => new() { Atom1, Atom2 };
+        public readonly List<Atom> Atoms;
     }
 }

@@ -9,21 +9,10 @@ namespace ChemSharp.Molecules
     /// </summary>
     public class Atom : Element, IEquatable<Atom>
     {
-        private Vector3 _location;
         /// <summary>
         /// Location in 3D Space
         /// </summary>
-        public Vector3 Location
-        {
-            get => Mapping(_location);
-            set => _location = value;
-        }
-
-        /// <summary>
-        /// Add a Mapping for Location to recalculate points
-        /// into different coordinate systems
-        /// </summary>
-        public Func<Vector3, Vector3> Mapping { get; set; } = s => s;
+        public Vector3 Location { get; set; }
 
         /// <summary>
         /// default ctor
@@ -37,7 +26,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
-        public float DistanceTo(Atom test) => MathV.Distance(Location, test.Location);
+        public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
 
         private string _title;
         /// <summary>
@@ -56,13 +45,13 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <returns></returns>
         // ReSharper disable NonReadonlyMemberInGetHashCode
-        public override int GetHashCode() => (_title, _location).GetHashCode();
+        public override int GetHashCode() => (_title, Location).GetHashCode();
         // ReSharper enable NonReadonlyMemberInGetHashCode
 
         public bool Equals(Atom other) =>
             !(other is null) &&
             (ReferenceEquals(this, other)
-             || _title == other._title && Location.Equals(other._location));
+             || _title == other._title && Location.Equals(other.Location));
 
         public override bool Equals(object obj) =>
             !(obj is null) &&

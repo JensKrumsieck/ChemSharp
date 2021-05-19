@@ -85,7 +85,7 @@ namespace ChemSharp.Molecules
             var matched = new HashSet<(int, int)>();
             for (var i = 0; i < Atoms.Count; i++)
             {
-                for (var j = i + 1; j < Atoms.Count(); j++)
+                for (var j = i + 1; j < Atoms.Count; j++)
                 {
                     if (i == j || !Atoms[i].BondToByCovalentRadii(Atoms[j]) ||
                         (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
@@ -93,16 +93,6 @@ namespace ChemSharp.Molecules
                     Bonds.Add(new Bond(Atoms[i], Atoms[j]));
                 }
             }
-        }
-
-        /// <summary>
-        /// Updates coordinate system mapping function
-        /// </summary>
-        /// <param name="mapping"></param>
-        public void SetMapping(Func<Vector3, Vector3> mapping)
-        {
-            foreach (var atom in Atoms)
-                atom.Mapping = mapping;
         }
 
         /// <summary>
@@ -117,6 +107,6 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s != null && s.IsNonMetal) : Enumerable.Empty<Atom>();
+        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s.IsNonMetal) : Enumerable.Empty<Atom>();
     }
 }

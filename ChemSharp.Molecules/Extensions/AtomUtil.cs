@@ -19,7 +19,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static string SumFormula(this IEnumerable<Atom> atoms)
         {
-            var groups = atoms.Group();
+            var groups = atoms.GroupBy(s => s.Symbol).OrderBy(s => s.Key);
             var formula = "";
             foreach (var g in groups)
             {
@@ -28,18 +28,6 @@ namespace ChemSharp.Molecules.Extensions
             }
             return formula;
         }
-
-        /// <summary>
-        /// Returns Elements grouped by Symbol
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        private static IEnumerable<IGrouping<string, Element>> Group(this IEnumerable<Element> input)
-            => from element in input
-               group element by element.Symbol
-                into newGroup
-               orderby newGroup.Key
-               select newGroup;
 
         /// <summary>
         /// Gets Saturation of Atom a in Context of Molecule mol

@@ -51,8 +51,7 @@ namespace ChemSharp.Molecules
         {
             AtomDataProvider = provider;
             Atoms = provider.Atoms.ToList();
-            if (provider is IBondDataProvider bondProvider
-                && bondProvider.Bonds != null && bondProvider.Bonds.Count() != 0)
+            if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
             {
                 BondDataProvider = bondProvider;
                 Bonds = bondProvider.Bonds.ToList();

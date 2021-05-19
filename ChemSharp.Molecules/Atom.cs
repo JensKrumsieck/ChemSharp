@@ -1,5 +1,4 @@
-﻿using ChemSharp.Mathematics;
-using System;
+﻿using System;
 using System.Numerics;
 
 namespace ChemSharp.Molecules
@@ -14,10 +13,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         public Vector3 Location { get; set; }
 
-        /// <summary>
-        /// default ctor
-        /// </summary>
-        /// <param name="symbol"></param>
+        /// <inheritdoc />
         public Atom(string symbol) : base(symbol) { }
 
         /// <summary>

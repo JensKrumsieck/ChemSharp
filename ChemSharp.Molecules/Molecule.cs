@@ -83,14 +83,14 @@ namespace ChemSharp.Molecules
             BondDataProvider = null;
             Bonds = new List<Bond>();
             var matched = new HashSet<(int, int)>();
-            for (var i = 0; i < Atoms.Count(); i++)
+            for (var i = 0; i < Atoms.Count; i++)
             {
                 for (var j = i + 1; j < Atoms.Count(); j++)
                 {
-                    if (i == j || !Atoms.ElementAt(i).BondToByCovalentRadii(Atoms.ElementAt(j)) ||
+                    if (i == j || !Atoms[i].BondToByCovalentRadii(Atoms[j]) ||
                         (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
                     matched.Add((i, j));
-                    Bonds.Add(new Bond(Atoms.ElementAt(i), Atoms.ElementAt(j)));
+                    Bonds.Add(new Bond(Atoms[i], Atoms[j]));
                 }
             }
         }

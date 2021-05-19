@@ -14,7 +14,7 @@ namespace ChemSharp.Tests.Molecules
             var atom1 = new Atom("He") { Location = new Vector3(1, 0, 0) };
             var atom2 = new Atom("Pr") { Location = new Vector3(0, 0, 0) };
             var prop = new Distance(atom1, atom2);
-            Assert.AreEqual(1f, prop.Value);
+            Assert.AreEqual(1.0, prop.Value, 1e-5d);
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace ChemSharp.Tests.Molecules
             var atom2 = new Atom("Pr") { Location = new Vector3(0, 0, 0) };
             var atom3 = new Atom("Nb") { Location = new Vector3(0, 1, 0) };
             var prop = new Angle(atom1, atom2, atom3);
-            Assert.AreEqual(90f, prop.Value);
+            Assert.AreEqual(90.0, prop.Value, 1e-5d);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace ChemSharp.Tests.Molecules
             var atom3 = new Atom("Nb") { Location = new Vector3(0, 1, 0) };
             var atom4 = new Atom("Lu") { Location = new Vector3(0, 1, 1) };
             var prop = new Dihedral(atom1, atom2, atom3, atom4);
-            Assert.AreEqual(-90f, prop.Value);
+            Assert.AreEqual(-90.0, prop.Value, 1e-5d);
         }
     }
 }

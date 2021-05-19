@@ -38,22 +38,22 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// Backing field for <see cref="Spectrum.Derivative"/>
         /// </summary>
-        private IEnumerable<DataPoint> _derivative;
+        private List<DataPoint> _derivative;
 
         /// <summary>
         /// Derivative of XYData
         /// </summary>
-        public List<DataPoint> Derivative => (_derivative ??= XYData.Derive()).ToList();
+        public List<DataPoint> Derivative => _derivative ??= XYData.Derive().ToList();
 
         /// <summary>
         /// Backing field for <see cref="Spectrum.Integral"/>
         /// </summary>
-        private IEnumerable<DataPoint> _integral;
+        private List<DataPoint> _integral;
 
         /// <summary>
         /// Integral of XYData
         /// </summary>
-        public List<DataPoint> Integral => (_integral ??= XYData.Integrate()).ToList();
+        public List<DataPoint> Integral => _integral ??= XYData.Integrate().ToList();
 
         /// <summary>
         /// <inheritdoc cref="ISpectrum.Title"/>

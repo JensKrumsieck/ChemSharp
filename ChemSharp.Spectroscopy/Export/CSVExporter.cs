@@ -1,7 +1,9 @@
-﻿using ChemSharp.Export;
+﻿using System.Collections.Generic;
+using ChemSharp.Export;
 using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.Extension;
 using System.IO;
+using System.Text;
 
 namespace ChemSharp.Spectroscopy.Export
 {
@@ -25,25 +27,39 @@ namespace ChemSharp.Spectroscopy.Export
             var exp = flags.HasFlag(SpectrumExportFlags.Experimental);
             var deriv = flags.HasFlag(SpectrumExportFlags.Derivative);
             var integral = flags.HasFlag(SpectrumExportFlags.Integral);
-            var csv = spc.Title;
+
+            var csv = new StringBuilder();
+            csv.AppendLine(spc.Title);
             var xTitle = $"{spc.Quantity()}/{spc.Unit()}{separator}";
-            csv += $"\n{xTitle}{spc.YQuantity()}{separator}" +
+            csv.AppendLine($"{xTitle}{spc.YQuantity()}{separator}" +
                    $"{(deriv ? $"{xTitle}Derivative" + separator : "")}" +
-                   $"{(integral ? $"{xTitle}Integral" + separator : "")}\n";
+                   $"{(integral ? $"{xTitle}Integral" + separator : "")}");
+
             for (var i = 0; i < spc.XYData.Count; i++)
             {
-                csv += $"{DataString(spc.XYData[i].X, separator, exp)}" +
-                       $"{DataString(spc.XYData[i].Y, separator, exp)}" +
-                       $"{DataString(spc.Derivative[i].X, separator, deriv)}" +
-                       $"{DataString(spc.Derivative[i].Y, separator, deriv)}" +
-                       $"{DataString(spc.Integral[i].X, separator, integral)}" +
-                       $"{DataString(spc.Integral[i].Y, separator, integral)}\n";
-            }
-            return csv;
-        }
+                var line = new StringBuilder();
+                if (exp)
+                {
+                    line.Append(spc.XYData[i].X.ToInvariantString() + separator);
+                    line.Append(spc.XYData[i].Y.ToInvariantString() + separator);
+                }
 
-        private static string DataString(double data, char separator, bool use = true) =>
-            $"{(use ? data.ToInvariantString() + separator : "")}";
+                if (deriv)
+                {
+                    line.Append(spc.Derivative[i].X.ToInvariantString() + separator);
+                    line.Append(spc.Derivative[i].Y.ToInvariantString() + separator);
+                }
+
+                if (integral)
+                {
+                    line.Append(spc.Integral[i].X.ToInvariantString() + separator);
+                    line.Append(spc.Integral[i].Y.ToInvariantString() + separator);
+                }
+                csv.AppendLine(line.ToString());
+            }
+            return csv.ToString();
+        }
+        
 
         public override void Export(IExportable exportable, Stream stream)
         {

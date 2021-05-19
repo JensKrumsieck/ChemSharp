@@ -67,8 +67,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static double[] Solve(string formula, Dictionary<string, double> exp, IEnumerable<Impurity> impurities)
         {
-            var calc = new ConcurrentStack<Result>();
-
+            var calc = new ConcurrentStack<(string formula, double error, double[] data)>();
             //get all combinations
             var comp = new List<HashSet<double>>();
             var imps = impurities.ToArray();
@@ -83,10 +82,10 @@ namespace ChemSharp.Molecules.Extensions
                 var vecArray = item.ToArray();
                 var testFormula = formula.SumFormula(imps, vecArray);
                 var analysis = testFormula.ElementalAnalysis();
-                calc.Push(new Result(testFormula, Error(ref analysis, ref exp), vecArray));
+                calc.Push((testFormula, Error(ref analysis, ref exp), vecArray));
             });
 
-            return calc.OrderBy(s => s.Err).First().Vec;
+            return calc.OrderBy(s => s.error).First().data;
         }
 
         /// <summary>

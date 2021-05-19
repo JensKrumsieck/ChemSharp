@@ -11,8 +11,6 @@ namespace ChemSharp.Tests.Molecules
     [TestClass]
     public class ElementalAnalysisTest
     {
-
-
         [TestMethod]
         public void TestSimulation()
         {
@@ -75,6 +73,26 @@ namespace ChemSharp.Tests.Molecules
             var best = await ea.Solve();
             //should be 0.2
             Assert.AreEqual(.2, best[0]);
+        }
+
+        [TestMethod]
+        public async Task TestMastersThesis()
+        {
+            const string formula = "C52H40ClN5O4Zn"; //Zinc isoporphyrin
+            var ea = new Analysis { Formula = formula };
+            ea.Impurities.Add(new Impurity("CH2Cl2", 0, 1, .1));
+            ea.Impurities.Add(new Impurity("C6H14", 0, 1, .1));
+            var experimental = new Dictionary<string, double>
+            {
+                {"C", 68.12},
+                {"H", 4.77},
+                {"N", 6.71}
+            };
+            ea.ExperimentalAnalysis = experimental;
+            var best = await ea.Solve();
+            //should be 0.5 and 0.7;
+            Assert.AreEqual(.5d, best[0], .1d);
+            Assert.AreEqual(.7d, best[1], .1d);
         }
     }
 }

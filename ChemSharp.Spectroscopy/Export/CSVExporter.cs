@@ -1,20 +1,6 @@
-﻿
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Spectroscopy (netstandard2.1)"
-Vor:
-using System.Collections.Generic;
-Nach:
-using ChemSharp.Export;
-*/
-
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Spectroscopy (net5.0)"
-Vor:
-using System.Collections.Generic;
-Nach:
-using ChemSharp.Export;
-*/
+﻿using ChemSharp.Export;
 using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.Extension;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 

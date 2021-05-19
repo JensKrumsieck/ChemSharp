@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules.ElementalAnalysis
 {
-    public class Analysis
+    public sealed class Analysis
     {
         private string _formula;
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Primitives;
-#if NETSTANDARD2_1
+#if NET5_0_OR_GREATER || NETSTANDARD2_1
 using System;
 #endif
 using System.Collections.Generic;

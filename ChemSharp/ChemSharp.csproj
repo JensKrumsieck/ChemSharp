@@ -3,7 +3,7 @@
   <PropertyGroup>
 	  <PackageId>ChemSharp</PackageId>
 	  <Authors>Jens Krumsieck</Authors>
-	  <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
 	  <LangVersion>9.0</LangVersion>
 	  <Version>1.0.4</Version>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

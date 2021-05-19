@@ -1,9 +1,10 @@
-﻿#if NETSTANDARD2_1
+﻿#if NETSTANDARD2_1 || NET5_0_OR_GREATER
 using MathF = System.MathF;
 #endif
 #if NETSTANDARD2_0
 using MathF = ChemSharp.Mathematics.MathF;
 #endif
+using System;
 using System.Numerics;
 
 namespace ChemSharp.Mathematics

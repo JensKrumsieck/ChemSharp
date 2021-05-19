@@ -44,7 +44,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <returns></returns>
         public static string RemoveAbbreviations(this string formula) =>
             Abbreviations.Aggregate(formula, (current, abbr) => current.Replace(abbr.Key, abbr.Value));
-        
+
         /// <summary>
         /// counts each element from a given string
         /// (Sum formula with Abbreviations)
@@ -63,7 +63,7 @@ namespace ChemSharp.Molecules.Extensions
                 if (m.Groups[1].Success) //Element Name!
                 {
                     var top = stack.Peek();
-                    if (!top.ContainsKey(m.Groups[1].Value))top[m.Groups[1].Value] = (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
+                    if (!top.ContainsKey(m.Groups[1].Value)) top[m.Groups[1].Value] = (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
                     //contains key -> additon
                     else top[m.Groups[1].Value] += (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
                 }

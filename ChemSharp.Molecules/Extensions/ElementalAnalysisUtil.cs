@@ -72,7 +72,7 @@ namespace ChemSharp.Molecules.Extensions
             //get all combinations
             var comp = new List<HashSet<double>>();
             var imps = impurities.ToArray();
-            foreach(var imp in imps)
+            foreach (var imp in imps)
             {
                 var count = (int)((imp.Upper - imp.Lower) / imp.Step) + 1; //add 0 to range
                 comp.Add(CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count).ToHashSet());

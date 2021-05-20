@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Extensions;
 using ChemSharp.Molecules.ElementalAnalysis;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +78,8 @@ namespace ChemSharp.Molecules.Extensions
                 comp.Add(CollectionsUtil.LinearRange(imp.Lower, imp.Upper, count).ToHashSet());
             }
             var cartesian = comp.Cartesian();
-            Parallel.ForEach(cartesian, item =>
+            Parallel.ForEach(cartesian, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+                item =>
             {
                 var vecArray = item.ToArray();
                 var testFormula = formula.SumFormula(imps, vecArray);

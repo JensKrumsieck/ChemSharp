@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using ChemSharp.Molecules;
+﻿using ChemSharp.Molecules;
 using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -85,7 +85,7 @@ namespace ChemSharp.Tests.Molecules
         {
             var atom = new Atom("Nb");
             var bonds = new List<Bond>();
-            var mol = new Molecule(new[] {atom}, bonds);
+            var mol = new Molecule(new[] { atom }, bonds);
             var n = mol.NonMetalNeighbors(atom);
             Assert.IsNotNull(n);
             Assert.AreEqual(n.Count(), 0);
@@ -97,8 +97,8 @@ namespace ChemSharp.Tests.Molecules
             //Abraham B. Alemayehu, Hugo Vazquez-Lima, Christine M. Beavers, Kevin J. Gagnon, Jesper Bendix, Abhik Ghosh,
             //Chemical Communications, 2014, 50, 11093,
             //DOI: 10.1039/C4CC02548B
-            const string file = "files/ptcor.mol2"; 
-            
+            const string file = "files/ptcor.mol2";
+
             var mol = MoleculeFactory.Create(file);
             //remember caching is on!
             foreach (var a in mol.Atoms)

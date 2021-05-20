@@ -82,7 +82,7 @@ namespace ChemSharp.Molecules.Extensions
         public static IEnumerable<Atom> Neighbors(Atom a, IEnumerable<Bond> bonds) =>
             bonds.Where(s => s.Atoms.Contains(a)).Select(s => s.Atoms.FirstOrDefault(b => !b.Equals(a)));
 
-        public static Dictionary<Atom, List<Atom>> BuildNeighborCache(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds) => 
+        public static Dictionary<Atom, List<Atom>> BuildNeighborCache(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds) =>
             atoms.ToDictionary(a => a, a => Neighbors(a, bonds).ToList());
     }
 }

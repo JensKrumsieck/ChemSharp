@@ -54,7 +54,7 @@ namespace ChemSharp.Tests.Molecules
         private static void Detect(Molecule molecule, int size)
         {
             var deadEnds = Element.DesiredSaturation.Where(s => s.Value == 1).Select(s => s.Key).ToList();
-            
+
             IEnumerable<Atom> NonMetalNonDeadEnd(Atom atom) => molecule.NonMetalNeighbors(atom)?.Where(a => !deadEnds.Contains(a.Symbol));
 
             var parts = new List<IEnumerable<Atom>>();
@@ -63,7 +63,7 @@ namespace ChemSharp.Tests.Molecules
             {
                 var connected = fig.Distinct().ToArray();
                 connected = connected.Where(s => s.IsNonMetal && s.Symbol != "H").ToArray();
-                if(connected.Length >= size) parts.Add(connected);
+                if (connected.Length >= size) parts.Add(connected);
             }
 
             foreach (var fig in parts.Distinct())

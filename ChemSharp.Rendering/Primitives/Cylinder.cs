@@ -9,6 +9,6 @@ namespace ChemSharp.Rendering.Primitives
 
         public float Radius { get; set; } = 1f;
 
-        public Vector3 Color { get; set; } = new (1f, 0, 0);
+        public Vector3 Color { get; set; } = new(1f, 0, 0);
     }
 }

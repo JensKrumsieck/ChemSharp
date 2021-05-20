@@ -33,7 +33,7 @@
         /// <summary>
         /// Returns Atoms as List to do LINQ
         /// </summary>
-        public Atom[] Atoms => _atoms ??= new [] {Atom1, Atom2};
+        public Atom[] Atoms => _atoms ??= new[] { Atom1, Atom2 };
 
     }
 }

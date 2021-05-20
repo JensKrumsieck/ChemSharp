@@ -3,10 +3,8 @@ using ChemSharp.Export;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace ChemSharp.Molecules
 {
@@ -51,7 +49,7 @@ namespace ChemSharp.Molecules
         {
             AtomDataProvider = provider;
             Atoms = provider.Atoms.ToList();
-            if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
+            if (provider is IBondDataProvider { Bonds: { } } bondProvider && bondProvider.Bonds.Any())
             {
                 BondDataProvider = bondProvider;
                 Bonds = bondProvider.Bonds.ToList();

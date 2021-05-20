@@ -26,11 +26,11 @@ namespace ChemSharp.Molecules
         {
             Atom1 = a1;
             Atom2 = a2;
-            Atoms = new HashSet<Atom> {a1, a2};
+            Atoms = new HashSet<Atom> { a1, a2 };
         }
 
         public override string ToString() => $"{Atom1.Title} - {Atom2.Title} : {Length}";
-        
+
         /// <summary>
         /// Returns Atoms as List to do LINQ
         /// </summary>

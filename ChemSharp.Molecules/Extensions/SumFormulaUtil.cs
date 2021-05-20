@@ -1,6 +1,7 @@
 ﻿using ChemSharp.Molecules.DataProviders;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 #if NETSTANDARD2_0 
@@ -14,7 +15,7 @@ namespace ChemSharp.Molecules.Extensions
         /// <summary>
         /// the regex pattern for molecular formulas
         /// </summary>
-        public const string Pattern = @"([A-Z][a-z]*)(\d*[,.]?\d*)|(\()|(\))(\d*[,.]?\d*)";
+        public const string Pattern = @"([A-Z][a-z]*)(\d*[.]?\d*)|(\()|(\))(\d*[.]?\d*)";
 
         /// <summary>
         /// Dictionary with Molecular Abbreviations
@@ -51,7 +52,16 @@ namespace ChemSharp.Molecules.Extensions
         /// </summary>
         /// <param name="formula"></param>
         /// <returns></returns>
-        public static Dictionary<string, double> CountElements(this string formula)
+        public static Dictionary<string, double> CountElements(this string formula) =>
+            CountElements(formula, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// counts each element from a given string
+        /// (Sum formula with Abbreviations)
+        /// </summary>
+        /// <param name="formula"></param>
+        /// <returns></returns>
+        public static Dictionary<string, double> CountElements(this string formula, CultureInfo ci)
         {
             formula = formula.RemoveAbbreviations();//remove special abbreviations
             var parse = Regex.Matches(formula, Pattern);
@@ -63,9 +73,12 @@ namespace ChemSharp.Molecules.Extensions
                 if (m.Groups[1].Success) //Element Name!
                 {
                     var top = stack.Peek();
-                    if (!top.ContainsKey(m.Groups[1].Value)) top[m.Groups[1].Value] = (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
+                    var g2Value = (m.Groups[2].Success && m.Groups[2].Value != ""
+                        ? Convert.ToDouble(m.Groups[2].Value, ci)
+                        : 1d);
+                    if (!top.ContainsKey(m.Groups[1].Value)) top[m.Groups[1].Value] = g2Value;
                     //contains key -> additon
-                    else top[m.Groups[1].Value] += (m.Groups[2].Success && m.Groups[2].Value != "" ? Convert.ToDouble(m.Groups[2].Value) : 1d);
+                    else top[m.Groups[1].Value] += g2Value;
                 }
 
                 if (m.Groups[3].Success) stack.Push(new Dictionary<string, double>()); //left bracket --> new element
@@ -76,12 +89,12 @@ namespace ChemSharp.Molecules.Extensions
                     var newTop = stack.Peek();
                     foreach (var (key, value) in top)
                     {
-                        var val = value * (m.Groups[5].Success && m.Groups[5].Value != ""
-                            ? Convert.ToDouble(m.Groups[5].Value)
+                        var g5Value = value * (m.Groups[5].Success && m.Groups[5].Value != ""
+                            ? Convert.ToDouble(m.Groups[5].Value, ci)
                             : 1d);
-                        if (!newTop.ContainsKey(key)) newTop.Add(key, val);
+                        if (!newTop.ContainsKey(key)) newTop.Add(key, g5Value);
                         else
-                            newTop[key] += val;
+                            newTop[key] += g5Value;
                     }
                 }
             }
@@ -102,7 +115,15 @@ namespace ChemSharp.Molecules.Extensions
         /// <param name="composition"></param>
         /// <returns></returns>
         public static string Parse(this Dictionary<string, double> composition) =>
-            string.Join("", (composition.Select(s => s.Key + s.Value)));
+            Parse(composition, CultureInfo.InvariantCulture);
+
+        /// <summary>
+        /// Parses dictionary as string
+        /// </summary>
+        /// <param name="composition"></param>
+        /// <returns></returns>
+        public static string Parse(this Dictionary<string, double> composition, CultureInfo ci) =>
+            string.Join("", composition.Select(s => s.Key + s.Value.ToString(ci)));
 
         /// <summary>
         /// multiplies each element with factor
@@ -114,25 +135,6 @@ namespace ChemSharp.Molecules.Extensions
         {
             for (var j = 0; j < dict.Count; j++) dict[dict.ElementAt(j).Key] = dict.ElementAt(j).Value * multiplier;
             return dict;
-        }
-
-        /// <summary>
-        /// merges all dictionaries
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        internal static Dictionary<string, double> Merge(this IEnumerable<Dictionary<string, double>> input)
-        {
-            var dic = new Dictionary<string, double>();
-            foreach (var elements in input)
-            {
-                foreach (var (element, value) in elements)
-                {
-                    if (dic.ContainsKey(element)) dic[element] += value;
-                    else dic.Add(element, value);
-                }
-            }
-            return dic;
         }
 
         /// <summary>

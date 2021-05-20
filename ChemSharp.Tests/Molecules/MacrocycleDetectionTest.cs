@@ -20,6 +20,12 @@ namespace ChemSharp.Tests.Molecules
         [TestMethod]
         public async Task DetectCorroleWithoutCache() => await RunTest(@"files\cif.cif", 23, false);
 
+        //Abraham B. Alemayehu, Hugo Vazquez-Lima, Christine M. Beavers, Kevin J. Gagnon, Jesper Bendix, Abhik Ghosh,
+        //Chemical Communications, 2014, 50, 11093,
+        //DOI: 10.1039/C4CC02548B
+        [TestMethod]
+        public async Task DetectPtCorrole() => await RunTest(@"files\ptcor.mol2", 23);
+
         [TestMethod]
         public async Task DetectPorphyrin() => await RunTest(@"files\tep.mol2", 24);
 
@@ -48,13 +54,22 @@ namespace ChemSharp.Tests.Molecules
         private static void Detect(Molecule molecule, int size)
         {
             var deadEnds = Element.DesiredSaturation.Where(s => s.Value == 1).Select(s => s.Key).ToList();
+            
             IEnumerable<Atom> NonMetalNonDeadEnd(Atom atom) => molecule.NonMetalNeighbors(atom)?.Where(a => !deadEnds.Contains(a.Symbol));
-            var figures = DFSUtil.ConnectedFigures(molecule.Atoms.Where(s => molecule.Neighbors(s).Count() >= 2),
-                molecule.NonMetalNeighbors).ToList();
-            foreach (var fig in figures.Distinct())
+
+            var parts = new List<IEnumerable<Atom>>();
+            foreach (var fig in DFSUtil.ConnectedFigures(molecule.Atoms.Where(s => molecule.Neighbors(s).Count >= 2),
+                NonMetalNonDeadEnd))
+            {
+                var connected = fig.Distinct().ToArray();
+                connected = connected.Where(s => s.IsNonMetal && s.Symbol != "H").ToArray();
+                if(connected.Length >= size) parts.Add(connected);
+            }
+
+            foreach (var fig in parts.Distinct())
             {
                 var data = FindCorpus(fig, NonMetalNonDeadEnd, size);
-                if (data.Count != size) continue;
+                if (data?.Count != size) continue;
                 Assert.AreEqual(4, data.Count(s => s.Symbol == "N"));
                 Assert.AreEqual(size - 4, data.Count(s => s.Symbol == "C"));
             }

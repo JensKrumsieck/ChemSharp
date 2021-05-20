@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChemSharp.Molecules
+﻿namespace ChemSharp.Molecules
 {
     public sealed class Bond
     {

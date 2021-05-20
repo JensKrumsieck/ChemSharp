@@ -108,11 +108,13 @@ namespace ChemSharp.Molecules
             return CacheNeighborList ? _cachedNeighbors[a] : AtomUtil.Neighbors(a, this).ToList();
         }
 
+        public void RebuildCache() => _cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
+
         /// <summary>
         /// returns nonmetal neighbors of specific atom
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s.IsNonMetal) : Enumerable.Empty<Atom>();
+        public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s != null && s.IsNonMetal) : Enumerable.Empty<Atom>();
     }
 }

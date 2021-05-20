@@ -18,14 +18,23 @@ namespace ChemSharp.Tests.Molecules
         public async Task DetectCorrole() => await RunTest(@"files\cif.cif", 23);
 
         [TestMethod]
+        public async Task DetectCorroleWithoutCache() => await RunTest(@"files\cif.cif", 23, false);
+
+        [TestMethod]
         public async Task DetectPorphyrin() => await RunTest(@"files\tep.mol2", 24);
 
         [TestMethod]
-        public async Task DetectPorphin() => await RunTest(@"files\porphin.cdxml", 24);
+        public async Task DetectPorphyrinWithoutCache() => await RunTest(@"files\tep.mol2", 24, false);
 
-        private static async Task RunTest(string path, int size)
+        [TestMethod]
+        public async Task DetectPorphin() => await RunTest(@"files\porphin.cdxml", 24);
+        [TestMethod]
+        public async Task DetectPorphinWithoutCache() => await RunTest(@"files\porphin.cdxml", 24, false);
+
+        private static async Task RunTest(string path, int size, bool useCache = true)
         {
             var molecule = MoleculeFactory.Create(path);
+            molecule.CacheNeighborList = useCache;
             await Task.Run(() => Detect(molecule, size));
         }
 

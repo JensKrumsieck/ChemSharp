@@ -25,6 +25,8 @@ namespace ChemSharp.Molecules
         /// </summary>
         public List<Bond> Bonds { get; set; }
 
+        public bool CacheNeighborList = true;
+
         /// <summary>
         /// creates Molecule without Atoms to add later
         /// </summary>
@@ -92,12 +94,19 @@ namespace ChemSharp.Molecules
             }
         }
 
+        private Dictionary<Atom, List<Atom>> _cachedNeighbors;
         /// <summary>
         /// returns neighbors of specific atom
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public IEnumerable<Atom> Neighbors(Atom a) => AtomUtil.Neighbors(a, this);
+        public List<Atom> Neighbors(Atom a)
+        {
+            //build cache at first call
+            if (CacheNeighborList && (_cachedNeighbors == null || _cachedNeighbors.Count != Atoms.Count))
+                _cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
+            return CacheNeighborList ? _cachedNeighbors[a] : AtomUtil.Neighbors(a, this).ToList();
+        }
 
         /// <summary>
         /// returns nonmetal neighbors of specific atom

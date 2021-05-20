@@ -67,6 +67,7 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 		* XYZ
 		* MOL2
 		* SVG
+		* POV (POVRay)
 
 * ### Spectroscopy
 	* #### Import

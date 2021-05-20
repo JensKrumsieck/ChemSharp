@@ -51,6 +51,15 @@ namespace ChemSharp.Tests.Rendering
         }
 
         [TestMethod]
+        public void CylinderTest()
+        {
+            var exp = string.Join(Environment.NewLine,
+                "cylinder { <0, 0, 0>, <0, 1, 0>, 1", "\tpigment {", "\t\tcolor rgb <1, 0, 0>", "\t}", "}", "");
+            var c = new Cylinder();
+            Assert.AreEqual(c.ToPovString(), exp);
+        }
+
+        [TestMethod]
         public void ParseBasicScene()
         {
             //saves a .pov file - test the render yourself

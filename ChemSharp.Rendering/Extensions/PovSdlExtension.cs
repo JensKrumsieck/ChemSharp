@@ -45,5 +45,16 @@ namespace ChemSharp.Rendering.Extensions
             pov.AppendLine("}");
             return pov.ToString();
         }
+
+        public static string ToPovString(this Cylinder c)
+        {
+            var pov = new StringBuilder();
+            pov.AppendLine($"cylinder {{ {c.Start.ToPovString()}, {c.End.ToPovString()}, {c.Radius.ToPovString()}");
+            pov.AppendLine("\tpigment {");
+            pov.AppendLine($"\t\tcolor rgb {c.Color.ToPovString()}");
+            pov.AppendLine("\t}");
+            pov.AppendLine("}");
+            return pov.ToString();
+        }
     }
 }

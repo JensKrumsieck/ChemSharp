@@ -3,35 +3,10 @@ using ChemSharp.Molecules;
 using ChemSharp.Rendering.Extensions;
 using ChemSharp.Rendering.Primitives;
 using System;
-
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Rendering (net5.0)"
-Vor:
-using ChemSharp.Export;
-using ChemSharp.Molecules;
-using ChemSharp.Rendering.Extensions;
-using ChemSharp.Rendering.Primitives;
-Nach:
-using ChemSharp.Collections.Generic;
-using System.IO;
-using ChemSharp.Rendering.Linq;
-using ChemSharp.Rendering.Text;
-*/
-
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Rendering (netstandard2.1)"
-Vor:
-using ChemSharp.Export;
-using ChemSharp.Molecules;
-using ChemSharp.Rendering.Extensions;
-using ChemSharp.Rendering.Primitives;
-Nach:
-using ChemSharp.Collections.Generic;
-using System.IO;
-using ChemSharp.Rendering.Linq;
-using ChemSharp.Rendering.Text;
-*/
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 
 namespace ChemSharp.Rendering.Export
 {
@@ -62,7 +37,6 @@ namespace ChemSharp.Rendering.Export
         {
             if (Cam == null) throw new NotSupportedException("Camera not set!");
             if (Lights.Count == 0) throw new NotSupportedException("No Lights found!");
-            //TODO: Bonds
             var atoms = mol.Atoms.Select(a =>
                     new Sphere
                     {
@@ -72,9 +46,20 @@ namespace ChemSharp.Rendering.Export
                     }
                         .ToPovString())
                 .ToList();
+            var bonds = mol.Bonds.Select(b =>
+                new Cylinder
+                {
+                    Start = b.Atom1.Location,
+                    End = b.Atom2.Location,
+                    Radius = .1f,
+                    Color = "#cccccc".HexColorToVector()
+                }
+                    .ToPovString())
+                .ToList();
             var atomString = string.Join(Environment.NewLine, atoms);
+            var bondString = string.Join(Environment.NewLine, bonds);
             var lightString = string.Join(Environment.NewLine, Lights.Select(s => s.ToPovString()));
-            return string.Join(Environment.NewLine, Cam.ToPovString(), lightString, atomString);
+            return string.Join(Environment.NewLine, Cam.ToPovString(), lightString, atomString, bondString);
         }
 
 

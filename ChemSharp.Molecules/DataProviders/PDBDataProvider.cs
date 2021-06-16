@@ -1,11 +1,45 @@
-﻿using System;
+﻿
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (netstandard2.1)"
+Vor:
+using System;
+Nach:
+using ChemSharp.Extensions;
+using ChemSharp.Files;
+using System;
+*/
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (net5.0)"
+Vor:
+using System;
+Nach:
+using ChemSharp.Extensions;
+using ChemSharp.Files;
+using System;
+*/
+using ChemSharp.Extensions;
+using ChemSharp.Files;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (netstandard2.1)"
+Vor:
 using System.Text;
 using ChemSharp.Extensions;
 using ChemSharp.Files;
+Nach:
+using System.Text;
+*/
+
+/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (net5.0)"
+Vor:
+using System.Text;
+using ChemSharp.Extensions;
+using ChemSharp.Files;
+Nach:
+using System.Text;
+*/
+
 
 namespace ChemSharp.Molecules.DataProviders
 {

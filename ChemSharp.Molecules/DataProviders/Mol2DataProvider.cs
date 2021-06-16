@@ -68,7 +68,7 @@ namespace ChemSharp.Molecules.DataProviders
             var type = cols[5];
             //check if "correct" sybyl type is given, use id otherwise
             var sym = Regex.IsMatch(type, "[.]") || ElementDataProvider.ColorData.ContainsKey(type)
-                ? Regex.Match(type, @"[A-Za-z]*").Value 
+                ? Regex.Match(type, @"[A-Za-z]*").Value
                 : Regex.Match(id, @"[A-Za-z]*").Value;
 
             return new Atom(sym)

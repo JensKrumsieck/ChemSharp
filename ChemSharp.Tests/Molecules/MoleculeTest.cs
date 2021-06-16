@@ -45,7 +45,7 @@ namespace ChemSharp.Tests.Molecules
             foreach (var b in mol.Bonds.Where(b => b.Atoms.Count(c => c.Symbol == "C") == 2))
                 Assert.IsTrue(b.IsAromatic);
         }
-        
+
         [TestMethod]
         public void TestMol2Myo()
         {
@@ -71,8 +71,7 @@ namespace ChemSharp.Tests.Molecules
             //(1992) J Biol Chem 267: 14443 - 14450
             //http://dx.doi.org/10.1006/jmbi.2001.5028
             const string path = "files/2spl.pdb";
-            var provider = new PDBDataProvider(path);
-            var mol = new Molecule(provider.Atoms);
+            var mol = MoleculeFactory.Create(path);
             //Mercury counts 1437 atoms and 1312 Bonds, auto detect finds 1314
             Assert.AreEqual(mol.Atoms.Count, 1437);
             Assert.AreEqual(mol.Bonds.Count, 1314);

@@ -45,7 +45,7 @@ namespace ChemSharp.Molecules.DataProviders
             if ((typeof(T)) != typeof(Atom) && (typeof(T)) != typeof(Bond)) yield break;
             foreach (var line in block)
             {
-                if (string.IsNullOrEmpty(line) || (line == "ATOM" || line == "BOND")) continue;
+                if (string.IsNullOrEmpty(line) || line is "ATOM" or "BOND") continue;
                 var cols = line.WhiteSpaceSplit();
                 if (typeof(T) == typeof(Atom)) yield return ReadAtom(cols) as T;
                 else yield return ReadBond(cols) as T;
@@ -57,7 +57,7 @@ namespace ChemSharp.Molecules.DataProviders
         /// </summary>
         /// <param name="cols"></param>
         /// <returns></returns>
-        private Atom ReadAtom(IReadOnlyList<string> cols)
+        private static Atom ReadAtom(IReadOnlyList<string> cols)
         {
             var id = cols[1];
             var loc = new Vector3(
@@ -65,7 +65,12 @@ namespace ChemSharp.Molecules.DataProviders
                 cols[3].ToSingle(),
                 cols[4].ToSingle()
             );
-            var sym = Regex.Match(id, @"[A-Za-z]*").Value;
+            var type = cols[5];
+            //check if "correct" sybyl type is given, use id otherwise
+            var sym = Regex.IsMatch(type, "[.]") || ElementDataProvider.ColorData.ContainsKey(type)
+                ? Regex.Match(type, @"[A-Za-z]*").Value 
+                : Regex.Match(id, @"[A-Za-z]*").Value;
+
             return new Atom(sym)
             {
                 Title = id,

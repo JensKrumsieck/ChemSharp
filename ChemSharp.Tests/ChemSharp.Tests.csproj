@@ -43,6 +43,9 @@
     <None Update="files\multicsv.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="files\myo.mol2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\nmr\acqu">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

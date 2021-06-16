@@ -45,6 +45,19 @@ namespace ChemSharp.Tests.Molecules
             foreach (var b in mol.Bonds.Where(b => b.Atoms.Count(c => c.Symbol == "C") == 2))
                 Assert.IsTrue(b.IsAromatic);
         }
+        
+        [TestMethod]
+        public void TestMol2Myo()
+        {
+            //Myoglobin 2SPL  J.BIOL.CHEM. V. 267 14443 1992
+            //converted \w mercury
+            const string path = "files/myo.mol2";
+            var provider = new Mol2DataProvider(path);
+            var mol = new Molecule(provider.Atoms, provider.Bonds);
+            //Mercury counts 1437 atoms and 1312 Bonds
+            Assert.AreEqual(mol.Atoms.Count, 1437);
+            Assert.AreEqual(mol.Bonds.Count, 1312);
+        }
 
         [TestMethod]
         public void TestMol2_2()

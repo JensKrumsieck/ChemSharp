@@ -44,6 +44,9 @@ namespace ChemSharp.Tests.Molecules
             await Task.Run(() => Detect(molecule, size));
         }
 
+        [TestMethod]
+        public async Task DetectHeme() => await RunTest(@"files\myo.mol2", 24);
+
         /// <summary>
         /// Uses <see cref="DFSUtil.ConnectedFigures"/> to  iterate over ConnectedFigures
         /// Tries to find a Macrocyle in a figure and returns

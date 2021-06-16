@@ -69,5 +69,12 @@ namespace ChemSharp.Extensions
         public static string[] WhiteSpaceSplit(this string input) => input
             .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
 
+
+        /// <summary>
+        /// sets first letter to uppercase and others to lowercase
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string UcFirst(this string s) => char.ToUpper(s[0]) + s.Substring(1).ToLower();
     }
 }

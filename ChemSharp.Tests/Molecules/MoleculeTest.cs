@@ -49,7 +49,10 @@ namespace ChemSharp.Tests.Molecules
         [TestMethod]
         public void TestMol2Myo()
         {
-            //Myoglobin 2SPL  J.BIOL.CHEM. V. 267 14443 1992
+            //Myoglobin 2SPL
+            //Carver, T.E., Brantley Jr., R.E., Singleton, E.W., Arduini, R.M., Quillin, M.L., Phillips Jr., G.N., Olson, J.S.
+            //(1992) J Biol Chem 267: 14443 - 14450
+            //http://dx.doi.org/10.1006/jmbi.2001.5028
             //converted \w mercury
             const string path = "files/myo.mol2";
             var provider = new Mol2DataProvider(path);
@@ -57,6 +60,37 @@ namespace ChemSharp.Tests.Molecules
             //Mercury counts 1437 atoms and 1312 Bonds
             Assert.AreEqual(mol.Atoms.Count, 1437);
             Assert.AreEqual(mol.Bonds.Count, 1312);
+        }
+
+
+        [TestMethod]
+        public void TestPDBMyo()
+        {
+            //Myoglobin 2SPL
+            //Carver, T.E., Brantley Jr., R.E., Singleton, E.W., Arduini, R.M., Quillin, M.L., Phillips Jr., G.N., Olson, J.S.
+            //(1992) J Biol Chem 267: 14443 - 14450
+            //http://dx.doi.org/10.1006/jmbi.2001.5028
+            const string path = "files/2spl.pdb";
+            var provider = new PDBDataProvider(path);
+            var mol = new Molecule(provider.Atoms);
+            //Mercury counts 1437 atoms and 1312 Bonds, auto detect finds 1314
+            Assert.AreEqual(mol.Atoms.Count, 1437);
+            Assert.AreEqual(mol.Bonds.Count, 1314);
+        }
+
+        [TestMethod]
+        public void TestPDBHemoglobin()
+        {
+            //HEMOGLOBIN 1HV4
+            //Liang, Y., Hua, Z., Liang, X., Xu, Q., Lu, G.
+            //(2001) J Mol Biol 313: 123 - 137
+            //http://dx.doi.org/10.1006/jmbi.2001.5028
+            const string path = "files/1hv4.pdb";
+            var provider = new PDBDataProvider(path);
+            var mol = new Molecule(provider.Atoms);
+            //Mercury counts 9288 atoms and 9560 Bonds, auto detect finds 9562
+            Assert.AreEqual(mol.Atoms.Count, 9288);
+            Assert.AreEqual(mol.Bonds.Count, 9562);
         }
 
         [TestMethod]

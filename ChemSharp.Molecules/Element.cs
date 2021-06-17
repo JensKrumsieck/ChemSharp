@@ -37,21 +37,30 @@ namespace ChemSharp.Molecules
         /// </summary>
         [JsonConstructor]
         public Element() { }
-
+        
         /// <summary>
         /// Create Element by symbol
         /// </summary>
         /// <param name="symbol"></param>
         public Element(string symbol)
         {
-            var elements = ElementDataProvider.ElementData.ToArray();
-            var shadow = elements.FirstOrDefault(s => s.Symbol == symbol);
+            var shadow = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == symbol);
             if (shadow == null) return;
-            var props = typeof(Element).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var p in props.Where(s => !Attribute.IsDefined(s, typeof(JsonIgnoreAttribute))))
-            {
-                p.SetValue(this, p.GetValue(shadow), null);
-            }
+            Name = shadow.Name;
+            Symbol = shadow.Symbol;
+            Appearance = shadow.Appearance;
+            AtomicWeight = shadow.AtomicWeight;
+            AtomicNumber = shadow.AtomicNumber;
+            Group = shadow.Group;
+            Period = shadow.Period;
+            Block = shadow.Block;
+            Category = shadow.Category;
+            ElectronConfiguration = shadow.ElectronConfiguration;
+            Electronegativity = shadow.Electronegativity;
+            CovalentRadius = shadow.CovalentRadius;
+            AtomicRadius = shadow.AtomicRadius;
+            VdWRadius = shadow.VdWRadius;
+            CAS = shadow.CAS;
         }
 
         /// <summary>

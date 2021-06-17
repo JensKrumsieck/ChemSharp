@@ -38,11 +38,11 @@ namespace ChemSharp.Molecules.DataProviders
             private set => _colorData = value;
         }
 
-        private static IEnumerable<Element> _elementData;
+        private static Element[] _elementData;
         /// <summary>
         /// contains elemental data
         /// </summary>
-        public static IEnumerable<Element> ElementData
+        public static Element[] ElementData
         {
             get
             {
@@ -74,7 +74,7 @@ namespace ChemSharp.Molecules.DataProviders
             //Read Data from https://github.com/JensKrumsieck/periodic-table 
             //fetched from http://en.wikipedia.org
             var raw = ResourceUtil.ReadResourceString(ApiSource);
-            var data = JsonSerializer.Deserialize<IEnumerable<Element>>(raw);
+            var data = JsonSerializer.Deserialize<Element[]>(raw);
             ElementData = data;
         }
 

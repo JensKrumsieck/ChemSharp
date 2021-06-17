@@ -1,10 +1,12 @@
-﻿using ChemSharp.DataProviders;
+﻿using System.Collections.Concurrent;
+using ChemSharp.DataProviders;
 using ChemSharp.Export;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules
 {
@@ -81,16 +83,22 @@ namespace ChemSharp.Molecules
             //discard data provider and reset bonds
             BondDataProvider = null;
             Bonds = new List<Bond>();
-            var matched = new HashSet<(int, int)>();
-            for (var i = 0; i < Atoms.Count; i++)
+            var matched = new ConcurrentStack<(int, int)>();
+            //TODO: Add Switch for Parallel depending on Atom Count.-..
+            Parallel.For(0, Atoms.Count, i =>
             {
-                for (var j = i + 1; j < Atoms.Count; j++)
+                var atomI = Atoms[i];
+                for (var j = i + 1; j < Atoms.Count; ++j)
                 {
-                    if (i == j || !Atoms[i].BondToByCovalentRadii(Atoms[j]) ||
+                    var atomJ = Atoms[j];
+                    if (i == j || !atomI.BondToByCovalentRadii(atomJ) ||
                         (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
-                    matched.Add((i, j));
-                    Bonds.Add(new Bond(Atoms[i], Atoms[j]));
+                    matched.Push((i, j));
                 }
+            });
+            foreach (var (i,j) in matched)
+            {
+                Bonds.Add(new Bond(Atoms[i], Atoms[j]));
             }
         }
 

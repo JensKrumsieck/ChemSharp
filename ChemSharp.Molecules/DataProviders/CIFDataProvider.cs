@@ -82,7 +82,7 @@ namespace ChemSharp.Molecules.DataProviders
                     raw[y].RemoveUncertainty().ToSingle(),
                     raw[z].RemoveUncertainty().ToSingle());
                 var coordinates = FractionalCoordinates.FractionalToCartesian(rawCoordinates, conversionMatrix);
-                var type = symbol != -1 ? raw[symbol] : Regex.Match(raw[label], @"([A-Z][a-z]*)").Value;
+                var type = symbol != -1 ? raw[symbol] : RegexUtil.AtomLabel.Match(raw[label]).Value;
                 yield return new Atom(type) { Location = coordinates, Title = raw[label] };
             }
         }

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {
@@ -27,15 +26,13 @@ namespace ChemSharp.Molecules.DataProviders
             Atoms = ReadAtoms(Content).ToList();
         }
 
-        internal const string Pattern = @"([A-Z][a-z]{0,1}){1}\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)\s*(-*\d*[,.]?\d*)";
-
         /// <summary>
         /// Read Atom data from CIF File
         /// </summary>
         /// <returns></returns>
         private static IEnumerable<Atom> ReadAtoms(IEnumerable<string> data) =>
             from line in data
-            select Regex.Match(line, Pattern)
+            select RegexUtil.XYZString.Match(line)
             into atomMatch
             where atomMatch.Groups.Count == 5
                   && !string.IsNullOrEmpty(atomMatch.Groups[4].Value)

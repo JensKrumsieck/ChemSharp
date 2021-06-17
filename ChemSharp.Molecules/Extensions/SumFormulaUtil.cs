@@ -12,10 +12,6 @@ namespace ChemSharp.Molecules.Extensions
 {
     public static class SumFormulaUtil
     {
-        /// <summary>
-        /// the regex pattern for molecular formulas
-        /// </summary>
-        public const string Pattern = @"([A-Z][a-z]*)(\d*[.]?\d*)|(\()|(\))(\d*[.]?\d*)";
 
         /// <summary>
         /// Dictionary with Molecular Abbreviations
@@ -64,7 +60,7 @@ namespace ChemSharp.Molecules.Extensions
         public static Dictionary<string, double> CountElements(this string formula, CultureInfo ci)
         {
             formula = formula.RemoveAbbreviations();//remove special abbreviations
-            var parse = Regex.Matches(formula, Pattern);
+            var parse = RegexUtil.SumFormula.Matches(formula);
             var stack = new Stack<Dictionary<string, double>>();
             var tmp = new Dictionary<string, double>();
             stack.Push(tmp);

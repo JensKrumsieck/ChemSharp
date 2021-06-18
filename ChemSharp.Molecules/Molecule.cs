@@ -83,8 +83,12 @@ namespace ChemSharp.Molecules
             //discard data provider and reset bonds
             BondDataProvider = null;
             Bonds = new List<Bond>();
+            var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
+            foreach (var (i,j) in matched)  Bonds.Add(new Bond(Atoms[i], Atoms[j]));
+        }
+        private IEnumerable<(int, int)> RecalculateBondsParallel()
+        {
             var matched = new ConcurrentStack<(int, int)>();
-            //TODO: Add Switch for Parallel depending on Atom Count.-..
             Parallel.For(0, Atoms.Count, i =>
             {
                 var atomI = Atoms[i];
@@ -96,10 +100,23 @@ namespace ChemSharp.Molecules
                     matched.Push((i, j));
                 }
             });
-            foreach (var (i,j) in matched)
+            return matched;
+        }
+        private IEnumerable<(int, int)> RecalculateBondsNonParallel()
+        {
+            var matched = new Stack<(int, int)>();
+            for(var i = 0; i < Atoms.Count; i++)
             {
-                Bonds.Add(new Bond(Atoms[i], Atoms[j]));
+                var atomI = Atoms[i];
+                for (var j = i + 1; j < Atoms.Count; ++j)
+                {
+                    var atomJ = Atoms[j];
+                    if (i == j || !atomI.BondToByCovalentRadii(atomJ) ||
+                        (matched.Contains((i, j)) && matched.Contains((j, i)))) continue;
+                    matched.Push((i, j));
+                }
             }
+            return matched;
         }
 
         private Dictionary<Atom, List<Atom>> _cachedNeighbors;

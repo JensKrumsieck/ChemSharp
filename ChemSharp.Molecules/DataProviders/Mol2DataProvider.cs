@@ -73,7 +73,8 @@ namespace ChemSharp.Molecules.DataProviders
             return new Atom(sym)
             {
                 Title = id,
-                Location = loc
+                Location = loc,
+                Tag = type
             };
         }
 

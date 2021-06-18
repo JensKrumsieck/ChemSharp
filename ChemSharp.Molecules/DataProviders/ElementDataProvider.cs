@@ -76,6 +76,5 @@ namespace ChemSharp.Molecules.DataProviders
             var data = JsonSerializer.Deserialize<Element[]>(raw);
             ElementData = data;
         }
-
     }
 }

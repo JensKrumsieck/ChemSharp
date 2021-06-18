@@ -1,44 +1,9 @@
-﻿
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (netstandard2.1)"
-Vor:
-using System;
-Nach:
-using ChemSharp.Extensions;
-using ChemSharp.Files;
-using System;
-*/
-
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (net5.0)"
-Vor:
-using System;
-Nach:
-using ChemSharp.Extensions;
-using ChemSharp.Files;
-using System;
-*/
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Files;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (netstandard2.1)"
-Vor:
-using System.Text;
-using ChemSharp.Extensions;
-using ChemSharp.Files;
-Nach:
-using System.Text;
-*/
-
-/* Nicht gemergte Änderung aus Projekt "ChemSharp.Molecules (net5.0)"
-Vor:
-using System.Text;
-using ChemSharp.Extensions;
-using ChemSharp.Files;
-Nach:
-using System.Text;
-*/
 
 
 namespace ChemSharp.Molecules.DataProviders
@@ -71,6 +36,7 @@ namespace ChemSharp.Molecules.DataProviders
         {
             var cols = line.WhiteSpaceSplit();
             var title = cols[2];
+            var tag = cols[3];
             var loc = new Vector3(
                 cols[6].ToSingle(),
                 cols[7].ToSingle(),
@@ -80,8 +46,36 @@ namespace ChemSharp.Molecules.DataProviders
             return new Atom(type)
             {
                 Location = loc,
-                Title = title
+                Title = title,
+                Tag = tag
             };
         }
+
+        public static readonly Dictionary<string, string> AminoAcids = new Dictionary<string, string>
+        {
+            ["ALA"] = "Alanine",
+            ["ARG"] = "Arginine",
+            ["ASN"] = "Asparagine",
+            ["ASP"] = "Aspartate",
+            ["ASX"] = "Aspartate or Asparagine",
+            ["CYS"] = "Cysteine",
+            ["GLU"] = "Glutamate",
+            ["GLN"] = "Glutamine",
+            ["GLY"] = "Glycine",
+            ["GLX"] = "Glutamate or Glutamine",
+            ["HIS"] = "Histidine",
+            ["ILE"] = "Isoleucine",
+            ["LEU"] = "Leucine",
+            ["LYS"] = "Lysine",
+            ["MET"] = "Methionine",
+            ["PHE"] = "Phenylalanine",
+            ["PRO"] = "Proline",
+            ["SER"] = "Serine",
+            ["THR"] = "Threonine",
+            ["TRP"] = "Tryptophan",
+            ["TYR"] = "Tyrosine",
+            ["VAL"] = "Valine",
+            ["XLE"] = "Leucine or Isoleucine"
+        };
     }
 }

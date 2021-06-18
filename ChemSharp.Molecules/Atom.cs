@@ -40,9 +40,7 @@ namespace ChemSharp.Molecules
         /// Gets HashCode, defined by title and location
         /// </summary>
         /// <returns></returns>
-        // ReSharper disable NonReadonlyMemberInGetHashCode
         public override int GetHashCode() => (_title, Location).GetHashCode();
-        // ReSharper enable NonReadonlyMemberInGetHashCode
 
         public bool Equals(Atom other) =>
             other is not null &&
@@ -52,6 +50,11 @@ namespace ChemSharp.Molecules
         public override bool Equals(object obj) =>
             obj is not null &&
             (ReferenceEquals(this, obj)
-             || obj.GetType() == this.GetType() && Equals((Atom)obj));
+             || obj.GetType() == GetType() && Equals((Atom)obj));
+
+        /// <summary>
+        /// Allows to tag any string related information to atom
+        /// </summary>
+        public string Tag;
     }
 }

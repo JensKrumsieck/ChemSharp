@@ -1,4 +1,5 @@
-![](https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/.github/chemsharp.png)
+<img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/.github/chemsharp.png" /><img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/icon.png" height="125px"/>
+
 # Chem# (ChemSharp)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/bb81db40213cc68deb97/maintainability)](https://codeclimate.com/github/JensKrumsieck/ChemSharp/maintainability)

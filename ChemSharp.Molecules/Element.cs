@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace ChemSharp.Molecules
@@ -37,7 +36,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         [JsonConstructor]
         public Element() { }
-        
+
         /// <summary>
         /// Create Element by symbol
         /// </summary>

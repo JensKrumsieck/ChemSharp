@@ -1,9 +1,9 @@
-﻿using System.Collections.Concurrent;
-using ChemSharp.DataProviders;
+﻿using ChemSharp.DataProviders;
 using ChemSharp.Export;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,7 +84,7 @@ namespace ChemSharp.Molecules
             BondDataProvider = null;
             Bonds = new List<Bond>();
             var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
-            foreach (var (i,j) in matched)  Bonds.Add(new Bond(Atoms[i], Atoms[j]));
+            foreach (var (i, j) in matched) Bonds.Add(new Bond(Atoms[i], Atoms[j]));
         }
         private IEnumerable<(int, int)> RecalculateBondsParallel()
         {
@@ -105,7 +105,7 @@ namespace ChemSharp.Molecules
         private IEnumerable<(int, int)> RecalculateBondsNonParallel()
         {
             var matched = new Stack<(int, int)>();
-            for(var i = 0; i < Atoms.Count; i++)
+            for (var i = 0; i < Atoms.Count; i++)
             {
                 var atomI = Atoms[i];
                 for (var j = i + 1; j < Atoms.Count; ++j)

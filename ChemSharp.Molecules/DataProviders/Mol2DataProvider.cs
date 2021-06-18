@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Text.RegularExpressions;
 
 namespace ChemSharp.Molecules.DataProviders
 {

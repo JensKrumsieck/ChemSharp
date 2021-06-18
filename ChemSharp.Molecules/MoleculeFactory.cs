@@ -29,7 +29,7 @@ namespace ChemSharp.Molecules
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static Molecule Create(string path) => new((IAtomDataProvider)CreateProvider(path));
+        public static Molecule Create(string path) => new(CreateProvider(path));
 
         /// <summary>
         /// Handles IDataProvider creation

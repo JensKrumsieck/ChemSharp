@@ -45,12 +45,12 @@ namespace ChemSharp.Molecules
         // ReSharper enable NonReadonlyMemberInGetHashCode
 
         public bool Equals(Atom other) =>
-            !(other is null) &&
+            other is not null &&
             (ReferenceEquals(this, other)
              || _title == other._title && Location.Equals(other.Location));
 
         public override bool Equals(object obj) =>
-            !(obj is null) &&
+            obj is not null &&
             (ReferenceEquals(this, obj)
              || obj.GetType() == this.GetType() && Equals((Atom)obj));
     }

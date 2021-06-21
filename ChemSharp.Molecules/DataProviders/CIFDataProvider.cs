@@ -68,9 +68,9 @@ namespace ChemSharp.Molecules.DataProviders
             var x = Array.IndexOf(headers, "_atom_site_fract_x");
             var y = Array.IndexOf(headers, "_atom_site_fract_y");
             var z = Array.IndexOf(headers, "_atom_site_fract_z");
-            foreach (var line in moleculeLoop.Where(s => !s.StartsWith("_")))
+            foreach (var line in moleculeLoop.Where(s => !s.Trim().StartsWith("_")))
             {
-                var raw = line.Split(' ');
+                var raw = line.Trim().Split(' ');
                 //ignore disorder group
                 if (disorderGroupIndex >= 0
                     && disorderGroupIndex < raw.Length

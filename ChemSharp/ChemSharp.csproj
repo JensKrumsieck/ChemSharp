@@ -2,6 +2,7 @@
 
   <PropertyGroup>
 	  <PackageId>ChemSharp</PackageId>
+    <Description>Library for processing of chemistry related files (aiming at spectroscopy and structural files)</Description>
 	  <Authors>Jens Krumsieck</Authors>
 	  <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
 	  <LangVersion>9.0</LangVersion>
@@ -11,6 +12,9 @@
 	  <RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <RepositoryType>git</RepositoryType>
+	  <Copyright>Jens Krumsieck</Copyright>
+	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageTags>Chemistry, Molecule, Atom, Spectroscopy</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>
@@ -25,6 +29,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\colorData.txt" />
     <EmbeddedResource Include="Resources\elements.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>

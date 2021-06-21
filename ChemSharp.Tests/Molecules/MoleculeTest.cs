@@ -75,6 +75,10 @@ namespace ChemSharp.Tests.Molecules
             //Mercury counts 1437 atoms and 1312 Bonds, auto detect finds 1314
             Assert.AreEqual(mol.Atoms.Count, 1437);
             Assert.AreEqual(mol.Bonds.Count, 1314);
+            //discard aminoacids, water, carbon monoxide & sulfate
+            var atomsNonAmino = mol.Atoms.Where(s => !PDBDataProvider.AminoAcids.ContainsKey(s.Tag) && s.Tag != "HOH" && s.Tag != "SO4" && s.Tag != "CMO");
+            var hem = mol.Atoms.Where(s => s.Tag == "HEM");
+            Assert.AreEqual(hem.Count(), atomsNonAmino.Count());
         }
 
         [TestMethod]

@@ -67,7 +67,7 @@ namespace ChemSharp.Extensions
         /// <param name="input"></param>
         /// <returns></returns>
         public static string[] WhiteSpaceSplit(this string input) => input
-            .Split(new[] { " ", "\t" }, StringSplitOptions.None).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+            .Split(new[] { " ", "\t" }, StringSplitOptions.RemoveEmptyEntries);
 
 
         /// <summary>

@@ -70,7 +70,7 @@ namespace ChemSharp.Molecules.DataProviders
             var z = Array.IndexOf(headers, "_atom_site_fract_z");
             foreach (var line in moleculeLoop.Where(s => !s.Trim().StartsWith("_")))
             {
-                var raw = line.Trim().Split(' ');
+                var raw = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 //ignore disorder group
                 if (disorderGroupIndex >= 0
                     && disorderGroupIndex < raw.Length
@@ -95,10 +95,10 @@ namespace ChemSharp.Molecules.DataProviders
         {
             if (bondLoop == null) yield break;
             var tmp = Atoms.ToDictionary(atom => atom.Title);
-            foreach (var line in bondLoop.Where(s => !s.StartsWith("_")))
+            foreach (var line in bondLoop.Where(s => !s.Trim().StartsWith("_")))
             {
                 if (string.IsNullOrEmpty(line)) continue;
-                var raw = line.Split(' ');
+                var raw = line.Split(new []{' '}, StringSplitOptions.RemoveEmptyEntries);
                 if (raw.Length == 0) continue;
                 var a1 = tmp.TryAndGet(raw[0]);
                 var a2 = tmp.TryAndGet(raw[1]);

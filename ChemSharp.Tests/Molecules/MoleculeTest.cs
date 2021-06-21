@@ -33,6 +33,17 @@ namespace ChemSharp.Tests.Molecules
         }
 
         [TestMethod]
+        public void TestCif_Trim()
+        {
+            //same cif, but with whitespaces everywhere
+            const string path = "files/cif_noTrim.cif";
+            var provider = new CIFDataProvider(path);
+            var mol = new Molecule(provider.Atoms, provider.Bonds);
+            Assert.AreEqual(79, mol.Atoms.Count);
+            Assert.AreEqual(89, mol.Bonds.Count);
+        }
+
+        [TestMethod]
         public void TestMol2()
         {
             const string path = "files/benzene.mol2";

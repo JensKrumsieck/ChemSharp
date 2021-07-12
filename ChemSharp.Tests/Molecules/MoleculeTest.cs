@@ -52,7 +52,7 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(12, mol.Atoms.Count);
             Assert.AreEqual(12, mol.Bonds.Count);
             Assert.AreEqual(78.11184, mol.Atoms.MolecularWeight(), 0.02);
-            //are C-C bonds in benzene aromatic? :D
+            //are C-C bonds in benzene aromatic?
             foreach (var b in mol.Bonds.Where(b => b.Atoms.Count(c => c.Symbol == "C") == 2))
                 Assert.IsTrue(b.IsAromatic);
         }
@@ -105,6 +105,18 @@ namespace ChemSharp.Tests.Molecules
             //Mercury counts 9288 atoms and 9560 Bonds, auto detect finds 9562
             Assert.AreEqual(mol.Atoms.Count, 9288);
             Assert.AreEqual(mol.Bonds.Count, 9562);
+        }
+
+
+        [TestMethod]
+        public void TestOriluyPDB()
+        {
+            //Mercury generated pdb file
+            //from:
+            //P.Schweyen, M.Hoffmann, J.Krumsieck, B.Wolfram, X.Xie, M.Bröring, Angew.Chem.Int.Ed., 2016, 55, 10118, DOI: 10.1002/anie.201604297.
+            const string path = "files/oriluy.pdb";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(mol.Atoms.Count, 130);
         }
 
         [TestMethod]

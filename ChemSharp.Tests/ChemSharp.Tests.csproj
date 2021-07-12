@@ -78,6 +78,9 @@
     <None Update="files\nmr\pdata\1\procs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="files\oriluy.pdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="files\porphin.cdxml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

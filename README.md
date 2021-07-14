@@ -61,7 +61,7 @@ var mol = new Molecule(provider.Atoms, provider.Bonds);
 * ### Molecule
 	* #### Import
 		* XYZ
-		* CIF (crystallographic information file)
+		* CIF (crystallographic information file, CCDC)
 		* MOL2 (TRIPOS Mol2)
 		* PDB (Protein Data Bank file)
 		* CDXML (Single Molecule only)

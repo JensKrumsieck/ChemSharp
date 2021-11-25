@@ -28,6 +28,7 @@
 * Open and process Molecular files (see [Supported Filetypes](#molecule))
 * Sum formula operations and elemental analysis calculation
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table
+* Blazor view for molecules using three.js
 * Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))
 * Unit Conversion for (Energy, Magnetic Units, Mass)
 

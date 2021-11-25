@@ -7,7 +7,7 @@
 Package for processing of molecule related files.
 
 ### Features
-* Open and process Molecular files (see [Supported Filetypes](#molecule))
+* Open and process Molecular files (see [Supported Filetypes](#supported-filetypes))
 * Sum formula operations and elemental analysis calculation
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table
 * Blazor View: `ChemSharp.Molecules.Blazor`  [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules.Blazor?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules.Blazor/)

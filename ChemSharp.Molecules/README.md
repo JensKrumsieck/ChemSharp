@@ -1,6 +1,8 @@
 <p align="center">
 <img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/icon.png" height="125px" /></p>
-<h1 align="center" >ChemSharp.Molecules</h1>
+<h1 align="center" >ChemSharp.Molecules</h1> 
+
+[![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules/)
 
 Package for processing of molecule related files.
 
@@ -8,7 +10,7 @@ Package for processing of molecule related files.
 * Open and process Molecular files (see [Supported Filetypes](#molecule))
 * Sum formula operations and elemental analysis calculation
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table
-
+* Blazor View: `ChemSharp.Molecules.Blazor`  [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules.Blazor?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules.Blazor/)
 
 ## Basic Usage
 #### Create Molecules

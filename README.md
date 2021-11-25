@@ -23,13 +23,13 @@
 |`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
 
 ### Features
-* Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))
 * Open and process Molecular files (see [Supported Filetypes](#molecule))
 * Sum formula operations and elemental analysis calculation
+* Using Elemental Data from https://github.com/JensKrumsieck/periodic-table
+* Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))
 * Unit Conversion for (Energy, Magnetic Units, Mass)
-* Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
-### Basic Usage (See [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki))
+### Basic Usage
 #### Create Molecules
 Molecules can be created in a lot of ways. The easiest way is to use MoleculeFactory.Create, which accepts a string path. Depending on the File extension the correct DataProvider is used to load the file.
 ```csharp

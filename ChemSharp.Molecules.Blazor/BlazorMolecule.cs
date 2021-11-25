@@ -13,6 +13,9 @@ namespace ChemSharp.Molecules.Blazor
         [Parameter]
         public Molecule? Molecule { get; set; }
 
+        [Parameter(CaptureUnmatchedValues = true)] 
+        public Dictionary<string, object> UnmatchedParameters { get; set; }
+
         private Guid? _guid;
 
         public BlazorMolecule()
@@ -32,9 +35,10 @@ namespace ChemSharp.Molecules.Blazor
         {
             //build canvas tree
             builder.OpenElement(0, "div");
+            builder.AddMultipleAttributes(1, UnmatchedParameters);
 
-            builder.OpenElement(1, "canvas");
-            builder.AddAttribute(2, "id", "three-" + _guid);
+            builder.OpenElement(2, "canvas");
+            builder.AddAttribute(3, "id", "three-" + _guid);
 
             builder.CloseElement();
             builder.CloseElement();
@@ -43,15 +47,15 @@ namespace ChemSharp.Molecules.Blazor
             {
                 foreach (var bond in Molecule.Bonds)
                 {
-                    builder.OpenComponent<BlazorBond>(3);
-                    builder.AddAttribute(4, "Bond", bond);
+                    builder.OpenComponent<BlazorBond>(4);
+                    builder.AddAttribute(5, "Bond", bond);
                     builder.CloseComponent();
                 }
                 //build molecule render tree
                 foreach (var atom in Molecule.Atoms)
                 {
-                    builder.OpenComponent<BlazorAtom>(5);
-                    builder.AddAttribute(6, "Atom", atom);
+                    builder.OpenComponent<BlazorAtom>(6);
+                    builder.AddAttribute(7, "Atom", atom);
                     builder.CloseComponent();
                 }
             }

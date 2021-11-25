@@ -1,19 +1,26 @@
-<img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/.github/chemsharp.png" /><img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/icon.png" height="125px"/>
-
-# Chem# (ChemSharp)
+<p align="center">
+<img src="https://raw.githubusercontent.com/JensKrumsieck/ChemSharp/master/icon.png" height="125px" /></p>
+<h1 align="center" >ChemSharp</h1>
+<h3 align="center">.NET Library for processing of chemistry related files. Powers <a href="https://github.com/JensKrumsieck/PorphyStruct">PorphyStruct</a>!</h3>
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/bb81db40213cc68deb97/maintainability)](https://codeclimate.com/github/JensKrumsieck/ChemSharp/maintainability)
 ![.NET](https://github.com/JensKrumsieck/ChemSharp/workflows/.NET/badge.svg)
+[![GitHub issues](https://img.shields.io/github/issues/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/issues)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/JensKrumsieck/ChemSharp)
 [![GitHub license](https://img.shields.io/github/license/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/blob/master/LICENSE)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jenskrumsieck/chemsharp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4573532.svg)](https://doi.org/10.5281/zenodo.4573532)
 
+<hr/>
+
+### NuGet Packages
 | | |
 |-|-|
 | `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp/) |
 | `ChemSharp.Molecules` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
+| `ChemSharp.Molecules.Blazor` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules.Blazor?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules.Blazor/) |
 | `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
 |`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
-| `ChemSharp.Rendering` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Rendering?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Rendering/) |
 
 ### Features
 * Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))
@@ -23,75 +30,76 @@
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table and natural constants
 
 ### Basic Usage (See [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki))
+#### Create Molecules
+Molecules can be created in a lot of ways. The easiest way is to use MoleculeFactory.Create, which accepts a string path. Depending on the File extension the correct DataProvider is used to load the file.
+```csharp
+//Creates a molecule from cif file
+const string path = "files/cif.cif";
+var mol = MoleculeFactory.Create(path);
+```
+It is also possible to create a Molecule by using a specific DataProvider (e.g. if automatic detection fails or you only want to support a selected number of file types)
+
+```csharp
+//You can also create molecules by selecting the provider yourself
+const string path = "files/benzene.mol2";
+var provider = new Mol2DataProvider(path);
+var mol = new Molecule(provider);
+```
+You can also add [Atoms and Bonds](https://github.com/JensKrumsieck/ChemSharp/wiki/Element-Atom-Bond) as Lists if you got the data from somewhere else.
+
+```csharp
+//...or by just adding the Atoms & Bonds as Lists
+const string path = "files/cif.cif";
+var provider = new CIFDataProvider(path);
+var mol = new Molecule(provider.Atoms, provider.Bonds);
+```
+
 #### Create Spectra
+Spectra can be created in a lot of ways. The easiest way is to use `SpectrumFactory.Create`, which accepts a `string path`. Depending on the File extension the correct DataProvider is used to load the file.
+
 ```csharp
 //Creates an UV/Vis Spectrum
 const string path = "files/uvvis.dsw";
 var uvvis = SpectrumFactory.Create(path);
+```
 
+It is also possible to create a Spectrum by using a specific DataProvider (e.g. if automatic detection fails or you only want to support a selected number of file types)
+
+```csharp
 //You can also create spectra by choosing the provider 
 //explicitly. e.g. csv files
 //Reads in an CSV Spectrum (first data only)
 const string path = "files/uvvis.csv";
 var prov = new GenericCSVProvider(path);
 var uvvis = new Spectrum(prov);
+```
 
+There is also the MultiCSVProvider which can provide data from multiple XY pairs in a csv file
+```csharp
 //To read in all CSV Data stored as (X,Y) pairs use the MultiCSVProvider
 //Each Spectrum will be stored as DataPoint[] in MultiXYData
 const string file = "files/multicsv.csv";
 var provider = new MultiCSVProvider(file);
 ```
-#### Create Molecules
-```csharp
-//Creates a molecule from cif file
-const string path = "files/cif.cif";
-var mol = MoleculeFactory.Create(path);
 
-//You can also create molecules by selecting the provider yourself
-const string path = "files/benzene.mol2";
-var provider = new Mol2DataProvider(path);
-var mol = new Molecule(provider);
-
-//...or by just adding the Atoms & Bonds as Lists
-const string path = "files/cif.cif";
-var provider = new CIFDataProvider(path);
-var mol = new Molecule(provider.Atoms, provider.Bonds);
-```
 ### Supported Filetypes
-* ### Molecule
-	* #### Import
-		* XYZ
-		* CIF (crystallographic information file, CCDC)
-		* MOL2 (TRIPOS Mol2)
-		* PDB (Protein Data Bank file)
-		* CDXML (Single Molecule only)
-	* #### Export
-		* XYZ
-		* MOL2
-		* SVG
-		* POV (POVRay)
+* **Molecule**
+	* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), CDXML (Single Molecule only))
+	* **Export** (XYZ, MOL2)
 
-* ### Spectroscopy
-	* #### Import
-		* Varian/Agilient DSW
-		* Bruker EMX SPC/PAR
-		* Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...))
-		* CSV
-	* #### Export
-		* CSV
+* **Spectroscopy**
+	* **Import** (Varian/Agilient DSW, Bruker EMX SPC/PAR, Bruker TopSpin (fid, (1r/1i processed spectra), JCAMP-DX (acqus, procs, ...)), CSV)
+	* **Export** (CSV)
 
 #### Used Libraries:
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)
 
 #### Compatibility
-* NET Standard 2.0 (tested with NET Framework 4.7.2 & NET Core 2.1, see Unit Tests)
-* NET Standard 2.1 (tested with NET 5.0, see Unit Tests)
+* .NET Standard 2.0, .NET Standard 2.1, .NET 5, .NET 6
 * Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity) 
 <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>)
 * Godot Engine (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Godot-Engine) for Snippet)
-
-### How to cite
-You can either cite the package with via the DOI: [10.5281/zenodo.4573532](https://doi.org/10.5281/zenodo.4573532) (universal DOI, there is also one for each version if you want to be specific about that. Just click the link :smirk:) or by linking this repository.
+* Blazor (see ChemSharp.Molecules.Blazor)
 
 ### Used by (Highlights):
 *  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**

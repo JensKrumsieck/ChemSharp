@@ -19,12 +19,13 @@ using ChemSharp.Rendering.Primitives.Svg;
 using ChemSharp.Rendering.Primitives.SVG;
 */
 using ChemSharp.Rendering.Primitives.Svg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[Obsolete("Package will be removed soon")]
 namespace ChemSharp.Rendering.Svg
 {
+    [Obsolete("Package will be removed soon")]
     public class SvgMolecule : IExportable
     {
         public readonly Molecule Molecule;

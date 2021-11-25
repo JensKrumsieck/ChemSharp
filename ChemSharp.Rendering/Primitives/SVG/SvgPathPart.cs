@@ -16,6 +16,7 @@ namespace ChemSharp.Rendering.Primitives.Svg
         ClosePath = 'Z'
     }
 
+    [Obsolete("Package will be removed soon")]
     public class SvgPathPart
     {
         public const string PartPattern = @"(M|L|C|A|Q|Z) ((\d+[.]?\d*)[,]?)*";

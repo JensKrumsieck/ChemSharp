@@ -14,6 +14,7 @@ jobs:
     - uses: smartsquaregmbh/delete-old-packages@v0.3.3
       with:
         keep: 10
+        version-pattern: "\\d*\\.\\d*\\.\\d*-\\w*\\.\\d*"
         names: |
           ChemSharp
           ChemSharp.Spectroscopy

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <IsPackable>false</IsPackable>
     <PackageId>ChemSharp.Rendering</PackageId>
     <Description>Chemsharp.Rendering: DEPRECATED</Description>
     <Authors>Jens Krumsieck</Authors>

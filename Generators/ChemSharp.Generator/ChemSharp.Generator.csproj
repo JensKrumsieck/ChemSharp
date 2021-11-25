@@ -6,6 +6,7 @@
     <Authors>Jens Krumsieck</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>1.0.11</Version>
+    <IsPackable>false</IsPackable>
     <Langversion>preview</Langversion>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>

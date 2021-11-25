@@ -50,7 +50,7 @@ namespace ChemSharp.Molecules.DataProviders
                 cols[locXIndex + 2].ToSingle()
             );
             //could have set last as index here, but not sure if some software appends data after type column
-            var type = cols[typeIndex].UcFirst();
+            var type = cols.Last().UcFirst();
             return new Atom(type)
             {
                 Location = loc,

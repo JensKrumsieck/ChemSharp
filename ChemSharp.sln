@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp", "ChemSharp\ChemSharp.csproj", "{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Generator", "Generators\ChemSharp.Generator\ChemSharp.Generator.csproj", "{C731EEA3-40A6-4694-8247-16F46ED0F2FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{CA4A529D-2EE9-4196-B069-328706EDE088}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Molecules.Blazor", "ChemSharp.Molecules.Blazor\ChemSharp.Molecules.Blazor.csproj", "{51EEF23F-218A-454E-A595-C0EF4328A54C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EEF23F-218A-454E-A595-C0EF4328A54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EEF23F-218A-454E-A595-C0EF4328A54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EEF23F-218A-454E-A595-C0EF4328A54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EEF23F-218A-454E-A595-C0EF4328A54C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

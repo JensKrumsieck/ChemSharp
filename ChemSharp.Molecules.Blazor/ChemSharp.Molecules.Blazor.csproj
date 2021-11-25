@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<PropertyGroup>
+		<PackageId>ChemSharp.Molecules.Blazor</PackageId>
+		<Description>Blazor Extension for ChemSharp.Molecules</Description>
+		<Authors>Jens Krumsieck</Authors>
+		<Version>1.0.10</Version>
+		<PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Chemistry, Molecule, Atom, Spectroscopy</PackageTags>
+		<Copyright>Jens Krumsieck</Copyright>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<PackageIcon>icon.png</PackageIcon>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web"  Version="6.0.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+    	<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
+  	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<!--Build and Bundle js file via webpack-->
+	<Target Name="NodeBuild" BeforeTargets="Build">
+		<Exec Command="node --version" ContinueOnError="true" />
+		<Exec Command="npm install" WorkingDirectory="Node" />
+		<Exec Command="npm run build" WorkingDirectory="Node" />
+	</Target>
+
+	<ItemGroup>
+		<None Include="..\icon.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+</Project>

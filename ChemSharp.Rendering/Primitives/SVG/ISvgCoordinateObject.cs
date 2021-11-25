@@ -1,5 +1,8 @@
-﻿namespace ChemSharp.Rendering.Primitives.SVG
+﻿using System;
+
+namespace ChemSharp.Rendering.Primitives.SVG
 {
+    [Obsolete("Package will be removed soon")]
     public interface ISvgCoordinateObject
     {
         public double X { get; set; }

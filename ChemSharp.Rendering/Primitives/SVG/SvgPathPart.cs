@@ -1,9 +1,11 @@
 ﻿using ChemSharp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ChemSharp.Rendering.Primitives.Svg
 {
+    [Obsolete("Package will be removed soon")]
     public enum SvgPartType
     {
         MoveTo = 'M',

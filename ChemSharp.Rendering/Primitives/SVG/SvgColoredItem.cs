@@ -1,8 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Xml.Serialization;
 
 namespace ChemSharp.Rendering.Primitives.Svg
 {
+    [Obsolete("Package will be removed soon")]
     public abstract class SvgColoredItem : SvgTransformableItem
     {
         [XmlAttribute("stroke")]

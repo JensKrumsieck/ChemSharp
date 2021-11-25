@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace ChemSharp.Rendering.Primitives.Svg
 {
+    [Obsolete("Package will be removed soon")]
     [XmlRoot("text")]
     public class SvgText : SvgColoredItem, ISvgItem, ISvgCoordinateObject
     {

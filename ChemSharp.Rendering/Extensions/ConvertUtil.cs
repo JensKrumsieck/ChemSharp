@@ -1,10 +1,12 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Svg;
+using System;
 using System.Drawing;
 using System.Numerics;
 
 namespace ChemSharp.Rendering.Extensions
 {
+    [Obsolete("Package will be removed soon")]
     public static class ConvertUtil
     {
         /// <summary>

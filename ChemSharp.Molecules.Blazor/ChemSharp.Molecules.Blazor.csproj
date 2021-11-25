@@ -3,7 +3,7 @@
 		<PackageId>ChemSharp.Molecules.Blazor</PackageId>
 		<Description>Blazor Extension for ChemSharp.Molecules</Description>
 		<Authors>Jens Krumsieck</Authors>
-		<Version>1.0.10</Version>
+		<Version>1.0.11</Version>
 		<PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>

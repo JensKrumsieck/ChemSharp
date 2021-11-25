@@ -1,8 +1,10 @@
 ﻿using ChemSharp.Molecules;
 using ChemSharp.Rendering.Primitives.Svg;
+using System;
 
 namespace ChemSharp.Rendering.Svg
 {
+    [Obsolete("Package will be removed soon")]
     public class SvgAtom
     {
         public readonly Atom Atom;

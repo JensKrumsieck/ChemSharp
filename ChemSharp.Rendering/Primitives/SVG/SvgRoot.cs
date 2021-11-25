@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace ChemSharp.Rendering.Primitives.Svg
 {
+    [Obsolete("Package will be removed soon")]
     [XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
     public class SvgRoot
     {

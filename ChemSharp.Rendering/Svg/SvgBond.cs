@@ -8,10 +8,12 @@ using ChemSharp.Rendering.Primitives.Svg;
 
 #if NETSTANDARD2_0
 using ChemSharp.Mathematics;
+using System;
 #endif
 
 namespace ChemSharp.Rendering.Svg
 {
+    [Obsolete("Package will be removed soon")]
     public class SvgBond
     {
         public readonly Bond Bond;

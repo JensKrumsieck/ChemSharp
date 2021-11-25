@@ -22,7 +22,7 @@ using ChemSharp.Rendering.Primitives.Svg;
 using System.Collections.Generic;
 using System.Linq;
 
-
+[Obsolete("Package will be removed soon")]
 namespace ChemSharp.Rendering.Svg
 {
     public class SvgMolecule : IExportable

@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace ChemSharp.Rendering.Export
 {
+    [Obsolete("Package will be removed soon")]
     public class PovRayExporter : IExporter
     {
         public Camera Cam { get; set; }

@@ -1,10 +1,12 @@
 ﻿using ChemSharp.Rendering.Primitives;
+using System;
 using System.Globalization;
 using System.Numerics;
 using System.Text;
 
 namespace ChemSharp.Rendering.Extensions
 {
+    [Obsolete("Package will be removed soon")]
     public static class PovSdlExtension
     {
         public static string ToPovString<T>(this T input) where T : struct

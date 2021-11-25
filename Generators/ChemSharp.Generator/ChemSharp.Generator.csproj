@@ -5,7 +5,7 @@
     <Description>Generates MathF</Description>
     <Authors>Jens Krumsieck</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <Langversion>preview</Langversion>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>ChemSharp.Rendering</PackageId>
+    <PackageId>ChemSharp.Rendering - Deprecated</PackageId>
     <Description>Chemsharp: Export to PovRay or SVG</Description>
     <Authors>Jens Krumsieck</Authors>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>

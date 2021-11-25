@@ -1,7 +1,9 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace ChemSharp.Rendering.Primitives
 {
+    [Obsolete("Package will be removed soon")]
     public class Cylinder
     {
         public Vector3 Start { get; set; } = Vector3.Zero;

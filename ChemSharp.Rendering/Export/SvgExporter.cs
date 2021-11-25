@@ -13,6 +13,7 @@ namespace ChemSharp.Rendering.Export
     /// <summary>
     /// Exports Molecule to Svg
     /// </summary>
+    [Obsolete("Package will be removed soon")]
     public class SvgExporter : IExporter
     {
         public double Width { get; set; }

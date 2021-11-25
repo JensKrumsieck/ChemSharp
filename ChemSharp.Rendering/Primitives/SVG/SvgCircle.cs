@@ -1,8 +1,10 @@
 ﻿using ChemSharp.Rendering.Primitives.SVG;
+using System;
 using System.Xml.Serialization;
 
 namespace ChemSharp.Rendering.Primitives.Svg
 {
+    [Obsolete("Package will be removed soon")]
     [XmlRoot("circle")]
     public class SvgCircle : SvgColoredItem, ISvgItem, ISvgCoordinateObject
     {

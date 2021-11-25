@@ -4,7 +4,7 @@
 	  <PackageId>ChemSharp</PackageId>
     <Description>Library for processing of chemistry related files (aiming at spectroscopy and structural files)</Description>
 	  <Authors>Jens Krumsieck</Authors>
-	  <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
 	  <LangVersion>9.0</LangVersion>
 	  <Version>1.0.10</Version>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

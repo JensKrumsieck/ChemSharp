@@ -130,15 +130,6 @@ namespace ChemSharp.Tests.Molecules
         }
 
         [TestMethod]
-        public void TestPDBPeas()
-        {
-            const string path = @"C:\Users\jenso\Downloads\5xnl.pdb";
-            var file = new PDBDataProvider(path);
-            file.ReadData();
-            var möl = MoleculeFactory.Create(path);
-        }
-
-        [TestMethod]
         public void TestXYZ()
         {
             const string path = "files/mescho.xyz";

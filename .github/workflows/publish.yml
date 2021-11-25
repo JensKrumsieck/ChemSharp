@@ -11,10 +11,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/delete-package-versions@v2
-      with: 
-        min-versions-to-keep: 10
-        delete-only-pre-release-versions: "true"
     - uses: actions/checkout@v2  
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1

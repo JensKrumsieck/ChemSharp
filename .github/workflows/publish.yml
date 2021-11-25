@@ -11,6 +11,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - uses: smartsquaregmbh/delete-old-packages@v0.3.3
+      with:
+        keep: 10
+        names: |
+          ChemSharp
+          ChemSharp.Spectroscopy
+          ChemSharp.Molecules
+          ChemSharp.Molecules.Blazor
+          ChemSharp.UnitConversion    
+          ChemSharp.Rendering
     - uses: actions/checkout@v2  
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1

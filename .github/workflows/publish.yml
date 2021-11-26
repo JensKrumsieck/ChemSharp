@@ -11,17 +11,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - uses: smartsquaregmbh/delete-old-packages@v0.3.3
+      with:
+        keep: 10
+        version-pattern: "\\d*\\.\\d*\\.\\d*-\\w*\\.\\d*"
+        names: |
+          ChemSharp
+          ChemSharp.Spectroscopy
+          ChemSharp.Molecules
+          ChemSharp.Molecules.Blazor
+          ChemSharp.UnitConversion
     - uses: actions/checkout@v2  
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x 
-        include-prerelease: true
-    - uses: actions/checkout@v2
+        dotnet-version: 6.0.x
     - name: Setup .NET 5
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 5.0.x 
     - name: Setup .NET Core 2.1
       uses: actions/setup-dotnet@v1
       with:
@@ -29,7 +37,7 @@ jobs:
     - name: Setup .NET Core 3.1	
       uses: actions/setup-dotnet@v1	
       with:	
-        dotnet-version: 3.1.x
+        dotnet-version: 3.1.x 
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
     - name: Install dependencies

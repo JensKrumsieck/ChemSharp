@@ -22,10 +22,13 @@
 | `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
 |`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
 
+<sup>CI Releases at: <a href="https://github.com/JensKrumsieck/ChemSharp/packages/">GitHub Packages</a> </sup>
+
 ### Features
 * Open and process Molecular files (see [Supported Filetypes](#molecule))
 * Sum formula operations and elemental analysis calculation
 * Using Elemental Data from https://github.com/JensKrumsieck/periodic-table
+* Blazor view for molecules using three.js
 * Open and process Spectroscopy related files (see [Supported Filetypes](#spectroscopy))
 * Unit Conversion for (Energy, Magnetic Units, Mass)
 

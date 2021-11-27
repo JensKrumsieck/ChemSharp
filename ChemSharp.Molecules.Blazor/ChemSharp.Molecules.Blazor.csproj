@@ -35,18 +35,9 @@
 	<ItemGroup>
     	<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
   	</ItemGroup>
-
-	<!--Build and Bundle js file via webpack
-	<Target Name="NodeBuild" BeforeTargets="AssignTargetPaths">
-		<Exec Command="node -version" ContinueOnError="true" />
-		<Exec Command="npm install" WorkingDirectory="Node" />
-		<Exec Command="npm run build" WorkingDirectory="Node" />
-	</Target>-->
 	<ItemGroup>
 		<None Include="..\icon.png" Pack="true" PackagePath="" />
 		<None Include="README.md" Pack="true" PackagePath="\" />
-		<!--<Content Remove="Node\*.json" />
-		<None Include="Node\*.json" CopyToOutputDirectory="Never" />-->
 	</ItemGroup>
 </Project>
 

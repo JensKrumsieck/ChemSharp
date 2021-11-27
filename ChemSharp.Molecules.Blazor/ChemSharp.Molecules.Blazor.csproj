@@ -36,7 +36,7 @@
   	</ItemGroup>
 
 	<!--Build and Bundle js file via webpack-->
-	<Target Name="NodeBuild" BeforeTargets="PrepareForBuild">
+	<Target Name="NodeBuild" BeforeTargets="PreBuildEvent">
 		<Exec Command="node --version" ContinueOnError="true" />
 		<Exec Command="npm install" WorkingDirectory="Node" />
 		<Exec Command="npm run build" WorkingDirectory="Node" />

@@ -18,7 +18,8 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<SupportedPlatform Include="browser" />
+		<SupportedPlatform Include="browser" /> 
+		<Content Update="assets\**" Pack="false" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,6 +27,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.ClientAssets" Version="0.1.0-alpha.21528.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
 	</ItemGroup>
@@ -34,17 +36,17 @@
     	<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
   	</ItemGroup>
 
-	<!--Build and Bundle js file via webpack-->
+	<!--Build and Bundle js file via webpack
 	<Target Name="NodeBuild" BeforeTargets="AssignTargetPaths">
-		<Exec Command="node --version" ContinueOnError="true" />
+		<Exec Command="node -version" ContinueOnError="true" />
 		<Exec Command="npm install" WorkingDirectory="Node" />
 		<Exec Command="npm run build" WorkingDirectory="Node" />
-	</Target>
+	</Target>-->
 	<ItemGroup>
 		<None Include="..\icon.png" Pack="true" PackagePath="" />
 		<None Include="README.md" Pack="true" PackagePath="\" />
-		<Content Remove="Node\*.json" />
-		<None Include="Node\*.json" CopyToOutputDirectory="Never" />
+		<!--<Content Remove="Node\*.json" />
+		<None Include="Node\*.json" CopyToOutputDirectory="Never" />-->
 	</ItemGroup>
 </Project>
 

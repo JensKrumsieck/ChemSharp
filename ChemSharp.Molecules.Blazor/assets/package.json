@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build:Debug": "webpack",
+    "build:Release": "webpack"
   },
   "author": "Jens Krumsieck",
   "license": "MIT",

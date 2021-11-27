@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\" CopyStaticAssets="true" />
+		<Folder Include="wwwroot\" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -35,7 +35,7 @@
   	</ItemGroup>
 
 	<!--Build and Bundle js file via webpack-->
-	<Target Name="NodeBuild" BeforeTargets="PreBuildEvent">
+	<Target Name="NodeBuild" BeforeTargets="AssignTargetPaths">
 		<Exec Command="node --version" ContinueOnError="true" />
 		<Exec Command="npm install" WorkingDirectory="Node" />
 		<Exec Command="npm run build" WorkingDirectory="Node" />

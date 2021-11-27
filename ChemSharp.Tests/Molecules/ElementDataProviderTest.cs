@@ -19,7 +19,7 @@ namespace ChemSharp.Tests.Molecules
         public void TestElementLoad()
         {
             var data = ElementDataProvider.ElementData;
-            Assert.AreEqual(118, data.Count());
+            Assert.AreEqual(118, data.Length);
         }
 
         [TestMethod]

@@ -56,7 +56,7 @@ namespace ChemSharp.Molecules.DataProviders
             };
         }
 
-        public static readonly Dictionary<string, string> AminoAcids = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> AminoAcids = new()
         {
             ["ALA"] = "Alanine",
             ["ARG"] = "Arginine",

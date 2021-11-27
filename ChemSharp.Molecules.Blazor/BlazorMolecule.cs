@@ -16,7 +16,7 @@ namespace ChemSharp.Molecules.Blazor
         [Parameter(CaptureUnmatchedValues = true)] 
         public Dictionary<string, object> UnmatchedParameters { get; set; }
 
-        private Guid? _guid;
+        private readonly Guid? _guid;
 
         public BlazorMolecule()
         {

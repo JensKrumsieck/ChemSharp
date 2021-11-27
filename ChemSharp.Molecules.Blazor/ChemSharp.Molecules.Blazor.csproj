@@ -36,10 +36,14 @@
 	</ItemGroup>
 
 	<!--Build and Bundle js file via webpack-->
-	<Target Name="NodeBuild" BeforeTargets="Build">
+	<Target Name="NodeBuild" BeforeTargets="BeforeBuild">
 		<Exec Command="node --version" ContinueOnError="true" />
 		<Exec Command="npm install" WorkingDirectory="Node" />
 		<Exec Command="npm run build" WorkingDirectory="Node" />
+	</Target>
+
+	<Target Name="RemoveBogus" AfterTargets="Build">
+		<RemoveDir Directories="$(OutputPath)\Node\"/>
 	</Target>
 
 	<ItemGroup>

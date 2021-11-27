@@ -5,6 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -39,7 +40,7 @@ jobs:
       with:
           proj-path: ChemSharp/Chemsharp.csproj
     - name: Pack
-      run: dotnet pack -c Release -o tmp -p:PackageVersion=${{steps.get-version.outputs.package-version}}-ci.${{ github.run_number }} --no-build --no-restore /p:GITHUB_ACTIONS=true
+      run: dotnet pack -c Release -o tmp -p:PackageVersion=${{steps.get-version.outputs.package-version}}-ci.${{ github.run_number }} --no-build --no-restore
     - run: cd ../
     - name: publish github
       run: dotnet nuget push tmp\*.nupkg --skip-duplicate -k ${{secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/JensKrumsieck/index.json 

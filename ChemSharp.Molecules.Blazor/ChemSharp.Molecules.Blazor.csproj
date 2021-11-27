@@ -14,40 +14,44 @@
 		<Nullable>enable</Nullable>
 		<PackageIcon>icon.png</PackageIcon>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="wwwroot\" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web"  Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
 	</ItemGroup>
 	
 	<ItemGroup>
     	<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
   	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="wwwroot\" />
-	</ItemGroup>
-
 	<!--Build and Bundle js file via webpack-->
 	<Target Name="NodeBuild" BeforeTargets="BeforeBuild">
+		<Delete Files="wwwroot\chemsharp.bundle.js" />
+		<Delete Files="wwwroot\chemsharp.bundle.js.LICENSE.txt" />
 		<Exec Command="node --version" ContinueOnError="true" />
 		<Exec Command="npm install" WorkingDirectory="Node" />
 		<Exec Command="npm run build" WorkingDirectory="Node" />
 	</Target>
-
-	<Target Name="RemoveBogus" AfterTargets="Build">
-		<RemoveDir Directories="$(OutputPath)\Node\"/>
+	<Target Name="Cleanup" AfterTargets="AfterBuild">
+		<Exec Command="dotnet pack --no-build" />
+		<Delete Files="wwwroot\chemsharp.bundle.js" />
+		<Delete Files="wwwroot\chemsharp.bundle.js.LICENSE.txt" />
 	</Target>
-
 	<ItemGroup>
 		<None Include="..\icon.png" Pack="true" PackagePath="" />
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<Content Remove="Node\*.json" />
+		<None Include="Node\*.json" CopyToOutputDirectory="Never" />
 	</ItemGroup>
 </Project>
+

@@ -47,7 +47,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Pack
-      run: dotnet pack -c Release -o tmp
+      run: dotnet pack -c Release -o tmp --no-build
     - run: cd ../
     - name: publish nuget
       run: dotnet nuget push tmp\*.nupkg --skip-duplicate --no-symbols true -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json  

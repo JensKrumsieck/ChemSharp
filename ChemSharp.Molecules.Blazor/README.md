@@ -31,7 +31,7 @@ Example usage of BlazorMolecule component (razor-file):
 }
   ```
  Example Project:
- https://github.com/JensKrumsieck/blazor-threejs
+ https://github.com/JensKrumsieck/blazor-playground
   
 ## Supported Files:
 * **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), CDXML (Single Molecule only))

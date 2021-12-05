@@ -13,6 +13,7 @@
     <PackageTags>Chemistry, Molecule, Atom, Spectroscopy</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <Copyright>Jens Krumsieck</Copyright>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>

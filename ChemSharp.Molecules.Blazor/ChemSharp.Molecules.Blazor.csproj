@@ -15,6 +15,7 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	
 	<ItemGroup>

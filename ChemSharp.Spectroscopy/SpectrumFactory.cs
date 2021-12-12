@@ -11,7 +11,7 @@ namespace ChemSharp.Spectroscopy
         /// <summary>
         /// Contains a file extension - type relationship
         /// </summary>
-        public static Dictionary<string, Type> DataProviderDictionary = new();
+        public static readonly Dictionary<string, Type> DataProviderDictionary = new();
 
         /// <summary>
         /// Import supported types for auto creation

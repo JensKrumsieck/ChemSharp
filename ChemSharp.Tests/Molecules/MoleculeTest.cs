@@ -4,6 +4,7 @@ using ChemSharp.Molecules.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChemSharp.Tests.Molecules
 {
@@ -146,6 +147,17 @@ namespace ChemSharp.Tests.Molecules
             var stream = File.Open(path, FileMode.Open);
             var xyz = new XYZDataProvider(stream);
             var mol = new Molecule(xyz);
+            Assert.AreEqual(23, mol.Atoms.Count);
+            Assert.AreEqual(23, mol.Bonds.Count);
+            Assert.AreEqual(148.205, mol.Atoms.MolecularWeight(), 0.02);
+        }
+
+        [TestMethod]
+        public async Task TestXYZStreamFactory()
+        {
+            const string path = "files/mescho.xyz";
+            var stream = File.Open(path, FileMode.Open);
+            var mol = await MoleculeFactory.CreateFromStreamAsync(stream, Path.GetExtension(path).Substring(1));
             Assert.AreEqual(23, mol.Atoms.Count);
             Assert.AreEqual(23, mol.Bonds.Count);
             Assert.AreEqual(148.205, mol.Atoms.MolecularWeight(), 0.02);

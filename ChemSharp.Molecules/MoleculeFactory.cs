@@ -2,6 +2,9 @@
 using ChemSharp.Molecules.DataProviders;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace ChemSharp.Molecules
 {
@@ -10,7 +13,7 @@ namespace ChemSharp.Molecules
         /// <summary>
         /// Contains a file extension - type relationship
         /// </summary>
-        public static Dictionary<string, Type> DataProviderDictionary = new();
+        public static readonly Dictionary<string, Type> DataProviderDictionary = new();
 
         /// <summary>
         /// Import supported types for auto creation
@@ -38,5 +41,21 @@ namespace ChemSharp.Molecules
         /// <returns></returns>
         public static IAtomDataProvider CreateProvider(string path) =>
             FileHandler.CreateProvider<IAtomDataProvider>(path, DataProviderDictionary);
+
+        /// <summary>
+        /// Creates Molecule from Stream Asynchronous.
+        /// Format needs to be given
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="ext">File Format extension without a dot</param>
+        /// <returns></returns>
+        public static async Task<Molecule> CreateFromStreamAsync(Stream data, string ext)
+        {
+            using var sr = new StreamReader(data);
+            var provider = (AbstractAtomDataProvider)FormatterServices.GetSafeUninitializedObject(DataProviderDictionary[ext]);
+            provider.Content = (await sr.ReadToEndAsync()).Split(Environment.NewLine.ToCharArray());
+            provider.ReadData();
+            return new Molecule(provider);
+        }
     }
 }

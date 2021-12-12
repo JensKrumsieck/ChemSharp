@@ -2,20 +2,10 @@
 	<PropertyGroup>
 		<PackageId>ChemSharp.Molecules.Blazor</PackageId>
 		<Description>Blazor Extension for ChemSharp.Molecules</Description>
-		<Authors>Jens Krumsieck</Authors>
-		<Version>1.0.13</Version>
-		<PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/JensKrumsieck/ChemSharp</RepositoryUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>Chemistry, Molecule, Atom, Spectroscopy</PackageTags>
-		<Copyright>Jens Krumsieck</Copyright>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<PackageIcon>icon.png</PackageIcon>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\.gitkeep" />
@@ -36,8 +26,6 @@
     	<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
   	</ItemGroup>
 	<ItemGroup>
-		<None Include="..\icon.png" Pack="true" PackagePath="" />
-		<None Include="README.md" Pack="true" PackagePath="\" />
 		<None Include="wwwroot\.gitkeep" Pack="false"/>
 	</ItemGroup>
 </Project>

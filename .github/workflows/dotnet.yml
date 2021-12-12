@@ -38,7 +38,7 @@ jobs:
     - uses: kzrnm/get-net-sdk-project-versions-action@v1
       id: get-version
       with:
-          proj-path: ChemSharp/Chemsharp.csproj
+          proj-path: Directory.Build.props
     - name: Pack
       run: dotnet pack -c Release -o tmp -p:PackageVersion=${{steps.get-version.outputs.package-version}}-ci.${{ github.run_number }} --no-build --no-restore
     - run: cd ../

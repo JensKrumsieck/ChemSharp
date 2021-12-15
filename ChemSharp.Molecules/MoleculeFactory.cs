@@ -52,8 +52,19 @@ namespace ChemSharp.Molecules
         public static async Task<Molecule> CreateFromStreamAsync(Stream data, string ext)
         {
             using var sr = new StreamReader(data);
+            return CreateFromString(await sr.ReadToEndAsync(), ext);         
+        }
+
+        /// <summary>
+        /// Creates Molecule from String containing the file content
+        /// </summary>
+        /// <param name="data">File Content</param>
+        /// <param name="ext">File Format without a dot</param>
+        /// <returns></returns>
+        public static Molecule CreateFromString(string data, string ext)
+        {
             var provider = (AbstractAtomDataProvider)FormatterServices.GetSafeUninitializedObject(DataProviderDictionary[ext]);
-            provider.Content = (await sr.ReadToEndAsync()).Split(Environment.NewLine.ToCharArray());
+            provider.Content = data.Split(Environment.NewLine.ToCharArray());
             provider.ReadData();
             return new Molecule(provider);
         }

@@ -162,5 +162,64 @@ namespace ChemSharp.Tests.Molecules
             Assert.AreEqual(23, mol.Bonds.Count);
             Assert.AreEqual(148.205, mol.Atoms.MolecularWeight(), 0.02);
         }
+
+        [TestMethod]
+        public void TextMol_Avogadro()
+        {
+            //mol file from avogadro
+            const string path = "files/tep.mol";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(46, mol.Atoms.Count);
+            //Assert.AreEqual(10, mol.Bonds.Count(s => s.IsAromatic)); Not supported by avogadro
+            Assert.AreEqual(4, mol.Bonds.Count(s => s.Order == 3));
+        }
+
+        [TestMethod]
+        public void TestMol_ChemSpider_2D()
+        {
+            //mol file from chemspider
+            const string path = "files/benzene.mol";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(6, mol.Atoms.Count);
+            Assert.AreEqual(6, mol.Bonds.Count);
+            //chemspider 2D mol files do not add implicit hydrogens
+        }
+
+        [TestMethod]
+        public void TestMol_ChemSpider()
+        {
+            //mol file from chemspider
+            const string path = "files/benzene_3d.mol";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(12, mol.Atoms.Count);
+            Assert.AreEqual(12, mol.Bonds.Count);
+        }
+
+        [TestMethod]
+        public void TestMol_Aromaticity()
+        {
+            //mol file from chemspider, manually edited
+            const string path = "files/benzene_arom.mol";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(12, mol.Atoms.Count);
+            Assert.AreEqual(12, mol.Bonds.Count);
+            Assert.AreEqual(6, mol.Bonds.Count(s => s.IsAromatic));
+
+            Assert.AreEqual(78.11184, mol.Atoms.MolecularWeight(), 0.02);
+            //are C-C bonds in benzene aromatic?
+            foreach (var b in mol.Bonds.Where(b => b.Atoms.Count(c => c.Symbol == "C") == 2))
+                Assert.IsTrue(b.IsAromatic);
+        }
+
+        [TestMethod]
+        public void TestMol_ChemSpider_Corrole()
+        {
+            //mol file from chemspider
+            const string path = "files/corrole.mol";
+            var mol = MoleculeFactory.Create(path);
+            Assert.AreEqual(37, mol.Atoms.Count);
+            Assert.AreEqual(41, mol.Bonds.Count);
+            //chemspider mol files do not add implicit hydrogens
+        }
     }
 }

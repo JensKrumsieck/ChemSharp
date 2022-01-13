@@ -23,6 +23,7 @@ namespace ChemSharp.Molecules
             DataProviderDictionary.Add("cif", typeof(CIFDataProvider));
             DataProviderDictionary.Add("xyz", typeof(XYZDataProvider));
             DataProviderDictionary.Add("mol2", typeof(Mol2DataProvider));
+            DataProviderDictionary.Add("mol", typeof(MolDataProvider));
             DataProviderDictionary.Add("pdb", typeof(PDBDataProvider));
             DataProviderDictionary.Add("cdxml", typeof(CDXMLDataProvider));
         }

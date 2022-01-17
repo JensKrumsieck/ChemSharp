@@ -87,7 +87,7 @@ var provider = new MultiCSVProvider(file);
 
 ### Supported Filetypes
 * **Molecule**
-	* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), CDXML (Single Molecule only))
+	* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), MOL (MDL MOL, ChemSpider), CDXML (Single Molecule only))
 	* **Export** (XYZ, MOL2)
 
 * **Spectroscopy**

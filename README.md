@@ -103,6 +103,7 @@ var provider = new MultiCSVProvider(file);
 <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>)
 * Godot Engine (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Godot-Engine) for Snippet)
 * Blazor (see ChemSharp.Molecules.Blazor)
+* <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-HelixToolkit-(WPF)">HelixToolkit</a> via ChemSharp.Molecules.HelixToolkit
 
 ### Used by (Highlights):
 *  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**

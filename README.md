@@ -19,6 +19,7 @@
 | `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp/) |
 | `ChemSharp.Molecules` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules/) |
 | `ChemSharp.Molecules.Blazor` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules.Blazor?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules.Blazor/) |
+| `ChemSharp.Molecules.HelixToolkit` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Molecules.HelixToolkit?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Molecules.HelixToolkit/) |
 | `ChemSharp.Spectroscopy` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.Spectroscopy?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.Spectroscopy/) |
 |`ChemSharp.UnitConversion` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/) |
 

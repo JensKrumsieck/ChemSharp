@@ -1,9 +1,8 @@
-﻿namespace ChemSharp.DataProviders
-{
-    public abstract class AbstractXYDataProvider : AbstractDataProvider, IXYDataProvider
-    {
-        public DataPoint[] XYData { get; set; }
+﻿namespace ChemSharp.DataProviders;
 
-        protected AbstractXYDataProvider(string path) : base(path) { }
-    }
+public abstract class AbstractXYDataProvider : AbstractDataProvider, IXYDataProvider
+{
+    public DataPoint[] XYData { get; set; }
+
+    protected AbstractXYDataProvider(string path) : base(path) { }
 }

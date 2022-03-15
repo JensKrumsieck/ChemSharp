@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace ChemSharp.Molecules.DataProviders
+namespace ChemSharp.Molecules.DataProviders;
+
+public interface IAtomDataProvider
 {
-    public interface IAtomDataProvider
-    {
-        public IEnumerable<Atom> Atoms { get; set; }
-    }
+    public IEnumerable<Atom> Atoms { get; set; }
 }

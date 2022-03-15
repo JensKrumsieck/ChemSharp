@@ -1,11 +1,10 @@
-﻿namespace ChemSharp.Export
+﻿namespace ChemSharp.Export;
+
+/// <summary>
+/// If a class implements IExportable it can be exported
+/// by using an IExporter
+/// </summary>
+public interface IExportable
 {
-    /// <summary>
-    /// If a class implements IExportable it can be exported
-    /// by using an IExporter
-    /// </summary>
-    public interface IExportable
-    {
-        //empty for now
-    }
+    //empty for now
 }

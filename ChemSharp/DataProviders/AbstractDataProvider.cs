@@ -1,11 +1,10 @@
-﻿namespace ChemSharp.DataProviders
+﻿namespace ChemSharp.DataProviders;
+
+public abstract class AbstractDataProvider
 {
-    public abstract class AbstractDataProvider
+    public string Path { get; set; }
+    protected AbstractDataProvider(string path)
     {
-        public string Path { get; set; }
-        protected AbstractDataProvider(string path)
-        {
-            Path = path;
-        }
+        Path = path;
     }
 }

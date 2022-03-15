@@ -1,6 +1,6 @@
-﻿using HelixToolkit.Wpf;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using HelixToolkit.Wpf;
 
 namespace ChemSharp.Molecules.HelixToolkit;
 public class Atom3D : ModelVisual3D

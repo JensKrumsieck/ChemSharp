@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace ChemSharp
+namespace ChemSharp;
+
+public class UTF8Writer : StringWriter
 {
-    public class UTF8Writer : StringWriter
-    {
-        public override Encoding Encoding => Encoding.UTF8;
-    }
+    public override Encoding Encoding => Encoding.UTF8;
 }

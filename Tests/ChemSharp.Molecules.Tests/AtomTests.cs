@@ -31,7 +31,7 @@ public class AtomTests
     {
         var atom1 = new Atom("He") { Location = new Vector3(1, 2, 3) };
         var atom2 = new Atom("He") { Location = new Vector3(1, 2, 3) };
-        Assert.True(atom1 == atom2);
+        Assert.True(atom1.Equals(atom2));
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class AtomTests
     {
         var atom1 = new Atom("He") { Location = new Vector3(1, 2, 3) };
         var atom2 = new Atom("He") { Location = new Vector3(1, 2, 4) };
-        Assert.True(atom1 != atom2);
+        Assert.True(!atom1.Equals(atom2));
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class AtomTests
     {
         var atom1 = new Atom("H") { Location = new Vector3(1, 2, 3) };
         var atom2 = new Atom("He") { Location = new Vector3(1, 2, 3) };
-        Assert.True(atom1 != atom2);
+        Assert.True(!atom1.Equals(atom2));
     }
 }
 

@@ -52,9 +52,6 @@ public class Atom : Element, IEquatable<Atom>
         (ReferenceEquals(this, obj)
          || obj.GetType() == GetType() && Equals((Atom)obj));
 
-    public static bool operator ==(Atom a, Atom b) => a.Equals(b);
-    public static bool operator !=(Atom a, Atom b) => !a.Equals(b);
-
     /// <summary>
     /// Allows to tag any string related information to atom
     /// </summary>

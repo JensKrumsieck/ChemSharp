@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp", "ChemSharp\ChemSharp.csproj", "{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Tests", "ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Tests", "Tests\ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F549A9E-53BD-4B97-AEF7-F39853FEA31B}"
 	ProjectSection(SolutionItems) = preProject

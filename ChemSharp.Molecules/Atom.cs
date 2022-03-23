@@ -37,10 +37,10 @@ public class Atom : Element, IEquatable<Atom>
     public override string ToString() => $"{Title}: {Location}";
 
     /// <summary>
-    /// Gets HashCode, defined by title and location
+    /// Gets HashCode, defined by Symbol and location
     /// </summary>
     /// <returns></returns>
-    public override int GetHashCode() => (_title, Location).GetHashCode();
+    public override int GetHashCode() => (Symbol, Location).GetHashCode();
 
     public bool Equals(Atom other) =>
         other is not null &&
@@ -52,7 +52,7 @@ public class Atom : Element, IEquatable<Atom>
         (ReferenceEquals(this, obj)
          || obj.GetType() == GetType() && Equals((Atom)obj));
 
-    public static bool operator == (Atom a, Atom b) => a.Equals(b);
+    public static bool operator ==(Atom a, Atom b) => a.Equals(b);
     public static bool operator !=(Atom a, Atom b) => !a.Equals(b);
 
     /// <summary>

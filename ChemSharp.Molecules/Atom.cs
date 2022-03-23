@@ -45,12 +45,15 @@ public class Atom : Element, IEquatable<Atom>
     public bool Equals(Atom other) =>
         other is not null &&
         (ReferenceEquals(this, other)
-         || _title == other._title && Location.Equals(other.Location));
+         || Symbol == other.Symbol && Location.Equals(other.Location));
 
     public override bool Equals(object obj) =>
         obj is not null &&
         (ReferenceEquals(this, obj)
          || obj.GetType() == GetType() && Equals((Atom)obj));
+
+    public static bool operator == (Atom a, Atom b) => a.Equals(b);
+    public static bool operator !=(Atom a, Atom b) => !a.Equals(b);
 
     /// <summary>
     /// Allows to tag any string related information to atom

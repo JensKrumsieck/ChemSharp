@@ -26,7 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Molecules.Blazor", "ChemSharp.Molecules.Blazor\ChemSharp.Molecules.Blazor.csproj", "{51EEF23F-218A-454E-A595-C0EF4328A54C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Molecules.HelixToolkit", "ChemSharp.Molecules.HelixToolkit\ChemSharp.Molecules.HelixToolkit.csproj", "{F6A7EDE1-E27C-4440-9A48-0E048F919198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Molecules.HelixToolkit", "ChemSharp.Molecules.HelixToolkit\ChemSharp.Molecules.HelixToolkit.csproj", "{F6A7EDE1-E27C-4440-9A48-0E048F919198}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{20F5697B-9414-4F33-88DA-9D84D9983B40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{BBB1E274-87ED-47C9-809E-345D50EBFD50} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD} = {CA4A529D-2EE9-4196-B069-328706EDE088}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

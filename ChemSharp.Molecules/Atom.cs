@@ -40,7 +40,7 @@ public class Atom : Element, IEquatable<Atom>
     /// Gets HashCode, defined by Symbol and location
     /// </summary>
     /// <returns></returns>
-    public override int GetHashCode() => (Symbol, Location).GetHashCode();
+    public override int GetHashCode() => (Title, Symbol, Location).GetHashCode();
 
     public bool Equals(Atom other) =>
         other is not null &&

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,11 +66,14 @@ public class Molecule : IExportable
     ///<summary>
     /// Provides AtomData
     /// </summary>
+    [Obsolete("This field will be removed in 1.2.0")]
     public readonly IAtomDataProvider AtomDataProvider;
 
     ///<summary>
     /// Provides BondData
     /// </summary>
+
+    [Obsolete("This field will be removed in 1.2.0")]
     public IBondDataProvider BondDataProvider { get; private set; }
 
     /// <summary>

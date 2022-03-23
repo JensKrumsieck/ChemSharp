@@ -10,7 +10,7 @@ public class AtomTests
 {
     [Theory]
     [ClassData(typeof(AtomTestDataGenerator))]
-    public void Atom_ShouldHaveSymbolIfValid(string symbol)
+    public void Atom_ShouldHaveSymbol_IfValid(string symbol)
     {
         var atom = new Atom(symbol);
         Assert.Equal(symbol, atom.Symbol);
@@ -18,12 +18,36 @@ public class AtomTests
     }
 
     [Fact]
-    public void Atom_ShouldBeDummyIfInvalidSymbol()
+    public void Atom_ShouldBeDummy_IfInvalidSymbol()
     {
         var atom = new Atom("FAIL");
         Assert.Equal("DA", atom.Symbol);
         Assert.Equal("Dummy Atom", atom.Name);
         Assert.Equal(Vector3.Zero, atom.Location); //default
+    }
+
+    [Fact]
+    public void Atoms_ShouldBeEqual_IfSymbolAndLocationMatch()
+    {
+        var atom1 = new Atom("He") { Location = new Vector3(1, 2, 3) };
+        var atom2 = new Atom("He") { Location = new Vector3(1, 2, 3) };
+        Assert.True(atom1 == atom2);
+    }
+
+    [Fact]
+    public void Atoms_ShouldNotBeEqual_IfLocationsDoNotMatch()
+    {
+        var atom1 = new Atom("He") { Location = new Vector3(1, 2, 3) };
+        var atom2 = new Atom("He") { Location = new Vector3(1, 2, 4) };
+        Assert.True(atom1 != atom2);
+    }
+
+    [Fact]
+    public void Atoms_ShouldNotBeEqual_IfSymbolsDoNotMatch()
+    {
+        var atom1 = new Atom("H") { Location = new Vector3(1, 2, 3) };
+        var atom2 = new Atom("He") { Location = new Vector3(1, 2, 3) };
+        Assert.True(atom1 != atom2);
     }
 }
 

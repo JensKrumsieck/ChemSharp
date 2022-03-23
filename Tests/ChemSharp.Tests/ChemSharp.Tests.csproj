@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
-    <ProjectReference Include="..\ChemSharp.Spectroscopy\ChemSharp.Spectroscopy.csproj" />
-    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj" />
-    <ProjectReference Include="..\ChemSharp.UnitConversion\ChemSharp.UnitConversion.csproj" />
+    <ProjectReference Include="..\..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
+    <ProjectReference Include="..\..\ChemSharp.Spectroscopy\ChemSharp.Spectroscopy.csproj" />
+    <ProjectReference Include="..\..\ChemSharp\ChemSharp.csproj" />
+    <ProjectReference Include="..\..\ChemSharp.UnitConversion\ChemSharp.UnitConversion.csproj" />
   </ItemGroup>
 
   <ItemGroup>

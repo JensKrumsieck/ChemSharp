@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Molecules.HelixTo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{20F5697B-9414-4F33-88DA-9D84D9983B40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Molecules.Tests", "Tests\ChemSharp.Molecules.Tests\ChemSharp.Molecules.Tests.csproj", "{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{F6A7EDE1-E27C-4440-9A48-0E048F919198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6A7EDE1-E27C-4440-9A48-0E048F919198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6A7EDE1-E27C-4440-9A48-0E048F919198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BBB1E274-87ED-47C9-809E-345D50EBFD50} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD} = {CA4A529D-2EE9-4196-B069-328706EDE088}
+		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C226C1E-BECB-41C3-BB05-E624764E4793}

@@ -43,7 +43,7 @@ public class Element
     public Element(string symbol)
     {
         var shadow = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == symbol);
-        if (shadow == null) return;
+        if (shadow == null) shadow = Dummy;
         Name = shadow.Name;
         Symbol = shadow.Symbol;
         Appearance = shadow.Appearance;
@@ -91,5 +91,14 @@ public class Element
         }
     }
     public static readonly Dictionary<string, int> DesiredSaturation = new();
+
+    /// <summary>
+    /// Dummy Element
+    /// </summary>
+    public static readonly Element Dummy = new()
+    {
+        Symbol = "DA",
+        Name = "Dummy Atom"
+    };
 }
 

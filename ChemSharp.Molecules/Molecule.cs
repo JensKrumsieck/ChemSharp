@@ -21,19 +21,22 @@ public class Molecule : IExportable
     /// <summary>
     /// The Molecules Atoms
     /// </summary>
-    public List<Atom> Atoms { get; set; }
+    public List<Atom> Atoms { get; set; } = new();
 
     /// <summary>
     /// The Molecules Bonds
     /// </summary>
-    public List<Bond> Bonds { get; set; }
+    public List<Bond> Bonds { get; set; } = new();
 
     public bool CacheNeighborList = true;
 
     /// <summary>
     /// creates Molecule without Atoms to add later
     /// </summary>
-    public Molecule() { }
+    public Molecule()
+    {
+    }
+
     /// <summary>
     /// creates Molecule with IEnumerable of Atoms
     /// </summary>
@@ -54,13 +57,14 @@ public class Molecule : IExportable
     {
         AtomDataProvider = provider;
         Atoms = provider.Atoms.ToList();
-        if (provider is IBondDataProvider { Bonds: { } } bondProvider && bondProvider.Bonds.Any())
+        if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
         {
             BondDataProvider = bondProvider;
             Bonds = bondProvider.Bonds.ToList();
         }
         else RecalculateBonds();
-        Title = ((AbstractDataProvider)AtomDataProvider).Path;
+
+        Title = ((AbstractDataProvider) AtomDataProvider).Path;
     }
 
     ///<summary>
@@ -90,6 +94,7 @@ public class Molecule : IExportable
         var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
         foreach (var (i, j) in matched) Bonds.Add(new Bond(Atoms[i], Atoms[j]));
     }
+
     private IEnumerable<(int, int)> RecalculateBondsParallel()
     {
         var matched = new ConcurrentStack<(int, int)>();
@@ -106,6 +111,7 @@ public class Molecule : IExportable
         });
         return matched;
     }
+
     private IEnumerable<(int, int)> RecalculateBondsNonParallel()
     {
         var matched = new Stack<(int, int)>();
@@ -120,10 +126,12 @@ public class Molecule : IExportable
                 matched.Push((i, j));
             }
         }
+
         return matched;
     }
 
     private Dictionary<Atom, List<Atom>> _cachedNeighbors;
+
     /// <summary>
     /// returns neighbors of specific atom
     /// </summary>
@@ -144,5 +152,7 @@ public class Molecule : IExportable
     /// </summary>
     /// <param name="a"></param>
     /// <returns></returns>
-    public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any() ? Neighbors(a).Where(s => s != null && s.IsNonMetal) : Enumerable.Empty<Atom>();
+    public IEnumerable<Atom> NonMetalNeighbors(Atom a) => Neighbors(a) != null && Neighbors(a).Any()
+        ? Neighbors(a).Where(s => s != null && s.IsNonMetal)
+        : Enumerable.Empty<Atom>();
 }

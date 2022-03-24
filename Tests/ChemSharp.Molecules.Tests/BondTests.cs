@@ -25,6 +25,13 @@ public class BondTests
 	}
 
 	[Fact]
+	public void Bond_HasOrder()
+	{
+		var bond = new Bond(null!, null!) {Order = 4};
+		Assert.Equal(4, bond.Order);
+	}
+
+	[Fact]
 	public void Bond_ShouldBeAromaticInBenzene()
 	{
 		var molecule = MoleculeFactory.Create("files/benzene_arom.mol");

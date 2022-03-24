@@ -5,7 +5,7 @@ public sealed class Bond
 	public readonly Atom Atom1;
 	public readonly Atom Atom2;
 
-	private Atom[] _atoms;
+	private Atom[]? _atoms;
 
 	/// <summary>
 	///     Indicates whether bond is aromatic

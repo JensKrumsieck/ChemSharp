@@ -24,7 +24,7 @@ public class Atom : Element, IEquatable<Atom>
     /// <returns></returns>
     public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
 
-    private string _title;
+    private string _title = "";
     /// <summary>
     /// Gets or Sets the Atom title
     /// </summary>
@@ -65,5 +65,5 @@ public class Atom : Element, IEquatable<Atom>
     /// <summary>
     /// Allows to tag any string related information to atom
     /// </summary>
-    public string Tag;
+    public string? Tag;
 }

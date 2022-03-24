@@ -18,7 +18,7 @@ public class Atom : Element, IEquatable<Atom>
 	/// <inheritdoc />
 	public Atom(string symbol) : base(symbol) { }
 
-	public Atom(string symbol, float x, float y, float z) : base(symbol) => Location = new Vector3(x, y, z);
+	public Atom(string symbol, float x, float y, float z) : this(symbol) => Location = new Vector3(x, y, z);
 
 	/// <summary>
 	///     Location in 3D Space

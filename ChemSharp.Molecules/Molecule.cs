@@ -185,4 +185,7 @@ public class Molecule : IExportable
 	public double Spin => (Multiplicity - 1d) / 2d;
 
 	public bool IsParamagnetic => Electrons % 2 == 1;
+
+	public string SumFormula => Atoms.SumFormula();
+	public double MolecularWeight => Atoms.MolecularWeight();
 }

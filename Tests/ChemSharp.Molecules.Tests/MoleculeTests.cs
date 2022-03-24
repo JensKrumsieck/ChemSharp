@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ChemSharp.Molecules.Extensions;
 using Xunit;
 
 namespace ChemSharp.Molecules.Tests;
@@ -13,9 +12,9 @@ public class MoleculeTests
 		var mol = MoleculeFactory.Create(path);
 		Assert.Equal(atoms, mol.Atoms.Count);
 		Assert.Equal(bonds, mol.Bonds.Count);
-		if (!string.IsNullOrEmpty(formula)) Assert.Equal(formula, mol.Atoms.SumFormula());
+		if (!string.IsNullOrEmpty(formula)) Assert.Equal(formula, mol.SumFormula);
 
-		if (weight.HasValue) Assert.Equal(weight.Value, mol.Atoms.MolecularWeight(), 1);
+		if (weight.HasValue) Assert.Equal(weight.Value, mol.MolecularWeight, 1);
 	}
 
 	[Fact]
@@ -35,7 +34,7 @@ public class MoleculeTests
 		mol.Bonds.Add(new Bond(mol.Atoms[0], mol.Atoms[1]));
 		Assert.Equal(2, mol.Atoms.Count);
 		Assert.Single(mol.Bonds);
-		Assert.Equal("He2", mol.Atoms.SumFormula());
+		Assert.Equal("He2", mol.SumFormula);
 	}
 
 	[Fact]

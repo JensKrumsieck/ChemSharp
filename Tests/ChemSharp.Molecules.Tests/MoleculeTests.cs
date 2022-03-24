@@ -92,6 +92,16 @@ public class MoleculeTests
 		Assert.Equal(2, mol.Multiplicity);
 		Assert.True(mol.IsParamagnetic);
 	}
+
+	[Fact]
+	public void Molecule_ShouldRecalculateBonds()
+	{
+		const string file = "files/cif.cif";
+		var mol = MoleculeFactory.Create(file);
+		mol.RecalculateBonds();
+		Assert.Equal(89, mol.Bonds.Count);
+		Assert.Null(mol.BondDataProvider); //obsolete
+	}
 }
 
 public class MoleculeTestDataGenerator : IEnumerable<object[]>

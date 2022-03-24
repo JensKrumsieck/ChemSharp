@@ -42,15 +42,25 @@ public class Atom : Element, IEquatable<Atom>
     /// <returns></returns>
     public override int GetHashCode() => (Title, Symbol, Location).GetHashCode();
 
-    public bool Equals(Atom other) =>
+    public bool Equals(Atom? other) =>
         other is not null &&
         (ReferenceEquals(this, other)
          || Symbol == other.Symbol && Location.Equals(other.Location));
 
-    public override bool Equals(object obj) =>
+    public override bool Equals(object? obj) =>
         obj is not null &&
         (ReferenceEquals(this, obj)
          || obj.GetType() == GetType() && Equals((Atom)obj));
+
+    public static bool operator ==(Atom? a, Atom? b) => 
+        a is null && b is null 
+        || a is not null && b is not null 
+                         && (ReferenceEquals(a, b) || a.Equals(b));
+
+    public static bool operator !=(Atom? a, Atom? b) => 
+        a is null || b is null 
+                  || !ReferenceEquals(a, b) 
+                  && !a.Equals(b);
 
     /// <summary>
     /// Allows to tag any string related information to atom

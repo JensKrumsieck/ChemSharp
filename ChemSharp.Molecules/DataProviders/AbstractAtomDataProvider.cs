@@ -7,22 +7,22 @@ namespace ChemSharp.Molecules.DataProviders;
 
 public class AbstractAtomDataProvider : AbstractDataProvider, IAtomDataProvider
 {
-    public string[] Content { get; set; }
+	public AbstractAtomDataProvider(string path) : base(path)
+	{
+		if (string.IsNullOrEmpty(path)) return;
+		var file = (PlainFile<string>)FileHandler.Handle(path);
+		Content = file.Content;
+	}
 
-    public IEnumerable<Atom> Atoms { get; set; }
+	public AbstractAtomDataProvider(Stream stream) : base("")
+	{
+		using var sr = new StreamReader(stream);
+		Content = sr.ReadToEnd().Split('\n');
+	}
 
-    public AbstractAtomDataProvider(string path) : base(path)
-    {
-        if (string.IsNullOrEmpty(path)) return;
-        var file = (PlainFile<string>)FileHandler.Handle(path);
-        Content = file.Content;
-    }
+	public string[] Content { get; set; }
 
-    public AbstractAtomDataProvider(Stream stream) : base("")
-    {
-        using var sr = new StreamReader(stream);
-        Content = sr.ReadToEnd().Split('\n');
-    }
+	public IEnumerable<Atom> Atoms { get; set; }
 
-    public virtual void ReadData() { }
+	public virtual void ReadData() { }
 }

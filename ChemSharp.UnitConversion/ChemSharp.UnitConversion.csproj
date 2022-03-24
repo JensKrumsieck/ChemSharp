@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj" />
+    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj"/>
   </ItemGroup>
 </Project>

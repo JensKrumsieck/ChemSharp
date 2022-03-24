@@ -7,57 +7,54 @@ namespace ChemSharp.Molecules.Blazor;
 
 public class BlazorMolecule : ComponentBase
 {
-    [Inject]
-    public IJSRuntime JS { get; set; }
+	private readonly Guid? _guid;
 
-    [Parameter]
-    public Molecule? Molecule { get; set; }
+	public BlazorMolecule() => _guid = Guid.NewGuid();
 
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> UnmatchedParameters { get; set; }
+	[Inject] public IJSRuntime JS { get; set; }
 
-    private readonly Guid? _guid;
+	[Parameter] public Molecule? Molecule { get; set; }
 
-    public BlazorMolecule()
-    {
-        _guid = Guid.NewGuid();
-    }
+	[Parameter(CaptureUnmatchedValues = true)]
+	public Dictionary<string, object> UnmatchedParameters { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (!firstRender) return;
-        await JS.InitThreeJSAsync("three-" + _guid);
-    }
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (!firstRender) return;
 
-    protected override async Task OnParametersSetAsync() => await JS.ClearCanvas();
+		await JS.InitThreeJSAsync("three-" + _guid);
+	}
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        //build canvas tree
-        builder.OpenElement(0, "div");
-        builder.AddMultipleAttributes(1, UnmatchedParameters);
+	protected override async Task OnParametersSetAsync() => await JS.ClearCanvas();
 
-        builder.OpenElement(2, "canvas");
-        builder.AddAttribute(3, "id", "three-" + _guid);
+	protected override void BuildRenderTree(RenderTreeBuilder builder)
+	{
+		//build canvas tree
+		builder.OpenElement(0, "div");
+		builder.AddMultipleAttributes(1, UnmatchedParameters);
 
-        builder.CloseElement();
-        builder.CloseElement();
+		builder.OpenElement(2, "canvas");
+		builder.AddAttribute(3, "id", "three-" + _guid);
 
-        if (Molecule != null)
-        {
-            foreach (var bond in Molecule.Bonds)
-            {
-                builder.OpenComponent<BlazorBond>(4);
-                builder.AddAttribute(5, "Bond", bond);
-                builder.CloseComponent();
-            }
-            //build molecule render tree
-            foreach (var atom in Molecule.Atoms)
-            {
-                builder.OpenComponent<BlazorAtom>(6);
-                builder.AddAttribute(7, "Atom", atom);
-                builder.CloseComponent();
-            }
-        }
-    }
+		builder.CloseElement();
+		builder.CloseElement();
+
+		if (Molecule != null)
+		{
+			foreach (var bond in Molecule.Bonds)
+			{
+				builder.OpenComponent<BlazorBond>(4);
+				builder.AddAttribute(5, "Bond", bond);
+				builder.CloseComponent();
+			}
+
+			//build molecule render tree
+			foreach (var atom in Molecule.Atoms)
+			{
+				builder.OpenComponent<BlazorAtom>(6);
+				builder.AddAttribute(7, "Atom", atom);
+				builder.CloseComponent();
+			}
+		}
+	}
 }

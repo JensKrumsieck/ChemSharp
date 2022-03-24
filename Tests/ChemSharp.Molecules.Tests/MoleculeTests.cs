@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.InteropServices;
 using ChemSharp.Molecules.Extensions;
 using Xunit;
 
@@ -16,9 +14,9 @@ public class MoleculeTests
         var mol = MoleculeFactory.Create(path);
         Assert.Equal(atoms, mol.Atoms.Count);
         Assert.Equal(bonds, mol.Bonds.Count);
-        if(!string.IsNullOrEmpty(formula)) 
+        if (!string.IsNullOrEmpty(formula))
             Assert.Equal(formula, mol.Atoms.SumFormula());
-        if(weight.HasValue) 
+        if (weight.HasValue)
             Assert.Equal(weight.Value, mol.Atoms.MolecularWeight(), 1);
     }
 
@@ -34,8 +32,8 @@ public class MoleculeTests
     public void Molecule_AtomsAndBondsCanBeAdded()
     {
         var mol = new Molecule();
-        mol.Atoms.Add(new Atom("He") {Location = new Vector3(0,0,1)});
-        mol.Atoms.Add(new Atom("He") {Location = new Vector3(0,0,0)});
+        mol.Atoms.Add(new Atom("He", 0, 0, 1));
+        mol.Atoms.Add(new Atom("He", 0, 0, 0));
         mol.Bonds.Add(new Bond(mol.Atoms[0], mol.Atoms[1]));
         Assert.Equal(2, mol.Atoms.Count);
         Assert.Single(mol.Bonds);
@@ -48,7 +46,7 @@ public class MoleculeTestDataGenerator : IEnumerable<object[]>
     //creates a list with objects containing path, atoms count, bonds count
     //sum formula and molecular weight#
     //chemspider 2D files (.mol) do not add implicit hydrogens
-    private List<object[]> _data = new()
+    private readonly List<object[]> _data = new()
     {
         new object[] {"files/cif.cif", 79, 89, "C40Cl2H29MoN4O3", 780.51},
         new object[] {"files/cif_noTrim.cif", 79, 89, "C40Cl2H29MoN4O3", 780.51},

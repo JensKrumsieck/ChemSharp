@@ -87,6 +87,22 @@ public class AtomTests
 		var atom2 = new Atom("Ne") {Location = new Vector3(1, 2, 3)};
 		Assert.True(atom1 != atom2);
 	}
+
+	[Fact]
+	public void Atoms_ShouldHaveElectronsEqualToAtomicNumber()
+	{
+		var atom = new Atom("Mo");
+		Assert.Equal(atom.AtomicNumber, atom.Electrons);
+	}
+
+	[Fact]
+	public void Atoms_ShouldHaveElectronsAccordingToCharge()
+	{
+		var atom = new Atom("Mo") {Charge = 5};
+		Assert.Equal(atom.AtomicNumber - 5, atom.Electrons);
+		atom = new Atom("Cl") {Charge = -1};
+		Assert.Equal(atom.AtomicNumber + 1, atom.Electrons);
+	}
 }
 
 public class AtomTestDataGenerator : IEnumerable<object[]>
@@ -99,10 +115,10 @@ public class AtomTestDataGenerator : IEnumerable<object[]>
 	                                   "Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu " +
 	                                   "Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr ";
 
-	private List<object[]> Data => AtomSymbols
-	                               .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
-	                               .Select(s => new object[] {s})
-	                               .ToList();
+	private static List<object[]> Data => AtomSymbols
+	                                      .Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
+	                                      .Select(s => new object[] {s})
+	                                      .ToList();
 
 	public IEnumerator<object[]> GetEnumerator() => Data.GetEnumerator();
 

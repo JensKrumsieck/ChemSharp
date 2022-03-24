@@ -50,7 +50,9 @@ public class Element
 	///     Constructor for Json Serialization
 	/// </summary>
 	[JsonConstructor]
-	public Element() { }
+	public Element()
+	{
+	}
 
 	/// <summary>
 	///     Create Element by symbol
@@ -58,8 +60,7 @@ public class Element
 	/// <param name="symbol"></param>
 	public Element(string symbol)
 	{
-		var shadow = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == symbol);
-		if (shadow == null) shadow = Dummy;
+		var shadow = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == symbol) ?? Dummy;
 
 		Name = shadow.Name;
 		Symbol = shadow.Symbol;
@@ -85,15 +86,15 @@ public class Element
 	public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
 
 	[JsonIgnore] public bool IsMetal => !IsMetalloid && !IsNonMetal;
+	[JsonIgnore] public int Charge { get; set; } = 0;
+
+	[JsonIgnore] public int Electrons => AtomicNumber - Charge;
 
 	[JsonIgnore]
 	public bool IsMetalloid => new[] {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"}.Contains(Symbol);
 
 	[JsonIgnore]
-	public bool IsNonMetal =>
-		new[] {"H", "C", "N", "O", "P", "S", "Se"}.Contains(Symbol) || Group == 18 || Group == 17;
-
-	#region API Properties
+	public bool IsNonMetal => new[] {"H", "C", "N", "O", "P", "S", "Se"}.Contains(Symbol) || Group == 18 || Group == 17;
 
 	public string Name { get; set; }
 	public string Symbol { get; set; }
@@ -110,6 +111,4 @@ public class Element
 	public int? AtomicRadius { get; set; }
 	public int? VdWRadius { get; set; }
 	public string CAS { get; set; }
-
-	#endregion API Properties
 }

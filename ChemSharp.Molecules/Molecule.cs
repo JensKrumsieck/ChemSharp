@@ -165,4 +165,24 @@ public class Molecule : IExportable
 		Neighbors(a) != null && Neighbors(a).Any()
 			? Neighbors(a).Where(s => s != null && s.IsNonMetal)
 			: Enumerable.Empty<Atom>();
+
+	public int Electrons => Atoms.Sum(s => s.Electrons) - ImplicitCharge;
+
+	/// <summary>
+	///     Charge is made up of atoms charges and the implicit charge entered for the molecule
+	/// </summary>
+	public int Charge => InferredCharge + ImplicitCharge;
+
+	private int InferredCharge => Atoms.Sum(s => s.Charge);
+	public int ImplicitCharge { get; set; } = 0;
+
+	/// <summary>
+	///     Spin Multiplicity following the rules 2s+1
+	///     for s = 0 Multiplicity is 1 (default)
+	/// </summary>
+	public int Multiplicity { get; set; } = 1;
+
+	public double Spin => (Multiplicity - 1d) / 2d;
+
+	public bool IsParamagnetic => Electrons % 2 == 1;
 }

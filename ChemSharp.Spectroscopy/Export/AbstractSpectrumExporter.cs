@@ -7,19 +7,17 @@ namespace ChemSharp.Spectroscopy.Export;
 [Flags]
 public enum SpectrumExportFlags
 {
-    Experimental,
-    Derivative,
-    Integral
+	Experimental,
+	Derivative,
+	Integral
 }
 
 public abstract class AbstractSpectrumExporter
 {
-    public SpectrumExportFlags Flags = SpectrumExportFlags.Experimental;
+	public SpectrumExportFlags Flags = SpectrumExportFlags.Experimental;
 
-    public Spectrum Spectrum { get; protected set; }
+	public Spectrum Spectrum { get; protected set; }
 
-    public virtual void Export(IExportable exportable, Stream stream)
-    {
-        Spectrum = exportable as Spectrum ?? throw new NotSupportedException("Please use Spectrum Type");
-    }
+	public virtual void Export(IExportable exportable, Stream stream) => Spectrum =
+		exportable as Spectrum ?? throw new NotSupportedException("Please use Spectrum Type");
 }

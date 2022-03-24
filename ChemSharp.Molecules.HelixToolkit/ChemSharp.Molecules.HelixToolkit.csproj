@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="HelixToolkit.Core.Wpf" Version="2.20.1" />
-    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.20.1"/>
+    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj"/>
   </ItemGroup>
 
 </Project>

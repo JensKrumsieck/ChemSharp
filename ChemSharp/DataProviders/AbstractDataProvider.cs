@@ -2,9 +2,7 @@
 
 public abstract class AbstractDataProvider
 {
-    public string Path { get; set; }
-    protected AbstractDataProvider(string path)
-    {
-        Path = path;
-    }
+	protected AbstractDataProvider(string path) => Path = path;
+
+	public string Path { get; set; }
 }

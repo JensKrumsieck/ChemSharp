@@ -7,6 +7,7 @@
 HelixToolkit Bindings for ChemSharp.Molecules (WPF)
 
 Add the necessary xmlns to your .xaml file and create a Viewport3D Element:
+
 ```xaml
 <Window
 xmlns:h="http://helix-toolkit.org/wpf" 
@@ -22,7 +23,9 @@ xmlns:controls="clr-namespace:ChemSharp.Molecules.HelixToolkit.Controls;assembly
     <controls:ItemsVisual3D ItemsSource="{Binding Bonds3D}"/>
 </h:HelixViewport3D>
 ```
-This is how an example code-behind file could look like: 
+
+This is how an example code-behind file could look like:
+
 ```csharp
 public partial class MainWindow : Window
     {
@@ -48,15 +51,19 @@ public partial class MainWindow : Window
         public ObservableCollection<Bond3D> Bonds3D { get; }
     }
   ```
-  
+
 ## Supported Files:
-* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), CDXML (Single Molecule only))
+
+* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file),
+  CDXML (Single Molecule only))
 * **Export** (XYZ, MOL2)
-  
+
 <hr/>
 
 #### Used Libraries:
+
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)
 
 #### Compatibility
+
 * .NET 6.0, .NET5.0

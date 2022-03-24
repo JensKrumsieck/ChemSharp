@@ -10,6 +10,7 @@ Creates a BlazorMolecule-Component to be used in your razor-Views. Supports all 
 You can use BlazorMoleculeFactory to create molecule from ```IBrowserFile```
 
 Example usage of BlazorMolecule component (razor-file):
+
   ```razor
 @page "/molecule"
 @using ChemSharp.Molecules.Blazor
@@ -30,17 +31,22 @@ Example usage of BlazorMolecule component (razor-file):
     }
 }
   ```
- Example Project:
- https://github.com/JensKrumsieck/blazor-playground
-  
+
+Example Project:
+https://github.com/JensKrumsieck/blazor-playground
+
 ## Supported Files:
-* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file), CDXML (Single Molecule only))
+
+* **Import** (XYZ, CIF (crystallographic information file, CCDC), MOL2 (TRIPOS Mol2), PDB (Protein Data Bank file),
+  CDXML (Single Molecule only))
 * **Export** (XYZ, MOL2)
-  
+
 <hr/>
 
 #### Used Libraries:
+
 * [MathNet.Numerics](https://github.com/mathnet/mathnet-numerics)
 
 #### Compatibility
+
 * .NET 6.0

@@ -5,11 +5,13 @@
 [![NuGet Badge](https://buildstats.info/nuget/ChemSharp.UnitConversion?includePreReleases=true)](https://www.nuget.org/packages/ChemSharp.UnitConversion/)
 
 ### Features
+
 * Unit Conversion for (Energy, Magnetic Units, Mass)
 
 ### Basic Usage
 
 Use given Converter:
+
 ```csharp
 //create converter instance (energy)
 var converter = new EnergyUnitConverter("nm", "cm^-1");
@@ -18,7 +20,9 @@ var wavenumbers = converter.Convert(500) / 1000;
 var nanometers = converter.ConvertInverted(50000) * 1000
 ```
 
-Create own Converter [EnergyUnitConverter](https://github.com/JensKrumsieck/ChemSharp/blob/master/ChemSharp.UnitConversion/EnergyUnitConverter.cs):
+Create own
+Converter [EnergyUnitConverter](https://github.com/JensKrumsieck/ChemSharp/blob/master/ChemSharp.UnitConversion/EnergyUnitConverter.cs):
+
 ```csharp
 namespace ChemSharp.UnitConversion
 {
@@ -46,4 +50,5 @@ namespace ChemSharp.UnitConversion
 ```
 
 #### Compatibility
+
 * .NET Standard 2.0, .NET Standard 2.1, .NET 5, .NET 6

@@ -19,7 +19,7 @@ public static class MathV
 	/// </summary>
 	/// <param name="input"></param>
 	/// <returns></returns>
-	public static Vector3 Centroid(IEnumerable<Vector3> input)
+	public static Vector3 Centroid(this IEnumerable<Vector3> input)
 	{
 		var array = input.ToArray();
 		return Sum(array) / array.Length;
@@ -30,7 +30,7 @@ public static class MathV
 	/// </summary>
 	/// <param name="input"></param>
 	/// <returns></returns>
-	public static Vector3 Sum(IEnumerable<Vector3> input)
+	public static Vector3 Sum(this IEnumerable<Vector3> input)
 	{
 		var array = input as Vector3[] ?? input.ToArray();
 		var sumX = array.Sum(s => s.X);
@@ -45,6 +45,7 @@ public static class MathV
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <returns></returns>
+	[Obsolete("Use Vector3.Dot instead!")]
 	public static float Dot(Vector3 left, Vector3 right) => Vector3.Dot(left, right);
 
 	/// <summary>
@@ -53,6 +54,7 @@ public static class MathV
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <returns></returns>
+	[Obsolete("Use Vector3.Cross instead!")]
 	public static Vector3 Cross(Vector3 left, Vector3 right) => Vector3.Cross(left, right);
 
 	/// <summary>
@@ -60,6 +62,7 @@ public static class MathV
 	/// </summary>
 	/// <param name="v"></param>
 	/// <returns></returns>
+	[Obsolete("Use Vector3.Normalize instead!")]
 	public static Vector3 Normalize(Vector3 v) => Vector3.Normalize(v);
 
 	/// <summary>
@@ -68,6 +71,7 @@ public static class MathV
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <returns></returns>
+	[Obsolete("Use Vector3.Distance instead!")]
 	public static float Distance(Vector3 left, Vector3 right) => Vector3.Distance(left, right);
 
 	/// <summary>
@@ -76,9 +80,9 @@ public static class MathV
 	/// <param name="p"></param>
 	/// <param name="point"></param>
 	/// <returns></returns>
-	public static Vector3 Project(Plane p, Vector3 point)
+	public static Vector3 Project(this Plane p, Vector3 point)
 	{
-		var dotProduct = Dot(p.Normal, point);
+		var dotProduct = Vector3.Dot(p.Normal, point);
 		var projVec = (dotProduct + p.D) * p.Normal;
 		return point - projVec;
 	}
@@ -89,11 +93,11 @@ public static class MathV
 	/// <param name="p"></param>
 	/// <param name="point"></param>
 	/// <returns></returns>
-	public static float Distance(Plane p, Vector3 point)
+	public static float Distance(this Plane p, Vector3 point)
 	{
 		var projection = Project(p, point);
 		var vectorTo = point - projection;
-		return Dot(vectorTo, p.Normal);
+		return Vector3.Dot(vectorTo, p.Normal);
 	}
 
 	/// <summary>
@@ -131,7 +135,7 @@ public static class MathV
 	{
 		var b1 = Vector3.Normalize(a - b);
 		var b2 = Vector3.Normalize(c - b);
-		return MathF.Acos(Dot(b1, b2));
+		return MathF.Acos(Vector3.Dot(b1, b2));
 	}
 
 	/// <summary>
@@ -159,18 +163,18 @@ public static class MathV
 		var b2 = b - c;
 		var b3 = d - c;
 
-		var c1 = Normalize(Cross(b1, b2));
-		var c2 = Normalize(Cross(b2, b3));
-		var c3 = Normalize(Cross(c1, b2));
+		var c1 = Vector3.Normalize(Vector3.Cross(b1, b2));
+		var c2 = Vector3.Normalize(Vector3.Cross(b2, b3));
+		var c3 = Vector3.Normalize(Vector3.Cross(c1, b2));
 
-		return MathF.Atan2(Dot(c3, c2), Dot(c1, c2));
+		return MathF.Atan2(Vector3.Dot(c3, c2), Vector3.Dot(c1, c2));
 	}
 
 	/// <summary>
-	///     Gets the mean plane of a list of atoms
+	///     Gets the mean plane of a list of vectors
 	/// </summary>
 	/// <returns></returns>
-	public static Plane MeanPlane(IList<Vector3> input)
+	public static Plane MeanPlane(this IList<Vector3> input)
 	{
 		//calculate Centroid first
 		//get the centroid
@@ -193,7 +197,7 @@ public static class MathV
 		var b = svd.U[1, 2];
 		var c = svd.U[2, 2];
 
-		var d = -Dot(centroid, new Vector3(a, b, c));
+		var d = -Vector3.Dot(centroid, new Vector3(a, b, c));
 
 		return new Plane(a, b, c, d);
 	}

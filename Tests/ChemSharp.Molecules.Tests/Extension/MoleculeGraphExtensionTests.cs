@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using ChemSharp.Extensions;
 using ChemSharp.Molecules.Extensions;
 using Xunit;
 
@@ -54,5 +56,18 @@ public class MoleculeGraphExtensionTests
 		var distance = _mol.DistanceMatrix();
 		Assert.Equal(distance.Length, _mol.Atoms.Count);
 		Assert.True(distance.IsSymmetric());
+	}
+
+	[Fact]
+	public void MatrixDFS_ShouldEqualGenericDFS()
+	{
+		var mol = MoleculeFactory.Create("files/benzene_arom.mol");
+		var graph = mol.AdjacencyMatrix();
+		var result = DFSUtil.DepthFirstSearch(mol.Atoms[0], mol.Neighbors);
+		var result2 = DFSUtil.DepthFirstSearch(graph[0, 0], i => graph.Neighbors(i));
+		Assert.Equal(result.Count, result2.Count);
+		var result2Atoms = result2.Select(s => mol.Atoms[s]).ToHashSet();
+		Assert.Equal(result, result2Atoms);
+		//Note: DFS with AdjacencyMatrix and converting back is slower!
 	}
 }

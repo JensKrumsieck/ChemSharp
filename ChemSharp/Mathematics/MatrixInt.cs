@@ -62,4 +62,6 @@ public readonly struct MatrixInt : IEquatable<MatrixInt>
 	/// <param name="src"></param>
 	/// <returns></returns>
 	public bool IsSymmetric() => this == Transpose(this);
+
+	public static readonly int[,] DirectionMatrix = {{0, 1, 0, -1}, {-1, 0, 1, 0}};
 }

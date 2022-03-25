@@ -53,6 +53,5 @@ public class MoleculeGraphExtensionTests
 		var distance = _mol.DistanceMatrix();
 		Assert.Equal(distance.Length, _mol.Atoms.Count);
 		Assert.True(distance.IsSymmetric());
-		Debug.Write(distance);
 	}
 }

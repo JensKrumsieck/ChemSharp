@@ -6,35 +6,35 @@ namespace ChemSharp.Molecules.Tests.Extension;
 
 public class MoleculeGraphExtensionTests
 {
-	private Molecule mol;
+	private readonly Molecule _mol;
 
 	public MoleculeGraphExtensionTests()
 	{
 		//WARNING! Do NOT sort!
-		mol = new Molecule();
-		mol.Atoms.Add(new Atom("C", 1.2130f, .6880f, 0f));
-		mol.Atoms.Add(new Atom("C", 1.203f, -.706f, 0f));
-		mol.Atoms.Add(new Atom("C", -.01f, -1.395f, 0f));
-		mol.Atoms.Add(new Atom("C", -1.2130f, -.6880f, 0f));
-		mol.Atoms.Add(new Atom("C", -1.2130f, .706f, 0f));
-		mol.Atoms.Add(new Atom("C", .01f, 1.395f, 0f));
-		mol.RecalculateBonds();
-		Debug.Assert(mol.Bonds.Count == 6);
+		_mol = new Molecule();
+		_mol.Atoms.Add(new Atom("C", 1.2130f, .6880f, 0f));
+		_mol.Atoms.Add(new Atom("C", 1.203f, -.706f, 0f));
+		_mol.Atoms.Add(new Atom("C", -.01f, -1.395f, 0f));
+		_mol.Atoms.Add(new Atom("C", -1.2130f, -.6880f, 0f));
+		_mol.Atoms.Add(new Atom("C", -1.2130f, .706f, 0f));
+		_mol.Atoms.Add(new Atom("C", .01f, 1.395f, 0f));
+		_mol.RecalculateBonds();
+		Debug.Assert(_mol.Bonds.Count == 6);
 	}
 
 	[Fact]
 	public void AdjacencyMatrix_ShouldGenerate()
 	{
-		var adjacency = mol.AdjacencyMatrix();
-		Assert.Equal(adjacency.Length, mol.Atoms.Count);
-		Assert.True(MoleculeGraphExtension.IsSymmetric(adjacency));
+		var adjacency = _mol.AdjacencyMatrix();
+		Assert.Equal(adjacency.Length, _mol.Atoms.Count);
+		Assert.True(adjacency.IsSymmetric());
 	}
 
 	[Fact]
 	public void AdjacencyMatrix_ShouldBeValid()
 	{
-		var adjacency = mol.AdjacencyMatrix();
-		var result = new int[,]
+		var adjacency = _mol.AdjacencyMatrix();
+		var result = new MatrixInt(new[,]
 		{
 			//0 1 2 3 4 5
 			{0, 1, 0, 0, 0, 1}, //0
@@ -43,15 +43,16 @@ public class MoleculeGraphExtensionTests
 			{0, 0, 1, 0, 1, 0}, //3
 			{0, 0, 0, 1, 0, 1}, //4
 			{1, 0, 0, 0, 1, 0}, //5
-		};
+		});
 		Assert.Equal(result, adjacency);
 	}
 
 	[Fact]
 	public void DistanceMatrix_CanBeCreated()
 	{
-		var distance = mol.DistanceMatrix();
-		Assert.Equal(distance.Length, mol.Atoms.Count);
+		var distance = _mol.DistanceMatrix();
+		Assert.Equal(distance.Length, _mol.Atoms.Count);
+		Assert.True(distance.IsSymmetric());
 		Debug.Write(distance);
 	}
 }

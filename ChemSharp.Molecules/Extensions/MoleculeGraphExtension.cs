@@ -94,31 +94,4 @@ public static class MoleculeGraphExtension
 
 		return iMin;
 	}
-
-	/// <summary>
-	/// Transposes Matrix
-	/// </summary>
-	/// <param name="src"></param>
-	/// <returns></returns>
-	public static int[,] Transpose(MatrixInt src)
-	{
-		var len = src.Length;
-		var transposed = new MatrixInt(len);
-		for (var i = 0; i < len; i++)
-		{
-			for (var j = 0; j < len; j++)
-			{
-				transposed[j, i] = src[i, j];
-			}
-		}
-
-		return transposed;
-	}
-
-	/// <summary>
-	/// Indicates whether Matrix is Symmetric
-	/// </summary>
-	/// <param name="src"></param>
-	/// <returns></returns>
-	public static bool IsSymmetric(int[,] src) => src == Transpose(src);
 }

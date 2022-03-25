@@ -1,4 +1,5 @@
 ﻿using System;
+using ChemSharp.Extensions;
 
 namespace ChemSharp;
 
@@ -63,5 +64,10 @@ public readonly struct MatrixInt : IEquatable<MatrixInt>
 	/// <returns></returns>
 	public bool IsSymmetric() => this == Transpose(this);
 
-	public static readonly int[,] DirectionMatrix = {{0, 1, 0, -1}, {-1, 0, 1, 0}};
+	/// <summary>
+	///     Returns neighbor vertices
+	/// </summary>
+	/// <param name="idx"></param>
+	/// <returns></returns>
+	public int[] Neighbors(int idx) => _values.GetRow(idx).FindAllIndicesOf(s => s == 1);
 }

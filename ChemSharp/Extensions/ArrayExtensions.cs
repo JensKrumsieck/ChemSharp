@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace ChemSharp.Extensions;
 
@@ -27,4 +28,8 @@ public static class ArrayExtensions
 		Enumerable.Range(0, matrix.GetLength(1))
 		          .Select(x => matrix[rowNumber, x])
 		          .ToArray();
+
+	public static int[] FindAllIndicesOf<T>(this T[] array, Predicate<T> match) =>
+		array.Select((value, index) => match(value) ? index : -1)
+		     .Where(index => index != -1).ToArray();
 }

@@ -50,6 +50,7 @@ public class MoleculeGraphExtensionTests
 	[Fact]
 	public void DistanceMatrix_CanBeCreated()
 	{
+		//Dijkstra is tested to be valid in other test project!
 		var distance = _mol.DistanceMatrix();
 		Assert.Equal(distance.Length, _mol.Atoms.Count);
 		Assert.True(distance.IsSymmetric());

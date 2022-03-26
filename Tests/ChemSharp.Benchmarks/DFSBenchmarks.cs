@@ -5,6 +5,7 @@ using ChemSharp.GraphTheory;
 namespace ChemSharp.Benchmarks;
 
 [MemoryDiagnoser]
+[MarkdownExporter]
 public class DFSBenchmarks
 {
 	private readonly UndirectedGraph<int, Edge<int>> _graph;
@@ -20,7 +21,7 @@ public class DFSBenchmarks
 		_graph = new UndirectedGraph<int, Edge<int>>(vertices, edges);
 	}
 
-	[Benchmark]
+	[Benchmark(Baseline = true)]
 	public void OldDFS()
 	{
 		var result = DFSUtil.DepthFirstSearch(1, v => _graph.Neighbors(v));

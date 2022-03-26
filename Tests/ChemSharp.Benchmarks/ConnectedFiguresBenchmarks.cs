@@ -4,6 +4,8 @@ using ChemSharp.GraphTheory;
 
 namespace ChemSharp.Benchmarks;
 
+[MemoryDiagnoser]
+[MarkdownExporter]
 public class ConnectedFiguresBenchmarks
 {
 	private readonly UndirectedGraph<int, Edge<int>> _graph;
@@ -18,7 +20,7 @@ public class ConnectedFiguresBenchmarks
 		};
 		_graph = new UndirectedGraph<int, Edge<int>>(vertices, edges);
 	}
-	[Benchmark]
+	[Benchmark(Baseline = true)]
 	public void OldConnectedFigures()
 	{
 		var result =DFSUtil.ConnectedFigures(_graph.Vertices, v => _graph.Neighbors(v));

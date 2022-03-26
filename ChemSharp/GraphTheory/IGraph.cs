@@ -7,4 +7,6 @@ public interface IGraph<TVertex, TEdge> where TEdge : IEdge<TVertex> where TVert
 {
 	public HashSet<TVertex> Vertices { get; }
 	public HashSet<TEdge> Edges { get; }
+
+	public List<TVertex> Neighbors(TVertex needle);
 }

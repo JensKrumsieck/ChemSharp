@@ -1,4 +1,5 @@
 ﻿using ChemSharp.Mathematics;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace ChemSharp.Molecules.Extensions;
 

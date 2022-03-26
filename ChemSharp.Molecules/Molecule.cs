@@ -5,13 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using ChemSharp.DataProviders;
 using ChemSharp.Export;
+using ChemSharp.GraphTheory;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
 
 namespace ChemSharp.Molecules;
 
-public class Molecule : IExportable
+public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 {
 	/// <summary>
 	///     Provides AtomData
@@ -24,24 +25,19 @@ public class Molecule : IExportable
 	public bool CacheNeighborList = true;
 
 	/// <summary>
-	///     creates Molecule without Atoms to add later
+	///		creates Molecule without Atoms to add later
 	/// </summary>
-	public Molecule()
-	{
-	}
+	public Molecule() { }
 
 	/// <summary>
 	///     creates Molecule with IEnumerable of Atoms
 	/// </summary>
 	/// <param name="atoms"></param>
 	/// <param name="bonds"></param>
-	public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds = null) : this()
+	public Molecule(IEnumerable<Atom> atoms, IEnumerable<Bond>? bonds = null)
+		: base(atoms, bonds ?? Enumerable.Empty<Bond>())
 	{
-		Atoms = atoms.ToList();
-		if (bonds != null)
-			Bonds = bonds.ToList();
-		else
-			RecalculateBonds();
+		if (bonds == null) RecalculateBonds();
 	}
 
 	/// <summary>
@@ -50,13 +46,10 @@ public class Molecule : IExportable
 	/// <param name="provider"></param>
 	public Molecule(IAtomDataProvider provider) : this()
 	{
-		AtomDataProvider = provider;
-		Atoms = provider.Atoms.ToList();
+		Atoms.AddRange(provider.Atoms);
+		;
 		if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
-		{
-			BondDataProvider = bondProvider;
-			Bonds = bondProvider.Bonds.ToList();
-		}
+			Bonds.AddRange(bondProvider.Bonds);
 		else
 			RecalculateBonds();
 
@@ -71,12 +64,12 @@ public class Molecule : IExportable
 	/// <summary>
 	///     The Molecules Atoms
 	/// </summary>
-	public List<Atom> Atoms { get; set; } = new();
+	public List<Atom> Atoms => Vertices;
 
 	/// <summary>
 	///     The Molecules Bonds
 	/// </summary>
-	public List<Bond> Bonds { get; set; } = new();
+	public List<Bond> Bonds => Edges;
 
 	/// <summary>
 	///     Provides BondData
@@ -117,8 +110,7 @@ public class Molecule : IExportable
 	public void RecalculateBonds()
 	{
 		//discard data provider and reset bonds
-		BondDataProvider = null;
-		Bonds = new List<Bond>();
+		Edges.Clear();
 		var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
 		foreach (var (i, j) in matched) Bonds.Add(new Bond(Atoms[i], Atoms[j]));
 	}

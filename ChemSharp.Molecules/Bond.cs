@@ -1,10 +1,9 @@
-﻿namespace ChemSharp.Molecules;
+﻿using ChemSharp.GraphTheory;
 
-public sealed class Bond
+namespace ChemSharp.Molecules;
+
+public sealed class Bond : Edge<Atom>
 {
-	public readonly Atom Atom1;
-	public readonly Atom Atom2;
-
 	private Atom[]? _atoms;
 
 	/// <summary>
@@ -17,11 +16,9 @@ public sealed class Bond
 	/// </summary>
 	public int Order = 1;
 
-	public Bond(Atom a1, Atom a2)
-	{
-		Atom1 = a1;
-		Atom2 = a2;
-	}
+	public Bond(Atom source, Atom target) : base(source, target) { }
+	public Atom Atom1 => Source;
+	public Atom Atom2 => Target;
 
 	/// <summary>
 	///     Gets Bond Length

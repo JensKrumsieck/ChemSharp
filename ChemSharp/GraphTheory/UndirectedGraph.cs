@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace ChemSharp.GraphTheory;
 
-public class UndirectedGraph<TVertex, TEdge> : IGraph<TVertex, TEdge>  where TEdge : IEdge<TVertex> where TVertex : IEquatable<TVertex>
+public class UndirectedGraph<TVertex, TEdge> : IGraph<TVertex, TEdge>
+	where TEdge : IEdge<TVertex> where TVertex : IEquatable<TVertex>
 {
 	private Dictionary<TVertex, List<TVertex>>? _cachedNeighbors;
 
@@ -12,13 +13,13 @@ public class UndirectedGraph<TVertex, TEdge> : IGraph<TVertex, TEdge>  where TEd
 
 	public UndirectedGraph(IEnumerable<TVertex> vertices, IEnumerable<TEdge> edges) : this()
 	{
-		Vertices.UnionWith(vertices);
-		Edges.UnionWith(edges);
+		Vertices.AddRange(vertices);
+		Edges.AddRange(edges);
 	}
 
 	public UndirectedGraph() { }
-	public HashSet<TVertex> Vertices { get; } = new();
-	public HashSet<TEdge> Edges { get; } = new();
+	public List<TVertex> Vertices { get; } = new();
+	public List<TEdge> Edges { get; } = new();
 
 	public List<TVertex> Neighbors(TVertex needle)
 	{

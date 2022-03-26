@@ -47,9 +47,12 @@ public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	public Molecule(IAtomDataProvider provider) : this()
 	{
 		Atoms.AddRange(provider.Atoms);
-		;
+		AtomDataProvider = provider;
 		if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
+		{
 			Bonds.AddRange(bondProvider.Bonds);
+			BondDataProvider = bondProvider;
+		}
 		else
 			RecalculateBonds();
 
@@ -110,6 +113,7 @@ public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	public void RecalculateBonds()
 	{
 		//discard data provider and reset bonds
+		BondDataProvider = null!;
 		Edges.Clear();
 		var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
 		foreach (var (i, j) in matched) Bonds.Add(new Bond(Atoms[i], Atoms[j]));

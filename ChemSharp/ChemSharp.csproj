@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0"/>
+    <PackageReference Include="System.Memory" Version="4.5.4"/>
+    <PackageReference Include="Contrib.Bcl.Ranges" Version="1.0.0"/>
   </ItemGroup>
 
   <ItemGroup>

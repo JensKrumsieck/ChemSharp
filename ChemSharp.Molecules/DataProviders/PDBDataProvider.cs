@@ -51,9 +51,9 @@ public class PDBDataProvider : AbstractAtomDataProvider
 
 	public sealed override void ReadData() => Atoms = ReadAtoms();
 
-	public IEnumerable<Atom> ReadAtoms() =>
+	private IEnumerable<Atom> ReadAtoms() =>
 		//step through lines and assign Atoms/Bonds
-		from line in Content.AsParallel()
+		from line in Content
 		where line.StartsWith("ATOM") || line.StartsWith("HETATM")
 		select ExtractAtom(line);
 
@@ -68,10 +68,10 @@ public class PDBDataProvider : AbstractAtomDataProvider
 		var title = cols[2];
 		var tag = cols[3];
 		var loc = new Vector3(
-		                      cols[locXIndex].ToSingle(),
-		                      cols[locXIndex + 1].ToSingle(),
-		                      cols[locXIndex + 2].ToSingle()
-		                     );
+			cols[locXIndex].ToSingle(),
+			cols[locXIndex + 1].ToSingle(),
+			cols[locXIndex + 2].ToSingle()
+		);
 		var type = cols.Last().UcFirst();
 		return new Atom(type) {Location = loc, Title = title, Tag = tag};
 	}

@@ -6,17 +6,18 @@ using ChemSharp.Memory;
 
 namespace ChemSharp.Molecules.Formats;
 
-public static class PDBFormat
+public class PDBFormat : FileFormat
 {
 	private const string Atom = "ATOM";
 	private const string HetAtom = "HETATM";
+	private PDBFormat(string path) : base(path) { }
 
-	public static List<Atom> Read(string path)
+	private List<Atom> ReadInternal()
 	{
 		var atom = Atom.AsSpan();
 		var hetAtom = HetAtom.AsSpan();
 		var atoms = new List<Atom>();
-		using var fs = File.OpenRead(path);
+		using var fs = File.OpenRead(Path);
 		using var sr = new StreamReader(fs);
 		while (sr.Peek() > 0)
 		{
@@ -29,7 +30,13 @@ public static class PDBFormat
 		return atoms;
 	}
 
-	private static Atom ParseAtom(ReadOnlySpan<char> line)
+	public static List<Atom> Read(string path)
+	{
+		var format = new PDBFormat(path);
+		return format.ReadInternal();
+	}
+
+	protected override Atom ParseAtom(ReadOnlySpan<char> line)
 	{
 		/*
 		 * http://www.wwpdb.org/documentation/file-format-content/format33/sect9.html#ATOM

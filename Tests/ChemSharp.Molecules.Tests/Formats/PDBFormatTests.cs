@@ -27,7 +27,7 @@ public class PDBFormatTests
 		var atoms = PDBFormat.Read(file);
 		var old = new PDBDataProvider(file);
 		old.ReadData();
-		var old_Atoms = old.Atoms.ToList();
-		old_Atoms.ToList().Should().BeEquivalentTo(atoms);
+		var oldAtoms = old.Atoms.ToList();
+		oldAtoms.ToList().Should().BeEquivalentTo(atoms);
 	}
 }

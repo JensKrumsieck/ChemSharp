@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using ChemSharp.DataProviders;
 using ChemSharp.Export;
@@ -115,11 +116,12 @@ public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 		//discard data provider and reset bonds
 		BondDataProvider = null!;
 		Edges.Clear();
-		var matched = Atoms.Count > 500 ? RecalculateBondsParallel() : RecalculateBondsNonParallel();
-		foreach (var (i, j) in matched) Bonds.Add(new Bond(Atoms[i], Atoms[j]));
+		if (Atoms.Count < 600) RecalculateBondsNonParallel();
+		else RecalculateBondsParallel();
 	}
 
-	private IEnumerable<(int, int)> RecalculateBondsParallel()
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private void RecalculateBondsParallel()
 	{
 		var matched = new ConcurrentStack<(int, int)>();
 		Parallel.For(0, Atoms.Count, i =>
@@ -128,34 +130,29 @@ public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 			for (var j = i + 1; j < Atoms.Count; ++j)
 			{
 				var atomJ = Atoms[j];
-				if (i == j || !atomI.BondToByCovalentRadii(atomJ) ||
-				    matched.Contains((i, j)) && matched.Contains((j, i)))
+				if (i == j || !atomI.BondToByCovalentRadii(atomJ))
 					continue;
-
 				matched.Push((i, j));
 			}
 		});
-		return matched;
+		foreach (var (i, j) in matched.ToArray()) Bonds.Add(new Bond(Atoms[i], Atoms[j]));
 	}
 
-	private IEnumerable<(int, int)> RecalculateBondsNonParallel()
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private void RecalculateBondsNonParallel()
 	{
-		var matched = new Stack<(int, int)>();
 		for (var i = 0; i < Atoms.Count; i++)
 		{
 			var atomI = Atoms[i];
 			for (var j = i + 1; j < Atoms.Count; ++j)
 			{
 				var atomJ = Atoms[j];
-				if (i == j || !atomI.BondToByCovalentRadii(atomJ) ||
-				    matched.Contains((i, j)) && matched.Contains((j, i)))
+				if (i == j || !atomI.BondToByCovalentRadii(atomJ))
 					continue;
 
-				matched.Push((i, j));
+				Bonds.Add(new Bond(atomI, atomJ));
 			}
 		}
-
-		return matched;
 	}
 
 	// /// <summary>

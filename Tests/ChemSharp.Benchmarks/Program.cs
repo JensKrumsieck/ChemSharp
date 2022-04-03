@@ -1,4 +1,3 @@
 ﻿using BenchmarkDotNet.Running;
-using ChemSharp.Benchmarks;
 
-var summary = BenchmarkRunner.Run(typeof(PdbBenchmarks));
+var summary = BenchmarkRunner.Run(typeof(Program).Assembly);

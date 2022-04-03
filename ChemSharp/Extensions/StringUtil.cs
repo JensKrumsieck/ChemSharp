@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 
 namespace ChemSharp.Extensions;
 
 public static class StringUtil
 {
+	public static readonly string[] NewLines = {"\n", "\r\n", "\r"};
+	public static readonly char[] WhiteSpaces = {' ', '\t'};
+
 	/// <summary>
 	///     Provides string with n spaces
 	/// </summary>
@@ -33,7 +35,7 @@ public static class StringUtil
 	/// <param name="input"></param>
 	/// <returns></returns>
 	public static string[] DefaultSplit(this string input) =>
-		input.Split(new[] {"\n", "\r\n", "\r"}, StringSplitOptions.RemoveEmptyEntries);
+		input.Split(NewLines, StringSplitOptions.RemoveEmptyEntries);
 
 	/// <summary>
 	///     Converts String to Int in Invariant Culture
@@ -61,7 +63,12 @@ public static class StringUtil
 	/// </summary>
 	/// <param name="input"></param>
 	/// <returns></returns>
-	public static string RemoveUncertainty(this string input) => input.Split('(').First();
+	public static string RemoveUncertainty(this string input)
+	{
+		var span = input.AsSpan();
+		var pos = span.IndexOf('(');
+		return pos == -1 ? input : span[..pos].ToString();
+	}
 
 	/// <summary>
 	///     Splits and Whitespace
@@ -69,7 +76,7 @@ public static class StringUtil
 	/// <param name="input"></param>
 	/// <returns></returns>
 	public static string[] WhiteSpaceSplit(this string input) => input
-		.Split(new[] {" ", "\t"}, StringSplitOptions.RemoveEmptyEntries);
+		.Split(WhiteSpaces, StringSplitOptions.RemoveEmptyEntries);
 
 	/// <summary>
 	///     sets first letter to uppercase and others to lowercase

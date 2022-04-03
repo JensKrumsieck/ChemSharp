@@ -15,7 +15,7 @@ public static class SumFormulaUtil
 	/// <summary>
 	///     Dictionary with Molecular Abbreviations
 	/// </summary>
-	internal static Dictionary<string, string> Abbreviations = new()
+	internal static readonly Dictionary<string, string> Abbreviations = new()
 	{
 		{"Mes", "C9H11"}, //Mesityl
 		{"Me", "CH2"}, //Methyl
@@ -38,7 +38,7 @@ public static class SumFormulaUtil
 	/// </summary>
 	/// <param name="formula"></param>
 	/// <returns></returns>
-	public static string RemoveAbbreviations(this string formula) =>
+	private static string RemoveAbbreviations(this string formula) =>
 		Abbreviations.Aggregate(formula, (current, abbr) => current.Replace(abbr.Key, abbr.Value));
 
 	/// <summary>

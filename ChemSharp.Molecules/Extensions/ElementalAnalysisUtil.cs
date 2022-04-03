@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ChemSharp.Extensions;
 using ChemSharp.Molecules.ElementalAnalysis;
@@ -40,10 +41,10 @@ public static class ElementalAnalysisUtil
 	/// <param name="exp"></param>
 	/// <returns></returns>
 	public static Dictionary<string, double> Deviation(Dictionary<string, double> theory,
-	                                                   Dictionary<string, double> exp) =>
+		Dictionary<string, double> exp) =>
 		theory.Where(item => exp.ContainsKey(item.Key) && exp[item.Key] != 0d)
-		      .ToDictionary(item => item.Key,
-		                    item => Math.Round(Math.Abs(item.Value - exp[item.Key]), 3));
+			.ToDictionary(item => item.Key,
+				item => Math.Round(Math.Abs(item.Value - exp[item.Key]), 3));
 
 	/// <summary>
 	///     calculates error between two analysis
@@ -84,13 +85,13 @@ public static class ElementalAnalysisUtil
 
 		var cartesian = comp.Cartesian();
 		Parallel.ForEach(cartesian, new ParallelOptions {MaxDegreeOfParallelism = Environment.ProcessorCount},
-		                 item =>
-		                 {
-			                 var vecArray = item.ToArray();
-			                 var testFormula = formula.SumFormula(imps, vecArray);
-			                 var analysis = testFormula.ElementalAnalysis();
-			                 calc.Push((testFormula, Error(ref analysis, ref exp), vecArray));
-		                 });
+			item =>
+			{
+				var vecArray = item.ToArray();
+				var testFormula = formula.SumFormula(imps, vecArray);
+				var analysis = testFormula.ElementalAnalysis();
+				calc.Push((testFormula, Error(ref analysis, ref exp), vecArray));
+			});
 
 		return calc.OrderBy(s => s.error).First().data;
 	}
@@ -104,12 +105,12 @@ public static class ElementalAnalysisUtil
 	/// <returns></returns>
 	public static string SumFormula(this string formula, IEnumerable<Impurity> impurities, IEnumerable<double> vec)
 	{
-		var testFormula = formula;
+		var testFormula = new StringBuilder(formula);
 		var imps = impurities.ToArray();
 		var vecArr = vec.ToArray();
 		for (var i = 0; i < vecArr.Length; i++)
-			testFormula += imps[i].Formula.CountElements().Factor(vecArr[i]).Parse();
+			testFormula.Append(imps[i].Formula.CountElements().Factor(vecArr[i]).Parse());
 
-		return testFormula;
+		return testFormula.ToString();
 	}
 }

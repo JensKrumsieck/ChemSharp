@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ChemSharp.Molecules.DataProviders;
+﻿using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Formats;
 using FluentAssertions;
 using Xunit;
@@ -9,13 +8,14 @@ namespace ChemSharp.Molecules.Tests.Formats;
 public class PDBFormatTests
 {
 	[Theory]
-	[InlineData("files/oriluy.pdb", 130)]
-	[InlineData("files/2spl.pdb", 1437)]
-	[InlineData("files/1hv4.pdb", 9288)]
-	public void PDBFormat_CanReadPlausibleData(string file, int count)
+	[InlineData("files/oriluy.pdb", 130, 151)]
+	[InlineData("files/2spl.pdb", 1437, 1314)]
+	[InlineData("files/1hv4.pdb", 9288, 9562)]
+	public void PDBFormat_CanReadPlausibleData(string file, int atomsCount, int bondsCount)
 	{
 		var mol = PDBFormat.Read(file);
-		mol.Atoms.Count.Should().Be(count);
+		mol.Atoms.Count.Should().Be(atomsCount);
+		mol.Bonds.Count.Should().Be(bondsCount);
 	}
 
 	[Theory]
@@ -26,7 +26,8 @@ public class PDBFormatTests
 	{
 		var mol = PDBFormat.Read(file);
 		var old = new PDBDataProvider(file);
-		var oldAtoms = old.Atoms.ToList();
-		oldAtoms.ToList().Should().BeEquivalentTo(mol.Atoms);
+		var oldMol = new Molecule(old);
+		oldMol.Atoms.Should().BeEquivalentTo(mol.Atoms);
+		oldMol.Bonds.Should().BeEquivalentTo(mol.Bonds);
 	}
 }

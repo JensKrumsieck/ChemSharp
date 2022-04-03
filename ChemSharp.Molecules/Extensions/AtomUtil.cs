@@ -25,7 +25,7 @@ public static class AtomUtil
 		foreach (var g in groups)
 		{
 			var count = g.Count();
-			formula.Append($"{g.Key}{(count != 1 ? count.ToString() : "")}");
+			formula.Append($"{g.Key}{(count != 1 ? count.ToString() : string.Empty)}");
 		}
 
 		return formula.ToString();

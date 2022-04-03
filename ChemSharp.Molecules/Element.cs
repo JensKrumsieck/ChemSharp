@@ -18,7 +18,7 @@ public class Element
 	/// </summary>
 	public static readonly Element Dummy = new() {Symbol = "DA", Name = "Dummy Atom"};
 
-	[JsonIgnore] private string _color;
+	[JsonIgnore] private string? _color;
 
 	static Element()
 	{

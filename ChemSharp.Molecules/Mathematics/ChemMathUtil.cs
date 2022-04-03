@@ -2,7 +2,6 @@
 using ChemSharp.Mathematics;
 
 #else
-using System;
 #endif
 
 namespace ChemSharp.Molecules.Mathematics;
@@ -25,7 +24,7 @@ public static class ChemMathUtil
 	public static bool BondToByCovalentRadii(this Atom atom, Atom test, float delta = Delta)
 	{
 		if (!atom.CovalentRadius.HasValue || !test.CovalentRadius.HasValue) return false;
-		return atom.DistanceToSquared(test) <
-		       MathF.Pow((atom.CovalentRadius.Value + (float)test.CovalentRadius.Value + delta) / 100f, 2);
+		var check = (atom.CovalentRadius.Value + (float)test.CovalentRadius.Value + delta) / 100f;
+		return atom.DistanceToSquared(test) < check * check;
 	}
 }

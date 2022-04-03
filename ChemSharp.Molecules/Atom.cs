@@ -47,6 +47,13 @@ public class Atom : Element, IEquatable<Atom>
 	/// <returns></returns>
 	public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
 
+	/// <summary>
+	///     Returns squared Distance of two atoms
+	/// </summary>
+	/// <param name="test"></param>
+	/// <returns></returns>
+	public float DistanceToSquared(Atom test) => Vector3.DistanceSquared(Location, test.Location);
+
 	public override string ToString() => $"{Title}: {Location}";
 
 	/// <summary>

@@ -158,22 +158,22 @@ public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 		return matched;
 	}
 
-	/// <summary>
-	///     returns neighbors of specific atom
-	/// </summary>
-	/// <param name="a"></param>
-	/// <returns></returns>
-	public List<Atom> Neighbors(Atom a)
-	{
-		//build cache at first call
-		if (CacheNeighborList &&
-		    (_cachedNeighbors == null || _cachedNeighbors.Count != Atoms.Count))
-			_cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
-
-		return CacheNeighborList ? _cachedNeighbors[a] : AtomUtil.Neighbors(a, this).ToList();
-	}
-
-	public void RebuildCache() => _cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
+	// /// <summary>
+	// ///     returns neighbors of specific atom
+	// /// </summary>
+	// /// <param name="a"></param>
+	// /// <returns></returns>
+	// public List<Atom> Neighbors(Atom a)
+	// {
+	// 	//build cache at first call
+	// 	if (CacheNeighborList &&
+	// 	    (_cachedNeighbors == null || _cachedNeighbors.Count != Atoms.Count))
+	// 		_cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
+	//
+	// 	return CacheNeighborList ? _cachedNeighbors[a] : AtomUtil.Neighbors(a, this).ToList();
+	// }
+	//
+	// public void RebuildCache() => _cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
 
 	/// <summary>
 	///     returns nonmetal neighbors of specific atom

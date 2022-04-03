@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
+﻿#if NETSTANDARD2_0
 using ChemSharp.Mathematics;
+
+#else
+using System;
+#endif
 
 namespace ChemSharp.Molecules.Mathematics;
 
@@ -11,17 +12,7 @@ public static class ChemMathUtil
 	/// <summary>
 	///     See BondTo Method
 	/// </summary>
-	public const float Delta = 25f;
-
-	/// <summary>
-	///     Centers the molecule at point
-	/// </summary>
-	/// <param name="atoms"></param>
-	public static Func<Vector3, Vector3> CenterMapping(this IEnumerable<Atom> atoms)
-	{
-		var centroid = MathV.Centroid(atoms.Select(s => s.Location));
-		return s => s - centroid;
-	}
+	private const float Delta = 25f;
 
 	/// <summary>
 	///     Tests if Atom is Bond to another based on distance!
@@ -33,8 +24,8 @@ public static class ChemMathUtil
 	/// <returns></returns>
 	public static bool BondToByCovalentRadii(this Atom atom, Atom test, float delta = Delta)
 	{
-		if (atom?.CovalentRadius is null || test?.CovalentRadius is null) return false;
-
-		return atom.DistanceTo(test) < (atom.CovalentRadius + (float)test.CovalentRadius + delta) / 100f;
+		if (!atom.CovalentRadius.HasValue || !test.CovalentRadius.HasValue) return false;
+		return atom.DistanceToSquared(test) <
+		       MathF.Pow((atom.CovalentRadius.Value + (float)test.CovalentRadius.Value + delta) / 100f, 2);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ChemSharp.Molecules.Extensions;
 
@@ -20,14 +21,14 @@ public static class AtomUtil
 	public static string SumFormula(this IEnumerable<Atom> atoms)
 	{
 		var groups = atoms.GroupBy(s => s.Symbol).OrderBy(s => s.Key);
-		var formula = "";
+		var formula = new StringBuilder();
 		foreach (var g in groups)
 		{
 			var count = g.Count();
-			formula += $"{g.Key}{(count != 1 ? count.ToString() : "")}";
+			formula.Append($"{g.Key}{(count != 1 ? count.ToString() : "")}");
 		}
 
-		return formula;
+		return formula.ToString();
 	}
 
 	/// <summary>

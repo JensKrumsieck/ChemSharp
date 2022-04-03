@@ -14,20 +14,19 @@ public class PDBFormatTests
 	[InlineData("files/1hv4.pdb", 9288)]
 	public void PDBFormat_CanReadPlausibleData(string file, int count)
 	{
-		var atoms = PDBFormat.Read(file);
-		atoms.Count.Should().Be(count);
+		var mol = PDBFormat.Read(file);
+		mol.Atoms.Count.Should().Be(count);
 	}
 
 	[Theory]
-	[InlineData("files/oriluy.pdb", 130)]
-	[InlineData("files/2spl.pdb", 1437)]
-	[InlineData("files/1hv4.pdb", 9288)]
-	public void PDBFormat_MatchesLegacyImplementation(string file, int count)
+	[InlineData("files/oriluy.pdb")]
+	[InlineData("files/2spl.pdb")]
+	[InlineData("files/1hv4.pdb")]
+	public void PDBFormat_MatchesLegacyImplementation(string file)
 	{
-		var atoms = PDBFormat.Read(file);
+		var mol = PDBFormat.Read(file);
 		var old = new PDBDataProvider(file);
-		old.ReadData();
 		var oldAtoms = old.Atoms.ToList();
-		oldAtoms.ToList().Should().BeEquivalentTo(atoms);
+		oldAtoms.ToList().Should().BeEquivalentTo(mol.Atoms);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using ChemSharp.Molecules;
 using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Formats;
 
@@ -14,15 +15,12 @@ public class PdbBenchmarks
 	[Benchmark(Baseline = true)]
 	public void DataProviderMethod()
 	{
-		var prov = new PDBDataProvider(file);
-		prov.ReadData();
-		var atoms = prov.Atoms.ToList();
-		//molecule would also allocate a list
+		var mol = new Molecule(new PDBDataProvider(file));
 	}
 
 	[Benchmark]
 	public void FormatMethod()
 	{
-		var atoms = PDBFormat.Read(file);
+		var mol = PDBFormat.Read(file);
 	}
 }

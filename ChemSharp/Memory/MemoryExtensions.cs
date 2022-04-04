@@ -1,26 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Buffers;
 using System.Globalization;
 
 namespace ChemSharp.Memory;
 
 public static class MemoryExtensions
 {
-	public static SpanSplitEnumerator Split(this ReadOnlySpan<char> input, char separator) => new(input, separator);
-
-	public static SpanSplitEnumerator Split(this ReadOnlySpan<char> input, ReadOnlySpan<char> separators) =>
-		new(input, separators);
-
-	public static List<Range> ToList(this SpanSplitEnumerator enumerator, bool ignoreEmpty = false)
+	public static Span<(int, int)> WhiteSpaceSplit(this ReadOnlySpan<char> input)
 	{
-		var list = new List<Range>();
-		foreach (var element in enumerator)
+		var col = ArrayPool<(int, int)>.Shared.Rent(input.Length);
+		var pos = 0;
+		var curStart = 0;
+		var curEnd = 0;
+		//step through span
+		for (var i = 0; i < input.Length; i++)
 		{
-			if (element.End.Value == element.Start.Value && ignoreEmpty) continue;
-			list.Add(element);
+			var c = input[i];
+			if (!char.IsWhiteSpace(c))
+				curEnd = i;
+			else
+			{
+				if (curEnd - curStart != 0)
+				{
+					col[pos] = (curStart + 1, curEnd - curStart);
+					pos++;
+				}
+
+				curStart = curEnd = i;
+			}
 		}
 
-		return list;
+		var firstZero = Array.IndexOf(col, Array.Find(col, a => a.Item1 - a.Item2 == 0));
+		var segment = col.AsSpan(0, firstZero);
+		return segment;
 	}
 
 	/// <summary>

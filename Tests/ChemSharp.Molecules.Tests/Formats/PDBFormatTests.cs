@@ -1,4 +1,5 @@
-﻿using ChemSharp.Molecules.DataProviders;
+﻿using System.Linq;
+using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Formats;
 using FluentAssertions;
 using Xunit;
@@ -15,6 +16,7 @@ public class PDBFormatTests
 	{
 		var mol = PDBFormat.Read(file);
 		mol.Atoms.Count.Should().Be(atomsCount);
+		mol.Atoms.Count(s => s.Symbol == "DA").Should().Be(0);
 		mol.Bonds.Count.Should().Be(bondsCount);
 	}
 

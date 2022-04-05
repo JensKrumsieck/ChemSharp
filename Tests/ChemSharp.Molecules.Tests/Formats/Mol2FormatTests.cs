@@ -1,4 +1,5 @@
-﻿using ChemSharp.Molecules.Formats;
+﻿using System.Linq;
+using ChemSharp.Molecules.Formats;
 using FluentAssertions;
 using Xunit;
 
@@ -12,6 +13,7 @@ public class Mol2FormatTests
 	{
 		var mol = Mol2Format.Read(file);
 		mol.Atoms.Count.Should().Be(atomsCount);
+		mol.Atoms.Count(s => s.Symbol == "DA").Should().Be(0);
 		mol.Bonds.Count.Should().Be(bondsCount);
 	}
 }

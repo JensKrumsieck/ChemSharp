@@ -43,6 +43,19 @@ public static class MemoryExtensions
 	}
 
 	/// <summary>
+	///     Returns position of first numeric character
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static int FirstNumeric(this ReadOnlySpan<char> input)
+	{
+		for (var i = 0; i < input.Length; i++)
+			if (char.IsNumber(input[i]))
+				return i;
+		return -1;
+	}
+
+	/// <summary>
 	///     Matches the point (.) character and returns first part of ROS
 	/// </summary>
 	/// <param name="input"></param>

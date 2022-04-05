@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ChemSharp.Memory;
 using ChemSharp.Molecules.DataProviders;
+using static System.IO.Path;
 
 namespace ChemSharp.Molecules.Formats;
 
@@ -27,11 +28,14 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var type = line.Slice(cols[5].start, cols[5].length);
 		var residue = line.Slice(cols[7].start, cols[7].length);
 		type = type.PointSplit();
-		//string cast necessary?
+		//most of the time type contains the actual type, so casting to string is ok!
 		var typeStr = type.ToString();
+		var pos = id.AsSpan().FirstNumeric();
 		var symbol = ElementDataProvider.ColorData.ContainsKey(typeStr)
-			? RegexUtil.AtomLabel.Match(typeStr).Value
-			: RegexUtil.AtomLabel.Match(id).Value;
+			? typeStr
+			: pos != -1
+				? id[..pos]
+				: id;
 		return new Atom(symbol, x, y, z) {Title = id, Residue = residue.ToString()};
 	}
 
@@ -44,9 +48,13 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var cols = line.WhiteSpaceSplit();
 		var a1 = line.Slice(cols[1].start, cols[1].length).ToInt() - 1;
 		var a2 = line.Slice(cols[2].start, cols[2].length).ToInt() - 1;
-		var type = line.Slice(cols[3].start, cols[3].length).ToString();
-		var aromatic = type == "ar";
+		var type = line.Slice(cols[3].start, cols[3].length);
+		var aromatic = type == "ar".AsSpan();
+#if NETSTANDARD2_0
+		var suc = int.TryParse(type.ToString(), out var order);
+#else
 		var suc = int.TryParse(type, out var order);
+#endif
 		return new Bond(Atoms[a1], Atoms[a2]) {IsAromatic = aromatic, Order = suc ? order : 0};
 	}
 
@@ -84,6 +92,6 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	{
 		var format = new Mol2Format(path);
 		format.ReadInternal();
-		return new Molecule(format.Atoms, format.Bonds);
+		return new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 }

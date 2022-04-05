@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ChemSharp.Extensions;
 using ChemSharp.Memory;
+using static System.IO.Path;
 
 namespace ChemSharp.Molecules.Formats;
 
@@ -57,7 +58,7 @@ public class PDBFormat : FileFormat, IAtomFileFormat
 	{
 		var format = new PDBFormat(path);
 		format.ReadInternal();
-		return new Molecule(format.Atoms);
+		return new Molecule(format.Atoms) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)

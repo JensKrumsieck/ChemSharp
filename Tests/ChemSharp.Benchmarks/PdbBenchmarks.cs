@@ -10,17 +10,17 @@ namespace ChemSharp.Benchmarks;
 public class PdbBenchmarks
 {
 	[Params("files/oriluy.pdb", "files/1hv4.pdb")]
-	public string file { get; set; }
-
-	[Benchmark(Baseline = true)]
-	public void DataProviderMethod()
-	{
-		var mol = new Molecule(new PDBDataProvider(file));
-	}
+	public string pdbFile { get; set; }
 
 	[Benchmark]
-	public void FormatMethod()
+	public void DataProviderMethodPdb()
 	{
-		var mol = PDBFormat.Read(file);
+		var mol = new Molecule(new PDBDataProvider(pdbFile));
+	}
+
+	[Benchmark(Baseline = true)]
+	public void FormatMethodPdb()
+	{
+		var mol = PDBFormat.Read(pdbFile);
 	}
 }

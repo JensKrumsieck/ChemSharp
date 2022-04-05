@@ -34,6 +34,11 @@ public class Atom : Element, IEquatable<Atom>
 		set => _title = value;
 	}
 
+	/// <summary>
+	///     Gets or sets the Residue Type
+	/// </summary>
+	public string Residue { get; set; }
+
 	public bool Equals(Atom? other) =>
 		other is not null &&
 		(ReferenceEquals(this, other)

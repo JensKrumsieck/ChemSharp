@@ -25,13 +25,14 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var y = line.Slice(cols[3].start, cols[3].length).ToSingle();
 		var z = line.Slice(cols[4].start, cols[4].length).ToSingle();
 		var type = line.Slice(cols[5].start, cols[5].length);
+		var residue = line.Slice(cols[7].start, cols[7].length);
 		type = type.PointSplit();
 		//string cast necessary?
 		var typeStr = type.ToString();
 		var symbol = ElementDataProvider.ColorData.ContainsKey(typeStr)
 			? RegexUtil.AtomLabel.Match(typeStr).Value
 			: RegexUtil.AtomLabel.Match(id).Value;
-		return new Atom(symbol, x, y, z) {Title = id};
+		return new Atom(symbol, x, y, z) {Title = id, Residue = residue.ToString()};
 	}
 
 	public List<Bond> Bonds { get; } = new();

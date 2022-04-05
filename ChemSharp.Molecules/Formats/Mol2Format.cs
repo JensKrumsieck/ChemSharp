@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using ChemSharp.Memory;
+using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules.Formats;
 
@@ -20,20 +20,34 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	public Atom ParseAtom(ReadOnlySpan<char> line)
 	{
 		var cols = line.WhiteSpaceSplit();
-		var id = line.Slice(cols[1].Item1, cols[1].Item2);
-		var x = line.Slice(cols[2].Item1, cols[2].Item2).ToSingle();
-		var y = line.Slice(cols[3].Item1, cols[3].Item2).ToSingle();
-		var z = line.Slice(cols[4].Item1, cols[4].Item2).ToSingle();
-		var loc = new Vector3(x, y, z);
-		var type = line.Slice(cols[5].Item1, cols[5].Item2);
-		var pointLoc = type.IndexOf('.');
-		type = pointLoc != -1 ? type[..pointLoc] : type;
-		return null!;
+		var id = line.Slice(cols[1].start, cols[1].length).ToString();
+		var x = line.Slice(cols[2].start, cols[2].length).ToSingle();
+		var y = line.Slice(cols[3].start, cols[3].length).ToSingle();
+		var z = line.Slice(cols[4].start, cols[4].length).ToSingle();
+		var type = line.Slice(cols[5].start, cols[5].length);
+		type = type.PointSplit();
+		//string cast necessary?
+		var typeStr = type.ToString();
+		var symbol = ElementDataProvider.ColorData.ContainsKey(typeStr)
+			? RegexUtil.AtomLabel.Match(typeStr).Value
+			: RegexUtil.AtomLabel.Match(id).Value;
+		return new Atom(symbol, x, y, z) {Title = id};
 	}
 
-
 	public List<Bond> Bonds { get; } = new();
-	public Bond ParseBond(ReadOnlySpan<char> line) => throw new NotImplementedException();
+
+
+	public Bond ParseBond(ReadOnlySpan<char> line)
+	{
+		//subtract 1 as mol2 starts counting at 1
+		var cols = line.WhiteSpaceSplit();
+		var a1 = line.Slice(cols[1].start, cols[1].length).ToInt() - 1;
+		var a2 = line.Slice(cols[2].start, cols[2].length).ToInt() - 1;
+		var type = line.Slice(cols[3].start, cols[3].length).ToString();
+		var aromatic = type == "ar";
+		var suc = int.TryParse(type, out var order);
+		return new Bond(Atoms[a1], Atoms[a2]) {IsAromatic = aromatic, Order = suc ? order : 0};
+	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)
 	{
@@ -60,8 +74,8 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		else
 		{
 			//no block beginning, parse if allowed
-			if (_pickingAtoms) ParseAtom(line);
-			if (_pickingBonds) ParseBond(line);
+			if (_pickingAtoms) Atoms.Add(ParseAtom(line));
+			if (_pickingBonds) Bonds.Add(ParseBond(line));
 		}
 	}
 
@@ -69,6 +83,6 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	{
 		var format = new Mol2Format(path);
 		format.ReadInternal();
-		return new Molecule(format.Atoms);
+		return new Molecule(format.Atoms, format.Bonds);
 	}
 }

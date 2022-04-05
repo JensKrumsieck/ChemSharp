@@ -16,7 +16,7 @@ public class Element
 	/// <summary>
 	///     Dummy Element
 	/// </summary>
-	public static readonly Element Dummy = new() {Symbol = "DA", Name = "Dummy Atom"};
+	private static readonly Element Dummy = new() {Symbol = "DA", Name = "Dummy Atom"};
 
 	[JsonIgnore] private string? _color;
 
@@ -94,7 +94,7 @@ public class Element
 	public bool IsMetalloid => new[] {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"}.Contains(Symbol);
 
 	[JsonIgnore]
-	public bool IsNonMetal => new[] {"H", "C", "N", "O", "P", "S", "Se"}.Contains(Symbol) || Group == 18 || Group == 17;
+	public bool IsNonMetal => new[] {"H", "C", "N", "O", "P", "S", "Se"}.Contains(Symbol) || Group is 18 or 17;
 
 	public string Name { get; set; }
 	public string Symbol { get; set; }

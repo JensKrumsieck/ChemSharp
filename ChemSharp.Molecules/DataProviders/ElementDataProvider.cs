@@ -17,9 +17,8 @@ public static class ElementDataProvider
 	/// </summary>
 	public const string ApiSource = "ChemSharp.Resources.elements.json";
 
-	private static ReadOnlyDictionary<string, string> _colorData;
-
-	private static Element[] _elementData;
+	private static ReadOnlyDictionary<string, string>? _colorData;
+	private static Element[]? _elementData;
 
 	static ElementDataProvider()
 	{
@@ -35,8 +34,7 @@ public static class ElementDataProvider
 		get
 		{
 			if (_colorData == null) EnsureColorData();
-
-			return _colorData;
+			return _colorData!;
 		}
 		private set => _colorData = value;
 	}
@@ -49,8 +47,7 @@ public static class ElementDataProvider
 		get
 		{
 			if (_elementData == null) EnsureApiData();
-
-			return _elementData;
+			return _elementData!;
 		}
 		private set => _elementData = value;
 	}
@@ -74,10 +71,10 @@ public static class ElementDataProvider
 	/// <returns></returns>
 	public static void EnsureApiData()
 	{
-		//Read Data from https://github.com/JensKrumsieck/periodic-table 
+		//Read Data from https://github.com/JensKrumsieck/periodic-table
 		//fetched from http://en.wikipedia.org
 		var raw = ResourceUtil.ReadResourceString(ApiSource);
-		var data = JsonSerializer.Deserialize<Element[]>(raw);
+		var data = JsonSerializer.Deserialize<Element[]>(raw)!;
 		ElementData = data;
 	}
 }

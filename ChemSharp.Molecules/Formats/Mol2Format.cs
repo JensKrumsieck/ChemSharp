@@ -49,13 +49,13 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var a1 = line.Slice(cols[1].start, cols[1].length).ToInt() - 1;
 		var a2 = line.Slice(cols[2].start, cols[2].length).ToInt() - 1;
 		var type = line.Slice(cols[3].start, cols[3].length);
-		var aromatic = type == "ar".AsSpan();
+		var aromatic = type.StartsWith("ar".AsSpan());
 #if NETSTANDARD2_0
 		var suc = int.TryParse(type.ToString(), out var order);
 #else
 		var suc = int.TryParse(type, out var order);
 #endif
-		return new Bond(Atoms[a1], Atoms[a2]) {IsAromatic = aromatic, Order = suc ? order : 0};
+		return new Bond(Atoms[a1], Atoms[a2]) {IsAromatic = aromatic, Order = suc ? order : 1};
 	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)

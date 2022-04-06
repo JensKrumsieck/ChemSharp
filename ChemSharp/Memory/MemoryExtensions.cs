@@ -56,6 +56,17 @@ public static class MemoryExtensions
 	}
 
 	/// <summary>
+	///     Removes Uncertainty appended to line in commas e.g. 8.1707(5) returns 8.1707
+	/// </summary>
+	/// <param name="input"></param>
+	/// <returns></returns>
+	public static ReadOnlySpan<char> RemoveUncertainty(this ReadOnlySpan<char> input)
+	{
+		var pos = input.IndexOf('(');
+		return input[..pos];
+	}
+
+	/// <summary>
 	///     Matches the point (.) character and returns first part of ROS
 	/// </summary>
 	/// <param name="input"></param>

@@ -8,37 +8,22 @@ public static class MemoryExtensions
 {
 	public static Span<(int start, int length)> WhiteSpaceSplit(this ReadOnlySpan<char> input)
 	{
-		var col = ArrayPool<(int, int)>.Shared.Rent(input.Length);
+		if (input.Length == 0) return Span<(int start, int length)>.Empty;
+		var array = ArrayPool<(int, int)>.Shared.Rent(input.Length);
+		Array.Clear(array, 0, input.Length); //zero array
 		var pos = 0;
-		var curStart = 0;
-		var curEnd = 0;
-		//step through span
+		var start = 0;
 		for (var i = 0; i < input.Length; i++)
-		{
-			var c = input[i];
-			if (!char.IsWhiteSpace(c))
+			if (i == input.Length - 1 || char.IsWhiteSpace(input[i]))
 			{
-				curEnd = i;
-				//if last character is non whitespace
-				if (i == input.Length - 1)
-					col[pos] = (curStart + 1, curEnd - curStart);
+				array[pos] = (start, i - start);
+				pos++;
+				start = i + 1;
 			}
-			else
-			{
-				if (curEnd - curStart != 0)
-				{
-					col[pos] = (curStart + 1, curEnd - curStart);
-					pos++;
-				}
 
-				curStart = curEnd = i;
-			}
-		}
-
-		//find first element with zero length
-		var firstZero = Array.IndexOf(col, Array.Find(col, a => a.Item2 == 0));
-		var segment = col.AsSpan(0, firstZero);
-		ArrayPool<(int, int)>.Shared.Return(col);
+		var firstZero = Array.IndexOf(array, Array.Find(array, a => a.Item2 == 0));
+		var segment = array.AsSpan(0, firstZero);
+		ArrayPool<(int, int)>.Shared.Return(array);
 		return segment;
 	}
 
@@ -63,7 +48,7 @@ public static class MemoryExtensions
 	public static ReadOnlySpan<char> RemoveUncertainty(this ReadOnlySpan<char> input)
 	{
 		var pos = input.IndexOf('(');
-		return input[..pos];
+		return pos != -1 ? input[..pos] : input;
 	}
 
 	/// <summary>

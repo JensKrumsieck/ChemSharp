@@ -13,7 +13,7 @@ public class Atom : Element, IEquatable<Atom>
 	/// <summary>
 	///     Allows to tag any string related information to atom
 	/// </summary>
-	public string? Tag;
+	[Obsolete("Will be removed in 1.2.0")] public string? Tag;
 
 	/// <inheritdoc />
 	public Atom(string symbol) : base(symbol) { }

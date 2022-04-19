@@ -62,29 +62,32 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	{
 		//@<TRIPOS> marks block beginning
 		if (line.StartsWith(Tripos.AsSpan()))
-		{
-			//determine whether to check for atoms or bonds
-			if (line.StartsWith(AtomsBlock.AsSpan()))
-			{
-				_pickingAtoms = true;
-				_pickingBonds = false;
-			}
-			else if (line.StartsWith(BondsBlock.AsSpan()))
-			{
-				_pickingBonds = true;
-				_pickingAtoms = false;
-			}
-			else
-			{
-				_pickingAtoms = false;
-				_pickingBonds = false;
-			}
-		}
+			SetPickingIndicator(line);
 		else
 		{
 			//no block beginning, parse if allowed
 			if (_pickingAtoms) Atoms.Add(ParseAtom(line));
 			if (_pickingBonds) Bonds.Add(ParseBond(line));
+		}
+	}
+
+	private void SetPickingIndicator(ReadOnlySpan<char> line)
+	{
+		//determine whether to check for atoms or bonds
+		if (line.StartsWith(AtomsBlock.AsSpan()))
+		{
+			_pickingAtoms = true;
+			_pickingBonds = false;
+		}
+		else if (line.StartsWith(BondsBlock.AsSpan()))
+		{
+			_pickingBonds = true;
+			_pickingAtoms = false;
+		}
+		else
+		{
+			_pickingAtoms = false;
+			_pickingBonds = false;
 		}
 	}
 

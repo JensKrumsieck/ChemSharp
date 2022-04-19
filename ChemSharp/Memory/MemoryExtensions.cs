@@ -11,18 +11,14 @@ public static class MemoryExtensions
 		if (input.Length == 0) return Span<(int start, int length)>.Empty;
 		var array = ArrayPool<(int, int)>.Shared.Rent(input.Length);
 		Array.Clear(array, 0, input.Length); //zero array
-		var pos = 0;
-		var start = 0;
-		for (var i = 0; i < input.Length; i++)
-			if (i == input.Length - 1 || char.IsWhiteSpace(input[i]))
-			{
-				array[pos] = (start, i - start);
-				pos++;
-				start = i + 1;
-			}
+		var i = 0;
+		foreach (var (start, length) in new SpanSplitEnumerator(input, " \t".AsSpan()))
+		{
+			array[i] = (start, length);
+			i++;
+		}
 
-		var firstZero = Array.IndexOf(array, Array.Find(array, a => a.Item2 == 0));
-		var segment = array.AsSpan(0, firstZero);
+		var segment = Array.FindAll(array, tuple => tuple.Item2 > 0).AsSpan();
 		ArrayPool<(int, int)>.Shared.Return(array);
 		return segment;
 	}

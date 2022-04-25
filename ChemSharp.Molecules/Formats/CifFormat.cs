@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using ChemSharp.Mathematics;
 using ChemSharp.Memory;
+using ChemSharp.Molecules.Extensions;
 using static System.IO.Path;
 
 
@@ -41,14 +42,22 @@ public class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 	private bool _pickingAtoms;
 	private bool _pickingBonds;
 
-
 	public CifFormat(string path) : base(path) { }
 
 	public List<Atom> Atoms { get; } = new();
 
-	public Atom ParseAtom(ReadOnlySpan<char> line)
+	public Atom? ParseAtom(ReadOnlySpan<char> line)
 	{
+		//filter disorder
 		var cols = line.WhiteSpaceSplit();
+		var disorder = 0;
+		if (_colDisorder != 0 && _colDisorder < cols.Length)
+#if NETSTANDARD2_0
+			int.TryParse(line.Slice(cols[_colDisorder].start, cols[_colDisorder].length).ToString(), out disorder);
+#else
+			int.TryParse(line.Slice(cols[_colDisorder].start, cols[_colDisorder].length).ToString(), out disorder);
+#endif
+		if (disorder >= 2) return null;
 		//parse atom
 		var label = line.Slice(cols[_colLabel].start, cols[_colLabel].length);
 		var symbol = line.Slice(cols[_colSymbol].start, cols[_colSymbol].length);
@@ -63,25 +72,14 @@ public class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 
 	public List<Bond> Bonds { get; } = new();
 
-	public Bond ParseBond(ReadOnlySpan<char> line) => null!;
-
-	/// <summary>
-	///     Add Nullable helper method to filter disordering
-	/// </summary>
-	/// <param name="line"></param>
-	/// <returns></returns>
-	private Atom? ParseAtomInternal(ReadOnlySpan<char> line)
+	public Bond? ParseBond(ReadOnlySpan<char> line)
 	{
-		//filter disorder
 		var cols = line.WhiteSpaceSplit();
-		var disorder = 0;
-		if (_colDisorder != 0 && _colDisorder < cols.Length)
-#if NETSTANDARD2_0
-			int.TryParse(line.Slice(cols[_colDisorder].start, cols[_colDisorder].length).ToString(), out disorder);
-#else
-			int.TryParse(line.Slice(cols[_colDisorder].start, cols[_colDisorder].length).ToString(), out disorder);
-#endif
-		return disorder >= 2 ? null : ParseAtom(line);
+		var strAtom1 = line.Slice(cols[0].start, cols[0].length).ToString();
+		var strAtom2 = line.Slice(cols[1].start, cols[1].length).ToString();
+		var (a1, a2) = Atoms.FindPairwise(strAtom1, strAtom2);
+		if (a1 == null || a2 == null) return null!;
+		return new Bond(a1, a2);
 	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)
@@ -97,11 +95,15 @@ public class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		//no block beginning, parse if allowed
 		if (_pickingAtoms && !line.StartsWith("_".AsSpan()))
 		{
-			var atom = ParseAtomInternal(line);
+			var atom = ParseAtom(line);
 			if (atom != null) Atoms.Add(atom);
 		}
 		else if (_pickingAtoms) ExtractHeader(line);
-		else if (_pickingBonds) Bonds.Add(ParseBond(line));
+		else if (_pickingBonds && !line.StartsWith("_".AsSpan()))
+		{
+			var bond = ParseBond(line);
+			if (bond != null) Bonds.Add(bond);
+		}
 	}
 
 	private void SetPickingIndicator(ReadOnlySpan<char> line)

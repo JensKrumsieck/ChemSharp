@@ -78,7 +78,5 @@ public class Atom : Element, IEquatable<Atom>
 		                 && (ReferenceEquals(a, b) || a.Equals(b));
 
 	public static bool operator !=(Atom? a, Atom? b) =>
-		a is null || b is null
-		          || !ReferenceEquals(a, b)
-		          && !a.Equals(b);
+		!(a == b);
 }

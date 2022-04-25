@@ -34,6 +34,13 @@ public class AtomTests
 	}
 
 	[Fact]
+	public void Atom_ShouldBeNotNullIsFalse()
+	{
+		Atom? atom1 = null!;
+		Assert.False(atom1 != null);
+	}
+
+	[Fact]
 	public void Atom_ShouldBeNull()
 	{
 		Atom atom1 = null!;

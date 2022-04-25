@@ -88,4 +88,21 @@ public static class AtomUtil
 
 	public static Dictionary<Atom, List<Atom>> BuildNeighborCache(IEnumerable<Atom> atoms, IEnumerable<Bond> bonds) =>
 		atoms.ToDictionary(a => a, a => Neighbors(a, bonds).ToList());
+
+	/// <summary>
+	///     Finds pair of atoms to prevent double looping
+	/// </summary>
+	/// <returns></returns>
+	public static (Atom? a1, Atom? a2) FindPairwise(this IList<Atom> atoms, string a1, string a2)
+	{
+		Atom? atom1 = null;
+		Atom? atom2 = null;
+		for (var i = 0; i < atoms.Count; i++)
+		{
+			if (atoms[i].Title == a1) atom1 = atoms[i];
+			if (atoms[i].Title == a2) atom2 = atoms[i];
+		}
+
+		return (atom1, atom2);
+	}
 }

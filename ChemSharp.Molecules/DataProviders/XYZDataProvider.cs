@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using ChemSharp.Files;
 
 namespace ChemSharp.Molecules.DataProviders;
 
+[Obsolete("Use Format instead! Will be removed in 1.2.0")]
 public class XYZDataProvider : AbstractAtomDataProvider
 {
 	/// <summary>

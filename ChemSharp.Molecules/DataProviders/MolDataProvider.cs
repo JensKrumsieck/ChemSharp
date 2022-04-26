@@ -8,6 +8,7 @@ using ChemSharp.Files;
 
 namespace ChemSharp.Molecules.DataProviders;
 
+[Obsolete("Use Format instead! Will be removed in 1.2.0")]
 public class MolDataProvider : AbstractAtomDataProvider, IBondDataProvider
 {
 	/// <summary>

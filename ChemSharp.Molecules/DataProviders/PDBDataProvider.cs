@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -7,6 +8,7 @@ using ChemSharp.Files;
 
 namespace ChemSharp.Molecules.DataProviders;
 
+[Obsolete("Use Format instead! Will be removed in 1.2.0")]
 public class PDBDataProvider : AbstractAtomDataProvider
 {
 	public static readonly Dictionary<string, string> AminoAcids = new()
@@ -68,10 +70,10 @@ public class PDBDataProvider : AbstractAtomDataProvider
 		var title = cols[2];
 		var tag = cols[3];
 		var loc = new Vector3(
-			cols[locXIndex].ToSingle(),
-			cols[locXIndex + 1].ToSingle(),
-			cols[locXIndex + 2].ToSingle()
-		);
+		                      cols[locXIndex].ToSingle(),
+		                      cols[locXIndex + 1].ToSingle(),
+		                      cols[locXIndex + 2].ToSingle()
+		                     );
 		var type = cols.Last().UcFirst();
 		return new Atom(type) {Location = loc, Title = title, Tag = tag};
 	}

@@ -57,7 +57,7 @@ public class PDBFormat : FileFormat, IAtomFileFormat
 	public static Molecule Read(string path)
 	{
 		var format = new PDBFormat(path);
-		format.ReadInternal();
+		format.ReadFromFileInternal();
 		return new Molecule(format.Atoms) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 

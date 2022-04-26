@@ -8,6 +8,7 @@ using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules;
 
+[Obsolete("Use Constructor Method instead!")]
 public static class MoleculeFactory
 {
 	/// <summary>

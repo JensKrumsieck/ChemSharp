@@ -9,6 +9,7 @@ using ChemSharp.Mathematics;
 
 namespace ChemSharp.Molecules.DataProviders;
 
+[Obsolete("Use Format instead! Will be removed in 1.2.0")]
 public class CIFDataProvider : AbstractAtomDataProvider, IBondDataProvider
 {
 	/// <summary>
@@ -38,8 +39,8 @@ public class CIFDataProvider : AbstractAtomDataProvider, IBondDataProvider
 		var cellLengths = CellParameters(infoLoop.DefaultSplit(), "cell_length").ToArray();
 		var cellAngles = CellParameters(infoLoop.DefaultSplit(), "cell_angle").ToArray();
 		var conversionMatrix = FractionalCoordinates.ConversionMatrix(cellLengths[0], cellLengths[1],
-			cellLengths[2], cellAngles[0], cellAngles[1],
-			cellAngles[2]);
+		                                                              cellLengths[2], cellAngles[0], cellAngles[1],
+		                                                              cellAngles[2]);
 		Atoms = ReadAtoms(moleculeLoop, conversionMatrix).ToList();
 		Bonds = ReadBonds(bondLoop).ToList();
 	}
@@ -80,9 +81,9 @@ public class CIFDataProvider : AbstractAtomDataProvider, IBondDataProvider
 				continue;
 
 			var rawCoordinates = new Vector3(
-				raw[x].RemoveUncertainty().ToSingle(),
-				raw[y].RemoveUncertainty().ToSingle(),
-				raw[z].RemoveUncertainty().ToSingle());
+			                                 raw[x].RemoveUncertainty().ToSingle(),
+			                                 raw[y].RemoveUncertainty().ToSingle(),
+			                                 raw[z].RemoveUncertainty().ToSingle());
 			var coordinates = FractionalCoordinates.FractionalToCartesian(rawCoordinates, conversionMatrix);
 			var type = symbol != -1 ? raw[symbol] : RegexUtil.AtomLabel.Match(raw[label]).Value;
 			yield return new Atom(type) {Location = coordinates, Title = raw[label]};
@@ -124,7 +125,7 @@ public class CIFDataProvider : AbstractAtomDataProvider, IBondDataProvider
 	private static IEnumerable<float> CellParameters(IEnumerable<string> input, string param) => input
 		.Where(s => s.StartsWith($"_{param}"))
 		.Select(s =>
-			s.Split(' ')
-				.Last().RemoveUncertainty()
-				.ToSingle());
+			        s.Split(' ')
+			         .Last().RemoveUncertainty()
+			         .ToSingle());
 }

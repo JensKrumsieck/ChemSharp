@@ -94,7 +94,7 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	public static Molecule Read(string path)
 	{
 		var format = new Mol2Format(path);
-		format.ReadInternal();
+		format.ReadFromFileInternal();
 		return new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 }

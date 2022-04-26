@@ -156,7 +156,7 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 	public static Molecule Read(string path)
 	{
 		var format = new CifFormat(path);
-		format.ReadInternal();
+		format.ReadFromFileInternal();
 		var molecule = new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
 		if (format._type == CifType.mmCIF) molecule.RecalculateBonds();
 		return molecule;

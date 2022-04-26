@@ -6,7 +6,11 @@ namespace ChemSharp.Molecules.Tests.Formats;
 
 public class CifFormatTests
 {
-	[Theory, InlineData("files/cif.cif", 79, 89), InlineData("files/cif_noTrim.cif", 79, 89)]
+	[Theory,
+	 InlineData("files/cif.cif", 79, 89),
+	 InlineData("files/cif_noTrim.cif", 79, 89),
+	 InlineData("files/mmcif.cif", 1291, 1251),
+	 InlineData("files/ligand.cif", 44, 46)]
 	public void CifFormat_CanReadPlausibleData(string file, int atomsCount, int bondsCount)
 	{
 		var mol = CifFormat.Read(file);

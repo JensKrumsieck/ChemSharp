@@ -17,4 +17,12 @@ public class MolFormatTests
 		mol.Atoms.Count(s => s.Symbol == "DA").Should().Be(0);
 		mol.Bonds.Count.Should().Be(bondsCount);
 	}
+
+	[Fact]
+	public void MolFormat_CanReadAromatics()
+	{
+		const string file = "files/benzene_arom.mol";
+		var mol = MolFormat.Read(file);
+		mol.Bonds.Count(s => s.IsAromatic).Should().Be(6);
+	}
 }

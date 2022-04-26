@@ -37,7 +37,15 @@ public class MolFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		var iA1 = line.Slice(cols[0].start, cols[0].length).ToInt();
 		var iA2 = line.Slice(cols[1].start, cols[1].length).ToInt();
 		var order = line.Slice(cols[2].start, cols[2].length).ToInt();
-		return new Bond(Atoms[iA1 - 1], Atoms[iA2 - 1]) {Order = order};
+		var bond = new Bond(Atoms[iA1 - 1], Atoms[iA2 - 1]);
+		if (order == 4)
+		{
+			bond.IsAromatic = true;
+			order = 1;
+		}
+
+		bond.Order = order;
+		return bond;
 	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)

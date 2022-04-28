@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using ChemSharp.Memory;
 using ChemSharp.Molecules.Extensions;
-using static System.IO.Path;
-
 
 namespace ChemSharp.Molecules.Formats;
 
@@ -151,14 +149,5 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		if (_type == CifType.CCDC) ExtractHeaderCCDC(line);
 		if (_type == CifType.mmCIF) ExtractHeaderMMCIF(line);
 		if (_type == CifType.Comp) ExtractHeaderComp(line);
-	}
-
-	public static Molecule Read(string path)
-	{
-		var format = new CifFormat(path);
-		format.ReadFromFileInternal();
-		var molecule = new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
-		if (format._type == CifType.mmCIF) molecule.RecalculateBonds();
-		return molecule;
 	}
 }

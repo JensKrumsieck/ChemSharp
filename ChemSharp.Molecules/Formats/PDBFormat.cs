@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using ChemSharp.Extensions;
 using ChemSharp.Memory;
-using static System.IO.Path;
 
 namespace ChemSharp.Molecules.Formats;
 
-public class PDBFormat : FileFormat, IAtomFileFormat
+// ReSharper disable once PartialTypeWithSinglePart
+public partial class PDBFormat : FileFormat, IAtomFileFormat
 {
 	private const string Atom = "ATOM";
 	private const string HetAtom = "HETATM";
@@ -54,12 +54,12 @@ public class PDBFormat : FileFormat, IAtomFileFormat
 		};
 	}
 
-	public static Molecule Read(string path)
-	{
-		var format = new PDBFormat(path);
-		format.ReadFromFileInternal();
-		return new Molecule(format.Atoms) {Title = GetFileNameWithoutExtension(format.Path)};
-	}
+//	public static Molecule Read(string path)
+//	{
+//		var format = new PDBFormat(path);
+//		format.ReadFromFileInternal();
+//		return new Molecule(format.Atoms) {Title = GetFileNameWithoutExtension(format.Path)};
+//	}
 
 	protected override void ParseLine(ReadOnlySpan<char> line)
 	{

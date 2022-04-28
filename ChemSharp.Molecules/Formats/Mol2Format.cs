@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using ChemSharp.Memory;
 using ChemSharp.Molecules.DataProviders;
-using static System.IO.Path;
 
 namespace ChemSharp.Molecules.Formats;
 
-public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
+// ReSharper disable once PartialTypeWithSinglePart
+public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 {
 	private const string Tripos = "@<TRIPOS>";
 	private const string AtomsBlock = $"{Tripos}ATOM";
@@ -89,12 +89,5 @@ public class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 			_pickingAtoms = false;
 			_pickingBonds = false;
 		}
-	}
-
-	public static Molecule Read(string path)
-	{
-		var format = new Mol2Format(path);
-		format.ReadFromFileInternal();
-		return new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 }

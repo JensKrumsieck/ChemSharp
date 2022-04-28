@@ -13,7 +13,8 @@ using ChemSharp.Molecules.Mathematics;
 
 namespace ChemSharp.Molecules;
 
-public class Molecule : UndirectedGraph<Atom, Bond>, IExportable
+// ReSharper disable once PartialTypeWithSinglePart
+public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 {
 	/// <summary>
 	///     Provides AtomData

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChemSharp.Memory;
-using static System.IO.Path;
 
 namespace ChemSharp.Molecules.Formats;
 
-public class MolFormat : FileFormat, IAtomFileFormat, IBondFileFormat
+// ReSharper disable once PartialTypeWithSinglePart
+public partial class MolFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 {
 	private const string Version = "V2000";
 	private int _idx;
@@ -79,12 +79,5 @@ public class MolFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		_noAtoms = line.Slice(cols[0].start, cols[0].length).ToInt();
 		_noBonds = line.Slice(cols[1].start, cols[1].length).ToInt();
 		_pickingAtoms = true;
-	}
-
-	public static Molecule Read(string path)
-	{
-		var format = new MolFormat(path);
-		format.ReadFromFileInternal();
-		return new Molecule(format.Atoms, format.Bonds) {Title = GetFileNameWithoutExtension(format.Path)};
 	}
 }

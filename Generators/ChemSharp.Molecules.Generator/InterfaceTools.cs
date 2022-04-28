@@ -7,7 +7,7 @@ public static class InterfaceTools
 {
 	public static bool HasInterface(this ClassDeclarationSyntax syn, string interfaceName)
 	{
-		var basetypes = syn.BaseList.Types.Select(s => s);
+		var basetypes = syn.BaseList!.Types.Select(s => s);
 		return basetypes.Any(s => s.ToString() == interfaceName);
 	}
 

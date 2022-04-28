@@ -8,7 +8,7 @@ using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules;
 
-[Obsolete("Use Constructor Method instead!")]
+[Obsolete("Use Molecule.FromX Method instead!")]
 public static class MoleculeFactory
 {
 	/// <summary>

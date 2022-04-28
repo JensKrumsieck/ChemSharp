@@ -10,10 +10,10 @@ public static class BlazorMoleculeFactory
 	/// </summary>
 	/// <param name="file"></param>
 	/// <returns></returns>
-	public static async Task<Molecule> CreateAsync(IBrowserFile file, long maxFileSize = 8192000L)
+	public static Molecule Create(IBrowserFile file, long maxFileSize = 8192000L)
 	{
 		var extension = FileHandler.GetExtension(file.Name);
 		var stream = file.OpenReadStream(maxFileSize);
-		return await MoleculeFactory.CreateFromStreamAsync(stream, extension);
+		return Molecule.FromStream(stream, extension);
 	}
 }

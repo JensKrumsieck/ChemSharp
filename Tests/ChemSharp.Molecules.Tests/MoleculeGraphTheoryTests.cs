@@ -14,7 +14,7 @@ public class MoleculeGraphTheoryTests
 	[InlineData("files/corrole.mol")]
 	public void Molecule_DFSIsValid(string path)
 	{
-		var mol = MoleculeFactory.Create(path);
+		var mol = Molecule.FromFile(path);
 		var dfs = mol.DepthFirstSearch();
 		//every atom is detected
 		dfs.Count.Should().Be(mol.Atoms.Count);
@@ -25,7 +25,7 @@ public class MoleculeGraphTheoryTests
 	[InlineData("files/myo.mol2", 209)]
 	public void Molecule_DFSFindsOnlyConnectedAtoms(string path, int less)
 	{
-		var mol = MoleculeFactory.Create(path);
+		var mol = Molecule.FromFile(path);
 		var dfs = mol.DepthFirstSearch();
 		//every atom is detected
 		dfs.Count.Should().NotBe(mol.Atoms.Count);
@@ -37,7 +37,7 @@ public class MoleculeGraphTheoryTests
 	[InlineData("files/myo.mol2", 209)]
 	public void Molecule_BFSFindsOnlyConnectedAtoms(string path, int less)
 	{
-		var mol = MoleculeFactory.Create(path);
+		var mol = Molecule.FromFile(path);
 		var bfs = mol.BreadthFirstSearch();
 		//every atom is detected
 		bfs.Count.Should().NotBe(mol.Atoms.Count);
@@ -51,7 +51,7 @@ public class MoleculeGraphTheoryTests
 	[InlineData("files/corrole.mol")]
 	public void Molecule_BFSIsValid(string path)
 	{
-		var mol = MoleculeFactory.Create(path);
+		var mol = Molecule.FromFile(path);
 		var bfs = mol.BreadthFirstSearch();
 		//every atom is detected
 		bfs.Count.Should().Be(mol.Atoms.Count);
@@ -63,7 +63,7 @@ public class MoleculeGraphTheoryTests
 	[InlineData("files/corrole.mol", 1)]
 	public void Molecule_ConnectedFiguresIsValid(string path, int figures)
 	{
-		var mol = MoleculeFactory.Create(path);
+		var mol = Molecule.FromFile(path);
 		var cf = mol.ConnectedFigures();
 		cf.Count().Should().Be(figures);
 	}

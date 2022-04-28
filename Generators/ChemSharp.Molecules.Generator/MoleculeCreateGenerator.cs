@@ -32,7 +32,7 @@ public class MoleculeCreateGenerator : ISourceGenerator
 							return mol;
 				}
 
-				public static Molecule? ReadFile(string path) => FileHandler.GetExtension(path) switch
+				private static Molecule? ReadFile(string path) => FileHandler.GetExtension(path) switch
 				{
 		");
 		foreach (var format in formats)
@@ -46,7 +46,7 @@ public class MoleculeCreateGenerator : ISourceGenerator
 				_ => null
 				};
 
-				public static Molecule? ReadStream(Stream stream, string extension) => extension switch
+				private static Molecule? ReadStream(Stream stream, string extension) => extension switch
 				{
 		");
 		foreach (var format in formats)

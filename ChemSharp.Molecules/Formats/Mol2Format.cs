@@ -5,7 +5,6 @@ using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules.Formats;
 
-// ReSharper disable once PartialTypeWithSinglePart
 public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 {
 	private const string Tripos = "@<TRIPOS>";

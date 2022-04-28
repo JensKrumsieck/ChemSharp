@@ -5,7 +5,6 @@ using ChemSharp.Memory;
 
 namespace ChemSharp.Molecules.Formats;
 
-// ReSharper disable once PartialTypeWithSinglePart
 public partial class PDBFormat : FileFormat, IAtomFileFormat
 {
 	private const string Atom = "ATOM";

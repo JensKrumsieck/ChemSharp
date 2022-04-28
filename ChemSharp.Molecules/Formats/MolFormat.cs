@@ -4,7 +4,6 @@ using ChemSharp.Memory;
 
 namespace ChemSharp.Molecules.Formats;
 
-// ReSharper disable once PartialTypeWithSinglePart
 public partial class MolFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 {
 	private const string Version = "V2000";

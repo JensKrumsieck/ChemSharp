@@ -1,28 +1,15 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿namespace ChemSharp.Molecules.ElementalAnalysis;
 
-namespace ChemSharp.Molecules.ElementalAnalysis;
-
-/// <summary>
-///     class for impurity handling in Elemental Analysis
-/// </summary>
-public class Impurity : INotifyPropertyChanged
+public struct Impurity
 {
-	private string _formula;
+	public string Formula;
 
-	private double _lower;
+	public double Lower;
 
-	private double _step;
+	public double Step;
 
-	private double _upper;
+	public double Upper;
 
-	/// <summary>
-	///     Ctor
-	/// </summary>
-	/// <param name="formula"></param>
-	/// <param name="lower"></param>
-	/// <param name="upper"></param>
-	/// <param name="step"></param>
 	public Impurity(string formula, double lower, double upper, double step)
 	{
 		Formula = formula;
@@ -30,61 +17,4 @@ public class Impurity : INotifyPropertyChanged
 		Upper = upper;
 		Step = step;
 	}
-
-	/// <summary>
-	///     Contains Sumformula as string
-	/// </summary>
-	public string Formula
-	{
-		get => _formula;
-		set
-		{
-			_formula = value;
-			OnPropertyChanged();
-		}
-	}
-
-	/// <summary>
-	///     Contains lower calculation bounds
-	/// </summary>
-	public double Lower
-	{
-		get => _lower;
-		set
-		{
-			_lower = value;
-			OnPropertyChanged();
-		}
-	}
-
-	/// <summary>
-	///     Contains upper calculation bounds
-	/// </summary>
-	public double Upper
-	{
-		get => _upper;
-		set
-		{
-			_upper = value;
-			OnPropertyChanged();
-		}
-	}
-
-	/// <summary>
-	///     Contains step for calculation
-	/// </summary>
-	public double Step
-	{
-		get => _step;
-		set
-		{
-			_step = value;
-			OnPropertyChanged();
-		}
-	}
-
-	public event PropertyChangedEventHandler PropertyChanged;
-
-	protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

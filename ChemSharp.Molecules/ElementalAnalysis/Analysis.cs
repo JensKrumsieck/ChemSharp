@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules.ElementalAnalysis;
 
+[Obsolete("Create your own ViewModel!")]
 public sealed class Analysis
 {
 	private Dictionary<string, double> _experimentalAnalysis;
@@ -59,7 +61,7 @@ public sealed class Analysis
 	/// <summary>
 	///     contains Impurities
 	/// </summary>
-	public List<Impurity> Impurities { get; set; } = new();
+	public List<Impurity> Impurities { get; } = new();
 
 	/// <summary>
 	///     Pass-through method to <see cref="ElementalAnalysisUtil.Solve" />

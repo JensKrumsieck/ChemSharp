@@ -62,4 +62,14 @@ public class ElementalAnalysisTests
 		best[0].Should().BeApproximately(.5, 1e-7);
 		best[1].Should().BeApproximately(.7, 1e-7);
 	}
+
+	[Fact]
+	public void Error_ShouldBeLessFor0_5DCM()
+	{
+		const string formula = "C70H55ClF6N6Zn";
+		var dcm = new Impurity("CH2Cl2", 0, 1, .1);
+		var exp = new Dictionary<string, double> {{"C", 68.41}, {"H", 4.841}, {"N", 6.78}};
+		var best = ElementalAnalysisUtil.Solve(formula, exp, new[] {dcm});
+		best[0].Should().BeApproximately(.5, 1e-7);
+	}
 }

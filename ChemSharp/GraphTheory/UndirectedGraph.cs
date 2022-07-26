@@ -33,5 +33,5 @@ public class UndirectedGraph<TVertex, TEdge> : IGraph<TVertex, TEdge>
 			.Where(e => e.Source.Equals(needle) || e.Target.Equals(needle))
 			.Select(e => e.Source.Equals(needle) ? e.Target : e.Source);
 
-	private void RebuildCache() => _cachedNeighbors = Vertices.ToDictionary(v => v, v => _Neighbors(v).ToList());
+	public void RebuildCache() => _cachedNeighbors = Vertices.ToDictionary(v => v, v => _Neighbors(v).ToList());
 }

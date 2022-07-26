@@ -9,6 +9,7 @@ public static class BlazorMoleculeFactory
 	///     Create Molecule from IBrowserFile
 	/// </summary>
 	/// <param name="file"></param>
+	/// <param name="maxFileSize"></param>
 	/// <returns></returns>
 	public static Molecule Create(IBrowserFile file, long maxFileSize = 8192000L)
 	{

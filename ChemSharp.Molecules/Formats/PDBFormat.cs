@@ -53,13 +53,6 @@ public partial class PDBFormat : FileFormat, IAtomFileFormat
 		};
 	}
 
-//	public static Molecule Read(string path)
-//	{
-//		var format = new PDBFormat(path);
-//		format.ReadFromFileInternal();
-//		return new Molecule(format.Atoms) {Title = GetFileNameWithoutExtension(format.Path)};
-//	}
-
 	protected override void ParseLine(ReadOnlySpan<char> line)
 	{
 		line = line.Trim();

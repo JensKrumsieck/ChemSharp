@@ -24,7 +24,8 @@ public class MoleculeFileFormatTests
 	 InlineData("files/2spl.pdb", 1437, 1314), InlineData("files/1hv4.pdb", 9288, 9562)
 	]
 	[InlineData("files/cif.xyz", 102, 155)]
-	[InlineData("files/mescho.xyz", 23, 23)]
+	[InlineData("files/mescho.xyz", 23, 23),
+	 InlineData("files/1484829.cif", 466, 528)]
 	public void Molecule_FromFile_ShouldBeValid(string filename, int atoms, int bonds)
 	{
 		var mol = Molecule.FromFile(filename);
@@ -49,7 +50,8 @@ public class MoleculeFileFormatTests
 	 InlineData("files/1hv4.pdb"),
 	 InlineData("files/cif.xyz"),
 	 InlineData("files/mescho.xyz"),
-	 InlineData("files/0001.pdb")]
+	 InlineData("files/0001.pdb"),
+	 InlineData("files/1484829.cif")]
 	public void Molecule_IsSameAs_MoleculeFactory(string filename)
 	{
 		var mol1 = Molecule.FromFile(filename);
@@ -80,7 +82,8 @@ public class MoleculeFileFormatTests
 	 InlineData("files/2spl.pdb", 1437, 1314), InlineData("files/1hv4.pdb", 9288, 9562)
 	]
 	[InlineData("files/cif.xyz", 102, 155)]
-	[InlineData("files/mescho.xyz", 23, 23)]
+	[InlineData("files/mescho.xyz", 23, 23),
+	 InlineData("files/1484829.cif", 466, 528)]
 	public void Molecule_FromStream_ShouldBeValid(string filename, int atoms, int bonds)
 	{
 		var stream = File.Open(filename, FileMode.Open);

@@ -12,7 +12,8 @@ public class CifFormatTests
 	 InlineData("files/mmcif.cif", 1291, 1251),
 	 InlineData("files/ligand.cif", 44, 46),
 	 InlineData("files/147288.cif", 206, 230),
-	 InlineData("files/4r21.cif", 6752, 6892)]
+	 InlineData("files/4r21.cif", 6752, 6892),
+	 InlineData("files/1484829.cif", 466, 528)]
 	public void CifFormat_CanReadPlausibleData(string file, int atomsCount, int bondsCount)
 	{
 		var mol = CifFormat.Read(file);

@@ -36,7 +36,7 @@ public partial class CifFormat
 #else
 			int.TryParse(line.Slice(cols[_colDisorder].start, cols[_colDisorder].length).ToString(), out disorder);
 #endif
-		if (disorder >= 2) return null;
+		if (disorder == 2) return null;
 		//parse atom
 		var label = line.Slice(cols[_colLabel].start, cols[_colLabel].length);
 		var symbol = line.Slice(cols[_colSymbol].start, cols[_colSymbol].length);
@@ -68,12 +68,12 @@ public partial class CifFormat
 
 		if (_idx == 6)
 			_conversionMatrix = FractionalCoordinates.ConversionMatrix(
-			                                                           _cellParams[0],
-			                                                           _cellParams[1],
-			                                                           _cellParams[2],
-			                                                           _cellParams[3],
-			                                                           _cellParams[4],
-			                                                           _cellParams[5]);
+				_cellParams[0],
+				_cellParams[1],
+				_cellParams[2],
+				_cellParams[3],
+				_cellParams[4],
+				_cellParams[5]);
 	}
 
 	private void SetPickingIndicatorCCDC(ReadOnlySpan<char> line)

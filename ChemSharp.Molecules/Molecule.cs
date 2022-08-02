@@ -18,11 +18,13 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	/// <summary>
 	///     Provides AtomData
 	/// </summary>
-	[Obsolete("This field will be removed in 1.2.0")]
+	[Obsolete("This field will be removed in 1.1.0")]
 	public readonly IAtomDataProvider AtomDataProvider;
 
+	[Obsolete("This field will be removed in 1.1.0")]
 	private Dictionary<Atom, List<Atom>> _cachedNeighbors;
 
+	[Obsolete("This field will be removed in 1.1.0")]
 	public bool CacheNeighborList = true;
 
 	/// <summary>
@@ -45,6 +47,7 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	///     creates Molecule with provider
 	/// </summary>
 	/// <param name="provider"></param>
+	[Obsolete]
 	public Molecule(IAtomDataProvider provider) : this()
 	{
 		Atoms.AddRange(provider.Atoms);

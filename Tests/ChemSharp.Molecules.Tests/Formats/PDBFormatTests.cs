@@ -11,6 +11,7 @@ public class PDBFormatTests
 	[InlineData("files/oriluy.pdb", 130, 151)]
 	[InlineData("files/2spl.pdb", 1437, 1314)]
 	[InlineData("files/1hv4.pdb", 9288, 9562)]
+	[InlineData("files/0001.pdb", 15450, 14968)]
 	public void PDBFormat_CanReadPlausibleData(string file, int atomsCount, int bondsCount)
 	{
 		var mol = PDBFormat.Read(file);

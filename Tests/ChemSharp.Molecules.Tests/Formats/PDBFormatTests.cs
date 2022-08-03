@@ -19,4 +19,13 @@ public class PDBFormatTests
 		mol.Atoms.Count(s => s.Symbol == "DA").Should().Be(0);
 		mol.Bonds.Count.Should().Be(bondsCount);
 	}
+
+	[Fact]
+	public void Residue_IsReadCorrectly()
+	{
+		var res = "MET"; //first residue is met
+		var file = "files/2spl.pdb";
+		var mol = Molecule.FromFile(file);
+		mol.Atoms[0].Residue.Should().Be(res);
+	}
 }

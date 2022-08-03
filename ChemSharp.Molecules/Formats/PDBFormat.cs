@@ -41,15 +41,15 @@ public partial class PDBFormat : FileFormat, IAtomFileFormat
 		var z = line[46..54].Trim();
 		var symbol = line[76..78].Trim();
 		var resName = line[17..20].Trim();
-		var chainId = line[21..22].Trim();
-#if NETCOREAPP3_0_OR_GREATER
-		var residue = string.Concat(resName, chainId);
-#else
-		var residue = string.Concat(resName.ToString(), chainId.ToString());
-#endif
+		//var chainId = line[21..22].Trim();
+//#if NETCOREAPP3_0_OR_GREATER
+//		var residue = string.Concat(resName,"-", chainId);
+//#else
+//		var residue = string.Concat(resName.ToString(), chainId.ToString());
+//#endif
 		return new Atom(symbol.ToString().UcFirst(), x.ToSingle(), y.ToSingle(), z.ToSingle())
 		{
-			Title = title.ToString(), Residue = residue
+			Title = title.ToString(), Residue = resName.ToString()
 		};
 	}
 

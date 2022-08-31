@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 using ChemSharp.Export;
 using ChemSharp.Extensions;
 
@@ -26,7 +23,7 @@ public class Mol2Exporter : AbstractMoleculeExporter
 	public override void Export(IExportable exportable, Stream stream)
 	{
 		base.Export(exportable, stream);
-		Debug.Assert(Molecule != null, nameof(Molecule) + " != null");
+		if (Molecule == null) return;
 		var atomsCount = Molecule.Atoms.Count;
 		var bondsCount = Molecule.Bonds.Count;
 		using var sw = new StreamWriter(stream);

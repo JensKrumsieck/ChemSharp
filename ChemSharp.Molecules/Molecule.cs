@@ -28,7 +28,7 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	/// <summary>
 	///     Title for Molecule
 	/// </summary>
-	public string Title { get; set; }
+	public string Title { get; set; } = "";
 
 	/// <summary>
 	///     The Molecules Atoms

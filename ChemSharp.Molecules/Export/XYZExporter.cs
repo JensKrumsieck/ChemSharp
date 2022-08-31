@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
-using ChemSharp.Export;
+﻿using ChemSharp.Export;
 using ChemSharp.Extensions;
 
 namespace ChemSharp.Molecules.Export;
@@ -20,8 +18,7 @@ public class XYZExporter : AbstractMoleculeExporter
 	public override void Export(IExportable exportable, Stream stream)
 	{
 		base.Export(exportable, stream);
-		Debug.Assert(Molecule != null, nameof(Molecule) + " != null");
-
+		if (Molecule == null) return;
 		var count = Molecule.Atoms.Count;
 		var name = Molecule.Title;
 		using var sw = new StreamWriter(stream);

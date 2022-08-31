@@ -4,11 +4,11 @@ namespace ChemSharp.Molecules.Properties;
 
 public class KeyValueProperty : IComparable<KeyValueProperty>
 {
-	public virtual string Key { get; set; }
+	public virtual string Key { get; set; } = "";
 	public virtual double Value { get; set; }
-	public virtual string Unit { get; set; }
+	public virtual string Unit { get; set; } = "";
 
-	public int CompareTo(KeyValueProperty other)
+	public int CompareTo(KeyValueProperty? other)
 	{
 		if (ReferenceEquals(this, other)) return 0;
 

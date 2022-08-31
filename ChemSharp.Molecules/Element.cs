@@ -50,9 +50,9 @@ public class Element
 	///     Constructor for Json Serialization
 	/// </summary>
 	[JsonConstructor]
-	public Element()
-	{
-	}
+#pragma warning disable CS8618
+	public Element() { }
+#pragma warning restore CS8618
 
 	/// <summary>
 	///     Create Element by symbol

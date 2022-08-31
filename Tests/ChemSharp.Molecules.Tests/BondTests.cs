@@ -32,16 +32,6 @@ public class BondTests
 	}
 
 	[Fact]
-	public void Bond_ShouldBeAromaticInBenzene()
-	{
-		var molecule = MoleculeFactory.Create("files/benzene_arom.mol");
-		var bonds = molecule.Bonds
-		                    .Where(b => b.Atoms.All(s => s.Symbol == "C"));
-
-		Assert.All(bonds, b => Assert.True(b.IsAromatic));
-	}
-
-	[Fact]
 	public void Bond_AtomWithNoNeighborsReturnsEmpty()
 	{
 		var atom = new Atom("Nb");
@@ -79,7 +69,7 @@ public class BondTests
 	{
 		const string file = "files/ptcor.mol2";
 
-		var mol = MoleculeFactory.Create(file);
+		var mol = Molecule.FromFile(file);
 		//remember caching is on!
 		foreach (var a in mol.Atoms)
 		{

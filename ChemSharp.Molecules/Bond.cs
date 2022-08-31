@@ -1,4 +1,4 @@
-﻿using ChemSharp.GraphTheory;
+﻿using Nodo;
 
 namespace ChemSharp.Molecules;
 

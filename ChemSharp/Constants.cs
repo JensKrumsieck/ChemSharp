@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChemSharp;
 
@@ -83,4 +84,34 @@ public static class Constants
 	///     Angstroms to pixels factor
 	/// </summary>
 	public const float AngstromToPixels = 20;
+
+	/// <summary>
+	///     Translates Amino Acids
+	/// </summary>
+	public static readonly Dictionary<string, string> AminoAcids = new()
+	{
+		["ALA"] = "Alanine",
+		["ARG"] = "Arginine",
+		["ASN"] = "Asparagine",
+		["ASP"] = "Aspartate",
+		["ASX"] = "Aspartate or Asparagine",
+		["CYS"] = "Cysteine",
+		["GLU"] = "Glutamate",
+		["GLN"] = "Glutamine",
+		["GLY"] = "Glycine",
+		["GLX"] = "Glutamate or Glutamine",
+		["HIS"] = "Histidine",
+		["ILE"] = "Isoleucine",
+		["LEU"] = "Leucine",
+		["LYS"] = "Lysine",
+		["MET"] = "Methionine",
+		["PHE"] = "Phenylalanine",
+		["PRO"] = "Proline",
+		["SER"] = "Serine",
+		["THR"] = "Threonine",
+		["TRP"] = "Tryptophan",
+		["TYR"] = "Tyrosine",
+		["VAL"] = "Valine",
+		["XLE"] = "Leucine or Isoleucine"
+	};
 }

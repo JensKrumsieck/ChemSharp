@@ -9,8 +9,8 @@ public class CoordinatesTest
 	public void FractionalCoordinates()
 	{
 		//cif uses conversion from fractional to cartesian, xyz is already cartesian
-		var cif = MoleculeFactory.Create("files/cif.cif");
-		var xyz = MoleculeFactory.Create("files/cif.xyz");
+		var cif = Molecule.FromFile("files/cif.cif");
+		var xyz = Molecule.FromFile("files/cif.xyz");
 		for (var i = 0; i < cif.Atoms.Count; i++)
 		{
 			cif.Atoms[i].Location.X.Should().BeApproximately(xyz.Atoms[i].Location.X, .0001f);

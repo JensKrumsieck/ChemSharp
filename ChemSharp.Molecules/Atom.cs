@@ -10,11 +10,6 @@ public class Atom : Element, IEquatable<Atom>
 {
 	private string _title = "";
 
-	/// <summary>
-	///     Allows to tag any string related information to atom
-	/// </summary>
-	[Obsolete("Will be removed in 1.2.0")] public string? Tag;
-
 	/// <inheritdoc />
 	public Atom(string symbol) : base(symbol) { }
 
@@ -37,7 +32,7 @@ public class Atom : Element, IEquatable<Atom>
 	/// <summary>
 	///     Gets or sets the Residue Type
 	/// </summary>
-	public string Residue { get; set; }
+	public string Residue { get; set; } = "";
 
 	public bool Equals(Atom? other) =>
 		other is not null &&

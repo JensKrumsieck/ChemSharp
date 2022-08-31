@@ -1,32 +1,17 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using ChemSharp.DataProviders;
 using ChemSharp.Export;
-using ChemSharp.GraphTheory;
-using ChemSharp.Molecules.DataProviders;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
+using Nodo;
 
 namespace ChemSharp.Molecules;
 
 public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 {
-	/// <summary>
-	///     Provides AtomData
-	/// </summary>
-	[Obsolete("This field will be removed in 1.1.0")]
-	public readonly IAtomDataProvider AtomDataProvider;
-
-	[Obsolete("This field will be removed in 1.1.0")]
-	private Dictionary<Atom, List<Atom>> _cachedNeighbors;
-
-	[Obsolete("This field will be removed in 1.1.0")]
-	public bool CacheNeighborList = true;
-
 	/// <summary>
 	///		creates Molecule without Atoms to add later
 	/// </summary>
@@ -44,26 +29,6 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	}
 
 	/// <summary>
-	///     creates Molecule with provider
-	/// </summary>
-	/// <param name="provider"></param>
-	[Obsolete]
-	public Molecule(IAtomDataProvider provider) : this()
-	{
-		Atoms.AddRange(provider.Atoms);
-		AtomDataProvider = provider;
-		if (provider is IBondDataProvider {Bonds: { }} bondProvider && bondProvider.Bonds.Any())
-		{
-			Bonds.AddRange(bondProvider.Bonds);
-			BondDataProvider = bondProvider;
-		}
-		else
-			RecalculateBonds();
-
-		Title = ((AbstractDataProvider)AtomDataProvider).Path;
-	}
-
-	/// <summary>
 	///     Title for Molecule
 	/// </summary>
 	public string Title { get; set; }
@@ -77,13 +42,6 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	///     The Molecules Bonds
 	/// </summary>
 	public List<Bond> Bonds => Edges;
-
-	/// <summary>
-	///     Provides BondData
-	/// </summary>
-
-	[Obsolete("This field will be removed in 1.2.0")]
-	public IBondDataProvider BondDataProvider { get; private set; }
 
 	public int Electrons => Atoms.Sum(s => s.Electrons) - ImplicitCharge;
 
@@ -116,8 +74,6 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	/// </summary>
 	public void RecalculateBonds()
 	{
-		//discard data provider and reset bonds
-		BondDataProvider = null!;
 		Edges.Clear();
 		if (Atoms.Count < 600) RecalculateBondsNonParallel();
 		else RecalculateBondsParallel();
@@ -158,30 +114,13 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 		}
 	}
 
-	// /// <summary>
-	// ///     returns neighbors of specific atom
-	// /// </summary>
-	// /// <param name="a"></param>
-	// /// <returns></returns>
-	// public List<Atom> Neighbors(Atom a)
-	// {
-	// 	//build cache at first call
-	// 	if (CacheNeighborList &&
-	// 	    (_cachedNeighbors == null || _cachedNeighbors.Count != Atoms.Count))
-	// 		_cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
-	//
-	// 	return CacheNeighborList ? _cachedNeighbors[a] : AtomUtil.Neighbors(a, this).ToList();
-	// }
-	//
-	// public void RebuildCache() => _cachedNeighbors = AtomUtil.BuildNeighborCache(Atoms, Bonds);
-
 	/// <summary>
 	///     returns nonmetal neighbors of specific atom
 	/// </summary>
 	/// <param name="a"></param>
 	/// <returns></returns>
 	public IEnumerable<Atom> NonMetalNeighbors(Atom a) =>
-		Neighbors(a) != null && Neighbors(a).Any()
-			? Neighbors(a).Where(s => s != null && s.IsNonMetal)
+		Neighbors(a) is { } _ && Neighbors(a).Any()
+			? Neighbors(a).Where(s => s.IsNonMetal)
 			: Enumerable.Empty<Atom>();
 }

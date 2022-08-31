@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using ChemSharp.Files;
 using FluentAssertions;
 using Xunit;
@@ -31,40 +29,6 @@ public class MoleculeFileFormatTests
 		var mol = Molecule.FromFile(filename);
 		mol.Atoms.Count.Should().Be(atoms);
 		mol.Bonds.Count.Should().Be(bonds);
-	}
-
-	//Test all files except unsupported cif versions
-	[Theory,
-	 InlineData("files/cif.cif"),
-	 InlineData("files/cif_noTrim.cif"),
-	 InlineData("files/147288.cif"),
-	 InlineData("files/benzene.mol2"),
-	 InlineData("files/myo.mol2"),
-	 InlineData("files/tep.mol2"),
-	 InlineData("files/ptcor.mol2"),
-	 InlineData("files/benzene_3d.mol"),
-	 InlineData("files/benzene_arom.mol"),
-	 InlineData("files/benzene.mol"),
-	 InlineData("files/oriluy.pdb"),
-	 InlineData("files/2spl.pdb"),
-	 InlineData("files/1hv4.pdb"),
-	 InlineData("files/cif.xyz"),
-	 InlineData("files/mescho.xyz"),
-	 InlineData("files/0001.pdb"),
-	 InlineData("files/1484829.cif")]
-	public void Molecule_IsSameAs_MoleculeFactory(string filename)
-	{
-		var mol1 = Molecule.FromFile(filename);
-		var mol2 = MoleculeFactory.Create(filename);
-		mol1.Atoms.Should().HaveSameCount(mol2.Atoms);
-		if (mol2.Atoms.Count(s => s.Symbol == "DA") == 0)
-			mol1.Bonds.Should().HaveSameCount(mol2.Bonds); //supress 1.0.x pdb bugs
-		for (var i = 0; i < mol1.Atoms.Count; ++i)
-		{
-			if (mol2.Atoms[i].Symbol != "DA" &&
-			    Math.Abs(mol2.Atoms[i].Location.Z - 1.0f) > 1e-99) //supress 1.0.x pdb bugs
-				mol1.Atoms[i].Should().Be(mol2.Atoms[i]);
-		}
 	}
 
 	[Theory,

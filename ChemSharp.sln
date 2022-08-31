@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp", "ChemSharp\ChemSharp.csproj", "{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChemSharp.Tests", "Tests\ChemSharp.Tests\ChemSharp.Tests.csproj", "{BBB1E274-87ED-47C9-809E-345D50EBFD50}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F549A9E-53BD-4B97-AEF7-F39853FEA31B}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
@@ -34,8 +32,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Molecules.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Base.Tests", "Tests\ChemSharp.Base.Tests\ChemSharp.Base.Tests.csproj", "{9E0CBAF5-47D3-4E5C-A5C6-2B72D4AFFAC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Benchmarks", "Tests\ChemSharp.Benchmarks\ChemSharp.Benchmarks.csproj", "{51C28F25-4B63-4FA6-83EA-42463AF7C7C0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChemSharp.Molecules.Generator", "Generators\ChemSharp.Molecules.Generator\ChemSharp.Molecules.Generator.csproj", "{8B774CDC-ECFE-44FF-9EEC-D071D3CD0063}"
 EndProject
 Global
@@ -48,10 +44,6 @@ Global
 		{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD857D77-6FA8-40FA-AA1E-5CF510D8D649}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBB1E274-87ED-47C9-809E-345D50EBFD50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD7FBCF2-784F-4950-9A01-3B454BA87D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD7FBCF2-784F-4950-9A01-3B454BA87D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7FBCF2-784F-4950-9A01-3B454BA87D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,10 +76,6 @@ Global
 		{9E0CBAF5-47D3-4E5C-A5C6-2B72D4AFFAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E0CBAF5-47D3-4E5C-A5C6-2B72D4AFFAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E0CBAF5-47D3-4E5C-A5C6-2B72D4AFFAC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51C28F25-4B63-4FA6-83EA-42463AF7C7C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51C28F25-4B63-4FA6-83EA-42463AF7C7C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51C28F25-4B63-4FA6-83EA-42463AF7C7C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51C28F25-4B63-4FA6-83EA-42463AF7C7C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B774CDC-ECFE-44FF-9EEC-D071D3CD0063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B774CDC-ECFE-44FF-9EEC-D071D3CD0063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B774CDC-ECFE-44FF-9EEC-D071D3CD0063}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,11 +85,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BBB1E274-87ED-47C9-809E-345D50EBFD50} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 		{C731EEA3-40A6-4694-8247-16F46ED0F2FD} = {CA4A529D-2EE9-4196-B069-328706EDE088}
 		{0ADAB8C5-8D08-456D-98CE-5D70E5DDC163} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 		{9E0CBAF5-47D3-4E5C-A5C6-2B72D4AFFAC1} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
-		{51C28F25-4B63-4FA6-83EA-42463AF7C7C0} = {20F5697B-9414-4F33-88DA-9D84D9983B40}
 		{8B774CDC-ECFE-44FF-9EEC-D071D3CD0063} = {CA4A529D-2EE9-4196-B069-328706EDE088}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

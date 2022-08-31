@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using ChemSharp.Molecules.ElementalAnalysis;
+﻿using ChemSharp.Molecules.ElementalAnalysis;
 using ChemSharp.Molecules.Extensions;
-using ChemSharp.Molecules.Formats;
 using FluentAssertions;
 using Xunit;
 
@@ -13,7 +11,7 @@ public class ElementalAnalysisTests
 	public void ElementalAnalysis_ShouldBeValidFromFile()
 	{
 		const string file = "files/cif.cif";
-		var mol = CifFormat.Read(file);
+		var mol = Molecule.FromFile(file);
 		var formula = mol.Atoms.SumFormula();
 		var chn = formula.ElementalAnalysis();
 		var exp = new Dictionary<string, double> {{"C", 61.55}, {"H", 3.745}, {"N", 7.178}};
@@ -24,7 +22,7 @@ public class ElementalAnalysisTests
 	public void Deviation_ShouldBeValidFromFile()
 	{
 		const string file = "files/cif.cif";
-		var mol = CifFormat.Read(file);
+		var mol = Molecule.FromFile(file);
 		var formula = mol.Atoms.SumFormula();
 		var chn = formula.ElementalAnalysis();
 		var exp = new Dictionary<string, double> {{"C", 60.55}, {"H", 3.145}, {"N", 1.178}};
@@ -37,7 +35,7 @@ public class ElementalAnalysisTests
 	public void Deviation_ShouldBeValidWithImpurities()
 	{
 		const string file = "files/cif.cif";
-		var mol = CifFormat.Read(file);
+		var mol = Molecule.FromFile(file);
 		var formula = mol.Atoms.SumFormula();
 		var chn = formula.ElementalAnalysis();
 		var exp = new Dictionary<string, double> {{"C", 60.55}, {"H", 2.7}, {"N", 7.7}};

@@ -5,6 +5,13 @@ namespace ChemSharp.Molecules.Extensions;
 
 public static class MoleculeUtil
 {
+	public static bool
+		IsSubgraphIsomorphicTo(this Molecule target, Molecule search, out Dictionary<int, int> mapping) =>
+		ConvertToSimpleGraph(target).IsSubgraphIsomorphicTo(ConvertToSimpleGraph(search), out mapping);
+
+	public static bool IsIsomorphicTo(this Molecule target, Molecule search, out Dictionary<int, int> mapping) =>
+		ConvertToSimpleGraph(target).IsIsomorphicTo(ConvertToSimpleGraph(search), out mapping);
+
 	public static bool IsSubgraphIsomorphicTo(this Molecule target, Molecule search) =>
 		ConvertToSimpleGraph(target).IsSubgraphIsomorphicTo(ConvertToSimpleGraph(search));
 

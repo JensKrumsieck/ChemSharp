@@ -1,4 +1,5 @@
 ﻿using ChemSharp.Molecules.Extensions;
+using FluentAssertions;
 using Xunit;
 
 namespace ChemSharp.Molecules.Tests;
@@ -46,5 +47,17 @@ public class MoleculeIsomorphism
 		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 		Assert.Equal(subTest.IsSubgraphIsomorphicTo(subCorrole), outcome);
+	}
+
+	[Fact]
+	public void Mapping_Is_Plausible()
+	{
+		var corrole = Molecule.FromFile("files/corrole.mol");
+		var test = Molecule.FromFile("files/147288.cif");
+		//strip metals, hydrogens and co
+		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		Assert.True(subTest.IsSubgraphIsomorphicTo(subCorrole, out var mapping));
+		mapping.Count.Should().Be(23);
 	}
 }

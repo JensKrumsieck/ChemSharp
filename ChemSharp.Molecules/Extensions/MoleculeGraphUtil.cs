@@ -19,7 +19,7 @@ public static class MoleculeGraphUtil
 		ConvertToSimpleGraph(target).IsIsomorphicTo(ConvertToSimpleGraph(search));
 
 	/// <summary>
-	///     Converts any Molecule (which is an UndirectedGraph<Atom, Bond>) to an int based UndirectedGraph<int, Edge<int>>.
+	///     Converts any Molecule (which is an UndirectedGraph&lt;Atom, Bond&gt;) to an int based UndirectedGraph&lt;int, Edge&lt;int&gt;&gt;.
 	/// </summary>
 	/// <param name="mol"></param>
 	/// <returns></returns>

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChemSharp.DataProviders;
+﻿namespace ChemSharp.DataProviders;
 
 /// <summary>
 ///     Provides access to parameter dictionary from Parameter files

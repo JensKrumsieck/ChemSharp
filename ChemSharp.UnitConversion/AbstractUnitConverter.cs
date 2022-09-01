@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 
 namespace ChemSharp.UnitConversion;
 

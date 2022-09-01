@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChemSharp.Generator.Extension;
+﻿namespace ChemSharp.Generator.Extension;
 
 public static class LinqExtensions
 {

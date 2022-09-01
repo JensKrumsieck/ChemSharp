@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 using ChemSharp.Export;
 using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.Extension;

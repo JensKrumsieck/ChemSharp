@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChemSharp.Molecules.Formats;
+﻿namespace ChemSharp.Molecules.Formats;
 
 public interface IAtomFileFormat
 {

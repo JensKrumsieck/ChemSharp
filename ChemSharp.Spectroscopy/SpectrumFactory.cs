@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ChemSharp.DataProviders;
+﻿using ChemSharp.DataProviders;
 using ChemSharp.Files;
 using ChemSharp.Spectroscopy.DataProviders;
 

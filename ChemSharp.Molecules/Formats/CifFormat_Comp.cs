@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp.Molecules.Formats;
+﻿namespace ChemSharp.Molecules.Formats;
 
 public partial class CifFormat
 {

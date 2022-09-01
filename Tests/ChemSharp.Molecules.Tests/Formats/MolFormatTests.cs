@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ChemSharp.Molecules.Formats;
+﻿using ChemSharp.Molecules.Formats;
 using FluentAssertions;
 using Xunit;
 

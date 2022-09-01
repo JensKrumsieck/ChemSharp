@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp.UnitConversion;
+﻿namespace ChemSharp.UnitConversion;
 
 public struct MappedFunction
 {

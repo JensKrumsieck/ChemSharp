@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ChemSharp.Files;
+﻿namespace ChemSharp.Files;
 
 /// <summary>
 ///     Parameter Files are files using a key value storage to store data like the .par or jcamp files

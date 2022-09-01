@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Nodo" Version="0.0.1-alpha.1"/>
-    <PackageReference Include="System.Text.Json" Version="6.0.1" />
-    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj" />
+    <PackageReference Include="System.Text.Json" Version="6.0.1"/>
+    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj"/>
     <ProjectReference Include="..\Generators\ChemSharp.Molecules.Generator\ChemSharp.Molecules.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0"/>
   </ItemGroup>
 </Project>

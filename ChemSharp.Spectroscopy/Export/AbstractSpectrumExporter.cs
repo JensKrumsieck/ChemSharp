@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using ChemSharp.Export;
+﻿using ChemSharp.Export;
 
 namespace ChemSharp.Spectroscopy.Export;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace ChemSharp.Extensions;
+﻿namespace ChemSharp.Extensions;
 
 public static class ArrayExtensions
 {

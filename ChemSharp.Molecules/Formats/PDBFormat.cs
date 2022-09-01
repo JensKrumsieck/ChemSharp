@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Memory;
 
 namespace ChemSharp.Molecules.Formats;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChemSharp.Spectroscopy;
+﻿namespace ChemSharp.Spectroscopy;
 
 public interface ISpectrum
 {

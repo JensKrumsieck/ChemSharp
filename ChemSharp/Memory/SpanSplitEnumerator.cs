@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp.Memory;
+﻿namespace ChemSharp.Memory;
 
 public ref struct SpanSplitEnumerator
 {

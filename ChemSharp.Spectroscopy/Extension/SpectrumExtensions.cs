@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using ChemSharp.Extensions;
+﻿using ChemSharp.Extensions;
 using ChemSharp.Spectroscopy.DataProviders;
 
 namespace ChemSharp.Spectroscopy.Extension;

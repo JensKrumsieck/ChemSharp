@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChemSharp;
+﻿namespace ChemSharp;
 
 public readonly struct DataPoint : IEquatable<DataPoint>
 {

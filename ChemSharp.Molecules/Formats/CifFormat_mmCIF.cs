@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp.Molecules.Formats;
+﻿namespace ChemSharp.Molecules.Formats;
 
 // ReSharper disable InconsistentNaming
 public partial class CifFormat

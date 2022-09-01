@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChemSharp;
+﻿namespace ChemSharp;
 
 public static class Constants
 {

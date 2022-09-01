@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace ChemSharp.Molecules.Formats;
+﻿namespace ChemSharp.Molecules.Formats;
 
 public abstract class FileFormat
 {

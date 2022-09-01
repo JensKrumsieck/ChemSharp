@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChemSharp.Molecules.Properties;
+﻿namespace ChemSharp.Molecules.Properties;
 
 public class KeyValueProperty : IComparable<KeyValueProperty>
 {

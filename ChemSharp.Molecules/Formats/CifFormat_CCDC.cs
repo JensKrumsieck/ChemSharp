@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using ChemSharp.Mathematics;
 using ChemSharp.Memory;
 
@@ -68,12 +67,12 @@ public partial class CifFormat
 
 		if (_idx == 6)
 			_conversionMatrix = FractionalCoordinates.ConversionMatrix(
-				_cellParams[0],
-				_cellParams[1],
-				_cellParams[2],
-				_cellParams[3],
-				_cellParams[4],
-				_cellParams[5]);
+			                                                           _cellParams[0],
+			                                                           _cellParams[1],
+			                                                           _cellParams[2],
+			                                                           _cellParams[3],
+			                                                           _cellParams[4],
+			                                                           _cellParams[5]);
 	}
 
 	private void SetPickingIndicatorCCDC(ReadOnlySpan<char> line)

@@ -63,17 +63,20 @@ public static class FractionalCoordinates
 	// }
 	public static Matrix4x4 ConversionMatrix(float a, float b, float c, float alpha, float beta, float gamma)
 		=> Matrix4x4.Transpose(new Matrix4x4(
-			a, b * MathF.Cos(gamma * MathF.PI / 180f), c * MathF.Cos(beta * MathF.PI / 180f), 0,
-			0, b * MathF.Sin(gamma * MathF.PI / 180f), c * (MathF.Cos(alpha * MathF.PI / 180f) -
-			                                                MathF.Cos(beta * MathF.PI / 180f) *
-			                                                MathF.Cos(gamma * MathF.PI / 180f)) /
-			                                           MathF.Sin(gamma * MathF.PI / 180f), 0,
-			0, 0, c * MathF.Sqrt(1f - MathF.Pow(MathF.Cos(alpha * MathF.PI / 180f), 2f) -
-				      MathF.Pow(MathF.Cos(beta * MathF.PI / 180f), 2f) -
-				      MathF.Pow(MathF.Cos(gamma * MathF.PI / 180f), 2f) + 2f *
-				      MathF.Cos(alpha * MathF.PI / 180f) *
-				      MathF.Cos(beta * MathF.PI / 180f) *
-				      MathF.Cos(gamma * MathF.PI / 180f)) /
-			      MathF.Sin(gamma * MathF.PI / 180f), 0,
-			0, 0, 0, 1));
+		                                     a, b * MathF.Cos(gamma * MathF.PI / 180f),
+		                                     c * MathF.Cos(beta * MathF.PI / 180f), 0,
+		                                     0, b * MathF.Sin(gamma * MathF.PI / 180f), c *
+		                                     (MathF.Cos(alpha * MathF.PI / 180f) -
+		                                      MathF.Cos(beta * MathF.PI / 180f) *
+		                                      MathF.Cos(gamma * MathF.PI / 180f)) /
+		                                     MathF.Sin(gamma * MathF.PI / 180f), 0,
+		                                     0, 0,
+		                                     c * MathF.Sqrt(1f - MathF.Pow(MathF.Cos(alpha * MathF.PI / 180f), 2f) -
+		                                                    MathF.Pow(MathF.Cos(beta * MathF.PI / 180f), 2f) -
+		                                                    MathF.Pow(MathF.Cos(gamma * MathF.PI / 180f), 2f) + 2f *
+		                                                    MathF.Cos(alpha * MathF.PI / 180f) *
+		                                                    MathF.Cos(beta * MathF.PI / 180f) *
+		                                                    MathF.Cos(gamma * MathF.PI / 180f)) /
+		                                     MathF.Sin(gamma * MathF.PI / 180f), 0,
+		                                     0, 0, 0, 1));
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ChemSharp.Memory;
+﻿using ChemSharp.Memory;
 using FluentAssertions;
 using Xunit;
 

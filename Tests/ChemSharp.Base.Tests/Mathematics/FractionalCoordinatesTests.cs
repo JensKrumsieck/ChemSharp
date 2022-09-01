@@ -7,11 +7,10 @@ namespace ChemSharp.Base.Tests.Mathematics;
 
 public class FractionalCoordinatesTests
 {
-	[Theory]
-	[InlineData(0.4236f, 0.43592f, 0.38263f, 3.983062f, 9.077097f, 5.775253f)]
-	[InlineData(0.3542f, 0.51241f, 0.40267f, 3.468567f, 10.365696f, 6.077729f)]
+	[Theory, InlineData(0.4236f, 0.43592f, 0.38263f, 3.983062f, 9.077097f, 5.775253f),
+	 InlineData(0.3542f, 0.51241f, 0.40267f, 3.468567f, 10.365696f, 6.077729f)]
 	public void FractionalCoordinates_AreValid(float xfrac, float yfrac, float zfrac, float xcart, float ycart,
-		float zcart)
+	                                           float zcart)
 	{
 		const float a = 8.1707f;
 		const float b = 15.1621f;

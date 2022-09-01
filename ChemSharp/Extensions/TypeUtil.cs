@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ChemSharp.Extensions;
+﻿namespace ChemSharp.Extensions;
 
 public static class TypeUtil
 {

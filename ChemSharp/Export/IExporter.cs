@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace ChemSharp.Export;
+﻿namespace ChemSharp.Export;
 
 /// <summary>
 ///     Defines an Exporter

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChemSharp.Mathematics;
+﻿namespace ChemSharp.Mathematics;
 
 public static class DataPointMath
 {

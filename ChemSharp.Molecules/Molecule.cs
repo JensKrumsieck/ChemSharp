@@ -10,7 +10,7 @@ namespace ChemSharp.Molecules;
 public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 {
 	/// <summary>
-	///		creates Molecule without Atoms to add later
+	///     creates Molecule without Atoms to add later
 	/// </summary>
 	public Molecule() { }
 

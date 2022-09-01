@@ -84,4 +84,17 @@ public class MoleculeIsomorphism
 		residualTest = new Molecule(residualTest.Atoms.Except(result!.Select(s => s.atomInTarget)));
 		Assert.False(residualTest.IsSubgraphIsomorphicTo(subCorrole)); //should now fail!
 	}
+
+	[Fact]
+	public void MapAll_Returns_Correct_Mappings()
+	{
+		var corrole = Molecule.FromFile("files/corrole.mol");
+		var test = Molecule.FromFile("files/147288.cif");
+		//strip metals, hydrogens and co
+		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var mappings = subTest.MapAll(subCorrole);
+		mappings.Should().HaveCount(23);
+		mappings.Values.Should().AllSatisfy(item => item.Count.Should().Be(2));
+	}
 }

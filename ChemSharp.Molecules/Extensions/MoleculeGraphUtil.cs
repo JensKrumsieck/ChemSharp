@@ -46,4 +46,26 @@ public static class MoleculeGraphUtil
 		result = mapping.Select(kvp => (target.Atoms[kvp.Key], search.Atoms[kvp.Value])).ToList();
 		return true;
 	}
+
+	/// <summary>
+	///     Returns all mappings of search to target molecule as a dictionary containing the search atoms as keys with a list
+	///     of the mapped atoms
+	/// </summary>
+	/// <param name="target"></param>
+	/// <param name="search"></param>
+	/// <returns></returns>
+	public static Dictionary<Atom, List<Atom>> MapAll(this Molecule target, Molecule search)
+	{
+		var tmp = target;
+		var mappings = new Dictionary<Atom, List<Atom>>();
+		while (tmp.TryMap(search, out var mapping))
+		{
+			tmp = new Molecule(tmp.Atoms.Except(mapping!.Select(s => s.atomInTarget)));
+			foreach (var (atomInTarget, atomInSearch) in mapping!)
+				if (!mappings.ContainsKey(atomInSearch)) mappings[atomInSearch] = new List<Atom> {atomInTarget};
+				else mappings[atomInSearch].Add(atomInTarget);
+		}
+
+		return mappings;
+	}
 }

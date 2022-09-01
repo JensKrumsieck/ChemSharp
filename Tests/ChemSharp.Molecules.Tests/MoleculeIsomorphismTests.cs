@@ -1,5 +1,6 @@
 ﻿using ChemSharp.Molecules.Extensions;
 using FluentAssertions;
+using Nodo.Search;
 using Xunit;
 
 namespace ChemSharp.Molecules.Tests;
@@ -93,8 +94,38 @@ public class MoleculeIsomorphism
 		//strip metals, hydrogens and co
 		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+
 		var mappings = subTest.MapAll(subCorrole);
 		mappings.Should().HaveCount(23);
 		mappings.Values.Should().AllSatisfy(item => item.Count.Should().Be(2));
+	}
+
+	[Theory]
+	[InlineData("files/1hv4.pdb", 8)]
+	[InlineData("files/2spl.pdb", 1)]
+	[InlineData("files/4r21.cif", 2)]
+	[InlineData("files/0001.pdb", 24)]
+	public void IntegrationTest_With_Proteins(string path, int numberOfHemes)
+	{
+		var porphyrin = Molecule.FromFile("files/porphyrin.xyz");
+		var subPorphyrin = new Molecule(porphyrin.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+
+		var protein = Molecule.FromFile(path);
+		//in combination with ConnectedFigures() this may be faster!
+		var subProtein = new Molecule(protein.Atoms.Where(a =>
+			a.IsNonMetal && a.Symbol != "H" && !Constants.AminoAcids.ContainsKey(a.Residue)));
+
+		var mappings = new Dictionary<Atom, List<Atom>>();
+		foreach (var test in subProtein.ConnectedFigures().Where(f => f.Count >= 24).Select(f => new Molecule(f)))
+		{
+			Assert.NotNull(test);
+			var tmp = test.MapAll(subPorphyrin);
+			foreach (var key in tmp.Keys)
+				if (mappings.ContainsKey(key)) mappings[key].AddRange(tmp[key]);
+				else mappings[key] = tmp[key];
+		}
+
+		mappings.Should().HaveCount(24); //porphyrin has 24 atoms
+		mappings.Values.Should().AllSatisfy(item => item.Count.Should().Be(numberOfHemes));
 	}
 }

@@ -32,13 +32,17 @@ public class MoleculeIsomorphism
 		Assert.Equal(mol1.IsIsomorphicTo(mol2), isIsomorphic);
 	}
 
-	[Theory, InlineData("files/147288.cif", true), InlineData("files/1484829.cif", true),
-	 InlineData("files/tep.mol", false), InlineData("files/ptcor.mol2", true), InlineData("files/cif.cif", true),
-	 InlineData("files/benzene.mol", false), InlineData("files/oriluy.pdb", false),
-	 InlineData("files/ligand.cif", false), InlineData("files/cif_noTrim.cif", true),
-	 InlineData("files/VATTOC.mol2", true)]
-	//is a porphyrin!
-	//issue with porphystruct detection!
+	[Theory,
+	 InlineData("files/147288.cif", true),
+	 InlineData("files/1484829.cif", true),
+	 InlineData("files/tep.mol", false),
+	 InlineData("files/ptcor.mol2", true),
+	 InlineData("files/cif.cif", true), //is a corrole
+	 InlineData("files/benzene.mol", false),
+	 InlineData("files/oriluy.pdb", false),
+	 InlineData("files/ligand.cif", false),
+	 InlineData("files/cif_noTrim.cif", true),
+	 InlineData("files/VATTOC.mol2", true)] //issue with PS
 	public void Corroles_Can_Be_Detected(string file, bool outcome)
 	{
 		var corrole = Molecule.FromFile("files/corrole.mol");
@@ -59,5 +63,25 @@ public class MoleculeIsomorphism
 		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 		Assert.True(subTest.IsSubgraphIsomorphicTo(subCorrole, out var mapping));
 		mapping.Count.Should().Be(23);
+	}
+
+	[Fact]
+	public void Mapping_Is_Correct()
+	{
+		var corrole = Molecule.FromFile("files/corrole.mol");
+		var test = Molecule.FromFile("files/147288.cif");
+		//strip metals, hydrogens and co
+		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		Assert.True(subTest.TryMap(subCorrole, out var result));
+		foreach (var (itemInTest, itemInCorrole) in result!)
+			itemInTest.Symbol.Should().Be(itemInCorrole.Symbol); //because both are usual corroles;
+
+		//remove result
+		var residualTest = new Molecule(subTest.Atoms.Except(result.Select(s => s.atomInTarget)));
+		Assert.True(residualTest.TryMap(subCorrole, out result)); //should find a second corrole
+		//remove result again
+		residualTest = new Molecule(residualTest.Atoms.Except(result!.Select(s => s.atomInTarget)));
+		Assert.False(residualTest.IsSubgraphIsomorphicTo(subCorrole)); //should now fail!
 	}
 }

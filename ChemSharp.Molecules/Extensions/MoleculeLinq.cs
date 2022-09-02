@@ -41,4 +41,12 @@ public static class MoleculeLinq
 
 		return new Molecule(atoms, enumerate);
 	}
+
+	/// <summary>
+	/// Adds an List overload for ToMolecule
+	/// </summary>
+	/// <param name="lists"></param>
+	/// <returns></returns>
+	public static IEnumerable<Molecule> ToMolecules(this IEnumerable<IEnumerable<Atom>> lists) =>
+		lists.Select(l => l.ToMolecule());
 }

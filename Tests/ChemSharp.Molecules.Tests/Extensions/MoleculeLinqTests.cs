@@ -17,4 +17,12 @@ public class MoleculeLinqTests
 		molecule.Where(a => a.Symbol != "H").Atoms.Should().HaveCount(23);
 		molecule.Where(a => a.Symbol != "H").Bonds.Should().HaveCount(27);
 	}
+
+	[Fact]
+	public void ToMolecule_Is_Valid()
+	{
+		var molecule = Molecule.FromFile("files/corrole.mol");
+		molecule.Where(a => a.Symbol != "H").Atoms.ToMolecule().Atoms.Should().HaveCount(23);
+		molecule.Where(a => a.Symbol != "H").Bonds.ToMolecule().Atoms.Should().HaveCount(23);
+	}
 }

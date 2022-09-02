@@ -48,10 +48,8 @@ public class MoleculeIsomorphism
 	{
 		var corrole = Molecule.FromFile("files/corrole.mol");
 		var test = Molecule.FromFile(file);
-		//strip metals, hydrogens and co
-		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
-		Assert.Equal(subTest.IsSubgraphIsomorphicTo(subCorrole), outcome);
+		Assert.Equal(Prepare(test).IsSubgraphIsomorphicTo(Prepare(corrole)), outcome);
 	}
 
 	[Fact]
@@ -59,10 +57,7 @@ public class MoleculeIsomorphism
 	{
 		var corrole = Molecule.FromFile("files/corrole.mol");
 		var test = Molecule.FromFile("files/147288.cif");
-		//strip metals, hydrogens and co
-		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
-		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
-		Assert.True(subTest.IsSubgraphIsomorphicTo(subCorrole, out var mapping));
+		Assert.True(Prepare(test).IsSubgraphIsomorphicTo(Prepare(corrole), out var mapping));
 		mapping.Count.Should().Be(23);
 	}
 
@@ -72,8 +67,8 @@ public class MoleculeIsomorphism
 		var corrole = Molecule.FromFile("files/corrole.mol");
 		var test = Molecule.FromFile("files/147288.cif");
 		//strip metals, hydrogens and co
-		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
-		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var subCorrole = Prepare(corrole);
+		var subTest = Prepare(test);
 		Assert.True(subTest.TryMap(subCorrole, out var result));
 		foreach (var (itemInTest, itemInCorrole) in result!)
 			itemInTest.Symbol.Should().Be(itemInCorrole.Symbol); //because both are usual corroles;
@@ -91,11 +86,8 @@ public class MoleculeIsomorphism
 	{
 		var corrole = Molecule.FromFile("files/corrole.mol");
 		var test = Molecule.FromFile("files/147288.cif");
-		//strip metals, hydrogens and co
-		var subCorrole = new Molecule(corrole.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
-		var subTest = new Molecule(test.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 
-		var mappings = subTest.MapAll(subCorrole);
+		var mappings = Prepare(test).MapAll(Prepare(corrole));
 		mappings.Should().HaveCount(23);
 		mappings.Values.Should().AllSatisfy(item => item.Count.Should().Be(2));
 	}
@@ -108,7 +100,7 @@ public class MoleculeIsomorphism
 	public void IntegrationTest_With_Proteins(string path, int numberOfHemes)
 	{
 		var porphyrin = Molecule.FromFile("files/porphyrin.xyz");
-		var subPorphyrin = new Molecule(porphyrin.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
+		var subPorphyrin = Prepare(porphyrin);
 
 		var protein = Molecule.FromFile(path);
 		//in combination with ConnectedFigures() this may be faster!
@@ -128,4 +120,16 @@ public class MoleculeIsomorphism
 		mappings.Should().HaveCount(24); //porphyrin has 24 atoms
 		mappings.Values.Should().AllSatisfy(item => item.Count.Should().Be(numberOfHemes));
 	}
+
+	[Fact]
+	public void GetSubgraphs_Should_Return_Individual_Molecules()
+	{
+		var corrole = Molecule.FromFile("files/corrole.mol");
+		var test = Molecule.FromFile("files/147288.cif");
+		var matches = Prepare(test).GetSubgraphs(Prepare(corrole)).ToList();
+		matches.Should().HaveCount(2);
+		matches.Should().AllSatisfy(item => item.Atoms.Should().HaveCount(23));
+	}
+
+	public static Molecule Prepare(Molecule mol) => new(mol.Atoms.Where(a => a.IsNonMetal && a.Symbol != "H"));
 }

@@ -117,6 +117,7 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		const string compNeedle = "_chem_comp.id";
 		const string mmcifNeedle = "_pdbx";
 		const string ccdcNeedle = "_atom_type_symbol";
+		const string altCCDCNeedle = "_symmetry";
 		if (line.StartsWith(compNeedle.AsSpan()))
 		{
 			_type = CifType.Comp;
@@ -125,7 +126,7 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		}
 
 		if (line.StartsWith(mmcifNeedle.AsSpan())) _type = CifType.mmCIF;
-		if (line.StartsWith(ccdcNeedle.AsSpan())) _type = CifType.CCDC;
+		if (line.StartsWith(ccdcNeedle.AsSpan()) || line.StartsWith(altCCDCNeedle.AsSpan())) _type = CifType.CCDC;
 	}
 
 	private void SetPickingIndicator(ReadOnlySpan<char> line)

@@ -37,41 +37,6 @@ public static class MathV
 	}
 
 	/// <summary>
-	///     Wrapper function for <see cref="Vector3.Dot" />
-	/// </summary>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <returns></returns>
-	[Obsolete("Use Vector3.Dot instead!")]
-	public static float Dot(Vector3 left, Vector3 right) => Vector3.Dot(left, right);
-
-	/// <summary>
-	///     Wrapper function for <see cref="Vector3.Cross" />
-	/// </summary>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <returns></returns>
-	[Obsolete("Use Vector3.Cross instead!")]
-	public static Vector3 Cross(Vector3 left, Vector3 right) => Vector3.Cross(left, right);
-
-	/// <summary>
-	///     Wrapper function for <see cref="Vector3.Normalize" />
-	/// </summary>
-	/// <param name="v"></param>
-	/// <returns></returns>
-	[Obsolete("Use Vector3.Normalize instead!")]
-	public static Vector3 Normalize(Vector3 v) => Vector3.Normalize(v);
-
-	/// <summary>
-	///     Wrapper function for <see cref="Vector3.Distance" />
-	/// </summary>
-	/// <param name="left"></param>
-	/// <param name="right"></param>
-	/// <returns></returns>
-	[Obsolete("Use Vector3.Distance instead!")]
-	public static float Distance(Vector3 left, Vector3 right) => Vector3.Distance(left, right);
-
-	/// <summary>
 	///     Projects a point onto plane p
 	/// </summary>
 	/// <param name="p"></param>

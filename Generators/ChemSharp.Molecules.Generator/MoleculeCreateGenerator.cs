@@ -11,7 +11,7 @@ public class MoleculeCreateGenerator : ISourceGenerator
 
 	public void Execute(GeneratorExecutionContext context)
 	{
-		var formats = context.GetClassesImplementing("IAtomFileFormat");
+		var formats = context.GetClassesImplementing("IAtomFileFormat").ToList();
 		var sb = new StringBuilder(@"
 		using System.IO;
 		using ChemSharp.Files;
@@ -38,7 +38,7 @@ public class MoleculeCreateGenerator : ISourceGenerator
 		foreach (var format in formats)
 		{
 			var ext = format.Identifier.ValueText.Split(new[] {"Format"}, StringSplitOptions.RemoveEmptyEntries)[0]
-			                .ToLower();
+				.ToLower();
 			sb.AppendLine($@"""{ext}"" => {format.Identifier.ValueText}.Read(path),");
 		}
 
@@ -52,7 +52,7 @@ public class MoleculeCreateGenerator : ISourceGenerator
 		foreach (var format in formats)
 		{
 			var ext = format.Identifier.ValueText.Split(new[] {"Format"}, StringSplitOptions.RemoveEmptyEntries)[0]
-			                .ToLower();
+				.ToLower();
 			sb.AppendLine($@"""{ext}"" => {format.Identifier.ValueText}.ReadFromStream(stream),");
 		}
 

@@ -38,7 +38,7 @@ public class Atom : Element, IEquatable<Atom>
 	/// </summary>
 	public int ResidueId { get; set; }
 
-	public int ChainId { get; set; }
+	public char ChainId { get; set; }
 
 	public bool Equals(Atom? other) =>
 		other is not null &&

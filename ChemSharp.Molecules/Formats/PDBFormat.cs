@@ -41,7 +41,7 @@ public partial class PDBFormat : FileFormat, IAtomFileFormat
 		var resName = line[17..20].Trim();
 		var resId = line[22..26].Trim().ToInt();
 		var chainIdRaw = line[21..22].Trim();
-		var chainId = chainIdRaw.Length > 0 ? char.ToUpper(chainIdRaw[0]) - 64 : 0;
+		var chainId = chainIdRaw.Length > 0 ? chainIdRaw[0] % 32 : 0;
 		return new Atom(symbol.ToString().UcFirst(), x.ToSingle(), y.ToSingle(), z.ToSingle())
 		{
 			Title = title.ToString(), Residue = resName.ToString(), ResidueId = resId, ChainId = chainId

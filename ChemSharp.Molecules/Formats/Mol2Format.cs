@@ -8,8 +8,10 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	private const string Tripos = "@<TRIPOS>";
 	private const string AtomsBlock = $"{Tripos}ATOM";
 	private const string BondsBlock = $"{Tripos}BOND";
+	private const string SubstructureBlock = $"{Tripos}SUBSTRUCTURE";
 	private bool _pickingAtoms;
 	private bool _pickingBonds;
+	private bool _pickingSubstructure;
 
 	public Mol2Format(string path) : base(path) { }
 
@@ -27,7 +29,6 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var idPos = residueRaw.FirstNumeric();
 		var residue = idPos != -1 ? residueRaw[..idPos] : residueRaw;
 		var resId = idPos != -1 ? residueRaw[idPos..].ToInt() : 0;
-		var chainId = line.Slice(cols[6].start, cols[6].length).ToInt();
 		type = type.PointSplit();
 		//most of the time type contains the actual type, so casting to string is ok!
 		var typeStr = type.ToString();
@@ -37,10 +38,7 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 			: pos != -1
 				? id[..pos]
 				: id;
-		return new Atom(symbol, x, y, z)
-		{
-			Title = id, Residue = residue.ToString(), ResidueId = resId, ChainId = chainId
-		};
+		return new Atom(symbol, x, y, z) {Title = id, Residue = residue.ToString(), ResidueId = resId};
 	}
 
 	public List<Bond> Bonds { get; } = new();
@@ -72,7 +70,20 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 			//no block beginning, parse if allowed
 			if (_pickingAtoms) Atoms.Add(ParseAtom(line));
 			if (_pickingBonds) Bonds.Add(ParseBond(line));
+			if (_pickingSubstructure) UpdateChainId(line);
 		}
+	}
+
+	private void UpdateChainId(ReadOnlySpan<char> line)
+	{
+		var cols = line.WhiteSpaceSplit();
+		if (cols.Length <= 5) return;
+		if (cols[5].length == 0) return;
+		var id = line.Slice(cols[1].start, cols[1].length).ToString();
+		var atom = Atoms.FirstOrDefault(a => $"{a.Residue + a.ResidueId}" == id);
+		if (atom == null) return;
+		var chainId = line.Slice(cols[5].start, cols[5].length);
+		atom.ChainId = chainId[0] % 32;
 	}
 
 	private void SetPickingIndicator(ReadOnlySpan<char> line)
@@ -82,16 +93,25 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		{
 			_pickingAtoms = true;
 			_pickingBonds = false;
+			_pickingSubstructure = false;
 		}
 		else if (line.StartsWith(BondsBlock.AsSpan()))
 		{
 			_pickingBonds = true;
 			_pickingAtoms = false;
+			_pickingSubstructure = false;
+		}
+		else if (line.StartsWith(SubstructureBlock.AsSpan()))
+		{
+			_pickingAtoms = false;
+			_pickingBonds = false;
+			_pickingSubstructure = true;
 		}
 		else
 		{
 			_pickingAtoms = false;
 			_pickingBonds = false;
+			_pickingSubstructure = false;
 		}
 	}
 }

@@ -1,7 +1,5 @@
-﻿using ChemSharp.Molecules.DataProviders;
-#if NETSTANDARD2_0
-using ChemSharp.Memory;
-#endif
+﻿using ChemSharp.Memory;
+using ChemSharp.Molecules.DataProviders;
 
 namespace ChemSharp.Molecules.Formats;
 

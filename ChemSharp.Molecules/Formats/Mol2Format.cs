@@ -82,7 +82,7 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var id = line.Slice(cols[1].start, cols[1].length).ToString();
 		var atoms = Atoms.Where(a => $"{a.Residue + a.ResidueId}" == id);
 		var chainIdRaw = line.Slice(cols[5].start, cols[5].length).Trim();
-		var chainId = chainIdRaw[0] % 32;
+		var chainId = chainIdRaw.Length > 0 ? chainIdRaw[0] : 0;
 		foreach (var atom in atoms) atom.ChainId = chainId;
 	}
 

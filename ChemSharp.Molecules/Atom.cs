@@ -33,6 +33,11 @@ public class Atom : Element, IEquatable<Atom>
 	/// </summary>
 	public string Residue { get; set; } = "";
 
+	/// <summary>
+	/// Gets or sets the residue id
+	/// </summary>
+	public int ResidueId { get; set; }
+
 	public bool Equals(Atom? other) =>
 		other is not null &&
 		(ReferenceEquals(this, other)

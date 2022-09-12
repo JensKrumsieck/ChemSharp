@@ -66,8 +66,6 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	/// <summary>
 	///     Recalculates Bonds based on Distances
 	///     WARNING! Discards every existing Bond information
-	///     Add a IBondDataProvider Instance to use Bonds read from file
-	///     WARNING! Any IBondDataProvider will be discarded by <see cref="RecalculateBonds" />
 	/// </summary>
 	public void RecalculateBonds()
 	{

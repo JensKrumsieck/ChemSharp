@@ -27,6 +27,7 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var idPos = residueRaw.FirstNumeric();
 		var residue = idPos != -1 ? residueRaw[..idPos] : residueRaw;
 		var resId = idPos != -1 ? residueRaw[idPos..].ToInt() : 0;
+		var chainId = line.Slice(cols[6].start, cols[6].length).ToInt();
 		type = type.PointSplit();
 		//most of the time type contains the actual type, so casting to string is ok!
 		var typeStr = type.ToString();
@@ -36,7 +37,10 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 			: pos != -1
 				? id[..pos]
 				: id;
-		return new Atom(symbol, x, y, z) {Title = id, Residue = residue.ToString(), ResidueId = resId};
+		return new Atom(symbol, x, y, z)
+		{
+			Title = id, Residue = residue.ToString(), ResidueId = resId, ChainId = chainId
+		};
 	}
 
 	public List<Bond> Bonds { get; } = new();

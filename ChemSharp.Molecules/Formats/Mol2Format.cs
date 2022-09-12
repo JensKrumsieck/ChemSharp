@@ -1,5 +1,7 @@
-﻿using ChemSharp.Memory;
-using ChemSharp.Molecules.DataProviders;
+﻿using ChemSharp.Molecules.DataProviders;
+#if NETSTANDARD2_0
+using ChemSharp.Memory;
+#endif
 
 namespace ChemSharp.Molecules.Formats;
 
@@ -80,10 +82,10 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		if (cols.Length <= 5) return;
 		if (cols[5].length == 0) return;
 		var id = line.Slice(cols[1].start, cols[1].length).ToString();
-		var atom = Atoms.FirstOrDefault(a => $"{a.Residue + a.ResidueId}" == id);
-		if (atom == null) return;
-		var chainId = line.Slice(cols[5].start, cols[5].length);
-		atom.ChainId = chainId[0] % 32;
+		var atoms = Atoms.Where(a => $"{a.Residue + a.ResidueId}" == id);
+		var chainIdRaw = line.Slice(cols[5].start, cols[5].length).Trim();
+		var chainId = chainIdRaw[0] % 32;
+		foreach (var atom in atoms) atom.ChainId = chainId;
 	}
 
 	private void SetPickingIndicator(ReadOnlySpan<char> line)

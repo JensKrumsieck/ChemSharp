@@ -20,9 +20,11 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 
 	private int _a1;
 	private int _a2 = 1;
+	private int _colChainId;
 	private int _colDisorder;
 	private int _colLabel;
 	private int _colRes;
+	private int _colSeqId;
 	private int _colSymbol;
 
 	private int _colX;
@@ -68,7 +70,21 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 		var y = line.Slice(cols[_colY].start, cols[_colY].length).RemoveUncertainty().ToSingle();
 		var z = line.Slice(cols[_colZ].start, cols[_colZ].length).RemoveUncertainty().ToSingle();
 		var residue = line.Slice(cols[_colRes].start, cols[_colRes].length).ToString();
-		return new Atom(symbol.ToString(), x, y, z) {Title = label.ToString(), Residue = residue};
+		var chainId = default(char);
+		if (_colChainId != 0)
+			chainId = line.Slice(cols[_colChainId].start, cols[_colChainId].length)[0];
+
+		var resId = 0;
+		if (_colSeqId != 0)
+		{
+			var resIdRaw = line.Slice(cols[_colSeqId].start, cols[_colSeqId].length);
+			if (char.IsDigit(resIdRaw[0])) resId = resIdRaw.ToInt();
+		}
+
+		return new Atom(symbol.ToString(), x, y, z)
+		{
+			Title = label.ToString(), Residue = residue, ResidueId = resId, ChainId = chainId
+		};
 	}
 
 	private Bond? ParseBondInternal(ReadOnlySpan<char> line)

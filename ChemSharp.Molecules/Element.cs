@@ -16,6 +16,9 @@ public class Element
 	/// </summary>
 	private static readonly Element Dummy = new() {Symbol = "DA", Name = "Dummy Atom"};
 
+	private readonly string[] _metalloids = {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"};
+	private readonly string[] _nonMetals = {"H", "C", "N", "O", "P", "S", "Se"};
+
 	[JsonIgnore] private string? _color;
 
 	static Element()
@@ -58,6 +61,7 @@ public class Element
 	/// <param name="symbol"></param>
 	public Element(string symbol)
 	{
+		if (symbol == "D") symbol = "H"; //filter deuterium
 		var shadow = ElementDataProvider.ElementData.FirstOrDefault(s => s.Symbol == symbol) ?? Dummy;
 
 		Name = shadow.Name;
@@ -84,16 +88,13 @@ public class Element
 	public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
 
 	[JsonIgnore] public bool IsMetal => !IsMetalloid && !IsNonMetal;
-	[JsonIgnore] public int Charge { get; set; } = 0;
+	[JsonIgnore] public int Charge { get; set; }
 
 	[JsonIgnore] public int Electrons => AtomicNumber - Charge;
 
-	[JsonIgnore]
-	public bool IsMetalloid => new[] {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"}.Contains(Symbol);
+	[JsonIgnore] public bool IsMetalloid => _metalloids.Contains(Symbol);
 
-	[JsonIgnore]
-	public bool IsNonMetal => new[] {"H", "C", "N", "O", "P", "S", "Se"}.Contains(Symbol) || Group is 18 or 17;
-
+	[JsonIgnore] public bool IsNonMetal => _nonMetals.Contains(Symbol) || Group is 18 or 17;
 	public string Name { get; set; }
 	public string Symbol { get; set; }
 	public string Appearance { get; set; }

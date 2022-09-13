@@ -105,8 +105,8 @@ public class Element
 	public string Category { get; set; }
 	public string ElectronConfiguration { get; set; }
 	public double? Electronegativity { get; set; }
-	public int? CovalentRadius { get; set; }
-	public int? AtomicRadius { get; set; }
+	public int CovalentRadius { get; set; }
+	public int AtomicRadius { get; set; }
 	public int? VdWRadius { get; set; }
 	public string CAS { get; set; }
 }

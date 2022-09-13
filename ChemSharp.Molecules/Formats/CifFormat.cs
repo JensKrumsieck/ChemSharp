@@ -1,4 +1,5 @@
-﻿using ChemSharp.Memory;
+﻿using ChemSharp.Extensions;
+using ChemSharp.Memory;
 using ChemSharp.Molecules.Extensions;
 
 namespace ChemSharp.Molecules.Formats;
@@ -81,7 +82,7 @@ public partial class CifFormat : FileFormat, IAtomFileFormat, IBondFileFormat
 			if (char.IsDigit(resIdRaw[0])) resId = resIdRaw.ToInt();
 		}
 
-		return new Atom(symbol.ToString(), x, y, z)
+		return new Atom(symbol.ToString().UcFirst(), x, y, z)
 		{
 			Title = label.ToString(), Residue = residue, ResidueId = resId, ChainId = chainId
 		};

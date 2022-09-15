@@ -16,8 +16,8 @@ public class Element
 	/// </summary>
 	private static readonly Element Dummy = new() {Symbol = "DA", Name = "Dummy Atom"};
 
-	private readonly string[] _metalloids = {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"};
-	private readonly string[] _nonMetals = {"H", "C", "N", "O", "P", "S", "Se"};
+	private static readonly string[] Metalloids = {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"};
+	private static readonly string[] NonMetals = {"H", "C", "N", "O", "P", "S", "Se"};
 
 	[JsonIgnore] private string? _color;
 
@@ -92,9 +92,9 @@ public class Element
 
 	[JsonIgnore] public int Electrons => AtomicNumber - Charge;
 
-	[JsonIgnore] public bool IsMetalloid => _metalloids.Contains(Symbol);
+	[JsonIgnore] public bool IsMetalloid => Metalloids.Contains(Symbol);
 
-	[JsonIgnore] public bool IsNonMetal => _nonMetals.Contains(Symbol) || Group is 18 or 17;
+	[JsonIgnore] public bool IsNonMetal => NonMetals.Contains(Symbol) || Group is 18 or 17;
 	public string Name { get; set; }
 	public string Symbol { get; set; }
 	public string Appearance { get; set; }

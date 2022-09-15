@@ -9,10 +9,10 @@ public class MoleculeFileFormatTests
 	[Theory,
 	 InlineData("files/cif.cif", 79, 89),
 	 InlineData("files/cif_noTrim.cif", 79, 89),
-	 InlineData("files/mmcif.cif", 1291, 1251),
+	 InlineData("files/mmcif.cif", 1291, 1256),
 	 InlineData("files/ligand.cif", 44, 46),
 	 InlineData("files/147288.cif", 206, 230),
-	 InlineData("files/4r21.cif", 6752, 6892),
+	 InlineData("files/4r21.cif", 6752, 6902),
 	 InlineData("files/benzene.mol2", 12, 12), InlineData("files/myo.mol2", 1437, 1312),
 	 InlineData("files/tep.mol2", 46, 50), InlineData("files/ptcor.mol2", 129, 127),
 	 InlineData("files/benzene_3d.mol", 12, 12),
@@ -27,15 +27,16 @@ public class MoleculeFileFormatTests
 		var mol = Molecule.FromFile(filename);
 		mol.Atoms.Count.Should().Be(atoms);
 		mol.Bonds.Count.Should().Be(bonds);
+		mol.Atoms.Where(a => a.Symbol == "DA").Should().HaveCount(0);
 	}
 
 	[Theory,
 	 InlineData("files/cif.cif", 79, 89),
 	 InlineData("files/cif_noTrim.cif", 79, 89),
-	 InlineData("files/mmcif.cif", 1291, 1251),
+	 InlineData("files/mmcif.cif", 1291, 1256),
 	 InlineData("files/ligand.cif", 44, 46),
 	 InlineData("files/147288.cif", 206, 230),
-	 InlineData("files/4r21.cif", 6752, 6892),
+	 InlineData("files/4r21.cif", 6752, 6902),
 	 InlineData("files/benzene.mol2", 12, 12), InlineData("files/myo.mol2", 1437, 1312),
 	 InlineData("files/tep.mol2", 46, 50), InlineData("files/ptcor.mol2", 129, 127),
 	 InlineData("files/benzene_3d.mol", 12, 12),

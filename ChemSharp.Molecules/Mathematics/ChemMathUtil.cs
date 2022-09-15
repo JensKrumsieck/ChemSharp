@@ -23,8 +23,7 @@ public static class ChemMathUtil
 	/// <returns></returns>
 	public static bool BondToByCovalentRadii(this Atom atom, Atom test, float delta = Delta)
 	{
-		if (!atom.CovalentRadius.HasValue || !test.CovalentRadius.HasValue) return false;
-		var check = (atom.CovalentRadius.Value + (float)test.CovalentRadius.Value + delta) / 100f;
+		var check = (atom.CovalentRadius + (float)test.CovalentRadius + delta) / 100f;
 		return atom.DistanceToSquared(test) < check * check;
 	}
 }

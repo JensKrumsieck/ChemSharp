@@ -15,4 +15,26 @@ public class Mol2FormatTests
 		mol.Atoms.Count(s => s.Symbol == "DA").Should().Be(0);
 		mol.Bonds.Count.Should().Be(bondsCount);
 	}
+
+	[Fact]
+	public void PDB_Mol2_Have_Same_ChainIds()
+	{
+		var pdb = PDBFormat.Read("files/0001.pdb");
+		var mol2 = Mol2Format.Read("files/0001.mol2");
+		mol2.Atoms.Should().HaveCount(pdb.Atoms.Count);
+		var pdbGrouped = pdb.Atoms.GroupBy(a => a.ChainId);
+		var mol2Grouped = mol2.Atoms.GroupBy(a => a.ChainId);
+		pdbGrouped.Should().HaveCount(mol2Grouped.Count());
+	}
+
+	[Fact]
+	public void Cif_Mol2_Have_Same_ChainIds()
+	{
+		var cif = CifFormat.Read("files/4n4n.cif");
+		var mol2 = Mol2Format.Read("files/0001.mol2");
+		mol2.Atoms.Should().HaveCount(cif.Atoms.Count);
+		var cifGrouped = cif.Atoms.GroupBy(a => a.ChainId);
+		var mol2Grouped = mol2.Atoms.GroupBy(a => a.ChainId);
+		cifGrouped.Should().HaveCount(mol2Grouped.Count());
+	}
 }

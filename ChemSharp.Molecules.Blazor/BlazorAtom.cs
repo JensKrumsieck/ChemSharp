@@ -15,6 +15,6 @@ public class BlazorAtom : ComponentBase
 
 		await JS.InvokeVoidAsync("chemsharpMolecules.addAtom", Atom.Title, Atom.Symbol,
 		                         Atom.Location.X, Atom.Location.Y, Atom.Location.Z,
-		                         Atom.CovalentRadius ?? 100, Atom.Color);
+		                         Atom.CovalentRadius, Atom.Color);
 	}
 }

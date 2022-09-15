@@ -14,7 +14,7 @@ public class Atom3D : ModelVisual3D
 	public Atom3D(Atom atom)
 	{
 		var builder = new MeshBuilder();
-		builder.AddSphere(atom.Location.ToPoint3D(), (double)(atom.CovalentRadius ?? 100) / 200);
+		builder.AddSphere(atom.Location.ToPoint3D(), atom.CovalentRadius / 200d);
 		var brush = new BrushConverter().ConvertFromString(atom.Color) as Brush;
 		Atom = atom;
 		Content = new GeometryModel3D(builder.ToMesh(), MaterialHelper.CreateMaterial(brush, 0, 0));

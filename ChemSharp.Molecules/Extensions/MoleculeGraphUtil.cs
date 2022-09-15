@@ -24,11 +24,11 @@ public static class MoleculeGraphUtil
 	/// <param name="mol"></param>
 	/// <returns></returns>
 	public static UndirectedGraph<int, Edge<int>> ConvertToSimpleGraph(this Molecule mol) => new(
-		mol.Atoms.Select(a => mol.Atoms.IndexOf(a)).ToList(),
-		mol.Bonds.Select(b => new Edge<int>(
-			mol.Atoms.IndexOf(b.Atom1),
-			mol.Atoms.IndexOf(b.Atom2)))
-	);
+		 mol.Atoms.Select((_, i) => i).ToList(),
+		 mol.Bonds.Select(b => new Edge<int>(
+		                                     mol.Atoms.IndexOf(b.Atom1),
+		                                     mol.Atoms.IndexOf(b.Atom2)))
+		);
 
 	/// <summary>
 	///     Tries to map a search molecule onto a target molecule and returns boolean result.
@@ -39,7 +39,7 @@ public static class MoleculeGraphUtil
 	/// <param name="result"></param>
 	/// <returns></returns>
 	public static bool TryMap(this Molecule target, Molecule search,
-		out IList<(Atom atomInTarget, Atom atomInSearch)>? result)
+	                          out IList<(Atom atomInTarget, Atom atomInSearch)>? result)
 	{
 		result = null;
 		if (!target.IsSubgraphIsomorphicTo(search, out var mapping)) return false;

@@ -9,6 +9,9 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 	private const string AtomsBlock = $"{Tripos}ATOM";
 	private const string BondsBlock = $"{Tripos}BOND";
 	private const string SubstructureBlock = $"{Tripos}SUBSTRUCTURE";
+
+	private readonly Dictionary<int, HashSet<int>> _chainIdToAtomId = new();
+	private int _i;
 	private bool _pickingAtoms;
 	private bool _pickingBonds;
 	private bool _pickingSubstructure;
@@ -29,6 +32,9 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var idPos = residueRaw.FirstNumeric();
 		var residue = idPos != -1 ? residueRaw[..idPos] : residueRaw;
 		var resId = idPos != -1 ? residueRaw[idPos..].ToInt() : 0;
+		var chainId = (char)line.Slice(cols[6].start, cols[6].length).ToInt();
+		if (!_chainIdToAtomId.ContainsKey(chainId)) _chainIdToAtomId[chainId] = new HashSet<int>();
+		_chainIdToAtomId[chainId].Add(_i++);
 		type = type.PointSplit();
 		//most of the time type contains the actual type, so casting to string is ok!
 		var typeStr = type.ToString();
@@ -79,11 +85,10 @@ public partial class Mol2Format : FileFormat, IAtomFileFormat, IBondFileFormat
 		var cols = line.WhiteSpaceSplit();
 		if (cols.Length <= 5) return;
 		if (cols[5].length == 0) return;
-		var id = line.Slice(cols[1].start, cols[1].length).ToString();
-		var startIndex = line.Slice(cols[2].start, cols[2].length).ToInt();
-		var atoms = Atoms.Where(a => $"{a.Residue + a.ResidueId}" == id && Atoms.IndexOf(a) < startIndex + 100);
+		var id = line.Slice(cols[0].start, cols[0].length).ToInt(); //index of chain
 		var chainIdRaw = line.Slice(cols[5].start, cols[5].length).Trim();
 		var chainId = chainIdRaw.Length > 0 ? chainIdRaw[0] : 'ä';
+		var atoms = Atoms.Where((_, j) => _chainIdToAtomId[id].Contains(j));
 		foreach (var atom in atoms) atom.ChainId = chainId;
 	}
 

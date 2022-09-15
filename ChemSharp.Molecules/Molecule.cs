@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using ChemSharp.Export;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
@@ -70,9 +71,32 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	public void RecalculateBonds()
 	{
 		Edges.Clear();
+#if NET5_0_OR_GREATER
+		RecalculateBondsSpan();
+#else
 		if (Atoms.Count < 600) RecalculateBondsNonParallel();
 		else RecalculateBondsParallel();
+#endif
 	}
+
+#if NET5_0_OR_GREATER
+	private void RecalculateBondsSpan()
+	{
+		var span = CollectionsMarshal.AsSpan(Atoms);
+		for (var i = 0; i < span.Length; i++)
+		{
+			var atomI = span[i];
+			for (var j = i + 1; j < span.Length; ++j)
+			{
+				var atomJ = span[j];
+				if (i == j || !atomI.BondToByCovalentRadii(atomJ))
+					continue;
+
+				Bonds.Add(new Bond(atomI, atomJ));
+			}
+		}
+	}
+#endif
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private void RecalculateBondsParallel()

@@ -1,31 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-	<PropertyGroup>
-		<PackageId>ChemSharp.Molecules.Blazor</PackageId>
-		<Description>Blazor Extension for ChemSharp.Molecules</Description>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-	</PropertyGroup>
-	<ItemGroup>
-		<Content Remove="wwwroot\.gitkeep" />
-	</ItemGroup>
+  <PropertyGroup>
+    <PackageId>ChemSharp.Molecules.Blazor</PackageId>
+    <Description>Blazor Extension for ChemSharp.Molecules</Description>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\.gitkeep"/>
+  </ItemGroup>
 
-	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-		<Content Update="assets\**" Pack="false" />
-	</ItemGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser"/>
+    <Content Update="assets\**" Pack="false"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.ClientAssets" Version="0.1.0-alpha.21528.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.1" Condition="'$(TargetFramework)' == 'net6.0'"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" Condition="'$(TargetFramework)' == 'net6.0'"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'"/>
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.ClientAssets" Version="0.1.0-alpha.21528.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="wwwroot\.gitkeep" Pack="false" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\.gitkeep" Pack="false"/>
+  </ItemGroup>
 </Project>

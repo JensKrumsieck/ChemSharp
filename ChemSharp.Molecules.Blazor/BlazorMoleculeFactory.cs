@@ -5,15 +5,16 @@ namespace ChemSharp.Molecules.Blazor;
 
 public static class BlazorMoleculeFactory
 {
-    /// <summary>
-    /// Create Molecule from IBrowserFile
-    /// </summary>
-    /// <param name="file"></param>
-    /// <returns></returns>
-    public async static Task<Molecule> CreateAsync(IBrowserFile file, long maxFileSize = 8192000L)
-    {
-        var extension = FileHandler.GetExtension(file.Name);
-        var stream = file.OpenReadStream(maxFileSize);
-        return await MoleculeFactory.CreateFromStreamAsync(stream, extension);
-    }
+	/// <summary>
+	///     Create Molecule from IBrowserFile
+	/// </summary>
+	/// <param name="file"></param>
+	/// <param name="maxFileSize"></param>
+	/// <returns></returns>
+	public static Molecule Create(IBrowserFile file, long maxFileSize = 8192000L)
+	{
+		var extension = FileHandler.GetExtension(file.Name);
+		var stream = file.OpenReadStream(maxFileSize);
+		return Molecule.FromStream(stream, extension);
+	}
 }

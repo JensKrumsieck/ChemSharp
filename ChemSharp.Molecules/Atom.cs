@@ -1,59 +1,83 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace ChemSharp.Molecules;
 
 /// <summary>
-/// Atom represents an Element in 3d Space
+///     Atom represents an Element in 3d Space
 /// </summary>
 public class Atom : Element, IEquatable<Atom>
 {
-    /// <summary>
-    /// Location in 3D Space
-    /// </summary>
-    public Vector3 Location { get; set; }
+	private string _title = "";
 
-    /// <inheritdoc />
-    public Atom(string symbol) : base(symbol) { }
+	/// <inheritdoc />
+	public Atom(string symbol) : base(symbol) { }
 
-    /// <summary>
-    /// Computes Distance To Other Atom
-    /// Wrapper from Vector3.Distance
-    /// </summary>
-    /// <param name="test"></param>
-    /// <returns></returns>
-    public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
+	public Atom(string symbol, float x, float y, float z) : this(symbol) => Location = new Vector3(x, y, z);
 
-    private string _title;
-    /// <summary>
-    /// Gets or Sets the Atom title
-    /// </summary>
-    public string Title
-    {
-        get => !string.IsNullOrEmpty(_title) ? _title : Symbol;
-        set => _title = value;
-    }
+	/// <summary>
+	///     Location in 3D Space
+	/// </summary>
+	public Vector3 Location { get; set; }
 
-    public override string ToString() => $"{Title}: {Location}";
+	/// <summary>
+	///     Gets or Sets the Atom title
+	/// </summary>
+	public string Title
+	{
+		get => !string.IsNullOrEmpty(_title) ? _title : Symbol;
+		set => _title = value;
+	}
 
-    /// <summary>
-    /// Gets HashCode, defined by title and location
-    /// </summary>
-    /// <returns></returns>
-    public override int GetHashCode() => (_title, Location).GetHashCode();
+	/// <summary>
+	///     Gets or sets the Residue Type
+	/// </summary>
+	public string Residue { get; set; } = "";
 
-    public bool Equals(Atom other) =>
-        other is not null &&
-        (ReferenceEquals(this, other)
-         || _title == other._title && Location.Equals(other.Location));
+	/// <summary>
+	/// Gets or sets the residue id
+	/// </summary>
+	public int ResidueId { get; set; }
 
-    public override bool Equals(object obj) =>
-        obj is not null &&
-        (ReferenceEquals(this, obj)
-         || obj.GetType() == GetType() && Equals((Atom)obj));
+	public char ChainId { get; set; }
 
-    /// <summary>
-    /// Allows to tag any string related information to atom
-    /// </summary>
-    public string Tag;
+	public bool Equals(Atom? other) =>
+		other is not null &&
+		(ReferenceEquals(this, other)
+		 || Symbol == other.Symbol && Location.Equals(other.Location));
+
+	/// <summary>
+	///     Computes Distance To Other Atom
+	///     Wrapper from Vector3.Distance
+	/// </summary>
+	/// <param name="test"></param>
+	/// <returns></returns>
+	public float DistanceTo(Atom test) => Vector3.Distance(Location, test.Location);
+
+	/// <summary>
+	///     Returns squared Distance of two atoms
+	/// </summary>
+	/// <param name="test"></param>
+	/// <returns></returns>
+	public float DistanceToSquared(Atom test) => Vector3.DistanceSquared(Location, test.Location);
+
+	public override string ToString() => $"{Title}: {Location}";
+
+	/// <summary>
+	///     Gets HashCode, defined by Symbol and location
+	/// </summary>
+	/// <returns></returns>
+	public override int GetHashCode() => (Title, Symbol, Location).GetHashCode();
+
+	public override bool Equals(object? obj) =>
+		obj is not null &&
+		(ReferenceEquals(this, obj)
+		 || obj.GetType() == GetType() && Equals((Atom)obj));
+
+	public static bool operator ==(Atom? a, Atom? b) =>
+		a is null && b is null
+		|| a is not null && b is not null
+		                 && (ReferenceEquals(a, b) || a.Equals(b));
+
+	public static bool operator !=(Atom? a, Atom? b) =>
+		!(a == b);
 }

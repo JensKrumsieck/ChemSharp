@@ -3,9 +3,9 @@
 namespace ChemSharp;
 
 /// <summary>
-/// Marks an Object that has data
+///     Marks an Object that has data
 /// </summary>
 public interface IDataObject
 {
-    IXYDataProvider DataProvider { get; }
+	IXYDataProvider DataProvider { get; }
 }

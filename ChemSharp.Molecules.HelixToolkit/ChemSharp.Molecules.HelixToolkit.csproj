@@ -3,14 +3,14 @@
   <PropertyGroup>
     <PackageId>ChemSharp.Molecules.HelixToolkit</PackageId>
     <Description>HelixToolkit Bindings for ChemSharp.Molecules</Description>
-    <TargetFrameworks>net6.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net7.0-windows</TargetFrameworks>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="HelixToolkit.Core.Wpf" Version="2.20.1" />
-    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj" />
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.23.0"/>
+    <ProjectReference Include="..\ChemSharp.Molecules\ChemSharp.Molecules.csproj"/>
   </ItemGroup>
 
 </Project>

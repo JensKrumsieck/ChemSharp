@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
-    <LangVersion>10</LangVersion>
-    <Version>1.0.15</Version>
+    <LangVersion>preview</LangVersion>
+    <Version>2.0.0-beta.1</Version>
     <Authors>Jens Krumsieck</Authors>
     <Copyright>Jens Krumsieck</Copyright>
     <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>
@@ -11,10 +11,12 @@
     <PackageTags>Chemistry, Molecule, Atom, Spectroscopy</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <nullable>enable</nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\icon.png" Pack="true" PackagePath="" />
-    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath=""/>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>

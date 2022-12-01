@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ChemSharp.DataProviders;
+﻿using ChemSharp.DataProviders;
 using ChemSharp.Export;
 using ChemSharp.Mathematics;
 using ChemSharp.Spectroscopy.Extension;
@@ -10,75 +7,76 @@ namespace ChemSharp.Spectroscopy;
 
 public class Spectrum : ISpectrum, IDataObject, IExportable
 {
-    ///<summary>
-    /// <inheritdoc />
-    /// </summary>
-    public IXYDataProvider DataProvider { get; }
+	/// <summary>
+	///     Backing field for <see cref="Spectrum.Derivative" />
+	/// </summary>
+	private List<DataPoint> _derivative;
 
-    public Spectrum(IXYDataProvider provider)
-    {
-        DataProvider = provider;
-        DataProviderChanged();
-    }
+	/// <summary>
+	///     Backing field for <see cref="Spectrum.Integral" />
+	/// </summary>
+	private List<DataPoint> _integral;
 
-    /// <summary>
-    /// When DataProvider is changed, add data
-    /// </summary>
-    private void DataProviderChanged()
-    {
-        XYData = DataProvider.XYData.ToList();
-        Title = DataProvider.Path;
-    }
+	public Spectrum(IXYDataProvider provider)
+	{
+		DataProvider = provider;
+		DataProviderChanged();
+	}
 
-    /// <summary>
-    /// <inheritdoc cref="ISpectrum.XYData"/>
-    /// </summary>
-    public List<DataPoint> XYData { get; set; } = new();
+	/// <summary>
+	///     Derivative of XYData
+	/// </summary>
+	public List<DataPoint> Derivative => _derivative ??= XYData.Derive().ToList();
 
-    /// <summary>
-    /// Backing field for <see cref="Spectrum.Derivative"/>
-    /// </summary>
-    private List<DataPoint> _derivative;
+	/// <summary>
+	///     Integral of XYData
+	/// </summary>
+	public List<DataPoint> Integral => _integral ??= XYData.Integrate().ToList();
 
-    /// <summary>
-    /// Derivative of XYData
-    /// </summary>
-    public List<DataPoint> Derivative => _derivative ??= XYData.Derive().ToList();
+	/// <summary>
+	///     Indexer for Properties
+	/// </summary>
+	/// <param name="index"></param>
+	/// <returns></returns>
+	public string this[string index]
+	{
+		get
+		{
+			if (DataProvider is IParameterProvider provider) return provider[index];
 
-    /// <summary>
-    /// Backing field for <see cref="Spectrum.Integral"/>
-    /// </summary>
-    private List<DataPoint> _integral;
+			throw new Exception("There is no Parameter Provider added");
+		}
+	}
 
-    /// <summary>
-    /// Integral of XYData
-    /// </summary>
-    public List<DataPoint> Integral => _integral ??= XYData.Integrate().ToList();
+	public DateTime CreationDate => this.CreationDate();
 
-    /// <summary>
-    /// <inheritdoc cref="ISpectrum.Title"/>
-    /// </summary>
-    public string Title { get; set; }
+	/// <summary>
+	///     <inheritdoc />
+	/// </summary>
+	public IXYDataProvider DataProvider { get; }
 
-    /// <summary>
-    /// Returns the Title
-    /// </summary>
-    /// <returns></returns>
-    public override string ToString() => Title;
+	/// <summary>
+	///     <inheritdoc cref="ISpectrum.XYData" />
+	/// </summary>
+	public List<DataPoint> XYData { get; set; } = new();
 
-    /// <summary>
-    /// Indexer for Properties
-    /// </summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
-    public string this[string index]
-    {
-        get
-        {
-            if (DataProvider is IParameterProvider provider) return provider[index];
-            throw new Exception("There is no Parameter Provider added");
-        }
-    }
+	/// <summary>
+	///     <inheritdoc cref="ISpectrum.Title" />
+	/// </summary>
+	public string Title { get; set; }
 
-    public DateTime CreationDate => this.CreationDate();
+	/// <summary>
+	///     When DataProvider is changed, add data
+	/// </summary>
+	private void DataProviderChanged()
+	{
+		XYData = DataProvider.XYData.ToList();
+		Title = DataProvider.Path;
+	}
+
+	/// <summary>
+	///     Returns the Title
+	/// </summary>
+	/// <returns></returns>
+	public override string ToString() => Title;
 }

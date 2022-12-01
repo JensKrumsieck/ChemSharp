@@ -3,14 +3,16 @@
   <PropertyGroup>
     <PackageId>ChemSharp.Molecules</PackageId>
     <Description>Chemsharp: Molecule IO (cif, xyz, ...) and Elemental Analysis</Description>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;net6.0;net7.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.1" />
-    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj" />
+    <PackageReference Include="Nodo" Version="0.0.1-alpha.1"/>
+    <PackageReference Include="System.Text.Json" Version="7.0.0"/>
+    <ProjectReference Include="..\ChemSharp\ChemSharp.csproj"/>
+    <ProjectReference Include="..\Generators\ChemSharp.Molecules.Generator\ChemSharp.Molecules.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0"/>
   </ItemGroup>
 </Project>

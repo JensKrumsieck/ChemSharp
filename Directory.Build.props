@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <LangVersion>preview</LangVersion>
-    <Version>2.0.0-alpha.3</Version>
+    <Version>2.0.0-beta.1</Version>
     <Authors>Jens Krumsieck</Authors>
     <Copyright>Jens Krumsieck</Copyright>
     <PackageProjectUrl>https://github.com/JensKrumsieck/ChemSharp</PackageProjectUrl>

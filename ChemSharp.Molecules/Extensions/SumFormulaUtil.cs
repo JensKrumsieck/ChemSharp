@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using ChemSharp.Molecules.DataProviders;
 #if NETSTANDARD2_0
 using ChemSharp.Extensions;
 #endif

@@ -2,7 +2,7 @@
 using System.Text.Json;
 using ChemSharp.Extensions;
 
-namespace ChemSharp.Molecules.DataProviders;
+namespace ChemSharp.Molecules;
 
 public static class ElementDataProvider
 {

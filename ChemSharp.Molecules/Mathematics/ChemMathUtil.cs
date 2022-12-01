@@ -1,10 +1,4 @@
-﻿#if NETSTANDARD2_0
-using ChemSharp.Mathematics;
-
-#else
-#endif
-
-namespace ChemSharp.Molecules.Mathematics;
+﻿namespace ChemSharp.Molecules.Mathematics;
 
 public static class ChemMathUtil
 {

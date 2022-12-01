@@ -1,6 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿#if NETSTANDARD
+using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+#else
 using System.Runtime.InteropServices;
+#endif
 using ChemSharp.Export;
 using ChemSharp.Molecules.Extensions;
 using ChemSharp.Molecules.Mathematics;
@@ -49,7 +52,7 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	public int Charge => InferredCharge + ImplicitCharge;
 
 	private int InferredCharge => Atoms.Sum(s => s.Charge);
-	public int ImplicitCharge { get; set; } = 0;
+	public int ImplicitCharge { get; set; }
 
 	/// <summary>
 	///     Spin Multiplicity following the rules 2s+1
@@ -98,6 +101,7 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 	}
 #endif
 
+#if NETSTANDARD
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private void RecalculateBondsParallel()
 	{
@@ -132,6 +136,7 @@ public partial class Molecule : UndirectedGraph<Atom, Bond>, IExportable
 			}
 		}
 	}
+#endif
 
 	/// <summary>
 	///     returns nonmetal neighbors of specific atom

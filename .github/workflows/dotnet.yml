@@ -46,4 +46,4 @@ jobs:
     - run: cd ../
     - name: publish github
       run: dotnet nuget push tmp\*.nupkg --skip-duplicate -k ${{secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/JensKrumsieck/index.json 
-      if: github.event_name != 'pull_request'
+      if: ${{ github.event_name == 'push' && github.repository_owner == 'JensKrumsieck' }}

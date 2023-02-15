@@ -15,7 +15,6 @@
 
 ### NuGet Packages
 
-=======
 | | |
 |-|-|
 | `ChemSharp` | [![NuGet Badge](https://buildstats.info/nuget/ChemSharp)](https://www.nuget.org/packages/ChemSharp/) |
@@ -47,27 +46,7 @@ path. Depending on the File extension the correct DataProvider is used to load t
 ```csharp
 //Creates a molecule from cif file
 const string path = "files/cif.cif";
-var mol = MoleculeFactory.Create(path);
-```
-
-It is also possible to create a Molecule by using a specific DataProvider (e.g. if automatic detection fails or you only
-want to support a selected number of file types)
-
-```csharp
-//You can also create molecules by selecting the provider yourself
-const string path = "files/benzene.mol2";
-var provider = new Mol2DataProvider(path);
-var mol = new Molecule(provider);
-```
-
-You can also add [Atoms and Bonds](https://github.com/JensKrumsieck/ChemSharp/wiki/Element-Atom-Bond) as Lists if you
-got the data from somewhere else.
-
-```csharp
-//...or by just adding the Atoms & Bonds as Lists
-const string path = "files/cif.cif";
-var provider = new CIFDataProvider(path);
-var mol = new Molecule(provider.Atoms, provider.Bonds);
+var mol = Molecule.FromFile(path);
 ```
 
 #### Create Spectra
@@ -121,9 +100,6 @@ var provider = new MultiCSVProvider(file);
 #### Compatibility
 
 * .NET Standard 2.0, .NET Standard 2.1, .NET 5, .NET 6
-* Unity (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity)
-  <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Unity"><img src="https://img.shields.io/badge/Unity-100000?logo=unity&logoColor=white"/></a>)
-* Godot Engine (see [Wiki](https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-Godot-Engine) for Snippet)
 * Blazor (see ChemSharp.Molecules.Blazor)
 * <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-HelixToolkit-(WPF)">HelixToolkit</a> via
   ChemSharp.Molecules.HelixToolkit
@@ -131,7 +107,6 @@ var provider = new MultiCSVProvider(file);
 ### Used by (Highlights):
 
 *  <img src="https://github.com/JensKrumsieck/PorphyStruct/blob/master/PorphyStruct.WPF/Resources/porphystruct.png" alt="logo" height="16"/>  **[PorphyStruct](https://github.com/JensKrumsieck/PorphyStruct)**
-* <img src="https://raw.githubusercontent.com/JensKrumsieck/SPCViewer/master/.github/spc.png" alt="logo" height="16"/>  **[SPCViewer](https://github.com/JensKrumsieck/SPCViewer)**
 * <img src="https://raw.githubusercontent.com/JensKrumsieck/CHN-Tool/master/.github/chn.png" alt="logo" height="16"/>  **[CHN-Tool](https://github.com/JensKrumsieck/CHN-Tool)**
 
 ### Stats

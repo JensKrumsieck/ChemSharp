@@ -2,10 +2,17 @@
 
 public static class FileExtensions
 {
-	public static bool ValidateWithExtensions(string filename, string[] extensions) =>
-		extensions.Contains(Path.GetExtension(filename)) &&
-		//check if all files are available
-		extensions.All(ext => File.Exists(GetBaseFilename(filename) + ext));
+	public static bool ValidateWithExtensions(string filename, string[] extensions)
+	{
+		if (!extensions.Contains(Path.GetExtension(filename).ToLower())) return false;
+		foreach (var ext in extensions)
+		{
+			var baseName = GetBaseFilename(filename);
+			if (!File.Exists(baseName + ext.ToLower()) && !File.Exists(baseName + ext.ToUpper())) return false;
+		}
+
+		return true;
+	}
 
 	public static string GetBaseFilename(string filename) =>
 		$"{Path.GetDirectoryName(filename)}\\{Path.GetFileNameWithoutExtension(filename)}";

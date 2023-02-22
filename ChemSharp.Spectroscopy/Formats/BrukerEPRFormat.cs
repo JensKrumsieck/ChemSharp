@@ -3,23 +3,15 @@ using ChemSharp.Spectroscopy.Extension;
 
 namespace ChemSharp.Spectroscopy.Formats;
 
-public class BrukerEPRFormat
+public class BrukerEPRFormat : SpectrumFormat
 {
-	private static readonly Func<string, string[], bool> ValidationMethod = FileExtensions.ValidateWithExtensions;
-	private readonly Dictionary<string, Action<string>> NeededFiles;
-
 	private Dictionary<string, string> _storage;
 	private DataPoint[] XYData;
 
-	public BrukerEPRFormat() =>
-		NeededFiles = new Dictionary<string, Action<string>> {{".par", ReadPAR}, {".spc", ReadSPC}};
-
-	private void Load(string filename)
+	public BrukerEPRFormat()
 	{
-		if (!ValidationMethod(filename, NeededFiles.Keys.ToArray()))
-			throw new ArgumentException($"The file '{filename}' is not supported by Bruker EPR Format");
-		var baseFilename = FileExtensions.GetBaseFilename(filename);
-		foreach (var (ext, func) in NeededFiles) func(baseFilename + ext);
+		ValidationMethod = FileExtensions.ValidateWithExtensions;
+		NeededFiles = new Dictionary<string, Action<string>> {{".par", ReadPAR}, {".spc", ReadSPC}};
 	}
 
 	private void ReadPAR(string file)

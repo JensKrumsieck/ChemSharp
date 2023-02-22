@@ -37,5 +37,5 @@ jobs:
     - name: Pack
       run: dotnet pack -c Release -p:PackageVersion=${{steps.get-version.outputs.package-version}}-ci.${{ github.run_number }} --no-build --no-restore
     - name: publish github
-      run: dotnet nuget push "*.nupkg" --skip-duplicate -k ${{secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/JensKrumsieck/index.json 
+      run: dotnet nuget push *.nupkg --skip-duplicate -k ${{secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/JensKrumsieck/index.json 
       if: ${{ github.event_name == 'push' && github.repository_owner == 'JensKrumsieck' }}

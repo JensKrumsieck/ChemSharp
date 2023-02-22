@@ -23,6 +23,8 @@ public class Spectrum : ISpectrum, IDataObject, IExportable
 		DataProviderChanged();
 	}
 
+	public Spectrum(DataPoint[] dataPoints) => XYData = dataPoints.ToList();
+
 	/// <summary>
 	///     Derivative of XYData
 	/// </summary>

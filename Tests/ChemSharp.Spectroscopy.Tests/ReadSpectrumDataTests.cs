@@ -27,4 +27,10 @@ public class ReadSpectrumDataTests
 		spc.XYData[32].Y.Should().BeApproximately(0.02218390256, 1e-5);
 		//correlate with csv later
 	}
+
+	[Fact]
+	public void NMRSpectrum_Is_Read_Plausible()
+	{
+		var spc = BrukerNMRFormat.Read("files/nmr/fid");
+	}
 }

@@ -2,11 +2,12 @@
 
 namespace ChemSharp.Spectroscopy.Formats;
 
-public class VarianUVVisFormat : SpectrumFormat
+public class VarianUVVisFormat : FileFormat
 {
 	private readonly List<DataPoint> XYData = new();
 
-	public VarianUVVisFormat()
+
+	private VarianUVVisFormat()
 	{
 		ValidationMethod = FileExtensions.ValidateWithExtensions;
 		NeededFiles = new Dictionary<string, Action<string>> {{".dsw", ReadDSW}};

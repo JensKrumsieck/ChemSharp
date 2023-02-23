@@ -1,10 +1,5 @@
-﻿using System.Text;
-using ChemSharp.Export;
-using ChemSharp.Extensions;
-using ChemSharp.Spectroscopy.Extension;
-
-namespace ChemSharp.Spectroscopy.Export;
-
+﻿namespace ChemSharp.Spectroscopy.Export;
+/**
 public class CSVExporter : AbstractSpectrumExporter
 {
 	/// <summary>
@@ -69,3 +64,4 @@ public class CSVExporter : AbstractSpectrumExporter
 		sw.Write(ExportToString(Spectrum, Separator, Flags));
 	}
 }
+**/

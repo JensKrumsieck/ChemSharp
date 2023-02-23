@@ -1,4 +1,7 @@
-﻿using ChemSharp.Extensions;
+﻿#if NETSTANDARD2_0
+//for Dictionary Deconstruct
+using ChemSharp.Extensions;
+#endif
 using ChemSharp.Spectroscopy.Extension;
 
 namespace ChemSharp.Spectroscopy.Formats;

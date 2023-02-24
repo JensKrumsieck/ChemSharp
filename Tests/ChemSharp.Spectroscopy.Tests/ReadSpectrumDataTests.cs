@@ -32,5 +32,21 @@ public class ReadSpectrumDataTests
 	public void NMRSpectrum_Is_Read_Plausible()
 	{
 		var spc = BrukerNMRFormat.Read("files/nmr/fid");
+		spc.XYData.Should().HaveCount(32768);
+	}
+
+	[Fact]
+	public void CSV_Is_Read_Plausible()
+	{
+		var spc = CSVFormat.Read("files/test_single.csv", ',');
+		spc.XYData.Should().HaveCount(901);
+	}
+
+	[Fact]
+	public void MultiCSV_Is_Read_Plausible()
+	{
+		var specs = CSVFormat.ReadAll("files/test_multiple.csv", ',');
+		specs.Should().HaveCount(3);
+		foreach (var spectrum in specs) spectrum.XYData.Should().HaveCount(901);
 	}
 }

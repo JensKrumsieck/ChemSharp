@@ -6,12 +6,15 @@ namespace ChemSharp.Memory;
 public static class MemoryExtensions
 {
 	public static Span<(int start, int length)> WhiteSpaceSplit(this ReadOnlySpan<char> input)
+		=> Split(input, " \t".AsSpan());
+
+	public static Span<(int start, int length)> Split(this ReadOnlySpan<char> input, ReadOnlySpan<char> delimiters)
 	{
 		if (input.Length == 0) return Span<(int start, int length)>.Empty;
 		var array = ArrayPool<(int, int)>.Shared.Rent(input.Length);
-		Array.Clear(array, 0, input.Length); //zero array
+		Array.Clear(array, 0, input.Length);
 		var i = 0;
-		foreach (var (start, length) in new SpanSplitEnumerator(input, " \t".AsSpan()))
+		foreach (var (start, length) in new SpanSplitEnumerator(input, delimiters))
 		{
 			array[i] = (start, length);
 			i++;

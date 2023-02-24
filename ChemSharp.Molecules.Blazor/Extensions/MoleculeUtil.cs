@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace ChemSharp.Molecules.Blazor.Extension;
+namespace ChemSharp.Molecules.Blazor.Extensions;
 
 public static class MoleculeUtil
 {

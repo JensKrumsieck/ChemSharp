@@ -1,4 +1,4 @@
-﻿using ChemSharp.Molecules.Blazor.Extension;
+﻿using ChemSharp.Molecules.Blazor.Extensions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;

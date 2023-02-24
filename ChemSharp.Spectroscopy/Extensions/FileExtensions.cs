@@ -1,4 +1,4 @@
-﻿namespace ChemSharp.Spectroscopy.Extension;
+﻿namespace ChemSharp.Spectroscopy.Extensions;
 
 public static class FileExtensions
 {

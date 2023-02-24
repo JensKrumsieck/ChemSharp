@@ -1,4 +1,4 @@
-﻿using ChemSharp.Spectroscopy.Extension;
+﻿using ChemSharp.Spectroscopy.Extensions;
 
 namespace ChemSharp.Spectroscopy.Formats;
 

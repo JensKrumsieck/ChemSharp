@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace ChemSharp.Molecules.Blazor.Extension;
+namespace ChemSharp.Molecules.Blazor.Extensions;
 
 public static class JSInteropUtil
 {

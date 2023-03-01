@@ -37,6 +37,9 @@ public class BrukerEPRFormat : FileFormat
 	{
 		var format = new BrukerEPRFormat();
 		format.Load(filename);
-		return new Spectrum(format.XYData) {Title = filename, optionalParameters = format._storage};
+		return new Spectrum(format.XYData)
+		{
+			Title = filename, optionalParameters = format._storage, XQuantity = "B", XUnit = format._storage["JUN"]
+		};
 	}
 }

@@ -8,12 +8,22 @@ public class Spectrum : ISpectrum, IExportable
 	/// <summary>
 	///     Backing field for <see cref="Spectrum.Derivative" />
 	/// </summary>
-	private List<DataPoint> _derivative;
+	private List<DataPoint>? _derivative;
 
 	/// <summary>
 	///     Backing field for <see cref="Spectrum.Integral" />
 	/// </summary>
-	private List<DataPoint> _integral;
+	private List<DataPoint>? _integral;
+
+	/// <summary>
+	///     Quantity of X-Axis
+	/// </summary>
+	public string XQuantity = "X";
+
+	/// <summary>
+	///     Unit of X-Axis
+	/// </summary>
+	public string XUnit = "a.u.";
 
 	public Spectrum(IEnumerable<DataPoint> dataPoints) => XYData = dataPoints.ToList();
 

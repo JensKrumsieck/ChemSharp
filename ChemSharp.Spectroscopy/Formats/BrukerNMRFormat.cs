@@ -96,6 +96,9 @@ public class BrukerNMRFormat : FileFormat
 	{
 		var format = new BrukerNMRFormat();
 		format.Load(filename);
-		return new Spectrum(format.XYData) {Title = filename, optionalParameters = format._storage};
+		return new Spectrum(format.XYData)
+		{
+			Title = filename, optionalParameters = format._storage, XQuantity = "δ", XUnit = "ppm"
+		};
 	}
 }

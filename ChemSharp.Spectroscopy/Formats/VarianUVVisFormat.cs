@@ -29,6 +29,6 @@ public class VarianUVVisFormat : FileFormat
 	{
 		var format = new VarianUVVisFormat();
 		format.Load(filename);
-		return new Spectrum(format.XYData) {Title = filename};
+		return new Spectrum(format.XYData) {Title = filename, XQuantity = "λ", XUnit = "nm"};
 	}
 }

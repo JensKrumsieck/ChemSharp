@@ -41,7 +41,7 @@
 #### Create Molecules
 
 Molecules can be created in a lot of ways. The easiest way is to use MoleculeFactory.Create, which accepts a string
-path. Depending on the File extension the correct DataProvider is used to load the file.
+path.
 
 ```csharp
 //Creates a molecule from cif file

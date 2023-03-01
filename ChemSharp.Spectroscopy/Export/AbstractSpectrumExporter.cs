@@ -12,10 +12,10 @@ public enum SpectrumExportFlags
 
 public abstract class AbstractSpectrumExporter
 {
-	public SpectrumExportFlags Flags = SpectrumExportFlags.Experimental;
+	protected SpectrumExportFlags Flags = SpectrumExportFlags.Experimental;
 
-	public Spectrum Spectrum { get; protected set; }
+	protected Spectrum Spectrum { get; set; }
 
-	public virtual void Export(IExportable exportable, Stream stream) => Spectrum =
+	protected virtual void Export(IExportable exportable, Stream stream) => Spectrum =
 		exportable as Spectrum ?? throw new NotSupportedException("Please use Spectrum Type");
 }

@@ -1,4 +1,4 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -49,7 +49,7 @@ public class MoleculeFileFormatTests
 	public void Molecule_FromStream_ShouldBeValid(string filename, int atoms, int bonds)
 	{
 		var stream = File.Open(filename, FileMode.Open);
-		var ext = FileHandler.GetExtension(filename);
+		var ext = FileUtil.GetExtension(filename);
 		var mol = Molecule.FromStream(stream, ext);
 		mol.Atoms.Count.Should().Be(atoms);
 		mol.Bonds.Count.Should().Be(bonds);

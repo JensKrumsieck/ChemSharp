@@ -51,35 +51,14 @@ var mol = Molecule.FromFile(path);
 
 #### Create Spectra
 
-Spectra can be created in a lot of ways. The easiest way is to use `SpectrumFactory.Create`, which accepts
-a `string path`. Depending on the File extension the correct DataProvider is used to load the file.
+Spectra can be created by using the Spectrum.FromFile Method.
 
 ```csharp
 //Creates an UV/Vis Spectrum
 const string path = "files/uvvis.dsw";
-var uvvis = SpectrumFactory.Create(path);
+var uvvis = Spectrum.FromFile(path);
 ```
 
-It is also possible to create a Spectrum by using a specific DataProvider (e.g. if automatic detection fails or you only
-want to support a selected number of file types)
-
-```csharp
-//You can also create spectra by choosing the provider 
-//explicitly. e.g. csv files
-//Reads in an CSV Spectrum (first data only)
-const string path = "files/uvvis.csv";
-var prov = new GenericCSVProvider(path);
-var uvvis = new Spectrum(prov);
-```
-
-There is also the MultiCSVProvider which can provide data from multiple XY pairs in a csv file
-
-```csharp
-//To read in all CSV Data stored as (X,Y) pairs use the MultiCSVProvider
-//Each Spectrum will be stored as DataPoint[] in MultiXYData
-const string file = "files/multicsv.csv";
-var provider = new MultiCSVProvider(file);
-```
 
 ### Supported Filetypes
 

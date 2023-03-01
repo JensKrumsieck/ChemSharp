@@ -1,5 +1,8 @@
 ﻿using ChemSharp.Export;
+using ChemSharp.Extensions;
 using ChemSharp.Mathematics;
+using ChemSharp.Spectroscopy.Extensions;
+using ChemSharp.Spectroscopy.Formats;
 
 namespace ChemSharp.Spectroscopy;
 
@@ -64,4 +67,13 @@ public class Spectrum : ISpectrum, IExportable
 	/// </summary>
 	/// <returns></returns>
 	public override string ToString() => Title;
+
+	public static Spectrum FromFile(string path)
+	{
+		var ext = FileUtil.GetExtension(path);
+		if (FileExtensions.BrukerNMRFiles.Contains(ext)) return BrukerNMRFormat.Read(path);
+		if (FileExtensions.BrukerEPRFiles.Contains(ext)) return BrukerEPRFormat.Read(path);
+		if (FileExtensions.VarianUVVisFiles.Contains(ext)) return VarianUVVisFormat.Read(path);
+		return FileExtensions.CSVFiles.Contains(ext) ? CSVFormat.Read(path, ',') : null;
+	}
 }

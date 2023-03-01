@@ -9,11 +9,11 @@ namespace ChemSharp.Spectroscopy.Formats;
 public abstract class FileFormat
 {
 	protected Dictionary<string, Action<string>> NeededFiles;
-	protected Func<string, string[], bool> ValidationMethod;
+	protected Func<string, IEnumerable<string>, bool> ValidationMethod;
 
 	protected void Load(string filename)
 	{
-		if (!ValidationMethod(filename, NeededFiles.Keys.ToArray()))
+		if (!ValidationMethod(filename, NeededFiles.Keys))
 			throw new
 				ArgumentException($"The file '{filename}' is not supported by {GetType().Name} or a needed file does not exist");
 		var baseFilename = FileExtensions.GetBaseFilename(filename);

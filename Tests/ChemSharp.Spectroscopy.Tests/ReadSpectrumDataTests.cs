@@ -49,4 +49,14 @@ public class ReadSpectrumDataTests
 		specs.Should().HaveCount(3);
 		foreach (var spectrum in specs) spectrum.XYData.Should().HaveCount(901);
 	}
+
+	[Theory, InlineData("files/Spectrum6.par", 2048), InlineData("files/Spectrum6.spc", 2048),
+	 InlineData("files/uvvis.DSW", 901), InlineData("files/nmr/fid", 32768), InlineData("files/nmr/acqus", 32768),
+	 InlineData("files/nmr/pdata/1/1r", 32768), InlineData("files/nmr/pdata/1/1i", 32768),
+	 InlineData("files/nmr/pdata/1/procs", 32768), InlineData("files/test_single.csv", 901)]
+	public void Spectrum_CanDecide_Plausible(string file, int cnt)
+	{
+		var spc = Spectrum.FromFile(file);
+		spc.XYData.Should().HaveCount(cnt);
+	}
 }

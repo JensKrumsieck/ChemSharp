@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using ChemSharp.Export;
 using ChemSharp.Extensions;
-using ChemSharp.Spectroscopy.Extension;
 
 namespace ChemSharp.Spectroscopy.Export;
 
@@ -10,7 +9,7 @@ public class CSVExporter : AbstractSpectrumExporter
 	/// <summary>
 	///     CSV Separator
 	/// </summary>
-	public char Separator = ',';
+	private char Separator = ',';
 
 	public static void Export(Spectrum spc, string filename, char separator,
 	                          SpectrumExportFlags flags = SpectrumExportFlags.Experimental)
@@ -29,8 +28,8 @@ public class CSVExporter : AbstractSpectrumExporter
 
 		var csv = new StringBuilder();
 		csv.AppendLine(spc.Title);
-		var xTitle = $"{spc.Quantity()}/{spc.Unit()}{separator}";
-		csv.AppendLine($"{xTitle}{spc.YQuantity()}{separator}" +
+		var xTitle = $"{spc.XQuantity}/{spc.XUnit}{separator}";
+		csv.AppendLine($"{xTitle}{separator}" +
 		               $"{(deriv ? $"{xTitle}Derivative" + separator : "")}" +
 		               $"{(integral ? $"{xTitle}Integral" + separator : "")}");
 
@@ -62,7 +61,7 @@ public class CSVExporter : AbstractSpectrumExporter
 	}
 
 
-	public override void Export(IExportable exportable, Stream stream)
+	protected override void Export(IExportable exportable, Stream stream)
 	{
 		base.Export(exportable, stream);
 		using var sw = new StreamWriter(stream);

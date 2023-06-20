@@ -1,4 +1,4 @@
-﻿using ChemSharp.Files;
+﻿using ChemSharp.Extensions;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace ChemSharp.Molecules.Blazor;
@@ -13,7 +13,7 @@ public static class BlazorMoleculeFactory
 	/// <returns></returns>
 	public static Molecule Create(IBrowserFile file, long maxFileSize = 8192000L)
 	{
-		var extension = FileHandler.GetExtension(file.Name);
+		var extension = FileUtil.GetExtension(file.Name);
 		var stream = file.OpenReadStream(maxFileSize);
 		return Molecule.FromStream(stream, extension);
 	}

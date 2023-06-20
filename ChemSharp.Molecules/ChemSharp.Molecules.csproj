@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nodo" Version="0.0.1-alpha.1"/>
-    <PackageReference Include="System.Text.Json" Version="7.0.0"/>
+    <PackageReference Include="Nodo" Version="1.0.0"/>
+    <PackageReference Include="System.Text.Json" Version="7.0.2"/>
     <ProjectReference Include="..\ChemSharp\ChemSharp.csproj"/>
     <ProjectReference Include="..\Generators\ChemSharp.Molecules.Generator\ChemSharp.Molecules.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>

@@ -6,6 +6,7 @@ namespace ChemSharp.Molecules.HelixToolkit;
 
 public class Atom3D : ModelVisual3D
 {
+	public static SolidColorBrush SelectionColor = Brushes.LightGoldenrodYellow;
 	private bool _isSelected;
 
 	//start with all true
@@ -49,7 +50,7 @@ public class Atom3D : ModelVisual3D
 		var brush = new BrushConverter().ConvertFromString(Atom.Color) as Brush;
 		UpdateOpacity(brush!);
 		((GeometryModel3D)Content).Material =
-			MaterialHelper.CreateMaterial(IsSelected ? Brushes.LightGoldenrodYellow : brush, 0, 0);
+			MaterialHelper.CreateMaterial(IsSelected ? SelectionColor : brush, 0, 0);
 	}
 
 	public override string ToString() => Atom + (IsSelected ? " SelectedAtom" : "");

@@ -82,6 +82,7 @@ var uvvis = Spectrum.FromFile(path);
 * Blazor (see ChemSharp.Molecules.Blazor)
 * <a href="https://github.com/JensKrumsieck/ChemSharp/wiki/Use-with-HelixToolkit-(WPF)">HelixToolkit</a> via
   ChemSharp.Molecules.HelixToolkit
+* Unity (see https://github.com/JensKrumsieck/ChemSharpUnityExample)
 
 ### Used by (Highlights):
 

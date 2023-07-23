@@ -43,7 +43,7 @@ public class Spectrum : ISpectrum, IExportable
 	/// <summary>
 	///     backing field for this Indexer
 	/// </summary>
-	internal Dictionary<string, string> optionalParameters { get; init; }
+	internal Dictionary<string, string> optionalParameters { get; set; }
 
 	/// <summary>
 	///     Indexer for Properties

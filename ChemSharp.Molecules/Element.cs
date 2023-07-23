@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ChemSharp.Molecules;
+﻿namespace ChemSharp.Molecules;
 
 /// <summary>
 ///     represents a chemical element
@@ -18,7 +16,7 @@ public class Element
 	private static readonly string[] Metalloids = {"B", "Si", "Ge", "As", "Sb", "Bi", "Se", "Te", "Po"};
 	private static readonly string[] NonMetals = {"H", "C", "N", "O", "P", "S", "Se"};
 
-	[JsonIgnore] private string? _color;
+	private string? _color;
 
 	static Element()
 	{
@@ -49,7 +47,6 @@ public class Element
 	/// <summary>
 	///     Constructor for Json Serialization
 	/// </summary>
-	[JsonConstructor]
 #pragma warning disable CS8618
 	public Element() { }
 #pragma warning restore CS8618
@@ -83,17 +80,16 @@ public class Element
 	/// <summary>
 	///     Returns Element Color
 	/// </summary>
-	[JsonIgnore]
 	public string Color => _color ??= ElementDataProvider.ColorData[Symbol];
 
-	[JsonIgnore] public bool IsMetal => !IsMetalloid && !IsNonMetal;
-	[JsonIgnore] public int Charge { get; set; }
+	public bool IsMetal => !IsMetalloid && !IsNonMetal;
+	public int Charge { get; set; }
 
-	[JsonIgnore] public int Electrons => AtomicNumber - Charge;
+	public int Electrons => AtomicNumber - Charge;
 
-	[JsonIgnore] public bool IsMetalloid => Metalloids.Contains(Symbol);
+	public bool IsMetalloid => Metalloids.Contains(Symbol);
 
-	[JsonIgnore] public bool IsNonMetal => NonMetals.Contains(Symbol) || Group is 18 or 17;
+	public bool IsNonMetal => NonMetals.Contains(Symbol) || Group is 18 or 17;
 	public string Name { get; set; }
 	public string Symbol { get; set; }
 	public string Appearance { get; set; }

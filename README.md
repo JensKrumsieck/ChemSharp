@@ -9,8 +9,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/JensKrumsieck/ChemSharp)
 [![GitHub license](https://img.shields.io/github/license/JensKrumsieck/ChemSharp)](https://github.com/JensKrumsieck/ChemSharp/blob/master/LICENSE)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jenskrumsieck/chemsharp)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4573532.svg)](https://doi.org/10.5281/zenodo.4573532)
-
 <hr/>
 
 ### NuGet Packages

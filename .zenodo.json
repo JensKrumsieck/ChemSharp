@@ -1,0 +1,17 @@
+{
+   "creators":[
+      {
+         "orcid":"0000-0001-6242-5846",
+         "affiliation":"Johann Heinrich von Thünen-Institute",
+         "name":"Krumsieck, Jens"
+      }
+   ],
+   "license":"MIT",
+   "title":"ChemSharp",
+   "keywords":[
+      "Chemistry",
+      "CSharp",
+      "C#",
+      "Molecule"
+   ]
+}
